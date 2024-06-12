@@ -9,6 +9,7 @@ jsFiles.forEach((file) => {
 });
 
 const cssFiles = [
+  "download-curriculum.css",
   "class-styles.css",
   "footer-styles.css",
   "nav-styles.css",
@@ -16,6 +17,7 @@ const cssFiles = [
   "tag-styles.css",
   "toggle-styles.css",
 ];
+
 cssFiles.forEach((file) => {
   const href = "./styles/" + file;
   const link = document.createElement("link");
