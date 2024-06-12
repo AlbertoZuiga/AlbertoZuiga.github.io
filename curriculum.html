@@ -1,226 +1,242 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="styles.css" />
-  <title>Currículum Vitae</title>
-</head>
-<body>
-  <nav>
-    <ul>
-      <li><a href="/index.html">Inicio</a></li>
-      <li><a href="/curriculum.html">Curriculum</a></li>
-    </ul>
-  </nav>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles/tag-styles.css" />
+    <link rel="stylesheet" href="styles/class-styles.css" />
+    <link rel="stylesheet" href="styles/nav-styles.css" />
+    <link rel="stylesheet" href="styles/table-styles.css" />
+    <link rel="stylesheet" href="styles/footer-styles.css" />
+    <link rel="stylesheet" href="styles/toggle-styles.css" />
+    <title>Currículum Vitae</title>
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="/index.html">Inicio</a></li>
+        <li><a href="/curriculum.html">Curriculum</a></li>
+      </ul>
+    </nav>
 
-  <div class="container">
-    <div style="text-align: center">
-      <h1>Currículum Vitae</h1>
+    <div>
+      <div class="fixed-toggle">
+        <label class="switch">
+          <input type="checkbox" id="toggleButton" onclick="toggleFunction()" />
+          <span class="slider"></span>
+        </label>
+        <p id="toggleStatus">Formato: web</p>
+      </div>
     </div>
 
-    <section>
-      <h2>Antecedentes personales</h2>
-      <hr />
-      <div class="section">
-        <table>
-          <tr>
-            <th>Nombre</th>
-            <td>Alberto Zúñiga Marinovic</td>
-          </tr>
-          <tr>
-            <th>Teléfono</th>
-            <td>+56 9 6496 2736</td>
-          </tr>
-          <tr>
-            <th>Correo electrónico</th>
-            <td>
-              <a href="mailto:azuiga@miuandes.cl">azuiga@miuandes.cl</a>;
-              <a href="mailto:a.zuniga.marinovic@gmail.com"
-                >a.zuniga.marinovic@gmail.com</a
-              >
-            </td>
-          </tr>
-        </table>
+    <div class="container">
+      <div style="text-align: center">
+        <h1>Currículum Vitae</h1>
       </div>
-    </section>
 
-    <section>
-      <h2>Antecedentes académicos</h2>
-      <hr />
-      <div class="section">
-        <table>
-          <tr>
-            <th>2020 - Presente</th>
-            <td>
-              <b>Universidad de los Andes</b><br />Estudiante de
-              Ingeniería Civil en Ciencias de la Computación
-            </td>
-          </tr>
-          <tr>
-            <th>2024</th>
-            <td>
-              <b>Universidad de los Andes</b><br />Ayudante de
-              <i>Web Technologies</i><br />Ayudante de <i>Programación</i>
-            </td>
-          </tr>
-          <tr>
-            <th>2022</th>
-            <td>
-              <b>Universidad de los Andes</b><br />Ayudante de
-              <i>Paradigmas de Programación</i><br />Ayudante de
-              <i>Programación</i>
-            </td>
-          </tr>
-        </table>
-      </div>
-    </section>
-
-    <section>
-      <h2>Antecedentes laborales</h2>
-      <hr />
-      <div class="section">
-        <table>
-          <tr>
-            <th>2022 - Presente</th>
-            <td>
-              <b>Fundación Nueva Mente</b><br />Colaboración pro
-              bono a tiempo parcial<br />Manejo de la página web utilizando
-              Wix<br />Registro y seguimiento de gastos
-            </td>
-          </tr>
-          <tr>
-            <th>2019</th>
-            <td><b>Cornershop</b></td>
-          </tr>
-        </table>
-      </div>
-    </section>
-
-    <section>
-      <h2>Formación complementaria</h2>
-      <hr />
-      <div class="section">
-        <h3>Universidad de los Andes:</h3>
-        <ul>
-          <li>
-            Concentración tecnológica en <i>Ingeniería Civil Eléctrica</i>
-          </li>
-          <li>Minor en <i>Psicología</i></li>
-          <li>Seminario <i>ChatGPT</i></li>
-        </ul>
-      </div>
-    </section>
-
-    <section>
-      <h2>Actividades extracurriculares</h2>
-      <hr />
-      <div class="section">
-        <table>
-          <th>2023</th>
-          <td>Consejero político de Ingeniería Civil</td>
-        </table>
-      </div>
-    </section>
-
-    <section>
-      <h2>Competencias profesionales</h2>
-      <hr />
-      <div class="section">
-        <h3>Lenguajes de programación</h3>
-        <div>
+      <section>
+        <h2>Antecedentes personales</h2>
+        <hr />
+        <div class="section">
           <table>
             <tr>
-              <th>Python</th>
-              <td>Avanzado</td>
+              <th>Nombre</th>
+              <td>Alberto Zúñiga Marinovic</td>
             </tr>
             <tr>
-              <th>C++</th>
-              <td>Intermedio</td>
+              <th>Teléfono</th>
+              <td>+56 9 6496 2736</td>
             </tr>
             <tr>
-              <th>SQL</th>
-              <td>Intermedio</td>
-            </tr>
-            <tr>
-              <th>Javascript</th>
-              <td>Intermedio</td>
-            </tr>
-            <tr>
-              <th>HTML</th>
-              <td>Intermedio</td>
-            </tr>
-            <tr>
-              <th>CSS</th>
-              <td>Intermedio</td>
-            </tr>
-            <tr>
-              <th>Ruby</th>
-              <td>Intermedio</td>
-            </tr>
-            <tr>
-              <th>React</th>
-              <td>Básico</td>
-            </tr>
-            <tr>
-              <th>C</th>
-              <td>Básico</td>
-            </tr>
-            <tr>
-              <th>Visual Basic para Excel</th>
-              <td>Básico</td>
+              <th>Correo electrónico</th>
+              <td>
+                <a href="mailto:azuiga@miuandes.cl">azuiga@miuandes.cl</a>;
+                <a href="mailto:a.zuniga.marinovic@gmail.com"
+                  >a.zuniga.marinovic@gmail.com</a
+                >
+              </td>
             </tr>
           </table>
         </div>
-        <h3>Idiomas</h3>
-        <div>
+      </section>
+
+      <section>
+        <h2>Antecedentes académicos</h2>
+        <hr />
+        <div class="section">
           <table>
             <tr>
-              <th>Español</th>
-              <td>Nativo</td>
+              <th>2020 - Presente</th>
+              <td>
+                <b>Universidad de los Andes</b><br />Estudiante de Ingeniería
+                Civil en Ciencias de la Computación
+              </td>
             </tr>
             <tr>
-              <th>Inglés</th>
-              <td>Básico-Intermedio</td>
+              <th>2024</th>
+              <td>
+                <b>Universidad de los Andes</b><br />Ayudante de
+                <i>Web Technologies</i><br />Ayudante de <i>Programación</i>
+              </td>
+            </tr>
+            <tr>
+              <th>2022</th>
+              <td>
+                <b>Universidad de los Andes</b><br />Ayudante de
+                <i>Paradigmas de Programación</i><br />Ayudante de
+                <i>Programación</i>
+              </td>
             </tr>
           </table>
         </div>
-        <h3>Herramientas de software</h3>
-        <div>
+      </section>
+
+      <section>
+        <h2>Antecedentes laborales</h2>
+        <hr />
+        <div class="section">
           <table>
             <tr>
-              <th>Git/GitHub</th>
-              <td>Avanzado</td>
+              <th>2022 - Presente</th>
+              <td>
+                <b>Fundación Nueva Mente</b><br />Colaboración pro bono a tiempo
+                parcial<br />Manejo de la página web utilizando Wix<br />Registro
+                y seguimiento de gastos
+              </td>
             </tr>
             <tr>
-              <th>Excel</th>
-              <td>Avanzado</td>
-            </tr>
-            <tr>
-              <th>LaTeX</th>
-              <td>Básico</td>
+              <th>2019</th>
+              <td><b>Cornershop</b></td>
             </tr>
           </table>
         </div>
-      </div>
-    </section>
-  </div>
-</body>
+      </section>
+
+      <section>
+        <h2>Formación complementaria</h2>
+        <hr />
+        <div class="section">
+          <h3>Universidad de los Andes:</h3>
+          <ul>
+            <li>
+              Concentración tecnológica en <i>Ingeniería Civil Eléctrica</i>
+            </li>
+            <li>Minor en <i>Psicología</i></li>
+            <li>Seminario <i>ChatGPT</i></li>
+          </ul>
+        </div>
+      </section>
+
+      <section>
+        <h2>Actividades extracurriculares</h2>
+        <hr />
+        <div class="section">
+          <table>
+            <th>2023</th>
+            <td>Consejero político de Ingeniería Civil</td>
+          </table>
+        </div>
+      </section>
+
+      <section>
+        <h2>Competencias profesionales</h2>
+        <hr />
+        <div class="section">
+          <h3>Lenguajes de programación</h3>
+          <div>
+            <table>
+              <tr>
+                <th>Python</th>
+                <td>Avanzado</td>
+              </tr>
+              <tr>
+                <th>C++</th>
+                <td>Intermedio</td>
+              </tr>
+              <tr>
+                <th>SQL</th>
+                <td>Intermedio</td>
+              </tr>
+              <tr>
+                <th>Javascript</th>
+                <td>Intermedio</td>
+              </tr>
+              <tr>
+                <th>HTML</th>
+                <td>Intermedio</td>
+              </tr>
+              <tr>
+                <th>CSS</th>
+                <td>Intermedio</td>
+              </tr>
+              <tr>
+                <th>Ruby</th>
+                <td>Intermedio</td>
+              </tr>
+              <tr>
+                <th>React</th>
+                <td>Básico</td>
+              </tr>
+              <tr>
+                <th>C</th>
+                <td>Básico</td>
+              </tr>
+              <tr>
+                <th>Visual Basic para Excel</th>
+                <td>Básico</td>
+              </tr>
+            </table>
+          </div>
+          <h3>Idiomas</h3>
+          <div>
+            <table>
+              <tr>
+                <th>Español</th>
+                <td>Nativo</td>
+              </tr>
+              <tr>
+                <th>Inglés</th>
+                <td>Básico-Intermedio</td>
+              </tr>
+            </table>
+          </div>
+          <h3>Herramientas de software</h3>
+          <div>
+            <table>
+              <tr>
+                <th>Git/GitHub</th>
+                <td>Avanzado</td>
+              </tr>
+              <tr>
+                <th>Excel</th>
+                <td>Avanzado</td>
+              </tr>
+              <tr>
+                <th>LaTeX</th>
+                <td>Básico</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer>
+      <p>&copy; 2024 Alberto Zúñiga. Todos los derechos reservados.</p>
+      <a href="mailto:a.zuniga.marinovic@gmail.com" class="footer-button">
+        <i class="fas fa-envelope"></i> Email
+      </a>
+      <a href="tel:+56964962736" class="footer-button">
+        <i class="fas fa-phone"></i> Teléfono
+      </a>
+      <a
+        href="https://www.linkedin.com/in/alberto-zuniga-marinovic/"
+        target="_blank"
+        class="footer-button"
+      >
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+    </footer>
+    <script src="js/toggle-button.js"></script>
+  </body>
 </html>
-
-<footer>
-  <p>&copy; 2024 Alberto Zúñiga. Todos los derechos reservados.</p>
-  <a href="mailto:a.zuniga.marinovic@gmail.com" class="footer-button">
-    <i class="fas fa-envelope"></i> Email
-  </a>
-  <a href="tel:+56964962736" class="footer-button">
-    <i class="fas fa-phone"></i> Teléfono
-  </a>
-  <a
-    href="https://www.linkedin.com/in/alberto-zuniga-marinovic/"
-    target="_blank"
-    class="footer-button"
-  >
-    <i class="fab fa-linkedin"></i> LinkedIn
-  </a>
-</footer>
