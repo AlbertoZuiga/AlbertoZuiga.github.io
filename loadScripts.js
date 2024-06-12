@@ -24,4 +24,5 @@ function loadJsFilesFromDirectory(directory) {
 }
 
 // Llamar a la función para cargar los archivos js
-loadJsFilesFromDirectory('js/');
+console.log("Esto es una prueba")
+loadJsFilesFromDirectory('./js/');
