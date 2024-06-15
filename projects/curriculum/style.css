@@ -20,31 +20,6 @@
   margin-top: 0;
 }
 
-/* navbar.css */
-nav {
-  position: fixed;
-  top: 0; 
-  width: 100%; 
-  background-color: #333;
-  color: #fff;
-  padding: 1rem;
-}
-
-nav ul {
-  list-style: none;
-  padding: 0;
-  text-align: center;
-}
-
-nav ul li {
-  display: inline;
-  margin: 0 1rem;
-}
-
-nav ul li a {
-  color: #fff;
-  text-decoration: none;
-}
 /* main.css */
 .container {
   max-width: 900px;
@@ -53,13 +28,13 @@ nav ul li a {
   box-sizing: border-box;
   border: 1px solid hsl(0, 0%, 0%);
   background-color: white;
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); 
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .fixed {
   position: fixed;
-  bottom: 0; 
-  width: 100%; 
+  bottom: 0;
+  width: 100%;
 }
 
 .hidden {
@@ -70,8 +45,7 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  padding-top: 81px;
-  background-color: rgb(242,243,245);
+  background-color: rgb(242, 243, 245);
 }
 
 .title {
@@ -95,42 +69,10 @@ body {
 .download-button:hover {
   background-color: #0056b3;
 }
-/* footer.css */
-footer {
-  background-color: #333; 
-  color: #fff; 
-  padding: 20px; 
-  text-align: center; 
-}
-
-footer p {
-  margin-bottom: 10px; 
-}
-
-.footer-button {
-  display: inline-block; 
-  margin: 0 10px; 
-  text-decoration: none; 
-  color: #fff; 
-  transition: color 0.3s, background-color 0.3s; 
-  padding: 10px 20px; 
-  border: 1px solid #fff; 
-  border-radius: 20px; 
-}
-
-.footer-button i {
-  margin-right: 5px; 
-}
-
-
-.footer-button:hover {
-  color: black; 
-  background-color: white; 
-}
 /* switch.css */
 .fixed-toggle {
   position: fixed;
-  top: 91px;
+  top: 10px;
   right: 10px;
   z-index: 1000;
 }
@@ -156,7 +98,7 @@ footer p {
   right: 0;
   bottom: 0;
   background-color: #ccc;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 34px;
 }
 
@@ -168,12 +110,12 @@ footer p {
   left: 4px;
   bottom: 4px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
   border-radius: 50%;
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color: #2196f3;
 }
 
 input:checked + .slider:before {
@@ -198,4 +140,3 @@ input:checked + .slider:before {
 .resume-section-table td {
   width: fit-content;
 }
-
