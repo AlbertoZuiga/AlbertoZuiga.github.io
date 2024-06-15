@@ -1,4 +1,4 @@
-/* Estilo para el contenedor fijo */
+/* switch.css */
 .fixed-toggle {
   position: fixed;
   top: 91px;
@@ -6,7 +6,6 @@
   z-index: 1000;
 }
 
-/* Estilo del interruptor */
 .switch {
   position: relative;
   display: inline-block;
@@ -52,7 +51,6 @@ input:checked + .slider:before {
   transform: translateX(26px);
 }
 
-/* Estilo del texto */
 #toggleStatus {
   font-size: 20px;
   margin-top: 10px;

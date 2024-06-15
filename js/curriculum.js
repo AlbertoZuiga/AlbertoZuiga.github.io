@@ -1,3 +1,29 @@
+function toggleFormat() {
+  const toggleStatus = document.getElementById("toggleStatus");
+  const toggleButton = document.getElementById("toggleButton");
+  if (toggleButton.checked) {
+    toggleStatus.textContent = "Formato: PDF";
+    showSections();
+  } else {
+    toggleStatus.textContent = "Formato: Web";
+    hideSections();
+  }
+
+  updateTitles();
+}
+
+function updateTitles() {
+  const all = document.querySelectorAll(".section-title");
+
+  all.forEach((element) => {
+    if (element.classList.contains("hidden")) {
+      element.classList.remove("hidden");
+    } else {
+      element.classList.add("hidden");
+    }
+  });
+}
+
 function toggleVisibility(id) {
   const section = document.getElementById(`section-${id}`);
   const arrowIcon = document.getElementById(`arrow-${id}`);
@@ -13,21 +39,7 @@ function toggleVisibility(id) {
   }
 }
 
-function toggleFunction() {
-  const toggleStatus = document.getElementById("toggleStatus");
-  const toggleButton = document.getElementById("toggleButton");
-  if (toggleButton.checked) {
-    toggleStatus.textContent = "Formato: PDF";
-    mostrarSecciones();
-  } else {
-    toggleStatus.textContent = "Formato: Web";
-    ocultarSecciones();
-  }
-
-  buscarH2();
-}
-
-function mostrarSecciones() {
+function showSections() {
   for (let index = 1; index <= 6; index++) {
     let section = document.getElementById(`section-${index}`);
 
@@ -41,7 +53,7 @@ function mostrarSecciones() {
   }
 }
 
-function ocultarSecciones() {
+function hideSections() {
   for (let index = 1; index <= 6; index++) {
     let section = document.getElementById(`section-${index}`);
 
@@ -53,17 +65,4 @@ function ocultarSecciones() {
       arrow.classList.add("fa-chevron-down");
     }
   }
-}
-
-function buscarH2() {
-  // Buscar todos los elementos h2
-  const allH2 = document.querySelectorAll("h2");
-
-  allH2.forEach((h2) => {
-    if (h2.classList.contains("hidden")) {
-      h2.classList.remove("hidden");
-    } else {
-      h2.classList.add("hidden");
-    }
-  });
 }
