@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reloj Digital</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="relojAnalogo">
+        <div id="relojDigital"></div>
+        <div id="segundos"></div>
+        <div id="minutos"></div>
+        <div id="horas"></div>
+        <div id="punto"></div>
+      </div>
+      <div id="fecha"></div>
+      <button onclick="cambiarPrecision()">
+        Cambiar precision
+      </button>
+      <button id="cambiarFormato" onclick="cambiarFormato()">
+        Formato 12h
+      </button>
+    </div>
+    <script src="main.js"></script>
+  </body>
+</html>

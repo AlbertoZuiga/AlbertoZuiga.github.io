@@ -1,104 +1,132 @@
-// Global variables
-let currentResult = 0;
-let lastCalculation = { operation: "add", value: 0 };
-let readyToCalculate = true;
+let display = document.getElementById("display");
+let currentInput = "";
+let previousInput = "";
+let operator = "";
+let lastResult = "";
+let lastInput = "";
+let lastOperator = "";
 
-// Calculation functions
-function calculateResult() {
-  const display = document.getElementById("display");
-
-  try {
-    switch (lastCalculation.operation) {
-      case "add":
-        currentResult += lastCalculation.value;
-        break;
-      case "subtract":
-        currentResult -= lastCalculation.value;
-        break;
-      case "multiply":
-        currentResult *= lastCalculation.value;
-        break;
-      case "divide":
-        if (lastCalculation.value === 0) {
-          currentResult = "Error";
-        } else {
-          currentResult /= lastCalculation.value;
-        }
-        break;
-    }
-  } catch (error) {
-    console.error(error);
-    currentResult = "Error";
-  }
-
-  display.textContent = currentResult;
-  readyToCalculate = true;
+function debugState() {
+  console.log(
+    `display: ${display}\ncurrentInput: ${currentInput}\npreviousInput: ${previousInput}\noperator: ${operator}\nlastResult: ${lastResult}\nlastInput: ${lastInput}\nlastOperator: ${lastOperator}`
+  );
 }
 
-function calculatePercentage() {
-  const display = document.getElementById("display");
-  const result = parseFloat(display.innerText);
-  currentResult = result / 100;
-  display.textContent = currentResult;
-  readyToCalculate = true;
+function appendNumber(number) {
+  clearOperator();
+  if (currentInput.includes(".") && number === ".") return;
+  number = currentInput === "" && number === "." ? "0." : number;
+  currentInput += number;
+  updateDisplay(currentInput);
 }
 
-// Display management functions
-function writeOnDisplay(text) {
-  const display = document.getElementById("display");
-  const currentText = display.innerText;
-
-  const selectedOperator = document.querySelector(".selected");
-
-  if (selectedOperator !== null) {
-    lastCalculation.operation = selectedOperator.id;
-    lastCalculation.value = parseFloat(text);
-    display.textContent = text;
-    selectedOperator.classList.remove("selected");
-    readyToCalculate = true;
-  } else if (currentText === "0" || currentText === "Error" || readyToCalculate) {
-    display.textContent = text;
-    currentResult = parseFloat(text);
-    readyToCalculate = false;
-  } else {
-    display.textContent = currentText + text;
-    currentResult = parseFloat(currentText + text);
-    readyToCalculate = false;
-  }
+function updateDisplay(number) {
+  display.innerText = number.toString().replace(".", ",");
 }
 
 function clearDisplay() {
-  clearSelectedOperator();
-  const display = document.getElementById("display");
-  if (readyToCalculate && currentResult === 0) {
-    lastCalculation = { operation: "add", value: 0 };
+  if (currentInput !== "" && previousInput !== "" && operator !== "") {
+    currentInput = "";
+    clearOperator();
+    updateDisplay("0");
+  } else if (previousInput !== "" && operator !== "") {
+    currentInput = previousInput;
+    previousInput = "";
+    operator = "";
+    clearOperator();
+  } else {
+    currentInput = "";
+    previousInput = "";
+    operator = "";
+    lastResult = "";
+    lastInput = "";
+    lastOperator = "";
+    updateDisplay("0");
   }
-  readyToCalculate = true;
-  currentResult = 0;
-  display.textContent = currentResult;
-
 }
 
 function toggleSign() {
-  const display = document.getElementById("display");
-  const number = parseFloat(display.innerText);
-  currentResult = -number;
-  display.innerText = currentResult;
+  if (currentInput) {
+    currentInput = (parseFloat(currentInput) * -1).toString();
+    updateDisplay(currentInput);
+  }
 }
 
-// Operator management functions
-function setSelectedOperator(id) {
-  clearSelectedOperator();
-  document.getElementById(id).classList.add("selected");
+function percent() {
+  if (currentInput) {
+    currentInput = (parseFloat(currentInput) / 100).toString();
+    updateDisplay(currentInput);
+  }
 }
 
-function clearSelectedOperator() {
-  document.querySelectorAll(".operator.selected").forEach(operator => {
+function clearOperator() {
+  document.querySelectorAll(".selected").forEach((operator) => {
     operator.classList.remove("selected");
   });
 }
 
-// Debug function
-function debugState() {
-  console.log(currentResult, readyToCalculate, lastCalculation);
+function setOperator(op) {
+  clearOperator();
+  let element = document.getElementById(op);
+  element.classList.add("selected");
+
+  if (currentInput === "" && lastResult === "") return;
+  if (previousInput !== "") calculate();
+  operator = op;
+  previousInput = currentInput;
+  currentInput = "";
 }
+
+function calculate() {
+  clearOperator();
+  previousInput = previousInput === "" ? lastResult : parseFloat(previousInput);
+  currentInput = currentInput === "" ? lastInput : parseFloat(currentInput);
+  operator = operator === "" ? lastOperator : operator;
+
+  if (previousInput === "" || currentInput === "") return;
+  let result;
+  let prev = parseFloat(previousInput);
+  let curr = parseFloat(currentInput);
+
+  switch (operator) {
+    case "sum":
+      result = prev + curr;
+      break;
+    case "dif":
+      result = prev - curr;
+      break;
+    case "mul":
+      result = prev * curr;
+      break;
+    case "div":
+      result = prev / curr;
+      break;
+    default:
+      return;
+  }
+
+  lastResult = result.toString();
+  lastInput = currentInput;
+  lastOperator = operator;
+  updateDisplay(lastResult);
+  previousInput = "";
+  currentInput = "";
+  operator = "";
+}
+
+document.addEventListener("keydown", (event) => {
+  const key = event.key;
+  if (!isNaN(key) || key === "." || key === ",") {
+    appendNumber(key.replace(",","."));
+  } else if (key === "Enter" || key === "=") {
+    calculate();
+  } else if (key === "Backspace") {
+    currentInput = currentInput.slice(0, -1);
+    updateDisplay(currentInput || "0");
+  } else if (key === "Escape" || key.toLowerCase() === "c") {
+    clearDisplay();
+  } else if (key === "+" || key === "-" || key === "*" || key === "/") {
+    let operatorMap = { "+": "sum", "-": "dif", "*": "mul", "/": "div" };
+    setOperator(operatorMap[key]);
+  }
+});

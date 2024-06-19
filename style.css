@@ -1,5 +1,5 @@
-/* navbar */
 nav {
+  z-index: 1;
   position: fixed;
   top: 0;
   width: 100%;
@@ -24,7 +24,6 @@ nav ul li a {
   text-decoration: none;
 }
 
-/* main */
 .fixed {
   position: fixed;
   bottom: 0;
@@ -43,7 +42,6 @@ body {
   background-color: rgb(242, 243, 245);
 }
 
-/* footer */
 footer {
   background-color: #333;
   color: #fff;
@@ -75,7 +73,6 @@ footer p {
   background-color: white;
 }
 
-/* projects */
 .projects {
   display: flex;
   justify-content: center;
@@ -84,6 +81,7 @@ footer p {
 }
 
 .project-button {
+  z-index: 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -92,12 +90,12 @@ footer p {
   color: #333;
   margin: 20px;
   transition: transform 0.3s;
-  width: 600px; /* Adjust the width as needed */
+  width: 600px; 
 }
 
 .project-button img {
   width: 100%;
-  height: 300px; /* Adjust the height as needed */
+  height: 300px; 
   object-fit: cover;
   border-radius: 10px;
 }
