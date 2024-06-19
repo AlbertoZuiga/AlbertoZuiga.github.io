@@ -1,61 +1,61 @@
-let formato24h = true;
-const reloj = document.getElementById("relojDigital");
-const fecha = document.getElementById("fecha");
+let format24h = true;
+const CLOCK = document.getElementById("digitalClock");
+const TODAY = document.getElementById("date");
 
-const horas = document.getElementById("horas");
-const minutos = document.getElementById("minutos");
-const segundos = document.getElementById("segundos");
+const HOURS = document.getElementById("hours");
+const MINUTES = document.getElementById("minutes");
+const SECONDS = document.getElementById("seconds");
 
 let precision = 0
 
-function actualizarHora() {
-  const ahora = new Date();
-  let opcionesHora = {
+function setTime() {
+  const now = new Date();
+  let hourOptions = {
     hour: "2-digit",
     minute: "2-digit",
     second: "2-digit",
     hour12: true
   };
-  // Reloj digital
+  // Digital Clock
   if (precision === 0){
-    opcionesHora["hour12"] = formato24h ? false : true;
+    hourOptions["hour12"] = format24h ? false : true;
   } else {
-    opcionesHora["hour12"] = formato24h ? false : true;
-    opcionesHora["fractionalSecondDigits"] = precision;
+    hourOptions["hour12"] = format24h ? false : true;
+    hourOptions["fractionalSecondDigits"] = precision;
   }
-  const opcionesFecha = { day: "2-digit", month: "2-digit", year: "numeric" };
+  const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
 
-  const horaActual = ahora.toLocaleTimeString("es-CH", opcionesHora);
-  const fechaActual = ahora.toLocaleDateString("es-CH", opcionesFecha);
+  const actualTime = now.toLocaleTimeString("es-CH", hourOptions);
+  const actualDate = now.toLocaleDateString("es-CH", dateOptions);
 
-  reloj.textContent = horaActual;
-  fecha.textContent = fechaActual;
+  CLOCK.textContent = actualTime;
+  TODAY.textContent = actualDate;
 
-  // Reloj analogico
-  const hora = ahora.getHours() % 12;
-  horas.style.transform = `rotate(${(hora * 360) / 12}deg)`;
+  // Analogical Clock
+  const hour = now.getHours() % 12;
+  HOURS.style.transform = `rotate(${(hour * 360) / 12}deg)`;
 
-  const minuto = ahora.getMinutes();
-  minutos.style.transform = `rotate(${(minuto * 360) / 60}deg)`;
+  const minute = now.getMinutes();
+  MINUTES.style.transform = `rotate(${(minute * 360) / 60}deg)`;
 
-  const segundo = Math.floor((ahora.getSeconds() * 1000 + ahora.getMilliseconds())/(10**(3-precision)));
-  segundos.style.transform = `rotate(${(segundo * 360) / parseInt(60000/(10**(3-precision))) }deg)`;
+  const second = Math.floor((now.getSeconds() * 1000 + now.getMilliseconds())/(10**(3-precision)));
+  SECONDS.style.transform = `rotate(${(second * 360) / parseInt(60000/(10**(3-precision))) }deg)`;
 }
 
-function cambiarFormato() {
-  const cambiarFormatoButton = document.getElementById("cambiarFormato");
+function setFormat() {
+  const setFormatButton = document.getElementById("setFormat");
 
-  formato24h = !formato24h;
-  cambiarFormatoButton.innerHTML = formato24h ? "Formato 12h" : "Formato 24h";
-  actualizarHora();
+  format24h = !format24h;
+  setFormatButton.innerHTML = format24h ? "Formato 12h" : "Formato 24h";
+  setTime();
 }
 
-function cambiarPrecision() {
-  clearInterval(intervalo);
+function setPrecision() {
+  clearInterval(interval);
   precision = (precision + 1) % 4;
-  intervalo = setInterval(actualizarHora, 10**(3-precision));
-  actualizarHora();
+  interval = setInterval(setTime, 10**(3-precision));
+  setTime();
 }
 
-let intervalo = setInterval(actualizarHora, 10**(3-precision));
-actualizarHora();
+let interval = setInterval(setTime, 10**(3-precision));
+setTime();

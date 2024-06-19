@@ -1,11 +1,11 @@
 :root {
-  --horas-height: 25%;
-  --minutos-height: 35%;
-  --segundos-height: 45%;
+  --hours-height: 25%;
+  --minutes-height: 35%;
+  --seconds-height: 45%;
 
-  --horas-width: 2%;
-  --minutos-width: 1.5%;
-  --segundos-width: 1%;
+  --hours-width: 2%;
+  --minutes-width: 1.5%;
+  --seconds-width: 1%;
 
   --clock-size: 300px;
   --main-color: aqua;
@@ -25,7 +25,7 @@ body {
   text-align: center;
 }
 
-#relojDigital {
+#digitalClock {
   color: var(--main-color);
   position: absolute;
   top: 50%;
@@ -35,7 +35,7 @@ body {
   margin-bottom: 20px;
 }
 
-#fecha {
+#date {
   font-size: 24px;
   margin-bottom: 10px;
 }
@@ -46,7 +46,7 @@ button {
   cursor: pointer;
 }
 
-#relojAnalogo {
+#analogicalClock {
   background-color: #000000;
   width: var(--clock-size);
   height: var(--clock-size);
@@ -56,7 +56,7 @@ button {
   box-shadow: inset 1px 1px 5px var(--main-color);
 }
 
-#punto {
+#dot {
   background-color: #000000;
   width: calc(var(--clock-size) / 30);
   height: calc(var(--clock-size) / 30);
@@ -68,38 +68,38 @@ button {
   transform: translate(-50%,-50%);
 }
 
-#horas {
+#hours {
   background-color: red;
   border-top: 1px solid #000000;
   position: absolute;
-  height: var(--horas-height);
-  top: calc(50% - var(--horas-height));
+  height: var(--hours-height);
+  top: calc(50% - var(--hours-height));
   left: 50%;
   transform: translateX(-50%);
-  width: var(--horas-width);
+  width: var(--hours-width);
   transform-origin: bottom;
 }
 
-#minutos {
+#minutes {
   background-color: red;
   border-top: 1px solid #000000;
   position: absolute;
-  height: var(--minutos-height);
-  top: calc(50% - var(--minutos-height));
+  height: var(--minutes-height);
+  top: calc(50% - var(--minutes-height));
   left: 50%;
   transform: translateX(-50%);
-  width: var(--minutos-width);
+  width: var(--minutes-width);
   transform-origin: bottom;
 }
 
-#segundos {
+#seconds {
   background-color: white;
   border-top: 1px solid #000000;
   position: absolute;
-  height: var(--segundos-height);
-  top: calc(50% - var(--segundos-height));
+  height: var(--seconds-height);
+  top: calc(50% - var(--seconds-height));
   left: 50%;
   transform: translateX(-50%);
-  width: var(--segundos-width);
+  width: var(--seconds-width);
   transform-origin: bottom;
 }
