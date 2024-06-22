@@ -117,7 +117,7 @@ function calculate() {
 document.addEventListener("keydown", (event) => {
   const key = event.key;
   if (!isNaN(key) || key === "." || key === ",") {
-    appendNumber(key.replace(",","."));
+    appendNumber(key.replace(",", "."));
   } else if (key === "Enter" || key === "=") {
     calculate();
   } else if (key === "Backspace") {
