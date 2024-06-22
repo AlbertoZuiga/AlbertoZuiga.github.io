@@ -1,27 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
     <div class="container">
-      <div id="game">
-        <div class="box top left clear"></div>
-        <div class="box top center clear"></div>
-        <div class="box top right clear"></div>
-        <div class="box middle left clear"></div>
-        <div class="box middle center clear"></div>
-        <div class="box middle right clear"></div>
-        <div class="box down left clear"></div>
-        <div class="box down center clear"></div>
-        <div class="box down right clear"></div>
-      </div>
+        <h1>Tic Tac Toe</h1>
+        <div class="board" id="board">
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+        </div>
+        <button id="restartButton">Reiniciar</button>
     </div>
-
-    <button id="restart" class="hidden">jugar de nuevo</button>
     <script src="script.js"></script>
-  </body>
+</body>
 </html>

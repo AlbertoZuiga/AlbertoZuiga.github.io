@@ -1,69 +1,73 @@
 body {
-  margin: 0px;
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-}
-
-.container {
-  position: relative;
-}
-
-#game {
-  position: absolute;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr); /* Example with 3 columns */
-  grid-template-rows: repeat(3, 1fr); /* Example with 3 columns */
-  grid-template-columns: auto auto auto;
-  grid-template-rows: auto auto auto;
-  background-color: black;
-  gap: 3px;
-  margin: 0px;
-  padding: 0px;
-  border-radius: 10%;
-}
-
-.box {
-  background-color: white;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: xx-large;
+  height: 100vh;
+  background-color: #f5f5f5;
+  font-family: Arial, sans-serif;
+  margin: 0;
 }
 
-.box:hover {
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
+  gap: 2px;
+  background-color: black;
+  margin-bottom: 20px;
+  border-radius: 5%;
+  overflow: hidden;
+}
+
+.cell {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.cell:not([class*=" "]):hover {
+  background-color: #dddddd;
+}
+
+.cell.X {
+  color: #ff0000;
   cursor: not-allowed;
 }
 
-.top.left {
-  border-radius: 10% 0 0 0;
+.cell.X.win {
+  background-color: #ff0000;
+  color: #ffffff;
+  cursor: not-allowed;
 }
 
-.top.right {
-  border-radius: 0 10% 0 0;
+.cell.O {
+  color: #0000ff;
+  cursor: not-allowed;
 }
 
-.down.left {
-  border-radius: 0 0 0 10%;
+.cell.O.win {
+  background-color: #0000ff;
+  color: #ffffff;
+  cursor: not-allowed;
 }
 
-.down.right {
-  border-radius: 0 0 10% 0;
-}
-
-.clear:hover {
-  background-color: #ddd;
+button {
+  padding: 10px 20px;
+  font-size: 1rem;
   cursor: pointer;
-}
-
-.X {
-  color: blue;
-}
-
-.O {
-  color: red;
-}
-
-.hidden {
-  display: none;
 }
