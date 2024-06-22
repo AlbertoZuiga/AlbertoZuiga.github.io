@@ -1,0 +1,44 @@
+body {
+  margin: 0px;
+  text-align: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  position: relative;
+}
+
+#game {
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Example with 3 columns */
+  grid-template-rows: repeat(3, 1fr); /* Example with 3 columns */
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  background-color: black;
+  gap: 3px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.box {
+  background-color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.X {
+  color: blue;
+  font-size: xx-large;
+}
+
+.O {
+  color: red;
+  font-size: xx-large;
+}
+
+.hidden {
+  display: none;
+}
