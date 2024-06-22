@@ -56,7 +56,7 @@ document.querySelectorAll(".box").forEach((element) => {
 function checkWin(player) {
   let playerWin = true;
 
-  document.querySelectorAll(".up").forEach((element) => {
+  document.querySelectorAll(".top").forEach((element) => {
     if (!element.classList.contains(player)) {
       playerWin = false;
     }
@@ -130,9 +130,9 @@ function checkWin(player) {
 
   if (document.querySelector(".middle.center").classList.contains(player)) {
     if (
-      (document.querySelector(".right.up").classList.contains(player) &&
+      (document.querySelector(".right.top").classList.contains(player) &&
         document.querySelector(".left.down").classList.contains(player)) ||
-      (document.querySelector(".left.up").classList.contains(player) &&
+      (document.querySelector(".left.top").classList.contains(player) &&
         document.querySelector(".right.down").classList.contains(player))
     ) {
       playing = false;

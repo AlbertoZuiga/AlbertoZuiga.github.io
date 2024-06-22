@@ -20,6 +20,7 @@ body {
   gap: 3px;
   margin: 0px;
   padding: 0px;
+  border-radius: 10%;
 }
 
 .box {
@@ -27,16 +28,40 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: xx-large;
+}
+
+.box:hover {
+  cursor: not-allowed;
+}
+
+.top.left {
+  border-radius: 10% 0 0 0;
+}
+
+.top.right {
+  border-radius: 0 10% 0 0;
+}
+
+.down.left {
+  border-radius: 0 0 0 10%;
+}
+
+.down.right {
+  border-radius: 0 0 10% 0;
+}
+
+.clear:hover {
+  background-color: #ddd;
+  cursor: pointer;
 }
 
 .X {
   color: blue;
-  font-size: xx-large;
 }
 
 .O {
   color: red;
-  font-size: xx-large;
 }
 
 .hidden {
