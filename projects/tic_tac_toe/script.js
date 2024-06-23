@@ -104,3 +104,42 @@ function winEffect(combination) {
     }, 400 * i + 200);
   }
 }
+
+window.addEventListener("resize", () => {
+  handleResize();
+});
+
+function handleResize() {
+  const SCALER = 0.8;
+  const CONTAINER = document.querySelector(".container");
+  let SIZE = { width: 0, height: 0, x: 0, y: 0 };
+
+  console.log("hola");
+
+  const RESIZER =
+    SCALER *
+    Math.min(
+      window.innerWidth / CONTAINER.offsetWidth,
+      window.innerHeight / CONTAINER.offsetHeight
+    );
+
+  SIZE.width = RESIZER * CONTAINER.offsetWidth;
+  SIZE.height = RESIZER * CONTAINER.offsetHeight;
+  SIZE.x = window.innerWidth / 2 - SIZE.width / 2;
+  SIZE.y = window.innerHeight / 2 - SIZE.height / 2;
+
+  CONTAINER.style.width = `${SIZE.width}px`;
+  CONTAINER.style.height = `${SIZE.height}px`;
+  CONTAINER.style.left = `${SIZE.x}`;
+  CONTAINER.style.top = `${SIZE.y}`;
+
+  const cellSide = Math.min(CONTAINER.offsetWidth, CONTAINER.offsetHeight - (1300) / 9) /
+    3;
+  CELLS.forEach((cell)=>{
+    cell.style.width = `${cellSide}px`;
+    cell.style.height = `${cellSide}px`;
+  })
+  
+}
+
+handleResize();
