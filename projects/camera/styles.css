@@ -18,3 +18,11 @@ body {
 #error-message {
   color: red;
 }
+
+#pictures {
+  margin-top: 50px;
+}
+canvas {
+  border: 1px solid black;
+  margin: 5px;
+}

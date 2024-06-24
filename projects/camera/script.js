@@ -9,6 +9,7 @@ async function startCamera() {
     video.srcObject = stream;
   } catch (err) {
     console.error("Error al acceder a la cámara: ", err);
+    snapButton.remove();
     errorMessage.style.display = "block";
   }
 }
@@ -16,16 +17,18 @@ async function startCamera() {
 function takePicture() {
   const download = document.createElement("a");
   const new_canvas = document.createElement("canvas");
+  
   new_canvas.width = (video.offsetWidth - 4) / 3;
   new_canvas.height = (video.offsetHeight - 4) / 3;
 
+  
+  const context = new_canvas.getContext("2d");
+  context.drawImage(video, 0, 0, new_canvas.width, new_canvas.height);
+ 
   download.href = new_canvas.toDataURL("image/png");
   download.download = "snapshot.png";
   download.appendChild(new_canvas);
   pictures.appendChild(download);
-
-  const context = new_canvas.getContext("2d");
-  context.drawImage(video, 0, 0, new_canvas.width, new_canvas.height);
 }
 
 snapButton.addEventListener("click", () => {
