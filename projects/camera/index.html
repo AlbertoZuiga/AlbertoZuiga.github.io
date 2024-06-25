@@ -3,22 +3,23 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <title>WebCam</title>
-
     <link rel="stylesheet" href="styles.css" />
+    <link rel="icon" href="data:," />
   </head>
 
   <body>
     <h1>Cámara Web</h1>
-
+    <p>
+    </p>
+    
     <div id="camera-container">
       <video id="video" autoplay></video>
-
-      <button id="snap">Tomar Foto</button>
-
+      
+      <button id="snap" disabled>Sacar Foto</button>
+      <button id="record" class="start" disabled>Comenzar Grabación</button>
+      
       <div id="pictures"></div>
     </div>
 
