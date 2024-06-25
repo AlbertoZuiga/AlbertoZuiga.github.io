@@ -17,7 +17,13 @@ async function startCamera() {
     setupVideoStream(stream);
     enableButtons();
   } catch (err) {
-    handleCameraError(err);
+    try {
+      stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      setupVideoStream(stream);
+      enableButtons();
+    } catch (err) {
+      handleCameraError(err);
+    }
   }
 }
 
