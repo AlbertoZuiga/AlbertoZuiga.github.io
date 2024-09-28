@@ -21,7 +21,7 @@
     <!-- Modal para ingresar credenciales -->
     <div id="credentials-modal" class="modal">
         <div class="modal-content">
-            <span id="close-modal">&times;</span>
+            <span id="close-modal" onclick="hideCredentialsModal()">&times;</span>
             <h2>Conectar a un Broker MQTT</h2>
     
             <div class="floating-label">
@@ -76,7 +76,7 @@
 
 
         <div>
-            <h2 id="subscribed-topics-header">Subscribed Topics</h2>
+            <h2 id="subscribed-topics-header">No topics subscribed</h2>
             <ul id="topic-list"></ul>            
         </div>
     </div>

@@ -1,4 +1,3 @@
-// Variables para conexión
 let client;
 let brokerAddress = ""; // URL inicial del broker
 let options = {
@@ -12,6 +11,8 @@ let options = {
   useSSL: true,
 };
 
+const subscribedTopics = [];
+
 window.onload = function () {
   const savedBrokerAddress = localStorage.getItem("brokerAddress");
   const savedOptions = localStorage.getItem("options");
@@ -19,11 +20,8 @@ window.onload = function () {
   if (savedBrokerAddress && savedOptions) {
     brokerAddress = savedBrokerAddress;
     options = JSON.parse(savedOptions);
-
-    document.getElementById(
-      "broker-address"
-    ).innerText = `Connected to: ${brokerAddress}`;
-    connectToBroker(); // Conectar al broker automáticamente si ya existen credenciales guardadas
+    document.getElementById("broker-address").innerText = `Connected to: ${brokerAddress}`;
+    initializeClient();
   } else {
     showCredentialsModal();
   }
@@ -34,18 +32,15 @@ function showCredentialsModal() {
   modal.style.display = "flex";
 }
 
-document.getElementById("close-modal").onclick = function () {
-  document.getElementById("credentials-modal").style.display = "none";
-};
+function hideCredentialsModal() {
+  const modal = document.getElementById("credentials-modal");
+  modal.style.display = "none";
+}
 
 function submitCredentials() {
   const userInput = document.getElementById("modal-user-input").value.trim();
-  const passwordInput = document
-    .getElementById("modal-password-input")
-    .value.trim();
-  const brokerInput = document
-    .getElementById("modal-broker-input")
-    .value.trim();
+  const passwordInput = document.getElementById("modal-password-input").value.trim();
+  const brokerInput = document.getElementById("modal-broker-input").value.trim();
   const portInput = document.getElementById("modal-port-input").value.trim();
 
   function isValidPort(port) {
@@ -74,102 +69,43 @@ function submitCredentials() {
   }
 
   brokerAddress = `wss://${brokerInput}:${portInput}/mqtt`;
-  options["username"] = userInput;
-  options["password"] = passwordInput;
+  options.username = userInput;
+  options.password = passwordInput;
 
-  // Intentar conectarse al broker
-  connectToBroker()
-    .then(() => {
-      // Guardar en localStorage si la conexión es exitosa
-      localStorage.setItem("brokerAddress", brokerAddress);
-      localStorage.setItem("options", JSON.stringify(options));
-      document.getElementById(
-        "broker-address"
-      ).innerText = `Connected to: ${brokerAddress}`;
-      document.getElementById("credentials-modal").style.display = "none";
-      updateSubscribedTopicsHeader();
-    })
-    .catch((error) => {
-      const savedBrokerAddress = localStorage.getItem("brokerAddress");
-      const savedOptions = localStorage.getItem("options");
-
-      if (savedBrokerAddress && savedOptions) {
-        brokerAddress = savedBrokerAddress;
-        options = JSON.parse(savedOptions);
-        document.getElementById(
-          "broker-address"
-        ).innerText = `Connected to: ${brokerAddress}`;
-      }
-      // Mostrar el error si la conexión falla
-      alert(error);
-    });
+  initializeClient();
 }
 
-function connectToBroker() {
-  return new Promise((resolve, reject) => {
-    client = mqtt.connect(brokerAddress, options);
+function initializeClient() {
+  client = mqtt.connect(brokerAddress, options);
 
-    if (client) {
-      client.on("connect", function () {
-        console.log("Connected");
-        updateGlobalStatus("green", "Connected");
-        resolve("Connection successful"); // Resolución exitosa
-      });
-
-      client.on("offline", function () {
-        console.log("Disconnected");
-        updateGlobalStatus("red", "Disconnected");
-      });
-
-      client.on("error", function (error) {
-        console.error("Connection failed: ", error);
-        updateGlobalStatus("red", "Connection failed");
-        reject("Failed to connect to broker"); // Rechazo en caso de error
-      });
-
-      client.on("message", function (topic, message) {
-        const msg = message.toString();
-        console.log(`Message received on ${topic}: ${msg}`);
-        const messageBox = document.getElementById(`message-box-${topic}`);
-        if (messageBox) {
-          messageBox.innerText = msg;
-          const messageLog = document.getElementById(`log-${topic}`);
-          const newMessage = document.createElement("p");
-          newMessage.innerText = msg;
-          messageLog.appendChild(newMessage);
-        }
-      });
-    } else {
-      reject("Failed to initialize MQTT client");
-    }
-  });
-}
-
-const subscribedTopics = [];
-
-if (client) {
-  // Cuando el cliente se conecta
   client.on("connect", function () {
+    localStorage.setItem("brokerAddress", brokerAddress);
+    localStorage.setItem("options", JSON.stringify(options));
+    document.getElementById("broker-address").innerText = `Connected to: ${brokerAddress}`;
+    hideCredentialsModal();
+    updateSubscribedTopicsHeader();
+    updateGlobalStatus("green", "Connected");
     console.log("Connected");
-    updateGlobalStatus("green", "Connected"); // Actualizamos el estado global
   });
 
-  // Cuando el cliente se desconecta
   client.on("offline", function () {
+    updateGlobalStatus("red", "Disconnected");
     console.log("Disconnected");
-    updateGlobalStatus("red", "Disconnected"); // Actualizamos el estado global
+    alert("You have been disconnected.");
   });
 
-  // Manejar mensajes entrantes
+  client.on("error", function (error) {
+    console.error("Connection failed: ", error);
+    updateGlobalStatus("red", "Connection failed");
+    alert("Failed to connect to broker.");
+  });
+
   client.on("message", function (topic, message) {
     const msg = message.toString();
     console.log(`Message received on ${topic}: ${msg}`);
-
     const messageBox = document.getElementById(`message-box-${topic}`);
     if (messageBox) {
-      messageBox.innerText = msg; // Actualizar el último mensaje en el recuadro
-
-      // Agregar el mensaje a la lista de mensajes históricos
+      messageBox.innerText = msg;
       const messageLog = document.getElementById(`log-${topic}`);
       const newMessage = document.createElement("p");
       newMessage.innerText = msg;
@@ -178,7 +114,6 @@ if (client) {
   });
 }
 
-// Función para actualizar el estado global de conexión
 function updateGlobalStatus(color, statusText) {
   const statusDot = document.getElementById("global-status-dot");
   const statusLabel = document.getElementById("global-status-text");
@@ -189,52 +124,57 @@ function updateGlobalStatus(color, statusText) {
   }
 }
 
-// Función para suscribirse a un tópico
 function subscribeToTopic(topic) {
+  if (!client || !client.connected) {
+    alert("You need to connect to a broker first.");
+    return;
+  }
+
   client.subscribe(topic, function (err) {
     if (!err) {
       console.log("Subscribed to:", topic);
       subscribedTopics.push(topic);
-      addTopicToList(topic); // Agregar el tópico a la lista en el HTML
+      addTopicToList(topic);
+      updateSubscribedTopicsHeader();
+    } else {
+      alert("Failed to subscribe to topic.");
     }
   });
 }
 
-// Publicar un mensaje en un tópico
 function publishMessage(topic) {
   const input = document.getElementById(`publish-input-${topic}`);
   const message = input.value.trim();
-  if (message) {
-    client.publish(topic, message, function (err) {
-      if (!err) {
-        console.log(`Message published to ${topic}: ${message}`);
-        input.value = ""; // Limpiar el campo de entrada después de publicar
-      }
-    });
-  } else {
+
+  if (!message) {
     alert("Please enter a message to publish.");
+    return;
   }
+
+  client.publish(topic, message, function (err) {
+    if (!err) {
+      console.log(`Message published to ${topic}: ${message}`);
+      input.value = ""; // Clear input after publishing
+    } else {
+      alert("Failed to publish message.");
+    }
+  });
 }
 
-// Mostrar/Ocultar el log de mensajes
 function toggleMessageLog(topic) {
   const log = document.getElementById(`log-${topic}`);
-  if (log.innerText === "") {
-    log.innerHTML = "No messages yet";
-  }
-  log.style.display =
-    log.style.display === "none" || log.style.display === "" ? "block" : "none";
+  log.style.display = log.style.display === "none" || log.style.display === "" ? "block" : "none";
 }
 
-// Agregar un nuevo tópico
 function addNewTopic() {
   const newTopicInput = document.getElementById("new-topic-input");
   const newTopic = newTopicInput.value.trim();
+
   if (newTopic) {
-    subscribeToTopic(newTopic); // Suscribirse al nuevo tópico
-    newTopicInput.value = ""; // Limpiar el input
+    subscribeToTopic(newTopic);
+    newTopicInput.value = ""; // Clear input after subscribing
   } else {
-    alert("Please enter a valid topic."); // Mensaje de error
+    alert("Please enter a valid topic.");
   }
 }
 
@@ -247,12 +187,11 @@ function updateSubscribedTopicsHeader() {
   }
 }
 
-// Modifica la función addTopicToList para llamar a updateSubscribedTopicsHeader
 function addTopicToList(topic) {
   const topicList = document.getElementById("topic-list");
   const listItem = document.createElement("li");
 
-  listItem.classList.add("topic-card"); // Agrega clase para el estilo
+  listItem.classList.add("topic-card");
 
   listItem.innerHTML = `
         <div class="topic-header">
@@ -277,45 +216,27 @@ function addTopicToList(topic) {
     `;
 
   topicList.appendChild(listItem);
-
-  updateSubscribedTopicsHeader(); // Actualizar el encabezado después de agregar un tópico
+  updateSubscribedTopicsHeader();
 }
 
-// Llama a updateSubscribedTopicsHeader también cuando se suscriba a un nuevo tópico
-function subscribeToTopic(topic) {
-  client.subscribe(topic, function (err) {
-    if (!err) {
-      console.log("Subscribed to:", topic);
-      subscribedTopics.push(topic);
-      addTopicToList(topic); // Agregar el tópico a la lista en el HTML
-      updateSubscribedTopicsHeader(); // Actualizar el encabezado
-    }
-  });
-}
-
-// Función para desuscribirse de un tópico
 function unsubscribeFromTopic(topic) {
   client.unsubscribe(topic, function (err) {
     if (!err) {
       console.log("Unsubscribed from:", topic);
-      // Eliminar el tópico de la lista y actualizar la interfaz
       const topicList = document.getElementById("topic-list");
-      const listItem = Array.from(topicList.children).find((li) => {
-        return li.querySelector(".topic-name").innerText === topic;
-      });
+      const listItem = Array.from(topicList.children).find((li) => li.querySelector(".topic-name").innerText === topic);
+
       if (listItem) {
-        topicList.removeChild(listItem); // Eliminar el elemento de la lista
+        topicList.removeChild(listItem);
       }
-      // Eliminar el tópico de la lista de tópicos suscritos
+
       const index = subscribedTopics.indexOf(topic);
       if (index > -1) {
         subscribedTopics.splice(index, 1);
       }
       updateSubscribedTopicsHeader();
     } else {
-      alert("Error unsubscribing from topic: " + err);
+      alert("Error unsubscribing from topic.");
     }
   });
 }
-
-updateSubscribedTopicsHeader();
