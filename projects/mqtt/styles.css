@@ -417,3 +417,18 @@ li {
   from { transform: translateY(-50px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+
+/* Botón de cierre (la "X") */
+#close-modal {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+#close-modal:hover,
+#close-modal:focus {
+  color: black;
+  text-decoration: none;
+}

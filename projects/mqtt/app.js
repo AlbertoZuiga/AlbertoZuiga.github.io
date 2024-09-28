@@ -17,6 +17,10 @@ function showCredentialsModal() {
     modal.style.display = 'flex';
 }
 
+document.getElementById("close-modal").onclick = function() {
+    document.getElementById('credentials-modal').style.display = "none";
+}
+
 function submitCredentials() {
     const userInput = document.getElementById('modal-user-input').value.trim();
     const passwordInput = document.getElementById('modal-password-input').value.trim();
@@ -248,15 +252,4 @@ function unsubscribeFromTopic(topic) {
     });
 }
 
-// Chequeo del estado de conexión y actualiza el color del estado
-setInterval(() => {
-    if (client.isConnected()) {
-        subscribedTopics.forEach(topic => updateTopicStatus(topic, 'green'));
-    } else {
-        subscribedTopics.forEach(topic => updateTopicStatus(topic, 'red'));
-    }
-}, 5000);
-
-
 updateSubscribedTopicsHeader()
-setTimeout(subscribeToTopic, 3000, 'admin')
