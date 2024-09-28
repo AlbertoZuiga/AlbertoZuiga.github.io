@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MQTT Web Client</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+    <script defer src="app.js"></script>
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="../../index.html">Inicio</a></li>
+  
+          <li><a href="../../projects.html">Proyectos</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+        <h1>MQTT Web Client</h1>
+
+        
+        <!-- Estado global de conexión -->
+        <div class="status-box">
+            <span class="status-dot red" id="global-status-dot"></span>
+            <span id="global-status-text">Disconnected</span>
+        </div>
+
+        <!-- Información del broker -->
+        <div class="broker-info">
+            <div id="broker-status">
+                <span id="broker-address">Connected to: 3e0f36dd787547f385acdec492cfc4b6.s1.eu.hivemq.cloud:8884</span>
+                <button onclick="toggleBrokerInputs()">Change Broker</button>
+            </div>
+            
+            <div id="broker-inputs" style="display: none;">
+                <div class="inputs-section">
+                    <input type="text" id="broker-input" placeholder="Enter broker address">
+                    <input type="number" id="port-input" placeholder="Enter port" value="8883">
+                </div>
+                <div class="buttons-section">
+                    <button onclick="changeBroker()">Submit</button>
+                    <button onclick="toggleBrokerInputs()" class="cancel-btn">Cancel</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección para agregar nuevos tópicos -->
+        <div class="add-topic-section">
+            <div class="add-topic-status">
+                <input type="text" id="new-topic-input" placeholder="Enter new topic">
+                <button onclick="addNewTopic()">Add Topic</button>
+            </div>
+        </div>
+
+
+        <div>
+            <h2 id="subscribed-topics-header">Subscribed Topics</h2>
+            <ul id="topic-list"></ul>            
+        </div>
+    </div>
+</body>
+</html>
