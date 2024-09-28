@@ -1,3 +1,33 @@
+nav {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: #333;
+  color: #fff;
+  padding: 1rem;
+  margin-bottom: 30px;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  text-align: center;
+}
+
+nav ul li {
+  display: inline;
+  margin: 0 1rem;
+}
+
+nav ul li a {
+  color: #fff;
+  text-decoration: none;
+}
+
+nav ul li a:hover {
+  color: rgb(0, 115, 186);
+}
+
 /* section.css */
 .section {
   margin-left: 50px;
@@ -72,7 +102,7 @@ body {
 /* switch.css */
 .fixed-toggle {
   position: fixed;
-  top: 10px;
+  top: 100px;
   right: 10px;
   z-index: 1000;
 }
