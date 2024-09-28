@@ -1,4 +1,10 @@
 /* Global Styles */
+:root {
+  --primary-color: #007bff; 
+  --success-color: #28a745;
+  --danger-color: #dc3545;
+}
+
 body {
   font-family: Arial, sans-serif;
   background-color: #f4f4f4;
@@ -268,7 +274,7 @@ li {
 }
 
 .floating-label input:focus {
-  border-color: #28a745;
+  border-color: var(--success-color);
 }
 
 .floating-label label {
@@ -289,7 +295,7 @@ li {
   top: 0;
   left: 10px;
   font-size: 0.85rem;
-  color: #28a745;
+  color: var(--success-color);
 }
 
 /* Animations */
@@ -314,7 +320,7 @@ li {
 
 /* Botones primarios */
 .btn-primary {
-  background-color: #007bff; /* Azul predeterminado */
+  background-color: var(--primary-color); /* Azul predeterminado */
   color: white;
 }
 
@@ -323,14 +329,14 @@ li {
 }
 
 .btn-primary:disabled{
-  background-color: #007bff; /* Azul claro */
+  background-color: var(--primary-color); /* Azul claro */
   opacity: 0.5; /* Semitransparente */
   cursor: not-allowed;
 }
 
 /* Botón Success */
 .btn-success {
-  background-color: #28a745; /* Color verde principal */
+  background-color: var(--success-color); /* Color verde principal */
   color: white; /* Texto blanco */
 }
 
@@ -349,7 +355,7 @@ li {
 
 /* Botones de peligro (danger) */
 .btn-danger {
-  background-color: #dc3545; /* Rojo */
+  background-color: var(--danger-color); /* Rojo */
   color: white; /* Texto blanco */
 }
 

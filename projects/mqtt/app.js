@@ -6,7 +6,7 @@ let options = {
   password: "",
   keepalive: 60,
   clean: true,
-  reconnectPeriod: 1000,
+  reconnectPeriod: 0,
   connectTimeout: 30 * 1000,
   useSSL: true,
 };
@@ -72,10 +72,14 @@ function submitCredentials() {
   options.username = userInput;
   options.password = passwordInput;
 
+  localStorage.removeItem("brokerAddress");
+  localStorage.removeItem("options");
+
   initializeClient();
 }
 
 function initializeClient() {
+    if (client){client.end();};
   client = mqtt.connect(brokerAddress, options);
 
   client.on("connect", function () {
@@ -84,19 +88,19 @@ function initializeClient() {
     document.getElementById("broker-address").innerText = `Connected to: ${brokerAddress}`;
     hideCredentialsModal();
     updateSubscribedTopicsHeader();
-    updateGlobalStatus("green", "Connected");
+    updateGlobalStatus("success", "Connected");
     console.log("Connected");
   });
 
   client.on("offline", function () {
-    updateGlobalStatus("red", "Disconnected");
+    updateGlobalStatus("danger", "Disconnected");
     console.log("Disconnected");
     alert("You have been disconnected.");
   });
 
   client.on("error", function (error) {
     console.error("Connection failed: ", error);
-    updateGlobalStatus("red", "Connection failed");
+    updateGlobalStatus("danger", "Connection failed");
     alert("Failed to connect to broker.");
   });
 
@@ -118,9 +122,11 @@ function initializeClient() {
 function updateGlobalStatus(color, statusText) {
   const statusDot = document.getElementById("global-status-dot");
   const statusLabel = document.getElementById("global-status-text");
+  const dotColor = getComputedStyle(document.documentElement).getPropertyValue(`--${color}-color`);
 
   if (statusDot && statusLabel) {
-    statusDot.className = `status-dot ${color}`;
+    statusDot.className = `status-dot`;
+    statusDot.style.backgroundColor = dotColor.trim(); // Asigna el color y elimina espacios en blanco
     statusLabel.innerText = statusText;
   }
 }
