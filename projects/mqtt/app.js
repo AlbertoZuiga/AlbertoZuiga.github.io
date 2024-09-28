@@ -111,6 +111,7 @@ function initializeClient() {
       newMessage.innerText = msg;
       messageLog.appendChild(newMessage);
     }
+    document.getElementById(`show-messages-${topic}`).disabled = false;
   });
 }
 
@@ -195,13 +196,13 @@ function addTopicToList(topic) {
 
   listItem.innerHTML = `
         <div class="topic-header">
-            <span class="topic-name">${topic}</span>
-            <button class="unsubscribe-btn" onclick="unsubscribeFromTopic('${topic}')">Unsubscribe</button>
+            <span class="topic-name">Topic: ${topic}</span>
+            <button class="btn btn-danger" onclick="unsubscribeFromTopic('${topic}')">Unsubscribe</button>
         </div>
 
         <div class="publish-section">
             <input type="text" id="publish-input-${topic}" class="publish-input" placeholder="Message">
-            <button class="publish-btn" onclick="publishMessage('${topic}')">Publish</button>
+            <button class="btn btn-success" onclick="publishMessage('${topic}')">Publish</button>
         </div>
 
         <div class="last-message">
@@ -211,7 +212,7 @@ function addTopicToList(topic) {
             </div>
         </div>
 
-        <button class="show-hide-btn" onclick="toggleMessageLog('${topic}')">Show all Messages</button>
+        <button class="btn btn-primary" id="show-messages-${topic}" onclick="toggleMessageLog('${topic}')" disabled>Show all Messages</button>
         <div class="message-log" id="log-${topic}" style="display: none;"></div>
     `;
 
