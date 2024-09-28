@@ -1,10 +1,10 @@
 // Variables para conexión
 let client;
-let brokerAddress = 'wss://3e0f36dd787547f385acdec492cfc4b6.s1.eu.hivemq.cloud:8884/mqtt'; // URL inicial del broker
+let brokerAddress = ''; // URL inicial del broker
 let options = {
     clientId: 'mqttjs_' + Math.random().toString(16).substr(2, 8),
-    username: 'admin',
-    password: 'admin',
+    username: '',
+    password: '',
     keepalive: 60,
     clean: true,
     reconnectPeriod: 1000,
@@ -12,6 +12,33 @@ let options = {
     useSSL: true
 };
 
+function showCredentialsModal() {
+    const modal = document.getElementById('credentials-modal');
+    modal.style.display = 'flex';
+}
+
+function submitCredentials() {
+    const userInput = document.getElementById('modal-user-input').value.trim();
+    const passwordInput = document.getElementById('modal-password-input').value.trim();
+    const brokerInput = document.getElementById('modal-broker-input').value.trim();
+    const portInput = document.getElementById('modal-port-input').value.trim();
+
+    if (userInput && passwordInput && brokerInput && portInput) {
+        brokerAddress = `wss://${brokerInput}:${portInput}/mqtt`; // Crear nueva dirección del broker
+        options['username'] = userInput;
+        options['password'] = passwordInput;
+
+        document.getElementById('broker-address').innerText = `Connected to: ${brokerAddress}`; // Actualizar texto del broker
+        document.getElementById('credentials-modal').style.display = 'none'; // Ocultar el modal
+        if (client) {
+            client.end(); // Desconectar el cliente actual
+        }
+        connectToBroker(); // Conectar al broker
+        updateSubscribedTopicsHeader()
+    } else {
+        alert('Please fill in all fields');
+    }
+}
 function connectToBroker() {
     client = mqtt.connect(brokerAddress, options);
     client.on('connect', function () {
@@ -36,25 +63,6 @@ function connectToBroker() {
             messageLog.appendChild(newMessage);
         }
     });
-}
-
-// Conectar al broker inicial
-connectToBroker(brokerAddress);
-
-// Función para cambiar el broker
-function changeBroker() {
-    const brokerInput = document.getElementById('broker-input').value.trim();
-    const portInput = document.getElementById('port-input').value.trim();
-    if (brokerInput && portInput) {
-        brokerAddress = `wss://${brokerInput}:${portInput}/mqtt`; // Crear nueva dirección del broker
-        document.getElementById('broker-address').innerText = `Connected to: ${brokerAddress}`; // Actualizar texto del broker
-        if (client) {
-            client.end(); // Desconectar el cliente actual
-        }
-        connectToBroker(); // Reconectar al nuevo broker
-    } else {
-        alert('Please enter a valid broker address and port.'); // Mensaje de error
-    }
 }
 
 // Función para mostrar/ocultar inputs del broker
@@ -123,13 +131,19 @@ client.on('message', function (topic, message) {
     }
 });
 
-// Publicar un mensaje
+// Publicar un mensaje en un tópico
 function publishMessage(topic) {
     const input = document.getElementById(`publish-input-${topic}`);
-    const message = input.value;
+    const message = input.value.trim();
     if (message) {
-        client.publish(topic, message);
-        input.value = ''; // Limpiar el input
+        client.publish(topic, message, function (err) {
+            if (!err) {
+                console.log(`Message published to ${topic}: ${message}`);
+                input.value = '';  // Limpiar el campo de entrada después de publicar
+            }
+        });
+    } else {
+        alert('Please enter a message to publish.');
     }
 }
 
@@ -209,7 +223,6 @@ function subscribeToTopic(topic) {
     });
 }
 
-// Modificar la función para desuscribirse de un tópico (si corresponde)
 // Función para desuscribirse de un tópico
 function unsubscribeFromTopic(topic) {
     client.unsubscribe(topic, function (err) {
