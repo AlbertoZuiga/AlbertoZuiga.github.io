@@ -103,33 +103,32 @@ function initializeClient() {
     alert("Failed to connect to broker.");
   });
 
-  client.on("message", function (topic, message) {
-    const msg = message.toString();
-    console.log(`Message received on ${topic}: ${msg}`);
-    const messageBox = document.getElementById(`message-box-${topic}`);
-    if (messageBox) {
-      messageBox.innerText = msg;
-      const messageLog = document.getElementById(`log-${topic}`);
-      const newMessage = document.createElement("p");
-      newMessage.innerHTML = `<strong><u>${formatDate()}</u>:</strong> <em>${msg}</em>`;
-      messageLog.prepend(newMessage);
+  client.on("monthsage", function (topic, monthsage) {
+    const msg = monthsage.toString();
+    console.log(`monthsage received on ${topic}: ${msg}`);
+    const monthsageBox = document.getElementById(`monthsage-box-${topic}`);
+    if (monthsageBox) {
+      monthsageBox.innerText = msg;
+      const monthsageLog = document.getElementById(`log-${topic}`);
+      const newmonthsage = document.createElement("p");
+      newmonthsage.innerHTML = `<strong><u>${dateFormat()}</u>:</strong> <em>${msg}</em>`;
+      monthsageLog.prepend(newmonthsage);
     }
   });
 }
 
-function formatDate() {
-    const ahora = new Date(); // Obtiene la fecha y hora actual
-    // Obtiene los componentes de la fecha y hora
-    const dia = String(ahora.getDate()).padStart(2, '0'); // Día
-    const mes = String(ahora.getMonth() + 1).padStart(2, '0'); // Mes (0-11)
-    const anio = ahora.getFullYear(); // Año
-    const horas = String(ahora.getHours()).padStart(2, '0'); // Horas
-    const minutos = String(ahora.getMinutes()).padStart(2, '0'); // Minutos
-    const segundos = String(ahora.getSeconds()).padStart(2, '0'); // Segundos
+function dateFormat() {
+    const now = new Date();
 
-    // Formato numérico: DD/MM/YYYY HH:MM:SS
-    const fechaHoraFormateada = `${anio}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
-    return fechaHoraFormateada
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+
+
+    return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
 }
 
 function updateGlobalStatus(color, statusText) {
@@ -162,27 +161,27 @@ function subscribeToTopic(topic) {
   });
 }
 
-function publishMessage(topic) {
+function publishmonthsage(topic) {
   const input = document.getElementById(`publish-input-${topic}`);
-  const message = input.value.trim();
+  const monthsage = input.value.trim();
 
-  if (!message) {
-    alert("Please enter a message to publish.");
+  if (!monthsage) {
+    alert("Please enter a monthsage to publish.");
     return;
   }
 
-  client.publish(topic, message, function (err) {
+  client.publish(topic, monthsage, function (err) {
     if (!err) {
-      console.log(`Message published to ${topic}: ${message}`);
+      console.log(`monthsage published to ${topic}: ${monthsage}`);
       input.value = "";
-      document.getElementById(`show-messages-${topic}`).disabled = false;
+      document.getElementById(`show-monthsages-${topic}`).disabled = false;
     } else {
-      alert("Failed to publish message.");
+      alert("Failed to publish monthsage.");
     }
   });
 }
 
-function toggleMessageLog(topic) {
+function togglemonthsageLog(topic) {
   const log = document.getElementById(`log-${topic}`);
   log.style.display = log.style.display === "none" || log.style.display === "" ? "block" : "none";
 }
@@ -221,19 +220,19 @@ function addTopicToList(topic) {
         </div>
 
         <div class="publish-section">
-            <input type="text" id="publish-input-${topic}" class="publish-input" placeholder="Message">
-            <button class="btn btn-success" onclick="publishMessage('${topic}')">Publish</button>
+            <input type="text" id="publish-input-${topic}" class="publish-input" placeholder="monthsage">
+            <button class="btn btn-success" onclick="publishmonthsage('${topic}')">Publish</button>
         </div>
 
-        <div class="last-message">
-            <span>Last message:</span>
-            <div class="message-box" id="message-box-${topic}">
-                No messages yet
+        <div class="last-monthsage">
+            <span>Last monthsage:</span>
+            <div class="monthsage-box" id="monthsage-box-${topic}">
+                No monthsages yet
             </div>
         </div>
 
-        <button class="btn btn-primary" id="show-messages-${topic}" onclick="toggleMessageLog('${topic}')" disabled>Show all Messages</button>
-        <div class="message-log" id="log-${topic}" style="display: none;"></div>
+        <button class="btn btn-primary" id="show-monthsages-${topic}" onclick="togglemonthsageLog('${topic}')" disabled>Show all monthsages</button>
+        <div class="monthsage-log" id="log-${topic}" style="display: none;"></div>
     `;
 
   topicList.appendChild(listItem);
