@@ -1,8 +1,11 @@
 /* Global Styles */
 :root {
-  --primary-color: #007bff; 
+  --primary-color: #007bff;
   --success-color: #28a745;
   --danger-color: #dc3545;
+  --primary-hover-color: #0056b3;
+  --success-hover-color: #218838;
+  --danger-hover-color: #c82333;
 }
 
 body {
@@ -191,7 +194,6 @@ li {
 
 .broker-info span {
   margin-right: 10px;
-  font-weight: bold;
   flex: 1;
 }
 
@@ -325,7 +327,7 @@ li {
 }
 
 .btn-primary:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-hover-color);
 }
 
 .btn-primary:disabled{
@@ -341,7 +343,7 @@ li {
 }
 
 .btn-success:hover {
-  background-color: #218838; /* Color más oscuro al hacer hover */
+  background-color: var(--success-hover-color); /* Color más oscuro al hacer hover */
 }
 
 /* Botones secundarios */
@@ -360,5 +362,5 @@ li {
 }
 
 .btn-danger:hover {
-  background-color: #c82333;
+  background-color: var(--danger-hover-color);
 }

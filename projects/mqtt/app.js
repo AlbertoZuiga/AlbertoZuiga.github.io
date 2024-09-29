@@ -41,7 +41,6 @@ function submitCredentials() {
   const userInput = document.getElementById("modal-user-input").value.trim();
   const passwordInput = document.getElementById("modal-password-input").value.trim();
   const brokerInput = document.getElementById("modal-broker-input").value.trim();
-  const portInput = document.getElementById("modal-port-input").value.trim();
 
   function isValidPort(port) {
     const portNumber = parseInt(port, 10);
@@ -53,7 +52,7 @@ function submitCredentials() {
     return urlPattern.test(broker);
   }
 
-  if (!userInput || !passwordInput || !brokerInput || !portInput) {
+  if (!userInput || !passwordInput || !brokerInput) {
     alert("Please fill in all fields.");
     return;
   }
@@ -63,12 +62,12 @@ function submitCredentials() {
     return;
   }
 
-  if (!isValidPort(portInput)) {
+  if (!isValidPort(2344)) {
     alert("Please enter a valid port number (1-65535).");
     return;
   }
 
-  brokerAddress = `wss://${brokerInput}:${portInput}/mqtt`;
+  brokerAddress = `wss://${brokerInput}`;
   options.username = userInput;
   options.password = passwordInput;
 
@@ -85,7 +84,7 @@ function initializeClient() {
   client.on("connect", function () {
     localStorage.setItem("brokerAddress", brokerAddress);
     localStorage.setItem("options", JSON.stringify(options));
-    document.getElementById("broker-address").innerText = `Connected to: ${brokerAddress}`;
+    document.getElementById("broker-address").innerHTML = `<strong>Connected to:</strong> <u><em>${brokerAddress}</u></em>`;
     hideCredentialsModal();
     updateSubscribedTopicsHeader();
     updateGlobalStatus("success", "Connected");
@@ -112,11 +111,25 @@ function initializeClient() {
       messageBox.innerText = msg;
       const messageLog = document.getElementById(`log-${topic}`);
       const newMessage = document.createElement("p");
-      newMessage.innerText = msg;
-      messageLog.appendChild(newMessage);
+      newMessage.innerHTML = `<strong><u>${formatDate()}</u>:</strong> <em>${msg}</em>`;
+      messageLog.prepend(newMessage);
     }
-    document.getElementById(`show-messages-${topic}`).disabled = false;
   });
+}
+
+function formatDate() {
+    const ahora = new Date(); // Obtiene la fecha y hora actual
+    // Obtiene los componentes de la fecha y hora
+    const dia = String(ahora.getDate()).padStart(2, '0'); // Día
+    const mes = String(ahora.getMonth() + 1).padStart(2, '0'); // Mes (0-11)
+    const anio = ahora.getFullYear(); // Año
+    const horas = String(ahora.getHours()).padStart(2, '0'); // Horas
+    const minutos = String(ahora.getMinutes()).padStart(2, '0'); // Minutos
+    const segundos = String(ahora.getSeconds()).padStart(2, '0'); // Segundos
+
+    // Formato numérico: DD/MM/YYYY HH:MM:SS
+    const fechaHoraFormateada = `${anio}-${mes}-${dia} ${horas}:${minutos}:${segundos}`;
+    return fechaHoraFormateada
 }
 
 function updateGlobalStatus(color, statusText) {
@@ -161,7 +174,8 @@ function publishMessage(topic) {
   client.publish(topic, message, function (err) {
     if (!err) {
       console.log(`Message published to ${topic}: ${message}`);
-      input.value = ""; // Clear input after publishing
+      input.value = "";
+      document.getElementById(`show-messages-${topic}`).disabled = false;
     } else {
       alert("Failed to publish message.");
     }
