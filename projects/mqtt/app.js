@@ -78,7 +78,7 @@ function submitCredentials() {
 }
 
 function initializeClient() {
-    if (client){client.end();};
+  if (client){client.end();};
   client = mqtt.connect(brokerAddress, options);
 
   client.on("connect", function () {
@@ -103,16 +103,17 @@ function initializeClient() {
     alert("Failed to connect to broker.");
   });
 
-  client.on("monthsage", function (topic, monthsage) {
-    const msg = monthsage.toString();
-    console.log(`monthsage received on ${topic}: ${msg}`);
-    const monthsageBox = document.getElementById(`monthsage-box-${topic}`);
-    if (monthsageBox) {
-      monthsageBox.innerText = msg;
-      const monthsageLog = document.getElementById(`log-${topic}`);
-      const newmonthsage = document.createElement("p");
-      newmonthsage.innerHTML = `<strong><u>${dateFormat()}</u>:</strong> <em>${msg}</em>`;
-      monthsageLog.prepend(newmonthsage);
+  client.on("message", function (topic, message) {
+    const msg = message.toString();
+    console.log(`message received on ${topic}: ${msg}`);
+    const messageBox = document.getElementById(`message-box-${topic}`);
+    if (messageBox) {
+      messageBox.innerText = msg;
+      const messageLog = document.getElementById(`log-${topic}`);
+      const newmessage = document.createElement("p");
+      newmessage.innerHTML = `<strong><u>${dateFormat()}</u>:</strong> <em>${msg}</em>`;
+      messageLog.prepend(newmessage);
+      document.getElementById(`show-messages-${topic}`).disabled = false;
     }
   });
 }
@@ -161,27 +162,27 @@ function subscribeToTopic(topic) {
   });
 }
 
-function publishmonthsage(topic) {
+function publishmessage(topic) {
   const input = document.getElementById(`publish-input-${topic}`);
-  const monthsage = input.value.trim();
+  const message = input.value.trim();
 
-  if (!monthsage) {
-    alert("Please enter a monthsage to publish.");
+  if (!message) {
+    alert("Please enter a message to publish.");
     return;
   }
 
-  client.publish(topic, monthsage, function (err) {
+  client.publish(topic, message, function (err) {
     if (!err) {
-      console.log(`monthsage published to ${topic}: ${monthsage}`);
+      console.log(`message published to ${topic}: ${message}`);
       input.value = "";
-      document.getElementById(`show-monthsages-${topic}`).disabled = false;
+      document.getElementById(`show-messages-${topic}`).disabled = false;
     } else {
-      alert("Failed to publish monthsage.");
+      alert("Failed to publish message.");
     }
   });
 }
 
-function togglemonthsageLog(topic) {
+function togglemessageLog(topic) {
   const log = document.getElementById(`log-${topic}`);
   log.style.display = log.style.display === "none" || log.style.display === "" ? "block" : "none";
 }
@@ -220,19 +221,19 @@ function addTopicToList(topic) {
         </div>
 
         <div class="publish-section">
-            <input type="text" id="publish-input-${topic}" class="publish-input" placeholder="monthsage">
-            <button class="btn btn-success" onclick="publishmonthsage('${topic}')">Publish</button>
+            <input type="text" id="publish-input-${topic}" class="publish-input" placeholder="message">
+            <button class="btn btn-success" onclick="publishmessage('${topic}')">Publish</button>
         </div>
 
-        <div class="last-monthsage">
-            <span>Last monthsage:</span>
-            <div class="monthsage-box" id="monthsage-box-${topic}">
-                No monthsages yet
+        <div class="last-message">
+            <span>Last message:</span>
+            <div class="message-box" id="message-box-${topic}">
+                No messages yet
             </div>
         </div>
 
-        <button class="btn btn-primary" id="show-monthsages-${topic}" onclick="togglemonthsageLog('${topic}')" disabled>Show all monthsages</button>
-        <div class="monthsage-log" id="log-${topic}" style="display: none;"></div>
+        <button class="btn btn-primary" id="show-messages-${topic}" onclick="togglemessageLog('${topic}')" disabled>Show all messages</button>
+        <div class="message-log" id="log-${topic}" style="display: none;"></div>
     `;
 
   topicList.appendChild(listItem);
