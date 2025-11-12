@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Calculator = () => {
@@ -6,9 +6,14 @@ const Calculator = () => {
   const [currentValue, setCurrentValue] = useState(null);
   const [pendingOperation, setPendingOperation] = useState(null);
   const [waitingForOperand, setWaitingForOperand] = useState(false);
+  const calculatorRef = useRef(null);
 
   useEffect(() => {
     document.title = "Calculadora - Alberto Zúñiga";
+    // Dar foco al contenedor para que capture eventos de teclado
+    if (calculatorRef.current) {
+      calculatorRef.current.focus();
+    }
   }, []);
 
   const updateDisplay = (value) => {
@@ -128,6 +133,7 @@ const Calculator = () => {
   return (
     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex
     <div
+      ref={calculatorRef}
       className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8"
       onKeyDown={handleKeyPress}
       tabIndex={0}
