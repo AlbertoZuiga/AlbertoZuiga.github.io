@@ -1,10 +1,76 @@
-# 📧 Configuración de EmailJS para el Formulario de Contacto
+# Configuración de EmailJS para el Formulario de Contacto
 
-Este documento explica cómo configurar EmailJS para que el formulario de contacto funcione correctamente.
+Esta guía te ayudará a configurar EmailJS para que el formulario de contacto funcione correctamente.
 
-## 📋 Pasos de Configuración
+## 🔒 Seguridad: Opciones para Proteger tus Credenciales
 
-### 1. Crear una Cuenta en EmailJS
+### Opción 1: Restricción por Dominio (Recomendado - Más Simple)
+
+La **Public Key de EmailJS está diseñada para ser pública**. La forma más simple y segura es:
+
+1. Configura tus credenciales directamente en `src/config/emailjs.config.js`
+2. En tu cuenta de EmailJS, ve a **Settings → Security**
+3. Agrega solo tus dominios permitidos:
+   - `albertozuniga.github.io`
+   - `localhost` (para desarrollo)
+
+**Ventajas:**
+- ✅ No requiere configuración adicional
+- ✅ EmailJS limita el uso por IP/sesión
+- ✅ Solo funciona desde tus dominios autorizados
+
+### Opción 2: Variables de Entorno (Más Seguro)
+
+Si prefieres no publicar las credenciales en el código:
+
+1. Copia `.env.example` a `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. Edita `.env` con tus credenciales reales:
+   ```
+   VITE_EMAILJS_SERVICE_ID=service_abc123
+   VITE_EMAILJS_TEMPLATE_ID=template_xyz789
+   VITE_EMAILJS_PUBLIC_KEY=tu_public_key_aqui
+   ```
+
+3. Configura los GitHub Secrets (ver sección más abajo)
+
+**Ventajas:**
+- ✅ Las credenciales NO se suben a GitHub
+- ✅ Fácil cambiar credenciales sin tocar el código
+- ✅ Mejor práctica para datos sensibles
+
+---
+
+## � Configuración de GitHub Secrets (Solo para Opción 2)
+
+Si elegiste usar variables de entorno, necesitas configurar los secrets en GitHub:
+
+1. Ve a tu repositorio en GitHub
+2. Click en **Settings** → **Secrets and variables** → **Actions**
+3. Click en **New repository secret**
+4. Agrega cada uno de estos secrets:
+
+   - **Name:** `VITE_EMAILJS_SERVICE_ID`  
+     **Value:** `service_tu_id_aqui`
+
+   - **Name:** `VITE_EMAILJS_TEMPLATE_ID`  
+     **Value:** `template_tu_id_aqui`
+
+   - **Name:** `VITE_EMAILJS_PUBLIC_KEY`  
+     **Value:** `tu_public_key_aqui`
+
+5. El workflow de GitHub Actions (`.github/workflows/deploy.yml`) los usará automáticamente al hacer build
+
+**Nota:** Los archivos `.env` están en `.gitignore` y nunca se subirán a GitHub.
+
+---
+
+## 🎨 Personalización Adicional
+
+### Cambiar el Email de Destino
 
 1. Ve a [https://www.emailjs.com/](https://www.emailjs.com/)
 2. Haz clic en **"Sign Up"** para crear una cuenta gratuita

@@ -1,18 +1,21 @@
 // Configuración de EmailJS
-// Para obtener estos valores:
-// 1. Crea una cuenta en https://www.emailjs.com/
-// 2. Crea un servicio de email (Gmail, Outlook, etc.)
-// 3. Crea una plantilla de email
-// 4. Obtén tu Public Key desde Account > General
+// Las credenciales se leen desde variables de entorno (.env)
 // 
-// IMPORTANTE: Este archivo contiene placeholders.
-// Reemplaza los valores con tus propias credenciales de EmailJS.
+// Para configurar:
+// 1. Copia .env.example a .env
+// 2. Llena tus credenciales de EmailJS en .env
+// 3. El archivo .env NO se subirá a GitHub (está en .gitignore)
+// 
+// Para producción en GitHub Pages:
+// - Configura los secrets en tu repositorio de GitHub
+// - O usa la restricción por dominio en EmailJS (opción más simple)
+// 
 // Consulta EMAILJS_SETUP.md para instrucciones detalladas.
 
 export const emailConfig = {
-  serviceId: "service_YOUR_SERVICE_ID", // Reemplaza con tu Service ID
-  templateId: "template_YOUR_TEMPLATE_ID", // Reemplaza con tu Template ID
-  publicKey: "YOUR_PUBLIC_KEY", // Reemplaza con tu Public Key
+  serviceId: import.meta.env.VITE_EMAILJS_SERVICE_ID || "service_YOUR_SERVICE_ID",
+  templateId: import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "template_YOUR_TEMPLATE_ID",
+  publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY",
 };
 
 // Plantilla sugerida para EmailJS:
