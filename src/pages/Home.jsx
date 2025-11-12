@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Inicio - Alberto Zúñiga";
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}

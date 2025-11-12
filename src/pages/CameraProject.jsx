@@ -12,6 +12,10 @@ const CameraProject = () => {
   const chunksRef = useRef([]);
 
   useEffect(() => {
+    document.title = "Cámara - Alberto Zúñiga";
+  }, []);
+
+  useEffect(() => {
     startCamera();
 
     // Keyboard shortcut for taking pictures

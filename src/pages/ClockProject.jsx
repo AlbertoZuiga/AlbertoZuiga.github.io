@@ -7,6 +7,10 @@ const Clock = () => {
   const [precision, setPrecision] = useState(0);
 
   useEffect(() => {
+    document.title = "Reloj - Alberto Zúñiga";
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date());
     }, 10 ** (3 - precision));

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const About = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -9,6 +9,10 @@ const About = () => {
     extracurricular: true,
     skills: true,
   });
+
+  useEffect(() => {
+    document.title = "Sobre Mí - Alberto Zúñiga";
+  }, []);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
