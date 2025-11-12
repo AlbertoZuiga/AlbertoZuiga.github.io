@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Projects = () => {
+  useEffect(() => {
+    document.title = "Proyectos - Alberto Zúñiga";
+  }, []);
+
   const projects = [
     {
       title: "Scheduler App",

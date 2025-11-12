@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const About = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -9,6 +9,10 @@ const About = () => {
     extracurricular: true,
     skills: true,
   });
+
+  useEffect(() => {
+    document.title = "Sobre Mí - Alberto Zúñiga";
+  }, []);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -24,7 +28,7 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
             Currículum Vitae
           </h1>
-          <p className="text-lg text-gray-600">Alberto Zúñiga Marinovic</p>
+          <p className="text-lg text-gray-600">Alberto Zúñiga</p>
         </div>
 
         {/* Antecedentes Personales */}
@@ -152,7 +156,7 @@ const About = () => {
                   </tr>
                   <tr>
                     <td className="py-3 font-semibold text-gray-700 align-top">
-                      Ago 2025 - Nov 2025
+                      Ago 2025 - Presente
                     </td>
                     <td className="py-3 text-gray-600">
                       <strong>Universidad de los Andes</strong>

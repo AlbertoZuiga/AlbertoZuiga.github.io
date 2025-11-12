@@ -1,6 +1,11 @@
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 const Home = () => {
+  useEffect(() => {
+    document.title = "Inicio - Alberto Zúñiga";
+  }, []);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -8,7 +13,7 @@ const Home = () => {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6 animate-fade-in">
-              Alberto Zúñiga Marinovic
+              Alberto Zúñiga 
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-primary-100">
               Estudiante de Ingeniería Civil en Ciencias de la Computación
