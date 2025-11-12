@@ -1,6 +1,116 @@
-import { useEffect } from "react";
+import { useEffect, useState, useRef } from "react";
+import emailjs from "@emailjs/browser";
+import toast, { Toaster } from "react-hot-toast";
+import { emailConfig } from "../config/emailjs.config";
 
 const Contact = () => {
+  const formRef = useRef();
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({});
+
+  useEffect(() => {
+    document.title = "Contacto - Alberto Zúñiga";
+  }, []);
+
+  // Validación del formulario
+  const validateForm = () => {
+    const newErrors = {};
+
+    // Validar nombre
+    if (!formData.name.trim()) {
+      newErrors.name = "El nombre es requerido";
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = "El nombre debe tener al menos 2 caracteres";
+    }
+
+    // Validar email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!formData.email.trim()) {
+      newErrors.email = "El email es requerido";
+    } else if (!emailRegex.test(formData.email)) {
+      newErrors.email = "Email inválido";
+    }
+
+    // Validar asunto
+    if (!formData.subject.trim()) {
+      newErrors.subject = "El asunto es requerido";
+    } else if (formData.subject.trim().length < 3) {
+      newErrors.subject = "El asunto debe tener al menos 3 caracteres";
+    }
+
+    // Validar mensaje
+    if (!formData.message.trim()) {
+      newErrors.message = "El mensaje es requerido";
+    } else if (formData.message.trim().length < 10) {
+      newErrors.message = "El mensaje debe tener al menos 10 caracteres";
+    } else if (formData.message.trim().length > 1000) {
+      newErrors.message = "El mensaje no puede exceder 1000 caracteres";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
+  // Manejar cambios en los inputs
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+    // Limpiar error del campo cuando el usuario empiece a escribir
+    if (errors[name]) {
+      setErrors((prev) => ({
+        ...prev,
+        [name]: "",
+      }));
+    }
+  };
+
+  // Enviar formulario
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!validateForm()) {
+      toast.error("Por favor, corrige los errores del formulario");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      // Configuración de EmailJS desde archivo de configuración
+      await emailjs.sendForm(
+        emailConfig.serviceId,
+        emailConfig.templateId,
+        formRef.current,
+        emailConfig.publicKey
+      );
+
+      toast.success("¡Mensaje enviado exitosamente! Te responderé pronto.");
+      
+      // Limpiar formulario
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+      setErrors({});
+    } catch (error) {
+      console.error("Error al enviar el mensaje:", error);
+      toast.error("Hubo un error al enviar el mensaje. Por favor, intenta nuevamente o contáctame directamente por email.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   useEffect(() => {
     document.title = "Contacto - Alberto Zúñiga";
   }, []);
@@ -119,24 +229,216 @@ const Contact = () => {
         </div>
 
         {/* Call to Action - Improved mobile spacing */}
-        <div className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100 hidden" display>
-          <div className="text-center">
+        <div className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100">
+          <div className="text-center mb-6">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
-              ¿Listo para trabajar juntos?
+              Envíame un mensaje
             </h2>
-            <p className="text-sm sm:text-base text-gray-700 mb-5 sm:mb-6 px-4">
-              Estoy disponible para proyectos freelance, colaboraciones y
-              oportunidades laborales. No dudes en contactarme a través de
-              cualquiera de estos medios.
+            <p className="text-sm sm:text-base text-gray-700 px-4">
+              Completa el formulario y te responderé a la brevedad
             </p>
-            <a
-              href="mailto:a.zuniga.marinovic@gmail.com"
-              className="btn-primary inline-block px-6 sm:px-8 py-2.5 sm:py-3 text-sm sm:text-base"
-            >
-              Enviar Email
-            </a>
           </div>
+
+          {/* Formulario de Contacto */}
+          <form ref={formRef} onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+            {/* Campo Nombre */}
+            <div>
+              <label
+                htmlFor="name"
+                className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2"
+              >
+                Nombre <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors text-sm sm:text-base ${
+                  errors.name
+                    ? "border-red-500 bg-red-50"
+                    : "border-gray-300 bg-white"
+                }`}
+                placeholder="Tu nombre completo"
+                disabled={isSubmitting}
+              />
+              {errors.name && (
+                <p className="mt-1 text-xs sm:text-sm text-red-600">
+                  {errors.name}
+                </p>
+              )}
+            </div>
+
+            {/* Campo Email */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2"
+              >
+                Email <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors text-sm sm:text-base ${
+                  errors.email
+                    ? "border-red-500 bg-red-50"
+                    : "border-gray-300 bg-white"
+                }`}
+                placeholder="tu@email.com"
+                disabled={isSubmitting}
+              />
+              {errors.email && (
+                <p className="mt-1 text-xs sm:text-sm text-red-600">
+                  {errors.email}
+                </p>
+              )}
+            </div>
+
+            {/* Campo Asunto */}
+            <div>
+              <label
+                htmlFor="subject"
+                className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2"
+              >
+                Asunto <span className="text-red-500">*</span>
+              </label>
+              <input
+                type="text"
+                id="subject"
+                name="subject"
+                value={formData.subject}
+                onChange={handleChange}
+                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors text-sm sm:text-base ${
+                  errors.subject
+                    ? "border-red-500 bg-red-50"
+                    : "border-gray-300 bg-white"
+                }`}
+                placeholder="¿De qué quieres hablar?"
+                disabled={isSubmitting}
+              />
+              {errors.subject && (
+                <p className="mt-1 text-xs sm:text-sm text-red-600">
+                  {errors.subject}
+                </p>
+              )}
+            </div>
+
+            {/* Campo Mensaje */}
+            <div>
+              <label
+                htmlFor="message"
+                className="block text-sm font-medium text-gray-700 mb-1 sm:mb-2"
+              >
+                Mensaje <span className="text-red-500">*</span>
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                value={formData.message}
+                onChange={handleChange}
+                rows="5"
+                className={`w-full px-3 sm:px-4 py-2 sm:py-2.5 border rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors resize-none text-sm sm:text-base ${
+                  errors.message
+                    ? "border-red-500 bg-red-50"
+                    : "border-gray-300 bg-white"
+                }`}
+                placeholder="Escribe tu mensaje aquí..."
+                disabled={isSubmitting}
+              />
+              <div className="flex justify-between items-center mt-1">
+                <div>
+                  {errors.message && (
+                    <p className="text-xs sm:text-sm text-red-600">
+                      {errors.message}
+                    </p>
+                  )}
+                </div>
+                <p className="text-xs text-gray-500">
+                  {formData.message.length}/1000
+                </p>
+              </div>
+            </div>
+
+            {/* Botón de Envío */}
+            <div className="pt-2">
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className={`w-full px-6 py-3 sm:py-3.5 rounded-lg font-semibold text-white transition-all duration-300 text-sm sm:text-base ${
+                  isSubmitting
+                    ? "bg-gray-400 cursor-not-allowed"
+                    : "bg-primary-600 hover:bg-primary-700 transform hover:scale-105 active:scale-95"
+                }`}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg
+                      className="animate-spin h-5 w-5 text-white"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                    >
+                      <circle
+                        className="opacity-25"
+                        cx="12"
+                        cy="12"
+                        r="10"
+                        stroke="currentColor"
+                        strokeWidth="4"
+                      />
+                      <path
+                        className="opacity-75"
+                        fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                      />
+                    </svg>
+                    Enviando...
+                  </span>
+                ) : (
+                  "Enviar Mensaje"
+                )}
+              </button>
+            </div>
+
+            {/* Honeypot para spam */}
+            <input
+              type="text"
+              name="honeypot"
+              style={{ display: "none" }}
+              tabIndex="-1"
+              autoComplete="off"
+            />
+          </form>
         </div>
+
+        {/* Toast Container */}
+        <Toaster
+          position="top-center"
+          toastOptions={{
+            duration: 4000,
+            style: {
+              background: "#363636",
+              color: "#fff",
+            },
+            success: {
+              iconTheme: {
+                primary: "#10b981",
+                secondary: "#fff",
+              },
+            },
+            error: {
+              iconTheme: {
+                primary: "#ef4444",
+                secondary: "#fff",
+              },
+            },
+          }}
+        />
       </div>
     </div>
   );
