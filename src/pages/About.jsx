@@ -21,6 +21,13 @@ const About = () => {
     }));
   };
 
+  const handleKeyDown = (e, section) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleSection(section);
+    }
+  };
+
   return (
     <div className="min-h-screen py-12">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -36,6 +43,11 @@ const About = () => {
           <div
             className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => toggleSection("personal")}
+            onKeyDown={(e) => handleKeyDown(e, "personal")}
+            role="button"
+            tabIndex={0}
+            aria-expanded={expandedSections.personal}
+            aria-label="Expandir o contraer Antecedentes Personales"
           >
             <h2 className="text-2xl font-bold text-gray-800">
               Antecedentes Personales
@@ -60,6 +72,12 @@ const About = () => {
             <div className="px-6 pb-6">
               <hr className="mb-6" />
               <table className="w-full">
+                <thead className="sr-only">
+                  <tr>
+                    <th>Campo</th>
+                    <th>Información</th>
+                  </tr>
+                </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
                     <td className="py-3 font-semibold text-gray-700 w-1/3">
@@ -118,6 +136,11 @@ const About = () => {
           <div
             className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => toggleSection("academic")}
+            onKeyDown={(e) => handleKeyDown(e, "academic")}
+            role="button"
+            tabIndex={0}
+            aria-expanded={expandedSections.academic}
+            aria-label="Expandir o contraer Antecedentes Académicos"
           >
             <h2 className="text-2xl font-bold text-gray-800">
               Antecedentes Académicos
@@ -142,6 +165,12 @@ const About = () => {
             <div className="px-6 pb-6">
               <hr className="mb-6" />
               <table className="w-full">
+                <thead className="sr-only">
+                  <tr>
+                    <th>Período</th>
+                    <th>Descripción</th>
+                  </tr>
+                </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
                     <td className="py-3 font-semibold text-gray-700 w-1/4 align-top">
@@ -239,6 +268,11 @@ const About = () => {
           <div
             className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => toggleSection("extracurricular")}
+            onKeyDown={(e) => handleKeyDown(e, "extracurricular")}
+            role="button"
+            tabIndex={0}
+            aria-expanded={expandedSections.extracurricular}
+            aria-label="Expandir o contraer Actividades Extracurriculares"
           >
             <h2 className="text-2xl font-bold text-gray-800">
               Actividades Extracurriculares
@@ -263,6 +297,12 @@ const About = () => {
             <div className="px-6 pb-6">
               <hr className="mb-6" />
               <table className="w-full">
+                <thead className="sr-only">
+                  <tr>
+                    <th>Año</th>
+                    <th>Actividad</th>
+                  </tr>
+                </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
                     <td className="py-3 font-semibold text-gray-700 w-1/4 align-top">
@@ -283,6 +323,11 @@ const About = () => {
           <div
             className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => toggleSection("work")}
+            onKeyDown={(e) => handleKeyDown(e, "work")}
+            role="button"
+            tabIndex={0}
+            aria-expanded={expandedSections.work}
+            aria-label="Expandir o contraer Antecedentes Laborales"
           >
             <h2 className="text-2xl font-bold text-gray-800">
               Antecedentes Laborales
@@ -307,6 +352,12 @@ const About = () => {
             <div className="px-6 pb-6">
               <hr className="mb-6" />
               <table className="w-full">
+                <thead className="sr-only">
+                  <tr>
+                    <th>Período</th>
+                    <th>Trabajo</th>
+                  </tr>
+                </thead>
                 <tbody className="divide-y divide-gray-200">
                   <tr>
                     <td className="py-3 font-semibold text-gray-700 w-1/4">
@@ -341,6 +392,11 @@ const About = () => {
           <div
             className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => toggleSection("additional")}
+            onKeyDown={(e) => handleKeyDown(e, "additional")}
+            role="button"
+            tabIndex={0}
+            aria-expanded={expandedSections.additional}
+            aria-label="Expandir o contraer Formación Complementaria"
           >
             <h2 className="text-2xl font-bold text-gray-800">
               Formación Complementaria
@@ -388,6 +444,11 @@ const About = () => {
           <div
             className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
             onClick={() => toggleSection("skills")}
+            onKeyDown={(e) => handleKeyDown(e, "skills")}
+            role="button"
+            tabIndex={0}
+            aria-expanded={expandedSections.skills}
+            aria-label="Expandir o contraer Competencias Profesionales"
           >
             <h2 className="text-2xl font-bold text-gray-800">
               Competencias Profesionales

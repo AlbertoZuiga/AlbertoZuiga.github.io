@@ -33,8 +33,6 @@ const Contact = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-gray-800 mb-2">Email</h3>
-            <p className="text-gray-600">a.zuniga.marinovic@gmail.com</p>
-            <p className="text-gray-600 mt-2">azuiga@miuandes.cl</p>
           </a>
 
           <a
@@ -55,7 +53,6 @@ const Contact = () => {
               </svg>
             </div>
             <h3 className="text-xl font-bold text-gray-800 mb-2">WhatsApp</h3>
-            <p className="text-gray-600">+56 9 6496 2736</p>
           </a>
         </div>
 

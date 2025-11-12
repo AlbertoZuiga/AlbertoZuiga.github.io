@@ -29,3 +29,10 @@
     @apply text-xl md:text-2xl font-semibold text-gray-700 mb-3;
   }
 }
+
+@layer utilities {
+  .sr-only {
+    @apply absolute w-px h-px p-0 -m-px overflow-hidden whitespace-nowrap border-0;
+    clip: rect(0, 0, 0, 0);
+  }
+}

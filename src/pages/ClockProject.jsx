@@ -53,7 +53,7 @@ const Clock = () => {
   const second = Math.floor(
     (time.getSeconds() * 1000 + time.getMilliseconds()) / 10 ** (3 - precision)
   );
-  const maxSeconds = parseInt(60000 / 10 ** (3 - precision));
+  const maxSeconds = Number.parseInt(60000 / 10 ** (3 - precision), 10);
 
   const toggleFormat = () => setFormat24h(!format24h);
   const cyclePrecision = () => setPrecision((precision + 1) % 4);
@@ -68,7 +68,6 @@ const Clock = () => {
   };
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex
     <div
       ref={containerRef}
       className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 py-8"
@@ -113,9 +112,9 @@ const Clock = () => {
         <div className="flex justify-center mb-8">
           <div className="relative w-80 h-80 bg-white rounded-full shadow-2xl">
             {/* Marcas de horas */}
-            {[...Array(12)].map((_, i) => (
+            {new Array(12).fill(null).map((_, i) => (
               <div
-                key={i}
+                key={`hour-mark-${i}`}
                 className="absolute w-1 h-4 bg-gray-800 left-1/2 top-2"
                 style={{
                   transform: `translateX(-50%) rotate(${i * 30}deg)`,

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const TicTacToe = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
+  const [board, setBoard] = useState(new Array(9).fill(null));
   const [isXTurn, setIsXTurn] = useState(true);
   const [gameOn, setGameOn] = useState(true);
   const [winningCells, setWinningCells] = useState([]);
@@ -92,7 +92,7 @@ const TicTacToe = () => {
   };
 
   const restartGame = () => {
-    setBoard(Array(9).fill(null));
+    setBoard(new Array(9).fill(null));
     // Alternar quien empieza cada juego
     const nextFirst = firstPlayer === "X" ? "O" : "X";
     setFirstPlayer(nextFirst);
@@ -102,7 +102,7 @@ const TicTacToe = () => {
   };
 
   const resetAll = () => {
-    setBoard(Array(9).fill(null));
+    setBoard(new Array(9).fill(null));
     setIsXTurn(true);
     setGameOn(true);
     setWinningCells([]);
@@ -121,6 +121,29 @@ const TicTacToe = () => {
   const winner = getWinner();
   const isDraw_ = !gameOn && !winner;
   const winPoints = winner && winner === firstPlayer ? 3 : 5;
+
+  // Función para calcular el mensaje de estado
+  const getStatusMessage = () => {
+    if (winner) {
+      const pointsText = winner === firstPlayer ? "(inició primero)" : "(inició segundo)";
+      return (
+        <div>
+          <span className="text-yellow-300">¡Ganó {winner}!</span>
+          <div className="text-lg mt-1">
+            +{winPoints} puntos {pointsText}
+          </div>
+        </div>
+      );
+    }
+    if (isDraw_) {
+      return <span className="text-yellow-300">¡Empate!</span>;
+    }
+    return (
+      <span>
+        Turno de: <span className="text-yellow-300">{isXTurn ? "X" : "O"}</span>
+      </span>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
@@ -149,22 +172,8 @@ const TicTacToe = () => {
 
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-white mb-4">Tres en Línea</h1>
-          <div className="text-2xl text-purple-200 font-semibold mb-2">
-            {winner ? (
-              <div>
-                <span className="text-yellow-300">¡Ganó {winner}!</span>
-                <div className="text-lg mt-1">
-                  +{winPoints} puntos {winner === firstPlayer ? "(inició primero)" : "(inició segundo)"}
-                </div>
-              </div>
-            ) : isDraw_ ? (
-              <span className="text-yellow-300">¡Empate!</span>
-            ) : (
-              <span>
-                Turno de:{" "}
-                <span className="text-yellow-300">{isXTurn ? "X" : "O"}</span>
-              </span>
-            )}
+          <div className="text-2xl md:text-3xl font-bold">
+            {getStatusMessage()}
           </div>
           {gamesPlayed > 0 && (
             <div className="text-sm text-purple-200">
