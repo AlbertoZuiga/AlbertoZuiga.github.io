@@ -119,7 +119,7 @@ const Contact = () => {
         </div>
 
         {/* Call to Action - Improved mobile spacing */}
-        <div className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100">
+        <div className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100 hidden" display>
           <div className="text-center">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
               ¿Listo para trabajar juntos?
