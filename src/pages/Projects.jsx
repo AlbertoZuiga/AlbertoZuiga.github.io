@@ -3,6 +3,16 @@ import { Link } from "react-router-dom";
 const Projects = () => {
   const projects = [
     {
+      title: "Scheduler App",
+      link: "http://scheduler-app-iu34.onrender.com/",
+      description: "Gestión de horarios y división automática de grupos con Flask",
+      color: "from-emerald-900 to-teal-900",
+      icon: "📅",
+      isReact: false,
+      external: true,
+      framework: "Flask",
+    },
+    {
       title: "Calculadora",
       link: "/projects/calculator",
       description: "Calculadora funcional con interfaz moderna",
@@ -31,9 +41,9 @@ const Projects = () => {
       link: "/projects/camera",
       description: "Captura fotos y graba videos desde tu navegador",
       color: "from-purple-900 to-pink-900",
-      icon: "�",
+      icon: "📸",
       isReact: true,
-    }
+    },
   ];
 
   return (
@@ -66,9 +76,14 @@ const Projects = () => {
                         ⚛️ React
                       </span>
                     )}
+                    {project.framework && (
+                      <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
+                        🐍 {project.framework}
+                      </span>
+                    )}
                     <span className="inline-flex items-center gap-1 text-sm opacity-80">
                       {project.external ? "↗" : "→"}{" "}
-                      {project.external ? "HTML" : "SPA"}
+                      {project.external ? "Web App" : "SPA"}
                     </span>
                   </div>
                 </div>
