@@ -6,7 +6,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8">
           <p className="text-lg mb-6">
-            &copy; {currentYear} Alberto Zúñiga Marinovic. Todos los derechos
+            &copy; {currentYear} Alberto Zúñiga. Todos los derechos
             reservados.
           </p>
         </div>

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const Calculator = () => {
@@ -9,6 +9,10 @@ const Calculator = () => {
   const [lastResult, setLastResult] = useState("");
   const [lastInput, setLastInput] = useState("");
   const [lastOperator, setLastOperator] = useState("");
+
+  useEffect(() => {
+    document.title = "Calculadora - Alberto Zúñiga";
+  }, []);
 
   const updateDisplay = (value) => {
     setDisplay(value.toString().replace(".", ","));

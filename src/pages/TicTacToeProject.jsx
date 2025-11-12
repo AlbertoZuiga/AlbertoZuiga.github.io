@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const TicTacToe = () => {
@@ -6,6 +6,10 @@ const TicTacToe = () => {
   const [isXTurn, setIsXTurn] = useState(true);
   const [gameOn, setGameOn] = useState(true);
   const [winningCells, setWinningCells] = useState([]);
+
+  useEffect(() => {
+    document.title = "Tres en Línea - Alberto Zúñiga";
+  }, []);
 
   const WINNING_COMBINATIONS = [
     [0, 1, 2],
