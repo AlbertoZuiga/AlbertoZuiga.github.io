@@ -14,6 +14,25 @@ const TicTacToe = () => {
     document.title = "Tres en Línea - Alberto Zúñiga";
   }, []);
 
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      const key = e.key.toLowerCase();
+      if (key === "n") {
+        e.preventDefault();
+        restartGame();
+      } else if (key === "r" && gamesPlayed > 0) {
+        e.preventDefault();
+        resetAll();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [gamesPlayed]);
+
   const WINNING_COMBINATIONS = [
     [0, 1, 2],
     [3, 4, 5],
@@ -149,7 +168,7 @@ const TicTacToe = () => {
           </div>
           {gamesPlayed > 0 && (
             <div className="text-sm text-purple-200">
-              Partidas jugadas: {gamesPlayed}
+              Partidas jugadas: {gamesPlayed} | Atajos: <kbd className="px-1 py-0.5 bg-white/20 rounded text-xs">N</kbd> Siguiente | <kbd className="px-1 py-0.5 bg-white/20 rounded text-xs">R</kbd> Resetear
             </div>
           )}
         </div>
