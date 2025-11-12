@@ -6,6 +6,7 @@ const CameraProject = () => {
   const [error, setError] = useState(null);
   const [captures, setCaptures] = useState([]);
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
+  const [isMirrored, setIsMirrored] = useState(false);
 
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
@@ -29,9 +30,17 @@ const CameraProject = () => {
   // Keyboard shortcut handler
   useEffect(() => {
     const handleKeyPress = (event) => {
-      if (event.code === "Space" && buttonsEnabled) {
+      if (!buttonsEnabled) return;
+
+      if (event.code === "Space") {
         event.preventDefault();
         takePicture();
+      } else if (event.code === "KeyR") {
+        event.preventDefault();
+        toggleRecording();
+      } else if (event.code === "KeyM") {
+        event.preventDefault();
+        setIsMirrored((prev) => !prev);
       }
     };
 
@@ -40,7 +49,7 @@ const CameraProject = () => {
     return () => {
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, [buttonsEnabled]); // Update when buttonsEnabled changes
+  }, [buttonsEnabled, isRecording]); // Update when buttonsEnabled or isRecording changes
 
   // Separate effect to update video element when stream changes
   useEffect(() => {
@@ -205,7 +214,9 @@ const CameraProject = () => {
             Toma fotos y graba videos usando tu cámara
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            Presiona <kbd className="px-2 py-1 bg-gray-200 rounded">Espacio</kbd> para tomar una foto
+            Atajos: <kbd className="px-2 py-1 bg-gray-200 rounded">Espacio</kbd> Foto | 
+            <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">R</kbd> Grabar | 
+            <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">M</kbd> Reflejar
           </p>
         </div>
 
@@ -226,8 +237,11 @@ const CameraProject = () => {
                 autoPlay
                 playsInline
                 muted
-                className="w-full max-w-2xl h-auto border-4 border-gray-800 rounded-lg bg-gray-300"
-                style={{ maxHeight: "480px" }}
+                className="w-full max-w-2xl h-auto border-4 border-gray-800 rounded-lg bg-gray-300 transition-transform duration-300"
+                style={{ 
+                  maxHeight: "480px",
+                  transform: isMirrored ? "scaleX(-1)" : "scaleX(1)"
+                }}
               />
               {isRecording && (
                 <div className="absolute top-4 right-4 flex items-center gap-2 bg-red-600 text-white px-3 py-2 rounded-full">
@@ -298,6 +312,31 @@ const CameraProject = () => {
                     Comenzar Grabación
                   </>
                 )}
+              </button>
+
+              <button
+                onClick={() => setIsMirrored(!isMirrored)}
+                disabled={!buttonsEnabled}
+                className={`px-6 py-3 font-semibold rounded-lg shadow-md transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2 ${
+                  isMirrored
+                    ? "bg-purple-600 hover:bg-purple-700 text-white"
+                    : "bg-gray-600 hover:bg-gray-700 text-white"
+                }`}
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
+                  />
+                </svg>
+                Reflejar
               </button>
             </div>
           </div>
