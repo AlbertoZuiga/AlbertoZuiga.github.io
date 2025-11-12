@@ -135,20 +135,20 @@ http://localhost:5173
 
 ```bash
 # Desarrollo
-npm run dev          # Inicia servidor de desarrollo en localhost:5173
-npm run dev --host   # Inicia servidor accesible en red local
+npm run dev             # Inicia servidor de desarrollo en localhost:5173
+npm run dev -- --host   # Inicia servidor accesible en red local
 
 # Build
-npm run build        # Construye para producción en /dist
+npm run build           # Construye para producción en /dist
 
 # Deployment
-npm run deploy       # Construye y despliega a GitHub Pages
+npm run deploy          # Construye y despliega a GitHub Pages
 
 # Linting
-npm run lint         # Ejecuta ESLint
+npm run lint            # Ejecuta ESLint
 
 # Preview
-npm run preview      # Previsualiza build de producción
+npm run preview         # Previsualiza build de producción
 ```
 
 ### Variables de Entorno
@@ -414,18 +414,6 @@ npm run build -- --force
 
 ---
 
-## 🤝 Contribuir
-
-Si encuentras bugs o tienes sugerencias:
-
-1. Abre un **Issue** en GitHub
-2. Haz un **Fork** del proyecto
-3. Crea una **rama** para tu feature (`git checkout -b feature/AmazingFeature`)
-4. **Commit** tus cambios (`git commit -m 'Add some AmazingFeature'`)
-5. **Push** a la rama (`git push origin feature/AmazingFeature`)
-6. Abre un **Pull Request**
-
----
 
 ## 📝 Licencia
 
@@ -440,18 +428,3 @@ Este proyecto es de código abierto y está disponible bajo la licencia MIT.
 - 💼 LinkedIn: [alberto-zuniga-marinovic](https://www.linkedin.com/in/alberto-zuniga-marinovic/)
 - 🐙 GitHub: [@AlbertoZuiga](https://github.com/AlbertoZuiga)
 - 💬 WhatsApp: [+56 9 6496 2736](https://wa.me/56964962736)
-
----
-
-## 🙏 Agradecimientos
-
-- **React Team** - Por React 19
-- **Tailwind Labs** - Por Tailwind CSS
-- **Vite Team** - Por la mejor experiencia de desarrollo
-- **GitHub** - Por el hosting gratuito
-
----
-
-**Hecho con ❤️ por Alberto Zúñiga**
-
-*Última actualización: Noviembre 2025*
