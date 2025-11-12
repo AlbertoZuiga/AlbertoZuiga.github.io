@@ -3,12 +3,9 @@ import { Link } from "react-router-dom";
 
 const Calculator = () => {
   const [display, setDisplay] = useState("0");
-  const [currentInput, setCurrentInput] = useState("");
-  const [previousInput, setPreviousInput] = useState("");
-  const [operator, setOperatorState] = useState("");
-  const [lastResult, setLastResult] = useState("");
-  const [lastInput, setLastInput] = useState("");
-  const [lastOperator, setLastOperator] = useState("");
+  const [currentValue, setCurrentValue] = useState(null);
+  const [pendingOperation, setPendingOperation] = useState(null);
+  const [waitingForOperand, setWaitingForOperand] = useState(false);
 
   useEffect(() => {
     document.title = "Calculadora - Alberto Zúñiga";
@@ -18,120 +15,124 @@ const Calculator = () => {
     setDisplay(value.toString().replace(".", ","));
   };
 
-  const appendNumber = (number) => {
-    setOperatorState("");
-    if (currentInput.includes(".") && number === ".") return;
-    const newNumber = currentInput === "" && number === "." ? "0." : number;
-    const newInput = currentInput + newNumber;
-    setCurrentInput(newInput);
-    updateDisplay(newInput);
+  const clearDisplay = () => {
+    setDisplay("0");
+    setCurrentValue(null);
+    setPendingOperation(null);
+    setWaitingForOperand(false);
   };
 
-  const clearDisplay = () => {
-    if (currentInput !== "" && previousInput !== "" && operator !== "") {
-      setCurrentInput("");
-      setOperatorState("");
-      updateDisplay("0");
-    } else if (previousInput !== "" && operator !== "") {
-      setCurrentInput(previousInput);
-      setPreviousInput("");
-      setOperatorState("");
-      setOperatorState("");
+  const inputDigit = (digit) => {
+    if (waitingForOperand) {
+      setDisplay(String(digit));
+      setWaitingForOperand(false);
     } else {
-      setCurrentInput("");
-      setPreviousInput("");
-      setOperatorState("");
-      setLastResult("");
-      setLastInput("");
-      setLastOperator("");
-      updateDisplay("0");
+      setDisplay(display === "0" ? String(digit) : display + digit);
+    }
+  };
+
+  const inputDot = () => {
+    if (waitingForOperand) {
+      setDisplay("0,");
+      setWaitingForOperand(false);
+    } else if (!display.includes(",")) {
+      setDisplay(display + ",");
     }
   };
 
   const toggleSign = () => {
-    if (currentInput) {
-      const newValue = (parseFloat(currentInput) * -1).toString();
-      setCurrentInput(newValue);
-      updateDisplay(newValue);
-    }
+    const value = Number.parseFloat(display.replace(",", "."));
+    updateDisplay(value * -1);
   };
 
   const percent = () => {
-    if (currentInput) {
-      const newValue = (parseFloat(currentInput) / 100).toString();
-      setCurrentInput(newValue);
+    const value = Number.parseFloat(display.replace(",", "."));
+    updateDisplay(value / 100);
+  };
+
+  const performOperation = (nextOperation) => {
+    const inputValue = Number.parseFloat(display.replace(",", "."));
+
+    if (currentValue === null) {
+      setCurrentValue(inputValue);
+    } else if (pendingOperation) {
+      const currentVal = currentValue || 0;
+      const newValue = calculate(currentVal, inputValue, pendingOperation);
+
       updateDisplay(newValue);
+      setCurrentValue(newValue);
     }
+
+    setWaitingForOperand(true);
+    setPendingOperation(nextOperation);
   };
 
-  const handleSetOperator = (op) => {
-    if (currentInput === "" && lastResult === "") return;
-    if (previousInput !== "") calculate();
-    setOperatorState(op);
-    setPreviousInput(currentInput);
-    setCurrentInput("");
-  };
-
-  const calculate = () => {
-    const prev =
-      previousInput === "" ? parseFloat(lastResult) : parseFloat(previousInput);
-    const curr =
-      currentInput === "" ? parseFloat(lastInput) : parseFloat(currentInput);
-    const op = operator === "" ? lastOperator : operator;
-
-    if (isNaN(prev) || isNaN(curr)) return;
-
-    let result;
-    switch (op) {
+  const calculate = (firstValue, secondValue, operation) => {
+    switch (operation) {
       case "sum":
-        result = prev + curr;
-        break;
+        return firstValue + secondValue;
       case "dif":
-        result = prev - curr;
-        break;
+        return firstValue - secondValue;
       case "mul":
-        result = prev * curr;
-        break;
+        return firstValue * secondValue;
       case "div":
-        result = prev / curr;
-        break;
+        return firstValue / secondValue;
       default:
-        return;
+        return secondValue;
     }
+  };
 
-    const resultStr = result.toString();
-    setLastResult(resultStr);
-    setLastInput(currentInput);
-    setLastOperator(operator);
-    updateDisplay(resultStr);
-    setPreviousInput("");
-    setCurrentInput("");
-    setOperatorState("");
+  const performEquals = () => {
+    const inputValue = Number.parseFloat(display.replace(",", "."));
+
+    if (pendingOperation && currentValue !== null) {
+      const newValue = calculate(currentValue, inputValue, pendingOperation);
+      updateDisplay(newValue);
+      setCurrentValue(null);
+      setPendingOperation(null);
+      setWaitingForOperand(true);
+    }
   };
 
   const handleKeyPress = (e) => {
     const key = e.key;
-    if (!isNaN(key) || key === "." || key === ",") {
-      appendNumber(key.replace(",", "."));
+    if (key >= "0" && key <= "9") {
+      inputDigit(key);
+    } else if (key === ".") {
+      inputDot();
+    } else if (key === ",") {
+      inputDot();
     } else if (key === "Enter" || key === "=") {
-      calculate();
+      e.preventDefault();
+      performEquals();
     } else if (key === "Backspace") {
-      const newInput = currentInput.slice(0, -1);
-      setCurrentInput(newInput);
-      updateDisplay(newInput || "0");
+      e.preventDefault();
+      if (display !== "0" && !waitingForOperand) {
+        const newDisplay = display.slice(0, -1) || "0";
+        setDisplay(newDisplay);
+      }
     } else if (key === "Escape" || key.toLowerCase() === "c") {
       clearDisplay();
-    } else if (key === "+" || key === "-" || key === "*" || key === "/") {
-      const operatorMap = { "+": "sum", "-": "dif", "*": "mul", "/": "div" };
-      handleSetOperator(operatorMap[key]);
+    } else if (key === "+") {
+      performOperation("sum");
+    } else if (key === "-") {
+      performOperation("dif");
+    } else if (key === "*") {
+      performOperation("mul");
+    } else if (key === "/") {
+      e.preventDefault();
+      performOperation("div");
     }
   };
 
   return (
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex
     <div
       className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8"
       onKeyDown={handleKeyPress}
-      tabIndex="0"
+      tabIndex={0}
+      role="application"
+      aria-label="Calculadora"
     >
       <div className="max-w-md mx-auto px-4">
         <div className="mb-6">
@@ -184,9 +185,9 @@ const Calculator = () => {
               %
             </button>
             <button
-              onClick={() => handleSetOperator("div")}
+              onClick={() => performOperation("div")}
               className={`${
-                operator === "div" ? "bg-primary-600" : "bg-primary-500"
+                pendingOperation === "div" ? "bg-primary-600" : "bg-primary-500"
               } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
             >
               ÷
@@ -196,16 +197,16 @@ const Calculator = () => {
             {["7", "8", "9"].map((num) => (
               <button
                 key={num}
-                onClick={() => appendNumber(num)}
+                onClick={() => inputDigit(num)}
                 className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
             ))}
             <button
-              onClick={() => handleSetOperator("mul")}
+              onClick={() => performOperation("mul")}
               className={`${
-                operator === "mul" ? "bg-primary-600" : "bg-primary-500"
+                pendingOperation === "mul" ? "bg-primary-600" : "bg-primary-500"
               } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
             >
               ×
@@ -215,16 +216,16 @@ const Calculator = () => {
             {["4", "5", "6"].map((num) => (
               <button
                 key={num}
-                onClick={() => appendNumber(num)}
+                onClick={() => inputDigit(num)}
                 className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
             ))}
             <button
-              onClick={() => handleSetOperator("dif")}
+              onClick={() => performOperation("dif")}
               className={`${
-                operator === "dif" ? "bg-primary-600" : "bg-primary-500"
+                pendingOperation === "dif" ? "bg-primary-600" : "bg-primary-500"
               } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
             >
               −
@@ -234,16 +235,16 @@ const Calculator = () => {
             {["1", "2", "3"].map((num) => (
               <button
                 key={num}
-                onClick={() => appendNumber(num)}
+                onClick={() => inputDigit(num)}
                 className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
             ))}
             <button
-              onClick={() => handleSetOperator("sum")}
+              onClick={() => performOperation("sum")}
               className={`${
-                operator === "sum" ? "bg-primary-600" : "bg-primary-500"
+                pendingOperation === "sum" ? "bg-primary-600" : "bg-primary-500"
               } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
             >
               +
@@ -251,19 +252,19 @@ const Calculator = () => {
 
             {/* Quinta fila */}
             <button
-              onClick={() => appendNumber("0")}
+              onClick={() => inputDigit("0")}
               className="col-span-2 bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               0
             </button>
             <button
-              onClick={() => appendNumber(".")}
+              onClick={inputDot}
               className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               ,
             </button>
             <button
-              onClick={calculate}
+              onClick={performEquals}
               className="bg-primary-500 hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               =
