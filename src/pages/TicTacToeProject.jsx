@@ -6,6 +6,9 @@ const TicTacToe = () => {
   const [isXTurn, setIsXTurn] = useState(true);
   const [gameOn, setGameOn] = useState(true);
   const [winningCells, setWinningCells] = useState([]);
+  const [firstPlayer, setFirstPlayer] = useState("X"); // Quien inicia el juego
+  const [scores, setScores] = useState({ X: 0, O: 0, draws: 0 });
+  const [gamesPlayed, setGamesPlayed] = useState(0);
 
   useEffect(() => {
     document.title = "Tres en Línea - Alberto Zúñiga";
@@ -47,14 +50,22 @@ const TicTacToe = () => {
     if (winCombination) {
       setWinningCells(winCombination);
       setGameOn(false);
+      
+      // Calcular puntos: 3 puntos si empezó primero, 5 puntos si empezó segundo
+      const points = currentPlayer === firstPlayer ? 3 : 5;
+      
       setTimeout(() => {
-        const message = `¡Ganó ${currentPlayer}!`;
-        alert(message);
-      }, 500);
+        setScores((prev) => ({
+          ...prev,
+          [currentPlayer]: prev[currentPlayer] + points,
+        }));
+        setGamesPlayed((prev) => prev + 1);
+      }, 100);
     } else if (isDraw(newBoard)) {
       setGameOn(false);
       setTimeout(() => {
-        alert("¡Empate!");
+        setScores((prev) => ({ ...prev, draws: prev.draws + 1 }));
+        setGamesPlayed((prev) => prev + 1);
       }, 100);
     } else {
       setIsXTurn(!isXTurn);
@@ -63,9 +74,22 @@ const TicTacToe = () => {
 
   const restartGame = () => {
     setBoard(Array(9).fill(null));
+    // Alternar quien empieza cada juego
+    const nextFirst = firstPlayer === "X" ? "O" : "X";
+    setFirstPlayer(nextFirst);
+    setIsXTurn(nextFirst === "X");
+    setGameOn(true);
+    setWinningCells([]);
+  };
+
+  const resetAll = () => {
+    setBoard(Array(9).fill(null));
     setIsXTurn(true);
     setGameOn(true);
     setWinningCells([]);
+    setFirstPlayer("X");
+    setScores({ X: 0, O: 0, draws: 0 });
+    setGamesPlayed(0);
   };
 
   const getWinner = () => {
@@ -77,6 +101,7 @@ const TicTacToe = () => {
 
   const winner = getWinner();
   const isDraw_ = !gameOn && !winner;
+  const winPoints = winner && winner === firstPlayer ? 3 : 5;
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
@@ -105,9 +130,14 @@ const TicTacToe = () => {
 
         <div className="text-center mb-8">
           <h1 className="text-5xl font-bold text-white mb-4">Tres en Línea</h1>
-          <div className="text-2xl text-purple-200 font-semibold">
+          <div className="text-2xl text-purple-200 font-semibold mb-2">
             {winner ? (
-              <span className="text-yellow-300">¡Ganó {winner}!</span>
+              <div>
+                <span className="text-yellow-300">¡Ganó {winner}!</span>
+                <div className="text-lg mt-1">
+                  +{winPoints} puntos {winner === firstPlayer ? "(inició primero)" : "(inició segundo)"}
+                </div>
+              </div>
             ) : isDraw_ ? (
               <span className="text-yellow-300">¡Empate!</span>
             ) : (
@@ -117,6 +147,11 @@ const TicTacToe = () => {
               </span>
             )}
           </div>
+          {gamesPlayed > 0 && (
+            <div className="text-sm text-purple-200">
+              Partidas jugadas: {gamesPlayed}
+            </div>
+          )}
         </div>
 
         {/* Tablero */}
@@ -150,13 +185,21 @@ const TicTacToe = () => {
         </div>
 
         {/* Botón de reinicio */}
-        <div className="text-center">
+        <div className="text-center flex gap-4 justify-center">
           <button
             onClick={restartGame}
             className="bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 text-lg"
           >
-            🔄 Reiniciar Juego
+            {gameOn ? "🔄 Reiniciar" : "▶️ Siguiente Juego"}
           </button>
+          {gamesPlayed > 0 && (
+            <button
+              onClick={resetAll}
+              className="bg-red-500 hover:bg-red-400 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 text-lg"
+            >
+              🗑️ Resetear Todo
+            </button>
+          )}
         </div>
 
         {/* Instrucciones */}
@@ -171,18 +214,39 @@ const TicTacToe = () => {
               </li>
               <li>✓ Si se llena el tablero sin ganador, es empate</li>
             </ul>
+            <div className="mt-4 pt-4 border-t border-white/20">
+              <h4 className="font-semibold mb-2">Sistema de Puntos:</h4>
+              <ul className="text-sm space-y-1 text-left">
+                <li>🥇 Ganar iniciando primero: <strong>3 puntos</strong></li>
+                <li>🏆 Ganar iniciando segundo: <strong>5 puntos</strong></li>
+                <li>🔄 Los turnos se alternan cada juego</li>
+              </ul>
+            </div>
           </div>
         </div>
 
         {/* Estadísticas del juego */}
-        <div className="mt-6 grid grid-cols-2 gap-4 max-w-md mx-auto">
+        <div className="mt-6 grid grid-cols-3 gap-4 max-w-lg mx-auto">
           <div className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-4 text-center">
             <div className="text-4xl font-bold text-blue-400 mb-1">X</div>
-            <div className="text-sm text-white/80">Jugador 1</div>
+            <div className="text-2xl font-bold text-white mb-1">{scores.X}</div>
+            <div className="text-xs text-white/80">puntos</div>
+            {firstPlayer === "X" && gameOn && (
+              <div className="text-xs text-yellow-300 mt-1">⭐ Inicia</div>
+            )}
+          </div>
+          <div className="bg-purple-500/20 backdrop-blur-sm rounded-lg p-4 text-center">
+            <div className="text-3xl font-bold text-purple-300 mb-1">⚖️</div>
+            <div className="text-2xl font-bold text-white mb-1">{scores.draws}</div>
+            <div className="text-xs text-white/80">empates</div>
           </div>
           <div className="bg-pink-500/20 backdrop-blur-sm rounded-lg p-4 text-center">
             <div className="text-4xl font-bold text-pink-400 mb-1">O</div>
-            <div className="text-sm text-white/80">Jugador 2</div>
+            <div className="text-2xl font-bold text-white mb-1">{scores.O}</div>
+            <div className="text-xs text-white/80">puntos</div>
+            {firstPlayer === "O" && gameOn && (
+              <div className="text-xs text-yellow-300 mt-1">⭐ Inicia</div>
+            )}
           </div>
         </div>
       </div>
