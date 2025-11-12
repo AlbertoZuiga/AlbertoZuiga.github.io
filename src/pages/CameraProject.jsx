@@ -22,7 +22,9 @@ const CameraProject = () => {
     return () => {
       // Cleanup: stop camera when component unmounts
       if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
+        for (const track of stream.getTracks()) {
+          track.stop();
+        }
       }
     };
   }, []); // Empty dependency array - only run once on mount
@@ -71,7 +73,7 @@ const CameraProject = () => {
         audio: true,
       });
       setupVideoStream(mediaStream);
-    } catch (err) {
+    } catch (initialError) {
       try {
         // Fallback: try Full HD video only
         const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -83,15 +85,15 @@ const CameraProject = () => {
           },
         });
         setupVideoStream(mediaStream);
-      } catch (err) {
+      } catch (secondError) {
         try {
           // Final fallback: try basic video only
           const mediaStream = await navigator.mediaDevices.getUserMedia({
             video: true,
           });
           setupVideoStream(mediaStream);
-        } catch (err) {
-          handleCameraError(err);
+        } catch (finalError) {
+          handleCameraError(finalError);
         }
       }
     }
@@ -141,8 +143,8 @@ const CameraProject = () => {
     
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
-    // Use JPEG with maximum quality (1.0 = 100%)
-    const imageUrl = canvas.toDataURL("image/jpeg", 1.0);
+    // Use JPEG with maximum quality (1 = 100%)
+    const imageUrl = canvas.toDataURL("image/jpeg", 1);
     setCaptures((prev) => [
       ...prev,
       {
@@ -214,9 +216,10 @@ const CameraProject = () => {
             Toma fotos y graba videos usando tu cámara
           </p>
           <p className="text-sm text-gray-500 mt-2">
-            Atajos: <kbd className="px-2 py-1 bg-gray-200 rounded">Espacio</kbd> Foto | 
-            <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">R</kbd> Grabar | 
-            <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">M</kbd> Reflejar
+            Atajos: <kbd className="px-2 py-1 bg-gray-200 rounded">Espacio</kbd>{" "}
+            Foto | <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">R</kbd>{" "}
+            Grabar | <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">M</kbd>{" "}
+            Reflejar
           </p>
         </div>
 
@@ -365,7 +368,9 @@ const CameraProject = () => {
                       src={capture.url}
                       controls
                       className="w-full h-auto"
-                    />
+                    >
+                      <track kind="captions" label="Sin subtítulos disponibles" />
+                    </video>
                   )}
                   
                   {/* Overlay with actions */}
