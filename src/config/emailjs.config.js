@@ -4,6 +4,10 @@
 // 2. Crea un servicio de email (Gmail, Outlook, etc.)
 // 3. Crea una plantilla de email
 // 4. Obtén tu Public Key desde Account > General
+// 
+// IMPORTANTE: Este archivo contiene placeholders.
+// Reemplaza los valores con tus propias credenciales de EmailJS.
+// Consulta EMAILJS_SETUP.md para instrucciones detalladas.
 
 export const emailConfig = {
   serviceId: "service_YOUR_SERVICE_ID", // Reemplaza con tu Service ID
