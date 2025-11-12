@@ -62,15 +62,15 @@ const Projects = () => {
           {projects.map((project) => {
             const ProjectCard = (
               <div
-                className={`card group relative overflow-hidden transform hover:scale-105 transition-all duration-300 bg-gradient-to-br ${project.color}`}
+                className={`card group relative overflow-hidden transform hover:scale-105 transition-all duration-300 bg-gradient-to-br ${project.color} h-full flex flex-col`}
               >
-                <div className="p-8 text-white">
+                <div className="p-8 text-white flex flex-col h-full">
                   <div className="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                     {project.icon}
                   </div>
                   <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                  <p className="text-gray-200 mb-4">{project.description}</p>
-                  <div className="flex items-center gap-2 flex-wrap">
+                  <p className="text-gray-200 mb-4 flex-grow">{project.description}</p>
+                  <div className="flex items-center gap-2 flex-wrap mt-auto">
                     {project.isReact && (
                       <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
                         ⚛️ React
@@ -92,7 +92,7 @@ const Projects = () => {
             );
 
             return project.isReact ? (
-              <Link key={project.title} to={project.link}>
+              <Link key={project.title} to={project.link} className="h-full block">
                 {ProjectCard}
               </Link>
             ) : (
@@ -101,6 +101,7 @@ const Projects = () => {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                className="h-full block"
               >
                 {ProjectCard}
               </a>
