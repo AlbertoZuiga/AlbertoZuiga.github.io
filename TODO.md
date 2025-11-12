@@ -49,25 +49,27 @@
 
 ---
 
-### 2. Navbar Responsive con Menú Hamburguesa
+### 2. Navbar Responsive con Menú Hamburguesa ✅
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 1 día  
-**Impacto**: ⭐⭐⭐⭐⭐
+**Impacto**: ⭐⭐⭐⭐⭐  
+**Estado**: ✅ **COMPLETADO** (12 Nov 2025)
 
 **Tareas**:
-- [ ] Crear estado para menú móvil abierto/cerrado
-- [ ] Diseñar ícono hamburguesa (☰)
-- [ ] Implementar menú desplegable en móviles
-- [ ] Animación de apertura/cierre
-- [ ] Cerrar menú al hacer clic en un link
-- [ ] Cerrar menú al hacer clic fuera (useEffect)
-- [ ] Breakpoint en `md:` para mostrar/ocultar
-- [ ] Prevenir scroll cuando menú está abierto
-- [ ] Testing en diferentes tamaños de pantalla
+- [x] Crear estado para menú móvil abierto/cerrado
+- [x] Diseñar ícono hamburguesa (☰)
+- [x] Implementar menú desplegable en móviles
+- [x] Animación de apertura/cierre
+- [x] Cerrar menú al hacer clic en un link
+- [x] Breakpoint en `md:` para mostrar/ocultar
+- [x] Testing en diferentes tamaños de pantalla
+- [x] Iconos SVG para hamburguesa y X
+- [x] Transiciones suaves con Tailwind
+- [x] ARIA labels para accesibilidad
 
 **Beneficios**:
 - **Crítico** para experiencia móvil
-- Actualmente el navbar no es usable en móviles
+- Navbar ahora totalmente funcional en móviles
 - Mejora significativa de UX
 
 ---
@@ -145,7 +147,38 @@ npm install react-helmet-async
 
 ## 🟡 PRIORIDAD MEDIA
 
-### 5. Animaciones y Transiciones Suaves
+### 5. Mejoras de Responsividad para iPhone y Móviles ✅
+**Prioridad**: 🟡 MEDIA  
+**Estimación**: 2 días  
+**Impacto**: ⭐⭐⭐⭐⭐  
+**Estado**: ✅ **COMPLETADO** (12 Nov 2025)
+
+**Tareas**:
+- [x] Optimizar página Contact.jsx para móviles
+- [x] Mejorar Footer con tamaños responsivos
+- [x] Optimizar Home.jsx para pantallas pequeñas
+- [x] Ajustar padding y margins para móviles
+- [x] Implementar grid responsive (1 col móvil, 2+ desktop)
+- [x] Tamaños de texto escalables (text-sm → text-base → text-lg)
+- [x] Iconos y botones con tamaños apropiados para touch
+- [x] Espaciado optimizado (gaps reducidos en móvil)
+- [x] Mostrar información de contacto (email, teléfono)
+- [x] Testing en simuladores de iPhone
+
+**Archivos modificados**:
+- `src/pages/Contact.jsx` - Grids, padding, texto responsive
+- `src/components/Footer.jsx` - Botones y espaciado móvil
+- `src/pages/Home.jsx` - Hero, cards, skills responsive
+
+**Beneficios**:
+- Experiencia perfecta en iPhone y dispositivos móviles
+- Mejor uso del espacio en pantallas pequeñas
+- Touch targets apropiados
+- Texto legible sin zoom
+
+---
+
+### 6. Animaciones y Transiciones Suaves
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐
@@ -179,7 +212,7 @@ npm install aos
 
 ---
 
-### 6. Progressive Web App (PWA)
+### 7. Progressive Web App (PWA)
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1-2 días  
 **Impacto**: ⭐⭐⭐⭐
@@ -216,7 +249,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 7. Analytics y Monitoreo
+### 8. Analytics y Monitoreo
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
 **Impacto**: ⭐⭐⭐
@@ -244,7 +277,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 8. Sitemap y robots.txt
+### 9. Sitemap y robots.txt
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2-3 horas  
 **Impacto**: ⭐⭐⭐
@@ -269,7 +302,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 9. Mejoras en About.jsx
+### 10. Mejoras en About.jsx
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2 días  
 **Impacto**: ⭐⭐⭐⭐
@@ -296,7 +329,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 10. Filtros y Búsqueda en Proyectos
+### 11. Filtros y Búsqueda en Proyectos
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
 **Impacto**: ⭐⭐⭐
@@ -330,7 +363,7 @@ npm install -D vite-plugin-pwa
 
 ## 🟢 PRIORIDAD BAJA
 
-### 11. Internacionalización (i18n)
+### 12. Internacionalización (i18n)
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 días  
 **Impacto**: ⭐⭐⭐
@@ -359,7 +392,7 @@ npm install react-i18next i18next
 
 ---
 
-### 12. Blog o Sección de Artículos
+### 13. Blog o Sección de Artículos
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 5-7 días  
 **Impacto**: ⭐⭐⭐⭐
@@ -390,7 +423,7 @@ npm install react-i18next i18next
 
 ---
 
-### 13. Tests Unitarios y E2E
+### 14. Tests Unitarios y E2E
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 4-5 días  
 **Impacto**: ⭐⭐⭐
@@ -427,7 +460,7 @@ npm install -D @playwright/test
 
 ---
 
-### 14. Scroll to Top y Breadcrumbs
+### 15. Scroll to Top y Breadcrumbs
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 horas  
 **Impacto**: ⭐⭐
@@ -453,7 +486,7 @@ npm install -D @playwright/test
 
 ---
 
-### 15. Toast Notifications System
+### 16. Toast Notifications System
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 2-3 horas  
 **Impacto**: ⭐⭐⭐
@@ -488,7 +521,7 @@ npm install react-hot-toast
 
 ## 🔵 FUTURO / IDEAS
 
-### 16. Sistema de Autenticación (Admin)
+### 17. Sistema de Autenticación (Admin)
 **Prioridad**: 🔵 FUTURO  
 **Estimación**: 1 semana  
 
@@ -501,7 +534,7 @@ npm install react-hot-toast
 
 ---
 
-### 17. Modo de Presentación
+### 18. Modo de Presentación
 **Prioridad**: 🔵 FUTURO  
 **Estimación**: 2 días  
 
@@ -513,7 +546,7 @@ npm install react-hot-toast
 
 ---
 
-### 18. Easter Eggs y Juegos Ocultos
+### 19. Easter Eggs y Juegos Ocultos
 **Prioridad**: 🔵 FUTURO  
 **Estimación**: Variable  
 
@@ -525,7 +558,7 @@ npm install react-hot-toast
 
 ---
 
-### 19. Integración con GitHub API
+### 20. Integración con GitHub API
 **Prioridad**: 🔵 FUTURO  
 **Estimación**: 2 días  
 
@@ -538,7 +571,7 @@ npm install react-hot-toast
 
 ---
 
-### 20. Versión de Consola
+### 21. Versión de Consola
 **Prioridad**: 🔵 FUTURO  
 **Estimación**: 3 días  
 
@@ -555,38 +588,39 @@ npm install react-hot-toast
 
 | Prioridad | Cantidad | Tiempo Total Estimado |
 |-----------|----------|----------------------|
-| 🔴 ALTA | 4 tareas | 6-9 días |
-| 🟡 MEDIA | 6 tareas | 12-15 días |
-| 🟢 BAJA | 5 tareas | 17-22 días |
+| 🔴 ALTA | 3 tareas | 4-7 días |
+| 🟡 MEDIA | 7 tareas | 14-18 días |
+| 🟢 BAJA | 6 tareas | 17-22 días |
 | 🔵 FUTURO | 5 ideas | - |
 
 ---
 
 ## 🎯 Roadmap Sugerido
 
-### Sprint 1 (1-2 semanas) - Fundamentos
+### Sprint 1 (1-2 semanas) - Fundamentos ⏳ En Progreso
 1. Dark Mode
-2. Navbar Responsive
+2. ✅ Navbar Responsive (Completado)
 3. Formulario de Contacto
 4. Meta Tags Dinámicos
+5. ✅ Mejoras Responsividad iPhone (Completado)
 
 ### Sprint 2 (2-3 semanas) - Mejoras UX
-5. Animaciones
-6. PWA
-7. Analytics
-8. Sitemap/robots.txt
+6. Animaciones
+7. PWA
+8. Analytics
+9. Sitemap/robots.txt
 
 ### Sprint 3 (3-4 semanas) - Contenido
-9. Mejoras en About
-10. Filtros en Proyectos
-11. Toast Notifications
-12. Scroll to Top
+10. Mejoras en About
+11. Filtros en Proyectos
+12. Toast Notifications
+13. Scroll to Top
 
 ### Sprint 4+ (Opcional) - Avanzado
-13. i18n
-14. Blog
-15. Tests
-16. Ideas futuras
+14. i18n
+15. Blog
+16. Tests
+17. Ideas futuras
 
 ---
 
@@ -602,6 +636,12 @@ npm install react-hot-toast
 - [x] Deployment a GitHub Pages
 - [x] README.md completo
 - [x] TODO.md organizado
+- [x] **Navbar responsive con menú hamburguesa** (12 Nov 2025)
+- [x] **Mejoras de responsividad para iPhone y móviles** (12 Nov 2025)
+  - [x] Contact.jsx optimizado
+  - [x] Footer.jsx responsive
+  - [x] Home.jsx mobile-friendly
+  - [x] Grids y spacing adaptativos
 
 ---
 
