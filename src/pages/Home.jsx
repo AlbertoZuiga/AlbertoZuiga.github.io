@@ -96,7 +96,11 @@ const Home = () => {
             </div>
           </div>
 
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
+          <div className="mt-8 grid md:grid-cols-4 gap-6">
+            <div className="card p-6 text-center">
+              <h4 className="font-semibold text-gray-800 mb-2">Flask</h4>
+              <p className="text-sm text-gray-600">Intermedio</p>
+            </div>
             <div className="card p-6 text-center">
               <h4 className="font-semibold text-gray-800 mb-2">SQL</h4>
               <p className="text-sm text-gray-600">Intermedio</p>
