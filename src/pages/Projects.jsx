@@ -13,6 +13,16 @@ const Projects = () => {
       framework: "Flask",
     },
     {
+      title: "Healthy",
+      link: "https://healthy-k6hn.onrender.com",
+      description: "Sistema de recomendación de planes saludables de comida integrado con compras",
+      color: "from-green-900 to-lime-900",
+      icon: "🥗",
+      isReact: false,
+      external: true,
+      framework: "Ruby on Rails",
+    },
+    {
       title: "Calculadora",
       link: "/projects/calculator",
       description: "Calculadora funcional con interfaz moderna",
@@ -78,7 +88,9 @@ const Projects = () => {
                     )}
                     {project.framework && (
                       <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
-                        🐍 {project.framework}
+                        {project.framework === "Flask" && "🐍"}
+                        {project.framework === "Ruby on Rails" && "💎"}
+                        {project.framework !== "Flask" && project.framework !== "Ruby on Rails" && "🔧"} {project.framework}
                       </span>
                     )}
                     <span className="inline-flex items-center gap-1 text-sm opacity-80">
