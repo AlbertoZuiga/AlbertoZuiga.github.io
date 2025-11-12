@@ -73,41 +73,91 @@ const Home = () => {
           <h2 className="section-title text-center mb-12">
             Competencias Técnicas
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            <div className="card p-6 text-center transform hover:scale-105 transition-transform">
-              <div className="text-4xl mb-3">🐍</div>
-              <h3 className="font-semibold text-gray-800">Python</h3>
-              <p className="text-sm text-gray-600">Intermedio - Avanzado</p>
-            </div>
-            <div className="card p-6 text-center transform hover:scale-105 transition-transform">
-              <div className="text-4xl mb-3">🟨</div>
-              <h3 className="font-semibold text-gray-800">JavaScript</h3>
-              <p className="text-sm text-gray-600">Intermedio - Avanzado</p>
-            </div>
-            <div className="card p-6 text-center transform hover:scale-105 transition-transform">
-              <div className="text-4xl mb-3">⚛️</div>
-              <h3 className="font-semibold text-gray-800">React</h3>
-              <p className="text-sm text-gray-600">Intermedio</p>
-            </div>
-            <div className="card p-6 text-center transform hover:scale-105 transition-transform">
-              <div className="text-4xl mb-3">🧰</div>
-              <h3 className="font-semibold text-gray-800">Git / GitHub</h3>
-              <p className="text-sm text-gray-600">Intermedio - Avanzado</p>
+
+          {/* Lenguajes de Programación */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">
+              Lenguajes de Programación
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🐍</div>
+                <h4 className="font-semibold text-gray-800">Python</h4>
+                <p className="text-sm text-gray-600">Intermedio - Avanzado</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🟨</div>
+                <h4 className="font-semibold text-gray-800">JavaScript</h4>
+                <p className="text-sm text-gray-600">Intermedio - Avanzado</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">💎</div>
+                <h4 className="font-semibold text-gray-800">Ruby</h4>
+                <p className="text-sm text-gray-600">Intermedio</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">⚙️</div>
+                <h4 className="font-semibold text-gray-800">C++</h4>
+                <p className="text-sm text-gray-600">Intermedio</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🗄️</div>
+                <h4 className="font-semibold text-gray-800">SQL</h4>
+                <p className="text-sm text-gray-600">Intermedio</p>
+              </div>
             </div>
           </div>
 
-          <div className="mt-8 grid md:grid-cols-3 gap-6">
-            <div className="card p-6 text-center">
-              <h4 className="font-semibold text-gray-800 mb-2">SQL</h4>
-              <p className="text-sm text-gray-600">Intermedio</p>
+          {/* Frameworks y Librerías */}
+          <div className="mb-10">
+            <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">
+              Frameworks y Librerías
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">⚛️</div>
+                <h4 className="font-semibold text-gray-800">React</h4>
+                <p className="text-sm text-gray-600">Intermedio</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🧪</div>
+                <h4 className="font-semibold text-gray-800">Flask</h4>
+                <p className="text-sm text-gray-600">Intermedio</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🎯</div>
+                <h4 className="font-semibold text-gray-800">Django</h4>
+                <p className="text-sm text-gray-600">Básico - Intermedio</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">⚡</div>
+                <h4 className="font-semibold text-gray-800">FastAPI</h4>
+                <p className="text-sm text-gray-600">Básico</p>
+              </div>
             </div>
-            <div className="card p-6 text-center">
-              <h4 className="font-semibold text-gray-800 mb-2">Docker</h4>
-              <p className="text-sm text-gray-600">Intermedio</p>
-            </div>
-            <div className="card p-6 text-center">
-              <h4 className="font-semibold text-gray-800 mb-2">Excel</h4>
-              <p className="text-sm text-gray-600">Avanzado</p>
+          </div>
+
+          {/* Herramientas */}
+          <div>
+            <h3 className="text-2xl font-semibold text-gray-800 text-center mb-6">
+              Herramientas
+            </h3>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🧰</div>
+                <h4 className="font-semibold text-gray-800">Git / GitHub</h4>
+                <p className="text-sm text-gray-600">Intermedio - Avanzado</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">🐳</div>
+                <h4 className="font-semibold text-gray-800">Docker</h4>
+                <p className="text-sm text-gray-600">Intermedio</p>
+              </div>
+              <div className="card p-6 text-center transform hover:scale-105 transition-transform">
+                <div className="text-4xl mb-3">📊</div>
+                <h4 className="font-semibold text-gray-800">Excel</h4>
+                <p className="text-sm text-gray-600">Avanzado</p>
+              </div>
             </div>
           </div>
         </div>
