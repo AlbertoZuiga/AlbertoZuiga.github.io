@@ -152,7 +152,7 @@ const About = () => {
                   </tr>
                   <tr>
                     <td className="py-3 font-semibold text-gray-700 align-top">
-                      Ago 2025 - Nov 2025
+                      Ago 2025 - Presente
                     </td>
                     <td className="py-3 text-gray-600">
                       <strong>Universidad de los Andes</strong>
