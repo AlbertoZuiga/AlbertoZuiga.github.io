@@ -6,7 +6,7 @@ const CameraProject = () => {
   const [error, setError] = useState(null);
   const [captures, setCaptures] = useState([]);
   const [buttonsEnabled, setButtonsEnabled] = useState(false);
-  const [isMirrored, setIsMirrored] = useState(false);
+  const [isMirrored, setIsMirrored] = useState(true);
 
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
