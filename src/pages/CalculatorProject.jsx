@@ -6,6 +6,8 @@ const Calculator = () => {
   const [currentValue, setCurrentValue] = useState(null);
   const [pendingOperation, setPendingOperation] = useState(null);
   const [waitingForOperand, setWaitingForOperand] = useState(false);
+  const [lastOperand, setLastOperand] = useState(null);
+  const [lastOperation, setLastOperation] = useState(null);
   const calculatorRef = useRef(null);
 
   useEffect(() => {
@@ -25,6 +27,8 @@ const Calculator = () => {
     setCurrentValue(null);
     setPendingOperation(null);
     setWaitingForOperand(false);
+    setLastOperand(null);
+    setLastOperation(null);
   };
 
   const inputDigit = (digit) => {
@@ -93,8 +97,15 @@ const Calculator = () => {
     if (pendingOperation && currentValue !== null) {
       const newValue = calculate(currentValue, inputValue, pendingOperation);
       updateDisplay(newValue);
+      setLastOperand(inputValue);
+      setLastOperation(pendingOperation);
       setCurrentValue(null);
       setPendingOperation(null);
+      setWaitingForOperand(true);
+    } else if (lastOperation && lastOperand !== null) {
+      // Repetir la última operación
+      const newValue = calculate(inputValue, lastOperand, lastOperation);
+      updateDisplay(newValue);
       setWaitingForOperand(true);
     }
   };
