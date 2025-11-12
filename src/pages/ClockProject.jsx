@@ -1,13 +1,18 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
   const [format24h, setFormat24h] = useState(true);
   const [precision, setPrecision] = useState(0);
+  const containerRef = useRef(null);
 
   useEffect(() => {
     document.title = "Reloj - Alberto Zúñiga";
+    // Dar foco al contenedor para que capture eventos de teclado
+    if (containerRef.current) {
+      containerRef.current.focus();
+    }
   }, []);
 
   useEffect(() => {
@@ -53,8 +58,25 @@ const Clock = () => {
   const toggleFormat = () => setFormat24h(!format24h);
   const cyclePrecision = () => setPrecision((precision + 1) % 4);
 
+  const handleKeyPress = (e) => {
+    const key = e.key.toLowerCase();
+    if (key === "f") {
+      toggleFormat();
+    } else if (key === "p") {
+      cyclePrecision();
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 py-8">
+    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex
+    <div
+      ref={containerRef}
+      className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 py-8"
+      onKeyDown={handleKeyPress}
+      tabIndex={0}
+      role="application"
+      aria-label="Reloj"
+    >
       <div className="max-w-4xl mx-auto px-4">
         <div className="mb-6">
           <Link
