@@ -18,7 +18,16 @@ const CameraProject = () => {
   useEffect(() => {
     startCamera();
 
-    // Keyboard shortcut for taking pictures
+    return () => {
+      // Cleanup: stop camera when component unmounts
+      if (stream) {
+        stream.getTracks().forEach((track) => track.stop());
+      }
+    };
+  }, []); // Empty dependency array - only run once on mount
+
+  // Keyboard shortcut handler
+  useEffect(() => {
     const handleKeyPress = (event) => {
       if (event.code === "Space" && buttonsEnabled) {
         event.preventDefault();
@@ -29,13 +38,9 @@ const CameraProject = () => {
     document.addEventListener("keydown", handleKeyPress);
 
     return () => {
-      // Cleanup: stop camera when component unmounts
-      if (stream) {
-        stream.getTracks().forEach((track) => track.stop());
-      }
       document.removeEventListener("keydown", handleKeyPress);
     };
-  }, []); // Empty dependency array - only run once on mount
+  }, [buttonsEnabled]); // Update when buttonsEnabled changes
 
   // Separate effect to update video element when stream changes
   useEffect(() => {
