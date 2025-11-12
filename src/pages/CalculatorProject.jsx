@@ -142,7 +142,6 @@ const Calculator = () => {
   };
 
   return (
-    // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/no-noninteractive-tabindex
     <div
       ref={calculatorRef}
       className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8"
