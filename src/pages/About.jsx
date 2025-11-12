@@ -24,7 +24,7 @@ const About = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
             Currículum Vitae
           </h1>
-          <p className="text-lg text-gray-600">Alberto Zúñiga Marinovic</p>
+          <p className="text-lg text-gray-600">Alberto Zúñiga</p>
         </div>
 
         {/* Antecedentes Personales */}
