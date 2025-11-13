@@ -200,7 +200,7 @@ const About = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
+                    <td className="py-3 font-semibold text-gray-700 dark:text-gray-300 align-top">
                       Mar 2025 - Jun 2025
                     </td>
                     <td className="py-3 text-gray-600 dark:text-gray-400">
@@ -212,7 +212,7 @@ const About = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
+                    <td className="py-3 font-semibold text-gray-700 dark:text-gray-300 align-top">
                       Ago 2024 - Nov 2024
                     </td>
                     <td className="py-3 text-gray-600 dark:text-gray-400">
@@ -224,7 +224,7 @@ const About = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
+                    <td className="py-3 font-semibold text-gray-700 dark:text-gray-300 align-top">
                       Mar 2024 - Jun 2024
                     </td>
                     <td className="py-3 text-gray-600 dark:text-gray-400">
@@ -236,7 +236,7 @@ const About = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
+                    <td className="py-3 font-semibold text-gray-700 dark:text-gray-300 align-top">
                       Mar 2023 - Jun 2023
                     </td>
                     <td className="py-3 text-gray-600 dark:text-gray-400">
@@ -248,7 +248,7 @@ const About = () => {
                     </td>
                   </tr>
                   <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
+                    <td className="py-3 font-semibold text-gray-700 dark:text-gray-300 align-top">
                       Ago 2022 - Nov 2022
                     </td>
                     <td className="py-3 text-gray-600 dark:text-gray-400">
@@ -305,7 +305,7 @@ const About = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   <tr>
-                    <td className="py-3 font-semibold text-gray-700 w-1/4 align-top">
+                    <td className="py-3 font-semibold text-gray-700 w-1/4 dark:text-gray-300 align-top">
                       2023
                     </td>
                     <td className="py-3 text-gray-600 dark:text-gray-400">
@@ -360,7 +360,7 @@ const About = () => {
                 </thead>
                 <tbody className="divide-y divide-gray-200 dark:divide-gray-700">
                   <tr>
-                    <td className="py-3 font-semibold text-gray-700 w-1/4">
+                    <td className="py-3 font-semibold text-gray-700 w-1/4 dark:text-gray-300">
                       2022 - 2024
                     </td>
                     <td className="py-3 text-gray-600 dark:text-gray-400">
@@ -475,7 +475,7 @@ const About = () => {
 
               {/* Lenguajes de Programación */}
               <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+                <h3 className="text-xl font-semibold text-gray-700 mb-4 dark:text-gray-300">
                   Lenguajes de Programación
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
@@ -520,7 +520,7 @@ const About = () => {
 
               {/* Frameworks y Librerías */}
               <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+                <h3 className="text-xl font-semibold text-gray-700 mb-4 dark:text-gray-300">
                   Frameworks y Librerías
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
@@ -549,7 +549,7 @@ const About = () => {
 
               {/* Herramientas de Software */}
               <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+                <h3 className="text-xl font-semibold text-gray-700 mb-4 dark:text-gray-300">
                   Herramientas de Software
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
@@ -574,7 +574,7 @@ const About = () => {
 
               {/* Idiomas */}
               <div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+                <h3 className="text-xl font-semibold text-gray-700 mb-4 dark:text-gray-300">
                   Idiomas
                 </h3>
                 <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
