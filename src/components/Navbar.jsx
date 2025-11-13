@@ -79,21 +79,26 @@ const Navbar = () => {
             {/* Theme Toggle Button */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-lg text-yellow-400 bg-gray-700 hover:bg-gray-600 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 transform hover:scale-110"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium bg-gray-700/50 hover:bg-gray-600 dark:bg-gray-800/50 dark:hover:bg-gray-700 border border-gray-600 dark:border-gray-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 group"
               aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               title={isDark ? "Modo claro" : "Modo oscuro"}
             >
-              {isDark ? (
-                // Sol (modo claro)
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                // Luna (modo oscuro)
-                <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                </svg>
-              )}
+              <span className="transform transition-transform duration-500 group-hover:rotate-180">
+                {isDark ? (
+                  // Sol (modo claro)
+                  <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  // Luna (modo oscuro)
+                  <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                )}
+              </span>
+              <span className="text-gray-200 dark:text-gray-300 hidden lg:inline">
+                {isDark ? "Claro" : "Oscuro"}
+              </span>
             </button>
           </div>
 
@@ -102,19 +107,21 @@ const Navbar = () => {
             {/* Theme Toggle Button - Mobile */}
             <button
               onClick={toggleTheme}
-              className="p-2.5 rounded-lg text-yellow-400 bg-gray-700 hover:bg-gray-600 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 transform hover:scale-110"
+              className="p-2.5 rounded-lg bg-gray-700/50 hover:bg-gray-600 dark:bg-gray-800/50 dark:hover:bg-gray-700 border border-gray-600 dark:border-gray-600 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 group"
               aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
               title={isDark ? "Modo claro" : "Modo oscuro"}
             >
-              {isDark ? (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
-              ) : (
-                <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-                </svg>
-              )}
+              <span className="block transform transition-transform duration-500 group-active:rotate-180">
+                {isDark ? (
+                  <svg className="w-5 h-5 text-yellow-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                ) : (
+                  <svg className="w-5 h-5 text-blue-400" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                  </svg>
+                )}
+              </span>
             </button>
 
             <button
