@@ -9,7 +9,6 @@ const Clock = () => {
 
   useEffect(() => {
     document.title = "Reloj - Alberto Zúñiga";
-    // Dar foco al contenedor para que capture eventos de teclado
     if (containerRef.current) {
       containerRef.current.focus();
     }
@@ -110,12 +109,12 @@ const Clock = () => {
 
         {/* Reloj Analógico */}
         <div className="flex justify-center mb-8">
-          <div className="relative w-80 h-80 bg-white rounded-full shadow-2xl">
+          <div className="relative w-80 h-80 bg-white dark:bg-gray-800 rounded-full shadow-2xl">
             {/* Marcas de horas */}
             {new Array(12).fill(null).map((_, i) => (
               <div
                 key={`hour-mark-${i}`}
-                className="absolute w-1 h-4 bg-gray-800 left-1/2 top-2"
+                className="absolute w-1 h-4 bg-gray-800 dark:bg-gray-200 left-1/2 top-2"
                 style={{
                   transform: `translateX(-50%) rotate(${i * 30}deg)`,
                   transformOrigin: "50% 158px",
@@ -131,7 +130,7 @@ const Clock = () => {
               return (
                 <div
                   key={num}
-                  className="absolute text-gray-800 font-bold text-xl"
+                  className="absolute text-gray-800 dark:text-gray-200 font-bold text-xl"
                   style={{
                     left: `${x}%`,
                     top: `${y}%`,
@@ -144,11 +143,11 @@ const Clock = () => {
             })}
 
             {/* Punto central */}
-            <div className="absolute w-4 h-4 bg-gray-800 rounded-full left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" />
+            <div className="absolute w-4 h-4 bg-gray-800 dark:bg-gray-200 rounded-full left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10" />
 
             {/* Manecilla de horas */}
             <div
-              className="absolute w-2 h-20 bg-gray-800 rounded-full left-1/2 top-1/2 origin-bottom transition-transform duration-1000"
+              className="absolute w-2 h-20 bg-gray-800 dark:bg-gray-200 rounded-full left-1/2 top-1/2 origin-bottom transition-transform duration-1000"
               style={{
                 transform: `translateX(-50%) translateY(-100%) ${getHandRotation(
                   hour,
@@ -159,7 +158,7 @@ const Clock = () => {
 
             {/* Manecilla de minutos */}
             <div
-              className="absolute w-1.5 h-28 bg-gray-600 rounded-full left-1/2 top-1/2 origin-bottom transition-transform duration-1000"
+              className="absolute w-1.5 h-28 bg-gray-600 dark:bg-gray-300 rounded-full left-1/2 top-1/2 origin-bottom transition-transform duration-1000"
               style={{
                 transform: `translateX(-50%) translateY(-100%) ${getHandRotation(
                   minute,
