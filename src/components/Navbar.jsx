@@ -102,8 +102,8 @@ const Navbar = () => {
                   )}
                 </div>
               </div>
-              {/* Label text - hidden on smaller screens */}
-              <span className="text-gray-200 text-sm font-medium hidden xl:inline">
+              {/* Label text - hidden on smaller screens with fixed width */}
+              <span className="text-gray-200 text-sm font-medium hidden xl:inline-block w-14 text-left">
                 {isDark ? "Oscuro" : "Claro"}
               </span>
             </button>
