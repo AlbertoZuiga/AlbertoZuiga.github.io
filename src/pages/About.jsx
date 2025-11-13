@@ -363,9 +363,9 @@ const About = () => {
         </section>
 
         {/* Formación Complementaria */}
-        <section className="card mb-6">
+        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
           <div
-            className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+            className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("additional")}
             onKeyDown={(e) => handleKeyDown(e, "additional")}
             role="button"
@@ -373,11 +373,11 @@ const About = () => {
             aria-expanded={expandedSections.additional}
             aria-label="Expandir o contraer Formación Complementaria"
           >
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
               Formación Complementaria
             </h2>
             <svg
-              className={`w-6 h-6 transform transition-transform ${
+              className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
                 expandedSections.additional ? "rotate-180" : ""
               }`}
               fill="none"
@@ -393,12 +393,12 @@ const About = () => {
             </svg>
           </div>
           {expandedSections.additional && (
-            <div className="px-6 pb-6">
-              <hr className="mb-6" />
-              <h3 className="text-xl font-semibold text-gray-700 mb-3">
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+              <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
+              <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
                 Universidad de los Andes:
               </h3>
-              <ul className="list-disc list-inside space-y-2 text-gray-600">
+              <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                 <li>
                   Concentración tecnológica en{" "}
                   <em>Ingeniería Civil Eléctrica</em>
@@ -415,9 +415,9 @@ const About = () => {
         </section>
 
         {/* Competencias Profesionales */}
-        <section className="card mb-6">
+        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
           <div
-            className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+            className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("skills")}
             onKeyDown={(e) => handleKeyDown(e, "skills")}
             role="button"
@@ -425,11 +425,11 @@ const About = () => {
             aria-expanded={expandedSections.skills}
             aria-label="Expandir o contraer Competencias Profesionales"
           >
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
               Competencias Profesionales
             </h2>
             <svg
-              className={`w-6 h-6 transform transition-transform ${
+              className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
                 expandedSections.skills ? "rotate-180" : ""
               }`}
               fill="none"
@@ -445,121 +445,121 @@ const About = () => {
             </svg>
           </div>
           {expandedSections.skills && (
-            <div className="px-6 pb-6">
-              <hr className="mb-6" />
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+              <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
 
               {/* Lenguajes de Programación */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
                   Lenguajes de Programación
                 </h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-                  <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Python</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio-Avanzado</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3">
+                  <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2 text-sm sm:text-base">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Python</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio-Avanzado</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">JavaScript</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio-Avanzado</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">JavaScript</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio-Avanzado</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">C++</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">C++</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">SQL</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">SQL</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Ruby</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Ruby</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">HTML/CSS</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">HTML/CSS</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">C</span>
-                    <span className="text-gray-500 text-sm font-semibold">Básico</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">C</span>
+                    <span className="text-gray-500 text-sm font-semibold dark:text-gray-500">Básico</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">VBA (Excel)</span>
-                    <span className="text-gray-500 text-sm font-semibold">Básico</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">VBA (Excel)</span>
+                    <span className="text-gray-500 text-sm font-semibold dark:text-gray-500">Básico</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Apps Script</span>
-                    <span className="text-gray-500 text-sm font-semibold">Básico</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Apps Script</span>
+                    <span className="text-gray-500 text-sm font-semibold dark:text-gray-500">Básico</span>
                   </div>
                 </div>
               </div>
 
               {/* Frameworks y Librerías */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
                   Frameworks y Librerías
                 </h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-                  <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">React</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3">
+                  <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2 text-sm sm:text-base">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">React</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">React Native</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">React Native</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Flask</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Flask</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Django</span>
-                    <span className="text-primary-600 text-sm font-semibold">Básico-Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Django</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Básico-Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">FastAPI</span>
-                    <span className="text-gray-500 text-sm font-semibold">Básico</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">FastAPI</span>
+                    <span className="text-gray-500 text-sm font-semibold dark:text-gray-500">Básico</span>
                   </div>
                 </div>
               </div>
 
               {/* Herramientas de Software */}
-              <div className="mb-8">
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+              <div className="mb-6 sm:mb-8">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
                   Herramientas de Software
                 </h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-                  <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Git/GitHub</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio-Avanzado</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3">
+                  <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2 text-sm sm:text-base">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Git/GitHub</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio-Avanzado</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Excel</span>
-                    <span className="text-primary-600 text-sm font-semibold">Avanzado</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Excel</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Avanzado</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Docker</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Docker</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">LaTeX</span>
-                    <span className="text-primary-600 text-sm font-semibold">Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">LaTeX</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Intermedio</span>
                   </div>
                 </div>
               </div>
 
               {/* Idiomas */}
               <div>
-                <h3 className="text-xl font-semibold text-gray-700 mb-4">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
                   Idiomas
                 </h3>
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-3">
-                  <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Español</span>
-                    <span className="text-primary-600 text-sm font-semibold">Nativo</span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3">
+                  <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2 text-sm sm:text-base">
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Español</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Nativo</span>
                   </div>
                   <div className="flex justify-between items-center border-b border-gray-200 pb-2">
-                    <span className="font-medium text-gray-700">Inglés</span>
-                    <span className="text-primary-600 text-sm font-semibold">Básico-Intermedio</span>
+                    <span className="font-medium text-gray-700 dark:text-gray-300">Inglés</span>
+                    <span className="text-primary-600 text-sm font-semibold dark:text-primary-400">Básico-Intermedio</span>
                   </div>
                 </div>
               </div>
