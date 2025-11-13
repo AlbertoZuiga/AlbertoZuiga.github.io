@@ -198,7 +198,7 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="min-w-0">
-                <h3 className="font-semibold text-gray-800 text-sm sm:text-base">GitHub</h3>
+                <h3 className="font-semibold text-gray-800 dark:text-white text-sm sm:text-base">GitHub</h3>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 truncate">@AlbertoZuiga</p>
               </div>
             </a>
@@ -207,11 +207,11 @@ const Contact = () => {
               href="https://www.linkedin.com/in/alberto-zuniga-marinovic/"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
+              className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
             >
               <div className="flex-shrink-0">
                 <svg
-                  className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600"
+                  className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600 dark:text-blue-400"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                 >
@@ -219,7 +219,7 @@ const Contact = () => {
                 </svg>
               </div>
               <div className="min-w-0">
-                <h3 className="font-semibold text-gray-800 text-sm sm:text-base">LinkedIn</h3>
+                <h3 className="font-semibold text-gray-800 dark:text-white text-sm sm:text-base">LinkedIn</h3>
                 <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 truncate">
                   alberto-zuniga-marinovic
                 </p>
@@ -229,12 +229,12 @@ const Contact = () => {
         </div>
 
         {/* Call to Action - Improved mobile spacing */}
-        <div className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100">
+        <div className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 dark:bg-gray-800">
           <div className="text-center mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 mb-3 sm:mb-4 px-2">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 px-2">
               Envíame un mensaje
             </h2>
-            <p className="text-sm sm:text-base text-gray-700 px-4">
+            <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 px-4">
               Completa el formulario y te responderé a la brevedad
             </p>
           </div>
@@ -264,7 +264,7 @@ const Contact = () => {
                 disabled={isSubmitting}
               />
               {errors.name && (
-                <p className="mt-1 text-xs sm:text-sm text-red-600">
+                <p className="mt-1 text-xs sm:text-sm text-red-600 dark:text-red-400">
                   {errors.name}
                 </p>
               )}
@@ -293,7 +293,7 @@ const Contact = () => {
                 disabled={isSubmitting}
               />
               {errors.email && (
-                <p className="mt-1 text-xs sm:text-sm text-red-600">
+                <p className="mt-1 text-xs sm:text-sm text-red-600 dark:text-red-400">
                   {errors.email}
                 </p>
               )}
@@ -322,7 +322,7 @@ const Contact = () => {
                 disabled={isSubmitting}
               />
               {errors.subject && (
-                <p className="mt-1 text-xs sm:text-sm text-red-600">
+                <p className="mt-1 text-xs sm:text-sm text-red-600 dark:text-red-400">
                   {errors.subject}
                 </p>
               )}
@@ -353,12 +353,12 @@ const Contact = () => {
               <div className="flex justify-between items-center mt-1">
                 <div>
                   {errors.message && (
-                    <p className="text-xs sm:text-sm text-red-600">
+                    <p className="text-xs sm:text-sm text-red-600 dark:text-red-400">
                       {errors.message}
                     </p>
                   )}
                 </div>
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-gray-500 dark:text-gray-400">
                   {formData.message.length}/1000
                 </p>
               </div>
@@ -371,8 +371,8 @@ const Contact = () => {
                 disabled={isSubmitting}
                 className={`w-full px-6 py-3 sm:py-3.5 rounded-lg font-semibold text-white transition-all duration-300 text-sm sm:text-base ${
                   isSubmitting
-                    ? "bg-gray-400 cursor-not-allowed"
-                    : "bg-primary-600 hover:bg-primary-700 transform hover:scale-105 active:scale-95"
+                    ? "bg-gray-400 dark:bg-gray-600 cursor-not-allowed"
+                    : "bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 transform hover:scale-105 active:scale-95"
                 }`}
               >
                 {isSubmitting ? (
@@ -426,12 +426,14 @@ const Contact = () => {
               color: "#fff",
             },
             success: {
+              duration: 5000,
               iconTheme: {
                 primary: "#10b981",
                 secondary: "#fff",
               },
             },
             error: {
+              duration: 6000,
               iconTheme: {
                 primary: "#ef4444",
                 secondary: "#fff",
