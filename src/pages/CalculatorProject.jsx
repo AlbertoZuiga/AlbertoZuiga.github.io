@@ -144,7 +144,7 @@ const Calculator = () => {
   return (
     <div
       ref={calculatorRef}
-      className="min-h-screen bg-gradient-to-br from-gray-900 to-gray-800 py-8"
+      className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-8"
       onKeyDown={handleKeyPress}
       tabIndex={0}
       role="application"
@@ -154,7 +154,7 @@ const Calculator = () => {
         <div className="mb-6">
           <Link
             to="/projects"
-            className="inline-flex items-center text-white hover:text-primary-400 transition-colors"
+            className="inline-flex items-center text-gray-700 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
           >
             <svg
               className="w-5 h-5 mr-2"
@@ -173,9 +173,9 @@ const Calculator = () => {
           </Link>
         </div>
 
-        <div className="bg-gray-800 rounded-3xl shadow-2xl p-6">
-          <div className="bg-gray-900 rounded-2xl p-6 mb-6 min-h-[100px] flex items-center justify-end">
-            <div className="text-white text-5xl font-light tracking-wider">
+        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6">
+          <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-6 mb-6 min-h-[100px] flex items-center justify-end">
+            <div className="text-gray-900 dark:text-white text-5xl font-light tracking-wider">
               {display}
             </div>
           </div>
@@ -184,19 +184,19 @@ const Calculator = () => {
             {/* Primera fila */}
             <button
               onClick={clearDisplay}
-              className="bg-gray-600 hover:bg-gray-500 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               C
             </button>
             <button
               onClick={toggleSign}
-              className="bg-gray-600 hover:bg-gray-500 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               +/-
             </button>
             <button
               onClick={percent}
-              className="bg-gray-600 hover:bg-gray-500 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               %
             </button>
@@ -214,7 +214,7 @@ const Calculator = () => {
               <button
                 key={num}
                 onClick={() => inputDigit(num)}
-                className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
@@ -233,7 +233,7 @@ const Calculator = () => {
               <button
                 key={num}
                 onClick={() => inputDigit(num)}
-                className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
@@ -252,7 +252,7 @@ const Calculator = () => {
               <button
                 key={num}
                 onClick={() => inputDigit(num)}
-                className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
@@ -269,13 +269,13 @@ const Calculator = () => {
             {/* Quinta fila */}
             <button
               onClick={() => inputDigit("0")}
-              className="col-span-2 bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              className="col-span-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               0
             </button>
             <button
               onClick={inputDot}
-              className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               ,
             </button>
@@ -288,7 +288,7 @@ const Calculator = () => {
           </div>
         </div>
 
-        <div className="text-center mt-6 text-gray-400 text-sm">
+        <div className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm">
           Usa el teclado para una experiencia más rápida
         </div>
       </div>
