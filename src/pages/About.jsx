@@ -253,9 +253,9 @@ const About = () => {
         </section>
 
         {/* Actividades Extracurriculares */}
-        <section className="card mb-6">
+        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
           <div
-            className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+            className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("extracurricular")}
             onKeyDown={(e) => handleKeyDown(e, "extracurricular")}
             role="button"
@@ -263,11 +263,11 @@ const About = () => {
             aria-expanded={expandedSections.extracurricular}
             aria-label="Expandir o contraer Actividades Extracurriculares"
           >
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
               Actividades Extracurriculares
             </h2>
             <svg
-              className={`w-6 h-6 transform transition-transform ${
+              className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
                 expandedSections.extracurricular ? "rotate-180" : ""
               }`}
               fill="none"
@@ -283,34 +283,26 @@ const About = () => {
             </svg>
           </div>
           {expandedSections.extracurricular && (
-            <div className="px-6 pb-6">
-              <hr className="mb-6" />
-              <table className="w-full">
-                <thead className="sr-only">
-                  <tr>
-                    <th>Año</th>
-                    <th>Actividad</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 w-1/4 align-top">
-                      2023
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      Consejero político de Ingeniería Civil
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+              <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
+              <div className="space-y-3">
+                <div className="pb-3">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    2023
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    Consejero político de Ingeniería Civil
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </section>
 
         {/* Antecedentes Laborales */}
-        <section className="card mb-6">
+        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
           <div
-            className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+            className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("work")}
             onKeyDown={(e) => handleKeyDown(e, "work")}
             role="button"
@@ -318,11 +310,11 @@ const About = () => {
             aria-expanded={expandedSections.work}
             aria-label="Expandir o contraer Antecedentes Laborales"
           >
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
               Antecedentes Laborales
             </h2>
             <svg
-              className={`w-6 h-6 transform transition-transform ${
+              className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
                 expandedSections.work ? "rotate-180" : ""
               }`}
               fill="none"
@@ -338,40 +330,34 @@ const About = () => {
             </svg>
           </div>
           {expandedSections.work && (
-            <div className="px-6 pb-6">
-              <hr className="mb-6" />
-              <table className="w-full">
-                <thead className="sr-only">
-                  <tr>
-                    <th>Período</th>
-                    <th>Trabajo</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 w-1/4">
-                      2022 - 2024
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Fundación Nueva Mente</strong>
-                      <br />
-                      Colaboración pro bono a tiempo parcial
-                      <br />
-                      Manejo de la página web utilizando Wix
-                      <br />
-                      Registro y seguimiento de gastos
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700">2019</td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Cornershop</strong>
-                      <br />
-                      Repartidor
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+              <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
+              <div className="space-y-4 sm:space-y-3">
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    2022 - 2024
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Fundación Nueva Mente</strong>
+                    <br />
+                    Colaboración pro bono a tiempo parcial
+                    <br />
+                    Manejo de la página web utilizando Wix
+                    <br />
+                    Registro y seguimiento de gastos
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    2019
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Cornershop</strong>
+                    <br />
+                    Repartidor
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </section>
