@@ -214,7 +214,7 @@ const Calculator = () => {
               <button
                 key={num}
                 onClick={() => inputDigit(num)}
-                className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
@@ -233,7 +233,7 @@ const Calculator = () => {
               <button
                 key={num}
                 onClick={() => inputDigit(num)}
-                className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
@@ -252,7 +252,7 @@ const Calculator = () => {
               <button
                 key={num}
                 onClick={() => inputDigit(num)}
-                className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
                 {num}
               </button>
@@ -269,13 +269,13 @@ const Calculator = () => {
             {/* Quinta fila */}
             <button
               onClick={() => inputDigit("0")}
-              className="col-span-2 bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              className="col-span-2 bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               0
             </button>
             <button
               onClick={inputDot}
-              className="bg-gray-700 hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              className="bg-gray-700 hover:bg-gray-600 dark:bg-gray-700 dark:hover:bg-gray-600 text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
             >
               ,
             </button>

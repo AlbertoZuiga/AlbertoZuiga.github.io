@@ -212,7 +212,7 @@ const CameraProject = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
             📸 Cámara Web
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             Toma fotos y graba videos usando tu cámara
           </p>
           <p className="text-sm text-gray-500 mt-2">
@@ -231,7 +231,7 @@ const CameraProject = () => {
         )}
 
         {/* Camera Container */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
           <div className="flex flex-col items-center">
             {/* Video Element */}
             <div className="relative mb-6">
@@ -248,7 +248,7 @@ const CameraProject = () => {
               />
               {isRecording && (
                 <div className="absolute top-4 right-4 flex items-center gap-2 bg-red-600 text-white px-3 py-2 rounded-full">
-                  <span className="w-3 h-3 bg-white rounded-full animate-pulse"></span>
+                  <span className="w-3 h-3 bg-white dark:bg-gray-800 rounded-full animate-pulse"></span>
                   <span className="text-sm font-semibold">REC</span>
                 </div>
               )}
@@ -347,7 +347,7 @@ const CameraProject = () => {
 
         {/* Captures Gallery */}
         {captures.length > 0 && (
-          <div className="bg-white rounded-lg shadow-lg p-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-6">
               Capturas ({captures.length})
             </h2>

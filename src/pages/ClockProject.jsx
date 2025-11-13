@@ -110,7 +110,7 @@ const Clock = () => {
 
         {/* Reloj Analógico */}
         <div className="flex justify-center mb-8">
-          <div className="relative w-80 h-80 bg-white rounded-full shadow-2xl">
+          <div className="relative w-80 h-80 bg-white dark:bg-gray-800 rounded-full shadow-2xl">
             {/* Marcas de horas */}
             {new Array(12).fill(null).map((_, i) => (
               <div
