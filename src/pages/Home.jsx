@@ -40,21 +40,21 @@ const Home = () => {
       </section>
 
       {/* About Preview */}
-      <section className="py-12 sm:py-16 bg-white">
+      <section className="py-12 sm:py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="section-title text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl">Sobre Mí</h2>
+          <h2 className="section-title text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl dark:text-white">Sobre Mí</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-            <div className="card p-6 sm:p-8">
-              <h3 className="section-subtitle mb-3 sm:mb-4 text-lg sm:text-xl">Formación Académica</h3>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+            <div className="card p-6 sm:p-8 dark:bg-gray-700 transition-colors duration-300">
+              <h3 className="section-subtitle mb-3 sm:mb-4 text-lg sm:text-xl dark:text-white">Formación Académica</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
                 Estudiante de Ingeniería Civil en Ciencias de la Computación en
                 la Universidad de los Andes, con concentración tecnológica en
                 Ingeniería Civil Eléctrica y Minor en Psicología.
               </p>
             </div>
-            <div className="card p-6 sm:p-8">
-              <h3 className="section-subtitle mb-3 sm:mb-4 text-lg sm:text-xl">Experiencia</h3>
-              <p className="text-gray-600 leading-relaxed text-sm sm:text-base">
+            <div className="card p-6 sm:p-8 dark:bg-gray-700 transition-colors duration-300">
+              <h3 className="section-subtitle mb-3 sm:mb-4 text-lg sm:text-xl dark:text-white">Experiencia</h3>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
                 Ayudante universitario en diversos cursos (Web Technologies, Programación, Paradigmas de Programación, Sistemas Electrónicos, Bases de Datos, Taller de Computación). Colaborador pro bono en Fundación Nueva Mente, gestionando su presencia web y registros administrativos.
               </p>
             </div>
@@ -68,95 +68,95 @@ const Home = () => {
       </section>
 
       {/* Skills Preview */}
-      <section className="py-12 sm:py-16 bg-gray-50">
+      <section className="py-12 sm:py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="section-title text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl">
+          <h2 className="section-title text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl dark:text-white">
             Competencias Técnicas
           </h2>
 
           {/* Lenguajes de Programación */}
           <div className="mb-8 sm:mb-10">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 text-center mb-4 sm:mb-6">
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6">
               Lenguajes de Programación
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6">
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🐍</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Python</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio - Avanzado</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Python</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio - Avanzado</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🟨</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">JavaScript</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio - Avanzado</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">JavaScript</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio - Avanzado</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">💎</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Ruby</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Ruby</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚙️</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">C++</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">C++</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🗄️</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">SQL</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">SQL</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio</p>
               </div>
             </div>
           </div>
 
           {/* Frameworks y Librerías */}
           <div className="mb-8 sm:mb-10">
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 text-center mb-4 sm:mb-6">
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6">
               Frameworks y Librerías
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6">
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚛️</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">React</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">React</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🧪</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Flask</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Flask</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🎯</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Django</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Básico - Intermedio</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Django</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Básico - Intermedio</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚡</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">FastAPI</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Básico</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">FastAPI</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Básico</p>
               </div>
             </div>
           </div>
 
           {/* Herramientas */}
           <div>
-            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 text-center mb-4 sm:mb-6">
+            <h3 className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6">
               Herramientas
             </h3>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🧰</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Git / GitHub</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio - Avanzado</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Git / GitHub</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio - Avanzado</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🐳</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Docker</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Intermedio</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Docker</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Intermedio</p>
               </div>
-              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform">
+              <div className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800">
                 <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📊</div>
-                <h4 className="font-semibold text-gray-800 text-sm sm:text-base">Excel</h4>
-                <p className="text-xs sm:text-sm text-gray-600">Avanzado</p>
+                <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">Excel</h4>
+                <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Avanzado</p>
               </div>
             </div>
           </div>
