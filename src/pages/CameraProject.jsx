@@ -205,33 +205,33 @@ const CameraProject = () => {
   };
 
   return (
-    <div className="min-h-screen py-12 bg-gray-50">
+    <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
             📸 Cámara Web
           </h1>
-          <p className="text-lg text-gray-600">
+          <p className="text-lg text-gray-600 dark:text-gray-300">
             Toma fotos y graba videos usando tu cámara
           </p>
-          <p className="text-sm text-gray-500 mt-2">
-            Atajos: <kbd className="px-2 py-1 bg-gray-200 rounded">Espacio</kbd>{" "}
-            Foto | <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">R</kbd>{" "}
-            Grabar | <kbd className="px-2 py-1 bg-gray-200 rounded ml-1">M</kbd>{" "}
+          <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
+            Atajos: <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded">Espacio</kbd>{" "}
+            Foto | <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded ml-1">R</kbd>{" "}
+            Grabar | <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded ml-1">M</kbd>{" "}
             Reflejar
           </p>
         </div>
 
         {/* Error Message */}
         {error && (
-          <div className="max-w-2xl mx-auto mb-6 bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-700 text-center">{error}</p>
+          <div className="max-w-2xl mx-auto mb-6 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+            <p className="text-red-700 dark:text-red-400 text-center">{error}</p>
           </div>
         )}
 
         {/* Camera Container */}
-        <div className="bg-white rounded-lg shadow-lg p-6 mb-8">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
           <div className="flex flex-col items-center">
             {/* Video Element */}
             <div className="relative mb-6">
@@ -240,7 +240,7 @@ const CameraProject = () => {
                 autoPlay
                 playsInline
                 muted
-                className="w-full max-w-2xl h-auto border-4 border-gray-800 rounded-lg bg-gray-300 transition-transform duration-300"
+                className="w-full max-w-2xl h-auto border-4 border-gray-800 dark:border-gray-600 rounded-lg bg-gray-300 dark:bg-gray-700 transition-transform duration-300"
                 style={{ 
                   maxHeight: "480px",
                   transform: isMirrored ? "scaleX(-1)" : "scaleX(1)"
@@ -259,7 +259,7 @@ const CameraProject = () => {
               <button
                 onClick={takePicture}
                 disabled={!buttonsEnabled}
-                className="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg shadow-md transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-3 bg-primary-500 hover:bg-primary-600 text-white font-semibold rounded-lg shadow-md transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 <svg
                   className="w-5 h-5"
@@ -286,7 +286,7 @@ const CameraProject = () => {
               <button
                 onClick={toggleRecording}
                 disabled={!buttonsEnabled}
-                className={`px-6 py-3 font-semibold rounded-lg shadow-md transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2 ${
+                className={`px-6 py-3 font-semibold rounded-lg shadow-md transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed flex items-center gap-2 ${
                   isRecording
                     ? "bg-red-600 hover:bg-red-700 text-white"
                     : "bg-green-600 hover:bg-green-700 text-white"
@@ -320,7 +320,7 @@ const CameraProject = () => {
               <button
                 onClick={() => setIsMirrored(!isMirrored)}
                 disabled={!buttonsEnabled}
-                className={`px-6 py-3 font-semibold rounded-lg shadow-md transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed flex items-center gap-2 ${
+                className={`px-6 py-3 font-semibold rounded-lg shadow-md transition-colors disabled:bg-gray-300 dark:disabled:bg-gray-700 disabled:cursor-not-allowed flex items-center gap-2 ${
                   isMirrored
                     ? "bg-purple-600 hover:bg-purple-700 text-white"
                     : "bg-gray-600 hover:bg-gray-700 text-white"
@@ -347,15 +347,15 @@ const CameraProject = () => {
 
         {/* Captures Gallery */}
         {captures.length > 0 && (
-          <div className="bg-white rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
               Capturas ({captures.length})
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
               {captures.map((capture, index) => (
                 <div
                   key={capture.id}
-                  className="relative group border-2 border-gray-300 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow"
+                  className="relative group border-2 border-gray-300 dark:border-gray-600 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition-shadow"
                 >
                   {capture.type === "image" ? (
                     <img
