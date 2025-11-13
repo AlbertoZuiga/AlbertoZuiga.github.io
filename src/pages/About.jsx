@@ -420,7 +420,7 @@ const About = () => {
           {expandedSections.additional && (
             <div className="px-6 pb-6">
               <hr className="mb-6 dark:border-gray-700" />
-              <h3 className="text-xl font-semibold text-gray-700 mb-3">
+              <h3 className="text-xl font-semibold text-gray-700 mb-3 dark:text-gray-300">
                 Universidad de los Andes:
               </h3>
               <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400">
