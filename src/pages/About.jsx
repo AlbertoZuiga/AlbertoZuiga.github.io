@@ -130,9 +130,9 @@ const About = () => {
         </section>
 
         {/* Antecedentes Académicos */}
-        <section className="card mb-6">
+        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
           <div
-            className="flex justify-between items-center p-6 cursor-pointer hover:bg-gray-50 transition-colors"
+            className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("academic")}
             onKeyDown={(e) => handleKeyDown(e, "academic")}
             role="button"
@@ -140,11 +140,11 @@ const About = () => {
             aria-expanded={expandedSections.academic}
             aria-label="Expandir o contraer Antecedentes Académicos"
           >
-            <h2 className="text-2xl font-bold text-gray-800">
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
               Antecedentes Académicos
             </h2>
             <svg
-              className={`w-6 h-6 transform transition-transform ${
+              className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
                 expandedSections.academic ? "rotate-180" : ""
               }`}
               fill="none"
@@ -160,103 +160,94 @@ const About = () => {
             </svg>
           </div>
           {expandedSections.academic && (
-            <div className="px-6 pb-6">
-              <hr className="mb-6" />
-              <table className="w-full">
-                <thead className="sr-only">
-                  <tr>
-                    <th>Período</th>
-                    <th>Descripción</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-gray-200">
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 w-1/4 align-top">
-                      2020 - Presente
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Universidad de los Andes</strong>
-                      <br />
-                      Estudiante de Ingeniería Civil en Ciencias de la
-                      Computación
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
-                      Ago 2025 - Presente
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Universidad de los Andes</strong>
-                      <br />
-                      Ayudante de <em>Sistemas Electrónicos</em>
-                      <br />
-                      Ayudante de <em>Bases de Datos</em>
-                      <br />
-                      Ayudante de <em>Paradigmas de Programación</em>
-                      <br />
-                      Ayudante de <em>Taller de Computación</em>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
-                      Mar 2025 - Jun 2025
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Universidad de los Andes</strong>
-                      <br />
-                      Ayudante de <em>Web Technologies</em>
-                      <br />
-                      Ayudante de <em>Taller de Proyectos de Ingeniería</em>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
-                      Ago 2024 - Nov 2024
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Universidad de los Andes</strong>
-                      <br />
-                      Ayudante de <em>Web Technologies</em>
-                      <br />
-                      Ayudante de <em>Aplicaciones Móviles</em>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
-                      Mar 2024 - Jun 2024
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Universidad de los Andes</strong>
-                      <br />
-                      Ayudante de <em>Web Technologies</em>
-                      <br />
-                      Ayudante de <em>Programación</em>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
-                      Mar 2023 - Jun 2023
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Universidad de los Andes</strong>
-                      <br />
-                      Ayudante de <em>Paradigmas de Programación</em>
-                      <br />
-                      Ayudante de <em>Programación</em>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="py-3 font-semibold text-gray-700 align-top">
-                      Ago 2022 - Nov 2022
-                    </td>
-                    <td className="py-3 text-gray-600">
-                      <strong>Universidad de los Andes</strong>
-                      <br />
-                      Ayudante de <em>Paradigmas de Programación</em>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+              <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
+              <div className="space-y-4 sm:space-y-3">
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    2020 - Presente
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Estudiante de Ingeniería Civil en Ciencias de la Computación
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Ago 2025 - Presente
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Ayudante de <em>Sistemas Electrónicos</em>
+                    <br />
+                    Ayudante de <em>Bases de Datos</em>
+                    <br />
+                    Ayudante de <em>Paradigmas de Programación</em>
+                    <br />
+                    Ayudante de <em>Taller de Computación</em>
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Mar 2025 - Jun 2025
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Ayudante de <em>Web Technologies</em>
+                    <br />
+                    Ayudante de <em>Taller de Proyectos de Ingeniería</em>
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Ago 2024 - Nov 2024
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Ayudante de <em>Web Technologies</em>
+                    <br />
+                    Ayudante de <em>Aplicaciones Móviles</em>
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Mar 2024 - Jun 2024
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Ayudante de <em>Web Technologies</em>
+                    <br />
+                    Ayudante de <em>Programación</em>
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Mar 2023 - Jun 2023
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Ayudante de <em>Paradigmas de Programación</em>
+                    <br />
+                    Ayudante de <em>Programación</em>
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Ago 2022 - Nov 2022
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Ayudante de <em>Paradigmas de Programación</em>
+                  </div>
+                </div>
+              </div>
             </div>
           )}
         </section>
