@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
@@ -9,10 +10,6 @@ const TicTacToe = () => {
   const [firstPlayer, setFirstPlayer] = useState("X"); // Quien inicia el juego
   const [scores, setScores] = useState({ X: 0, O: 0, draws: 0 });
   const [gamesPlayed, setGamesPlayed] = useState(0);
-
-  useEffect(() => {
-    document.title = "Tres en Línea - Alberto Zúñiga";
-  }, []);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -147,6 +144,12 @@ const TicTacToe = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
+      <SEO 
+        title="Tic-Tac-Toe - Alberto Zúñiga | Juego React"
+        description="Juego de Tres en Línea (Tic-Tac-Toe) desarrollado con React. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo del portfolio."
+        url="https://albertozuiga.github.io/projects/tic-tac-toe"
+        keywords="tic-tac-toe React, tres en línea JavaScript, juego interactivo, proyecto React"
+      />
       <div className="max-w-2xl mx-auto px-4">
         <div className="mb-6">
           <Link
