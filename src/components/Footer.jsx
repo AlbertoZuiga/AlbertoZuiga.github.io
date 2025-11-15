@@ -1,9 +1,15 @@
+import { Link } from "react-router-dom";
+import BrandMark from "./BrandMark";
+
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-gray-800 dark:bg-gray-950 text-white py-8 sm:py-12 transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-center mb-4 sm:mb-6">
+          <BrandMark size="lg" />
+        </div>
         <div className="text-center mb-6 sm:mb-8">
           <p className="text-base sm:text-lg mb-4 sm:mb-6">
             &copy; {currentYear} Alberto Zúñiga. Todos los derechos

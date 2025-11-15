@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import BrandMark from "../components/BrandMark";
 import SEO from "../components/SEO";
 
 const Home = () => {
@@ -6,7 +7,7 @@ const Home = () => {
     <div className="min-h-screen">
       <SEO 
         title="Alberto Zúñiga - Desarrollador Full Stack | Portfolio"
-        description="Portafolio de Alberto Zúñiga. Estudiante de Ingeniería en Ciencias de la Computación, Universidad de los Andes. Desarrollo web con Python, JavaScript, Ruby on Rails, Flask y más."
+        description="Portafolio de Alberto Zúñiga: Desarrollador Full Stack y estudiante de Ingeniería en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React."
         url="https://albertozuiga.github.io"
         keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
       />
@@ -28,6 +29,7 @@ const Home = () => {
         
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
+            <BrandMark size="lg" className="mx-auto mb-3 sm:mb-4" />
             {/* Título con glow sutil */}
             <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in px-2">
               <span className="relative inline-block">
