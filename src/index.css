@@ -18,7 +18,7 @@
   }
 
   .card {
-    @apply bg-gray-100 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden;
+    @apply bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden;
   }
 
   .section-title {

@@ -26,7 +26,7 @@ const About = () => {
   };
 
   return (
-    <div className="py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
+    <div className="py-8 sm:py-12 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
       <SEO 
         title="Sobre Mí - Alberto Zúñiga | CV y Experiencia"
         description="Currículum vitae de Alberto Zúñiga. Experiencia en desarrollo web, formación académica en Ingeniería en Ciencias de la Computación, habilidades técnicas en React, Python, Java y más."
