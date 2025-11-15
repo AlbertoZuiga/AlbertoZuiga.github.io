@@ -1,11 +1,7 @@
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import SEO from "../components/SEO";
 
 const Projects = () => {
-  useEffect(() => {
-    document.title = "Proyectos - Alberto Zúñiga";
-  }, []);
-
   const projects = [
     {
       title: "Scheduler App",
@@ -63,6 +59,12 @@ const Projects = () => {
 
   return (
     <div className="min-h-screen py-12 dark:bg-gray-900 transition-colors duration-300">
+      <SEO 
+        title="Proyectos - Alberto Zúñiga | Portfolio de Desarrollo Web"
+        description="Explora mis proyectos de desarrollo web: Scheduler App (Flask), Healthy (Ruby on Rails), Calculadora, Reloj, Tic-Tac-Toe y Cámara Web con React. Aplicaciones interactivas y funcionales."
+        url="https://albertozuiga.github.io/projects"
+        keywords="proyectos web, React, Flask, Ruby on Rails, desarrollo frontend, aplicaciones interactivas, portfolio proyectos"
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
