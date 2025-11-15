@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const SEO = ({ 
   title = "Alberto Zúñiga - Desarrollador Full Stack", 
-  description = "Portafolio de Alberto Zúñiga. Desarrollador Full Stack con experiencia en Python, JavaScript, Ruby on Rails, Flask y más. Estudiante de Ingeniería en Ciencias de la Computación.",
+  description = "Portafolio de Alberto Zúñiga: Desarrollador Full Stack y estudiante de Ingeniería en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React.",
   image = "/og-image.png",
   url = "https://albertozuiga.github.io",
   type = "website",

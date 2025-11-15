@@ -7,7 +7,7 @@ const Home = () => {
     <div className="min-h-screen">
       <SEO 
         title="Alberto Zúñiga - Desarrollador Full Stack | Portfolio"
-        description="Portafolio de Alberto Zúñiga. Estudiante de Ingeniería en Ciencias de la Computación, Universidad de los Andes. Desarrollo web con Python, JavaScript, Ruby on Rails, Flask y más."
+        description="Portafolio de Alberto Zúñiga: Desarrollador Full Stack y estudiante de Ingeniería en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React."
         url="https://albertozuiga.github.io"
         keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
       />
