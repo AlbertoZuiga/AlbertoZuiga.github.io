@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 const SEO = ({ 
@@ -11,6 +12,11 @@ const SEO = ({
 }) => {
   // URL completa de la imagen para OG
   const fullImageUrl = image.startsWith('http') ? image : `${url}${image}`;
+  
+  // Forzar actualización del título en el DOM
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
   
   return (
     <Helmet prioritizeSeoTags>
