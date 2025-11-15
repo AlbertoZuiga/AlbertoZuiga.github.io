@@ -6,9 +6,9 @@ const Home = () => {
     <div className="min-h-screen">
       <SEO 
         title="Alberto Zúñiga - Desarrollador Full Stack | Portfolio"
-        description="Portafolio de Alberto Zúñiga. Estudiante de Ingeniería Civil en Ciencias de la Computación, Universidad de los Andes. Desarrollador Full Stack con proyectos en React, JavaScript y Python."
+        description="Portafolio de Alberto Zúñiga. Estudiante de Ingeniería en Ciencias de la Computación, Universidad de los Andes. Desarrollo web con Python, JavaScript, Ruby on Rails, Flask y más."
         url="https://albertozuiga.github.io"
-        keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, React, JavaScript, Python, portfolio, Universidad de los Andes"
+        keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
       />
       {/* Hero Section */}
       <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-12 sm:py-16 md:py-20">

@@ -61,9 +61,9 @@ const Projects = () => {
     <div className="min-h-screen py-12 dark:bg-gray-900 transition-colors duration-300">
       <SEO 
         title="Proyectos - Alberto Zúñiga | Portfolio de Desarrollo Web"
-        description="Explora mis proyectos de desarrollo web: Scheduler App (Flask), Healthy (Ruby on Rails), Calculadora, Reloj, Tic-Tac-Toe y Cámara Web con React. Aplicaciones interactivas y funcionales."
+        description="Proyectos de desarrollo web: Scheduler App (Flask/Python), Healthy (Ruby on Rails), aplicaciones interactivas con JavaScript. Backend y frontend."
         url="https://albertozuiga.github.io/projects"
-        keywords="proyectos web, React, Flask, Ruby on Rails, desarrollo frontend, aplicaciones interactivas, portfolio proyectos"
+        keywords="proyectos web, Python, Flask, Ruby on Rails, JavaScript, desarrollo full stack, aplicaciones web, portfolio proyectos"
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">

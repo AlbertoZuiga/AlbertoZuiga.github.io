@@ -145,10 +145,10 @@ const TicTacToe = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
       <SEO 
-        title="Tic-Tac-Toe - Alberto Zúñiga | Juego React"
-        description="Juego de Tres en Línea (Tic-Tac-Toe) desarrollado con React. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo del portfolio."
+        title="Tic-Tac-Toe - Alberto Zúñiga"
+        description="Juego de Tres en Línea (Tic-Tac-Toe) con JavaScript. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo."
         url="https://albertozuiga.github.io/projects/tic-tac-toe"
-        keywords="tic-tac-toe React, tres en línea JavaScript, juego interactivo, proyecto React"
+        keywords="tic-tac-toe, tres en línea JavaScript, juego interactivo, desarrollo web, programación"
       />
       <div className="max-w-2xl mx-auto px-4">
         <div className="mb-6">

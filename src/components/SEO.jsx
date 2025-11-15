@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 
 const SEO = ({ 
   title = "Alberto Zúñiga - Desarrollador Full Stack", 
-  description = "Portafolio de Alberto Zúñiga. Desarrollador Full Stack especializado en React, Node.js y Python. Proyectos interactivos y experiencia profesional.",
+  description = "Portafolio de Alberto Zúñiga. Desarrollador Full Stack con experiencia en Python, JavaScript, Ruby on Rails, Flask y más. Estudiante de Ingeniería en Ciencias de la Computación.",
   image = "/og-image.png",
   url = "https://albertozuiga.github.io",
   type = "website",
-  keywords = "Alberto Zúñiga, desarrollador, full stack, React, JavaScript, portfolio, web developer"
+  keywords = "Alberto Zúñiga, desarrollador full stack, Python, JavaScript, Ruby on Rails, Flask, portfolio, desarrollo web"
 }) => {
   // URL completa de la imagen para OG
   const fullImageUrl = image.startsWith('http') ? image : `${url}${image}`;

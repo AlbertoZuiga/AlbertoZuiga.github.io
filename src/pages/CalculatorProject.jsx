@@ -151,10 +151,10 @@ const Calculator = () => {
       aria-label="Calculadora"
     >
       <SEO 
-        title="Calculadora Interactiva - Alberto Zúñiga | Proyecto React"
-        description="Calculadora funcional desarrollada con React. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio de Alberto Zúñiga."
+        title="Calculadora Interactiva - Alberto Zúñiga"
+        description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
         url="https://albertozuiga.github.io/projects/calculator"
-        keywords="calculadora React, proyecto JavaScript, calculadora interactiva, desarrollo frontend"
+        keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
       />
       <div className="max-w-md mx-auto px-4">
         <div className="mb-6">
