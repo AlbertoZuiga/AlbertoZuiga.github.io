@@ -44,10 +44,10 @@ const Home = () => {
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 px-4">
               <Link
                 to="/projects"
-                className="group relative inline-flex items-center bg-gray-100 text-primary-700 hover:bg-white text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-400/20"
+                className="group relative inline-flex items-center gap-2 bg-gray-100 text-primary-700 hover:bg-white text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-400/20"
               >
                 <span>Ver Proyectos</span>
-                <span className="ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                <span className="group-hover:translate-x-1 transition-all duration-300">
                   →
                 </span>
               </Link>
