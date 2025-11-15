@@ -197,10 +197,16 @@ const TicTacToe = () => {
               Partidas jugadas: {gamesPlayed} | Atajos: <kbd className="px-1 py-0.5 bg-white/20 rounded text-xs">N</kbd> Siguiente | <kbd className="px-1 py-0.5 bg-white/20 rounded text-xs">R</kbd> Resetear
             </div>
           )}
-        </div>
+        </motion.div>
 
         {/* Tablero */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl mb-8">
+        <motion.div 
+          className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl mb-8"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.2 }}
+        >
           <div className="grid grid-cols-3 gap-4 max-w-md mx-auto">
             {board.map((cell, index) => (
               <button
@@ -227,10 +233,16 @@ const TicTacToe = () => {
               </button>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Botón de reinicio */}
-        <div className="text-center flex gap-4 justify-center">
+        <motion.div 
+          className="text-center flex gap-4 justify-center"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.3 }}
+        >
           <button
             onClick={restartGame}
             className="bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 text-lg"
@@ -245,10 +257,16 @@ const TicTacToe = () => {
               🗑️ Resetear Todo
             </button>
           )}
-        </div>
+        </motion.div>
 
         {/* Instrucciones */}
-        <div className="mt-8 text-center">
+        <motion.div 
+          className="mt-8 text-center"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.4 }}
+        >
           <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white max-w-md">
             <h3 className="text-xl font-semibold mb-3">Cómo Jugar</h3>
             <ul className="text-sm space-y-2 text-left">
@@ -268,10 +286,16 @@ const TicTacToe = () => {
               </ul>
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Estadísticas del juego */}
-        <div className="mt-6 grid grid-cols-3 gap-4 max-w-lg mx-auto">
+        <motion.div 
+          className="mt-6 grid grid-cols-3 gap-4 max-w-lg mx-auto"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.5 }}
+        >
           <div className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-4 text-center">
             <div className="text-4xl font-bold text-blue-400 mb-1">X</div>
             <div className="text-2xl font-bold text-white mb-1">{scores.X}</div>
@@ -293,7 +317,7 @@ const TicTacToe = () => {
               <div className="text-xs text-yellow-300 mt-1">⭐ Inicia</div>
             )}
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
     </PageTransition>
