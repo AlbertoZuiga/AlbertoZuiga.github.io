@@ -11,28 +11,49 @@ const Home = () => {
         keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
       />
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 text-white py-12 sm:py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-primary-900 to-gray-800 text-white py-12 sm:py-16 md:py-20 transition-colors duration-500">
+        {/* Glow visual sutil - Igual en ambos modos */}
+        <div className="absolute inset-0 opacity-20 pointer-events-none">
+          <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-primary-500 rounded-full blur-3xl"></div>
+          <div className="absolute bottom-1/3 right-1/3 w-[500px] h-[500px] bg-blue-500 rounded-full blur-3xl"></div>
+        </div>
+        
+        {/* Patrón de fondo sutil */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `radial-gradient(circle at 2px 2px, white 1px, transparent 0)`,
+            backgroundSize: '40px 40px'
+          }}></div>
+        </div>
+        
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in px-2">
-              Alberto Zúñiga 
+            {/* Título con glow sutil */}
+            <h1 className="relative text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 animate-fade-in px-2">
+              <span className="relative inline-block">
+                <span className="absolute inset-0 blur-2xl opacity-30 bg-gradient-to-r from-primary-300 to-blue-300"></span>
+                <span className="relative text-gray-100">Alberto Zúñiga</span>
+              </span>
             </h1>
-            <p className="text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4 text-primary-100 px-4">
+            <p className="text-lg sm:text-xl md:text-2xl mb-3 sm:mb-4 text-gray-200 px-4">
               Estudiante de Ingeniería Civil en Ciencias de la Computación
             </p>
-            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-primary-200 px-4">
+            <p className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-300 px-4">
               Universidad de los Andes
             </p>
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 px-4">
               <Link
                 to="/projects"
-                className="btn-primary bg-white text-primary-600 hover:bg-gray-100 text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
+                className="group relative inline-flex items-center bg-gray-100 text-primary-700 hover:bg-white text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-400/20"
               >
-                Ver Proyectos
+                <span>Ver Proyectos</span>
+                <span className="ml-2 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300">
+                  →
+                </span>
               </Link>
               <Link
                 to="/contact"
-                className="btn-secondary border-white text-white bg-transparent hover:bg-white hover:text-primary-600 text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
+                className="relative inline-flex items-center border-2 border-gray-300/60 text-gray-100 bg-transparent hover:bg-white/5 hover:border-gray-200 text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 backdrop-blur-sm"
               >
                 Contactar
               </Link>
