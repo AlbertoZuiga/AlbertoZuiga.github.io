@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import SEO from "../components/SEO";
 
 const About = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -9,10 +10,6 @@ const About = () => {
     extracurricular: true,
     skills: true,
   });
-
-  useEffect(() => {
-    document.title = "Sobre Mí - Alberto Zúñiga";
-  }, []);
 
   const toggleSection = (section) => {
     setExpandedSections((prev) => ({
@@ -29,7 +26,13 @@ const About = () => {
   };
 
   return (
-    <div className="py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
+    <div className="py-8 sm:py-12 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+      <SEO 
+        title="Sobre Mí - Alberto Zúñiga | CV y Experiencia"
+        description="Currículum vitae de Alberto Zúñiga. Experiencia en desarrollo web, formación académica en Ingeniería en Ciencias de la Computación, habilidades técnicas en React, Python, Java y más."
+        url="https://albertozuiga.github.io/about"
+        keywords="Alberto Zúñiga CV, experiencia laboral, ingeniería computación, desarrollador, Universidad de los Andes, habilidades técnicas"
+      />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 sm:mb-12">
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4">
