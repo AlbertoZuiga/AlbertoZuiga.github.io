@@ -1,4 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <rect width="100" height="100" fill="#0073ba" rx="15"/>
-  <text x="50" y="70" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="white" text-anchor="middle">AZ</text>
+  <!-- 2. A y Z fusionadas en una sola forma continua, blanco y negro -->
+  <rect width="100" height="100" rx="18" fill="#0f172a"/>
+  <!-- Forma continua: diagonal + puente que sugiere A/Z -->
+  <path d="M24 76 L50 24 L76 76 L64 76 L50 48 L36 76 Z" fill="#ffffff"/>
+  <!-- Corte asimétrico para insinuar la Z -->
+  <rect x="44" y="56" width="24" height="8" transform="skewX(-15)" fill="#0f172a"/>
 </svg>
