@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import SEO from "../components/SEO";
 
 const CameraProject = () => {
   const [stream, setStream] = useState(null);
@@ -11,10 +12,6 @@ const CameraProject = () => {
   const videoRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
-
-  useEffect(() => {
-    document.title = "Cámara - Alberto Zúñiga";
-  }, []);
 
   useEffect(() => {
     startCamera();
@@ -206,6 +203,12 @@ const CameraProject = () => {
 
   return (
     <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
+      <SEO 
+        title="Cámara Web - Alberto Zúñiga"
+        description="Aplicación de cámara web con JavaScript. Captura de fotos, grabación de video, acceso a MediaDevices API. Proyecto web del portfolio."
+        url="https://albertozuiga.github.io/projects/camera"
+        keywords="cámara web, MediaDevices API, captura video JavaScript, getUserMedia, desarrollo web"
+      />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-8">

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -8,7 +9,6 @@ const Clock = () => {
   const containerRef = useRef(null);
 
   useEffect(() => {
-    document.title = "Reloj - Alberto Zúñiga";
     if (containerRef.current) {
       containerRef.current.focus();
     }
@@ -75,6 +75,12 @@ const Clock = () => {
       role="application"
       aria-label="Reloj"
     >
+      <SEO 
+        title="Reloj Digital - Alberto Zúñiga"
+        description="Reloj digital interactivo con JavaScript. Formato 12/24 horas, precisión ajustable, navegación por teclado. Proyecto web del portfolio."
+        url="https://albertozuiga.github.io/projects/clock"
+        keywords="reloj digital, proyecto JavaScript, reloj tiempo real, desarrollo web, programación"
+      />
       <div className="max-w-4xl mx-auto px-4">
         <div className="mb-6">
           <Link

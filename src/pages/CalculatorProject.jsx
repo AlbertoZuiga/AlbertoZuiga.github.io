@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import SEO from "../components/SEO";
 
 const Calculator = () => {
   const [display, setDisplay] = useState("0");
@@ -11,7 +12,6 @@ const Calculator = () => {
   const calculatorRef = useRef(null);
 
   useEffect(() => {
-    document.title = "Calculadora - Alberto Zúñiga";
     // Dar foco al contenedor para que capture eventos de teclado
     if (calculatorRef.current) {
       calculatorRef.current.focus();
@@ -150,6 +150,12 @@ const Calculator = () => {
       role="application"
       aria-label="Calculadora"
     >
+      <SEO 
+        title="Calculadora Interactiva - Alberto Zúñiga"
+        description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
+        url="https://albertozuiga.github.io/projects/calculator"
+        keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
+      />
       <div className="max-w-md mx-auto px-4">
         <div className="mb-6">
           <Link
