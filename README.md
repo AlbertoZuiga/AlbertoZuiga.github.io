@@ -16,7 +16,6 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 - [Proyectos Incluidos](#-proyectos-incluidos)
 - [Navegación](#-navegación)
 - [Deployment](#-deployment)
-- [Contribuir](#-contribuir)
 - [Contacto](#-contacto)
 
 ---
@@ -285,12 +284,7 @@ export default defineConfig({
 })
 ```
 
-**package.json**:
-```json
-{
-  "homepage": "https://albertozuiga.github.io"
-}
-```
+Nota: en Vite no es necesario definir `homepage` en `package.json` (era común en CRA). Con `base: '/'` es suficiente para `usuario.github.io`.
 
 ### SPA Routing en GitHub Pages
 
@@ -328,9 +322,16 @@ El archivo `public/404.html` y el script en `index.html` permiten que las rutas 
 ```javascript
 colors: {
   primary: {
-    50: '#eff6ff',
-    // ... hasta 900
-    500: '#3b82f6',
+    50: '#e6f3f9',
+    100: '#cce7f3',
+    200: '#99cfe7',
+    300: '#66b7db',
+    400: '#339fcf',
+    500: '#0073ba',
+    600: '#005c95',
+    700: '#004570',
+    800: '#002e4a',
+    900: '#001725',
   }
 }
 ```
