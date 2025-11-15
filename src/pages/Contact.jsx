@@ -1,7 +1,8 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
 import { emailConfig } from "../config/emailjs.config";
+import SEO from "../components/SEO";
 
 const Contact = () => {
   const formRef = useRef();
@@ -13,10 +14,6 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState({});
-
-  useEffect(() => {
-    document.title = "Contacto - Alberto Zúñiga";
-  }, []);
 
   // Validación del formulario
   const validateForm = () => {
@@ -117,6 +114,12 @@ const Contact = () => {
 
   return (
     <div className="min-h-screen py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
+      <SEO 
+        title="Contacto - Alberto Zúñiga | Hablemos de tu Proyecto"
+        description="Contacta a Alberto Zúñiga. Estudiante de Ingeniería en Ciencias de la Computación disponible para proyectos de desarrollo web. Email: alberto.zuniga@mi.unc.edu.ar"
+        url="https://albertozuiga.github.io/contact"
+        keywords="contacto Alberto Zúñiga, colaboración desarrollo web, freelance developer, contratar desarrollador"
+      />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Improved mobile spacing */}
         <div className="text-center mb-8 sm:mb-12">
