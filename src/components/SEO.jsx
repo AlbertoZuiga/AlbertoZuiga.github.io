@@ -13,7 +13,7 @@ const SEO = ({
   const fullImageUrl = image.startsWith('http') ? image : `${url}${image}`;
   
   return (
-    <Helmet>
+    <Helmet prioritizeSeoTags>
       {/* Meta Tags Básicos */}
       <title>{title}</title>
       <meta name="description" content={description} />
