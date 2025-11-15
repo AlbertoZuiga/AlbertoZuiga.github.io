@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import PageTransition from "../components/PageTransition";
+import { slideUp, fadeIn, scaleIn } from "../utils/animations";
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
@@ -143,15 +146,21 @@ const TicTacToe = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
-      <SEO 
+    <PageTransition>
+      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
+        <SEO 
         title="Tic-Tac-Toe - Alberto Zúñiga"
         description="Juego de Tres en Línea (Tic-Tac-Toe) con JavaScript. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo."
         url="https://albertozuiga.github.io/projects/tic-tac-toe"
         keywords="tic-tac-toe, tres en línea JavaScript, juego interactivo, desarrollo web, programación"
       />
       <div className="max-w-2xl mx-auto px-4">
-        <div className="mb-6">
+        <motion.div 
+          className="mb-6"
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
           <Link
             to="/projects"
             className="inline-flex items-center text-white hover:text-yellow-300 transition-colors"
@@ -171,9 +180,14 @@ const TicTacToe = () => {
             </svg>
             Volver a Proyectos
           </Link>
-        </div>
+        </motion.div>
 
-        <div className="text-center mb-8">
+        <motion.div 
+          className="text-center mb-8"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+        >
           <h1 className="text-5xl font-bold text-white mb-4">Tres en Línea</h1>
           <div className="text-2xl md:text-3xl font-bold">
             {getStatusMessage()}
@@ -282,6 +296,7 @@ const TicTacToe = () => {
         </div>
       </div>
     </div>
+    </PageTransition>
   );
 };
 
