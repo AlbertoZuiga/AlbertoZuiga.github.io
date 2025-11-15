@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import PageTransition from "../components/PageTransition";
+import { slideUp, fadeIn, scaleIn } from "../utils/animations";
 
 const Calculator = () => {
   const [display, setDisplay] = useState("0");
@@ -142,14 +145,15 @@ const Calculator = () => {
   };
 
   return (
-    <div
-      ref={calculatorRef}
-      className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-8"
-      onKeyDown={handleKeyPress}
-      tabIndex={0}
-      role="application"
-      aria-label="Calculadora"
-    >
+    <PageTransition>
+      <div
+        ref={calculatorRef}
+        className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-8"
+        onKeyDown={handleKeyPress}
+        tabIndex={0}
+        role="application"
+        aria-label="Calculadora"
+      >
       <SEO 
         title="Calculadora Interactiva - Alberto Zúñiga"
         description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
@@ -157,7 +161,12 @@ const Calculator = () => {
         keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
       />
       <div className="max-w-md mx-auto px-4">
-        <div className="mb-6">
+        <motion.div 
+          className="mb-6"
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
           <Link
             to="/projects"
             className="inline-flex items-center text-gray-700 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
@@ -177,9 +186,14 @@ const Calculator = () => {
             </svg>
             Volver a Proyectos
           </Link>
-        </div>
+        </motion.div>
 
-        <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-2xl p-6">
+        <motion.div 
+          className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-2xl p-6"
+          variants={scaleIn}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-6 mb-6 min-h-[100px] flex items-center justify-end">
             <div className="text-gray-900 dark:text-white text-5xl font-light tracking-wider">
               {display}
@@ -292,13 +306,20 @@ const Calculator = () => {
               =
             </button>
           </div>
-        </div>
+        </motion.div>
 
-        <div className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm">
+        <motion.div 
+          className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.3 }}
+        >
           Usa el teclado para una experiencia más rápida
-        </div>
+        </motion.div>
       </div>
     </div>
+    </PageTransition>
   );
 };
 
