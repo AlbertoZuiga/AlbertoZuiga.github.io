@@ -234,7 +234,7 @@ const CameraProject = () => {
         )}
 
         {/* Camera Container */}
-        <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
           <div className="flex flex-col items-center">
             {/* Video Element */}
             <div className="relative mb-6">
@@ -350,7 +350,7 @@ const CameraProject = () => {
 
         {/* Captures Gallery */}
         {captures.length > 0 && (
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+          <div className="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
               Capturas ({captures.length})
             </h2>

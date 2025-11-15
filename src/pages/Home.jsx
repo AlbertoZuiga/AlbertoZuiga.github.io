@@ -42,7 +42,7 @@ const Home = () => {
       </section>
 
       {/* About Preview */}
-      <section className="py-12 sm:py-16 bg-white dark:bg-gray-800 transition-colors duration-300">
+      <section className="py-12 sm:py-16 bg-gray-50 dark:bg-gray-800 transition-colors duration-300">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="section-title text-center mb-8 sm:mb-12 text-2xl sm:text-3xl md:text-4xl dark:text-white">Sobre Mí</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">

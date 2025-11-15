@@ -179,7 +179,7 @@ const Calculator = () => {
           </Link>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-2xl p-6">
+        <div className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-2xl p-6">
           <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-6 mb-6 min-h-[100px] flex items-center justify-end">
             <div className="text-gray-900 dark:text-white text-5xl font-light tracking-wider">
               {display}
