@@ -108,10 +108,6 @@ const Contact = () => {
     }
   };
 
-  useEffect(() => {
-    document.title = "Contacto - Alberto Zúñiga";
-  }, []);
-
   return (
     <div className="min-h-screen py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
       <SEO 
