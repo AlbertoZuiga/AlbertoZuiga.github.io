@@ -22,14 +22,24 @@ const Navbar = () => {
   return (
     <nav className="sticky top-0 z-50 bg-gray-800 dark:bg-gray-950 shadow-lg transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
+        <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0">
             <Link
               to="/"
               onClick={closeMenu}
-              className="text-white text-xl font-bold hover:text-primary-400 transition-colors"
+              aria-label="Ir al inicio"
+              title="Inicio"
+              className="inline-flex items-center justify-center rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-transform hover:scale-105 p-0.5"
             >
-              Alberto Zúñiga
+              <span className="sr-only">Inicio</span>
+              <img
+                src="/favicon.svg"
+                alt="Marca personal: ir a inicio"
+                className="h-12 w-12 sm:h-14 sm:w-14 md:h-16 md:w-16 rounded-2xl shadow-md ring-1 ring-white/10 dark:ring-white/10"
+                loading="eager"
+                decoding="async"
+                draggable={false}
+              />
             </Link>
           </div>
 
