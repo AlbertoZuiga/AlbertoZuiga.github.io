@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+# Do not index generator tools
+Disallow: /linkedin-banner-generator.html
+Disallow: /og-image-generator.html
