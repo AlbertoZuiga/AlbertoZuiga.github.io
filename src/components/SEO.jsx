@@ -47,6 +47,33 @@ const SEO = ({
       {/* Additional SEO */}
       <meta name="author" content="Alberto Zúñiga" />
       <meta name="robots" content="index, follow" />
+
+      {/* JSON-LD: Person */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'Person',
+          name: 'Alberto Zúñiga',
+          url,
+          image: fullImageUrl,
+          jobTitle: 'Desarrollador Full Stack',
+          sameAs: [
+            'https://github.com/AlbertoZuiga',
+            'https://www.linkedin.com/in/alberto-zuniga-marinovic/'
+          ]
+        })}
+      </script>
+
+      {/* JSON-LD: WebSite */}
+      <script type="application/ld+json">
+        {JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'WebSite',
+          name: 'Alberto Zúñiga Portfolio',
+          url,
+          inLanguage: 'es-CL'
+        })}
+      </script>
     </Helmet>
   );
 };
