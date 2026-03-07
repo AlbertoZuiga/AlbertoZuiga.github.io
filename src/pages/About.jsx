@@ -199,7 +199,17 @@ const About = () => {
                 </div>
                 <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
                   <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    Ago 2025 - Presente
+                    Mar 2026 - Presente
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
+                    <br />
+                    Ayudante de <em>Paradigmas de Programación</em>
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Ago 2025 - Nov 2025
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                     <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
@@ -369,6 +379,26 @@ const About = () => {
             <div className="px-4 sm:px-6 pb-4 sm:pb-6">
               <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
               <div className="space-y-4 sm:space-y-3">
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Mar 2026 - Presente
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Buk</strong>
+                    <br />
+                    Software Engineer Level 1
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Ene 2026 - Feb 2026
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Buk</strong>
+                    <br />
+                    Práctica profesional como Software Engineer
+                  </div>
+                </div>
                 <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
                   <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
                     2022 - 2024
