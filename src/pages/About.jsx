@@ -1,5 +1,8 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import PageTransition from "../components/PageTransition";
+import { slideUp, fadeIn, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 const About = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -26,23 +29,35 @@ const About = () => {
   };
 
   return (
-    <div className="py-8 sm:py-12 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-      <SEO 
+    <PageTransition>
+      <div className="py-8 sm:py-12 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
+        <SEO 
         title="Sobre Mí - Alberto Zúñiga | CV y Experiencia"
         description="Currículum vitae de Alberto Zúñiga. Experiencia en desarrollo web, formación académica en Ingeniería en Ciencias de la Computación, habilidades técnicas en React, Python, Java y más."
         url="https://albertozuiga.github.io/about"
         keywords="Alberto Zúñiga CV, experiencia laboral, ingeniería computación, desarrollador, Universidad de los Andes, habilidades técnicas"
       />
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12">
+        <motion.div 
+          className="text-center mb-8 sm:mb-12"
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4">
             Currículum Vitae
           </h1>
           <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300">Alberto Zúñiga</p>
-        </div>
+        </motion.div>
 
         {/* Antecedentes Personales */}
-        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
+        <motion.section 
+          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <div
             className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("personal")}
@@ -130,10 +145,16 @@ const About = () => {
               </div>
             </div>
           )}
-        </section>
+        </motion.section>
 
         {/* Antecedentes Académicos */}
-        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
+        <motion.section 
+          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <div
             className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("academic")}
@@ -253,10 +274,16 @@ const About = () => {
               </div>
             </div>
           )}
-        </section>
+        </motion.section>
 
         {/* Actividades Extracurriculares */}
-        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
+        <motion.section 
+          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <div
             className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("extracurricular")}
@@ -300,10 +327,16 @@ const About = () => {
               </div>
             </div>
           )}
-        </section>
+        </motion.section>
 
         {/* Antecedentes Laborales */}
-        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
+        <motion.section 
+          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <div
             className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("work")}
@@ -363,10 +396,16 @@ const About = () => {
               </div>
             </div>
           )}
-        </section>
+        </motion.section>
 
         {/* Formación Complementaria */}
-        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
+        <motion.section 
+          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <div
             className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("additional")}
@@ -415,10 +454,16 @@ const About = () => {
               </ul>
             </div>
           )}
-        </section>
+        </motion.section>
 
         {/* Competencias Profesionales */}
-        <section className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300">
+        <motion.section 
+          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <div
             className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
             onClick={() => toggleSection("skills")}
@@ -568,9 +613,10 @@ const About = () => {
               </div>
             </div>
           )}
-        </section>
+        </motion.section>
       </div>
     </div>
+    </PageTransition>
   );
 };
 

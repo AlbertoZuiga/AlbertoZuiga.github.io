@@ -1,5 +1,8 @@
 import { useState, useRef, useEffect } from "react";
+import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import PageTransition from "../components/PageTransition";
+import { slideUp, fadeIn } from "../utils/animations";
 
 const CameraProject = () => {
   const [stream, setStream] = useState(null);
@@ -202,8 +205,9 @@ const CameraProject = () => {
   };
 
   return (
-    <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
-      <SEO 
+    <PageTransition>
+      <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
+        <SEO 
         title="Cámara Web - Alberto Zúñiga"
         description="Aplicación de cámara web con JavaScript. Captura de fotos, grabación de video, acceso a MediaDevices API. Proyecto web del portfolio."
         url="https://albertozuiga.github.io/projects/camera"
@@ -211,7 +215,12 @@ const CameraProject = () => {
       />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8">
+        <motion.div 
+          className="text-center mb-8"
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
           <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
             📸 Cámara Web
           </h1>
@@ -224,7 +233,7 @@ const CameraProject = () => {
             Grabar | <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded ml-1">M</kbd>{" "}
             Reflejar
           </p>
-        </div>
+        </motion.div>
 
         {/* Error Message */}
         {error && (
@@ -428,6 +437,7 @@ const CameraProject = () => {
         )}
       </div>
     </div>
+    </PageTransition>
   );
 };
 

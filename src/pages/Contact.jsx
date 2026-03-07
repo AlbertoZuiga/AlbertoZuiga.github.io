@@ -1,8 +1,11 @@
 import { useState, useRef } from "react";
+import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import toast, { Toaster } from "react-hot-toast";
 import { emailConfig } from "../config/emailjs.config";
 import SEO from "../components/SEO";
+import PageTransition from "../components/PageTransition";
+import { slideUp, fadeIn, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
 
 const Contact = () => {
   const formRef = useRef();
@@ -109,8 +112,9 @@ const Contact = () => {
   };
 
   return (
-    <div className="min-h-screen py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
-      <SEO 
+    <PageTransition>
+      <div className="min-h-screen py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
+        <SEO 
         title="Contacto - Alberto Zúñiga | Hablemos de tu Proyecto"
         description="Contacta a Alberto Zúñiga. Estudiante de Ingeniería en Ciencias de la Computación disponible para proyectos de desarrollo web. Email: alberto.zuniga@mi.unc.edu.ar"
         url="https://albertozuiga.github.io/contact"
@@ -118,17 +122,28 @@ const Contact = () => {
       />
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header Section - Improved mobile spacing */}
-        <div className="text-center mb-8 sm:mb-12">
+        <motion.div 
+          className="text-center mb-8 sm:mb-12"
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
           <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 px-2">
             Contacto
           </h1>
           <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 px-4">
             ¿Tienes alguna pregunta o propuesta? Me encantaría escucharte
           </p>
-        </div>
+        </motion.div>
 
         {/* Call to Action - Improved mobile spacing */}
-        <div className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 dark:bg-gray-800">
+        <motion.div 
+          className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 dark:bg-gray-800"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <div className="text-center mb-6">
             <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 px-2">
               Envíame un mensaje
@@ -313,13 +328,20 @@ const Contact = () => {
               autoComplete="off"
             />
           </form>
-        </div>
+        </motion.div>
 
         {/* Contact Methods Grid - Improved mobile layout */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 mb-8 sm:mb-12">
-          <a
+        <motion.div 
+          className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8 mt-8 sm:mt-12 mb-8 sm:mb-12"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
+          <motion.a
             href="mailto:a.zuniga.marinovic@gmail.com"
             className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
+            variants={staggerItem}
           >
             <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-primary-100 dark:bg-primary-900 rounded-full mb-3 sm:mb-4">
               <svg
@@ -335,14 +357,15 @@ const Contact = () => {
             <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 break-all px-2">
               a.zuniga.marinovic@gmail.com
             </p>
-          </a>
+          </motion.a>
 
-          <a
+          <motion.a
             href="https://wa.me/56964962736?text=Hola%20Alberto%2C%20te%20contacto%20desde%20tu%20sitio%20web."
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Contactar por WhatsApp"
             className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
+            variants={staggerItem}
           >
             <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-green-50 dark:bg-green-900 rounded-full mb-3 sm:mb-4">
               <svg
@@ -356,11 +379,17 @@ const Contact = () => {
             </div>
             <h3 className="text-lg sm:text-xl font-bold text-gray-800 dark:text-white mb-1 sm:mb-2">WhatsApp</h3>
             <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">+56 9 6496 2736</p>
-          </a>
-        </div>
+          </motion.a>
+        </motion.div>
 
         {/* Social Networks - Improved mobile layout */}
-        <div className="card p-6 sm:p-8 mb-6 sm:mb-8 dark:bg-gray-800">
+        <motion.div 
+          className="card p-6 sm:p-8 mb-6 sm:mb-8 dark:bg-gray-800"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
           <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4 sm:mb-6 text-center">
             Redes Sociales
           </h2>
@@ -413,7 +442,7 @@ const Contact = () => {
               </div>
             </a>
           </div>
-        </div>
+        </motion.div>
 
         {/* Toast Container */}
         <Toaster
@@ -442,6 +471,7 @@ const Contact = () => {
         />
       </div>
     </div>
+    </PageTransition>
   );
 };
 

@@ -1,6 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
+import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import PageTransition from "../components/PageTransition";
+import { slideUp, fadeIn, scaleIn } from "../utils/animations";
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -67,14 +70,15 @@ const Clock = () => {
   };
 
   return (
-    <div
-      ref={containerRef}
-      className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 py-8"
-      onKeyDown={handleKeyPress}
-      tabIndex={0}
-      role="application"
-      aria-label="Reloj"
-    >
+    <PageTransition>
+      <div
+        ref={containerRef}
+        className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 py-8"
+        onKeyDown={handleKeyPress}
+        tabIndex={0}
+        role="application"
+        aria-label="Reloj"
+      >
       <SEO 
         title="Reloj Digital - Alberto Zúñiga"
         description="Reloj digital interactivo con JavaScript. Formato 12/24 horas, precisión ajustable, navegación por teclado. Proyecto web del portfolio."
@@ -82,7 +86,12 @@ const Clock = () => {
         keywords="reloj digital, proyecto JavaScript, reloj tiempo real, desarrollo web, programación"
       />
       <div className="max-w-4xl mx-auto px-4">
-        <div className="mb-6">
+        <motion.div 
+          className="mb-6"
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
           <Link
             to="/projects"
             className="inline-flex items-center text-white hover:text-yellow-300 transition-colors"
@@ -102,19 +111,29 @@ const Clock = () => {
             </svg>
             Volver a Proyectos
           </Link>
-        </div>
+        </motion.div>
 
-        <div className="text-center mb-8">
+        <motion.div 
+          className="text-center mb-8"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+        >
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-4 font-mono">
             {formatTime()}
           </h1>
           <p className="text-2xl md:text-3xl text-purple-200 font-semibold">
             {formatDate()}
           </p>
-        </div>
+        </motion.div>
 
         {/* Reloj Analógico */}
-        <div className="flex justify-center mb-8">
+        <motion.div 
+          className="flex justify-center mb-8"
+          variants={scaleIn}
+          initial="hidden"
+          animate="visible"
+        >
           <div className="relative w-80 h-80 bg-gray-50 dark:bg-gray-800 rounded-full shadow-2xl">
             {/* Marcas de horas */}
             {new Array(12).fill(null).map((_, i) => (
@@ -185,10 +204,16 @@ const Clock = () => {
               }}
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Controles */}
-        <div className="flex flex-wrap justify-center gap-4">
+        <motion.div 
+          className="flex flex-wrap justify-center gap-4"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.3 }}
+        >
           <button
             onClick={toggleFormat}
             className="bg-white hover:bg-gray-100 text-purple-900 font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
@@ -204,18 +229,25 @@ const Clock = () => {
               ? "Segundos"
               : `${precision} decimal${precision > 1 ? "es" : ""}`}
           </button>
-        </div>
+        </motion.div>
 
-        <div className="mt-8 text-center">
+        <motion.div 
+          className="mt-8 text-center"
+          variants={fadeIn}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.4 }}
+        >
           <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
             <p className="text-sm mb-2">⌨️ Atajos de teclado:</p>
             <p className="text-xs opacity-80">
               F - Cambiar formato | P - Cambiar precisión
             </p>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
+    </PageTransition>
   );
 };
 
