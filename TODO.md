@@ -171,15 +171,19 @@ Problema (26 Sep 2026): las cards de Arbocensus, Scheduler App y Healthy enlazan
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2 días  
 **Impacto**: ⭐⭐⭐⭐  
-**Depende de**: C14/C15 (datos en `cv.js`, `AccordionSection`)
+**Depende de**: C14/C15 (datos en `cv.js`, `AccordionSection`)  
+**Rama**: `feat/about-improvements` (26 Sep 2026)
+
+Previo: `cv.js` / `skills.js` sincronizados con `cv/main.tex` (Buk con equipo y logros; Fundación Nueva Mente y Consejero político pasan a "Liderazgo y Voluntariado" junto a Pastoral 2025-2026; sin Cornershop; +PostgreSQL/PostGIS, OR-Tools, Celery; Inglés Intermedio). Niveles de las 3 herramientas nuevas son estimados: ajustar en `skills.js` si no calzan.
 
 **Tareas**:
 
-- [ ] Timeline visual de experiencia (línea vertical con puntos, fechas destacadas)
-- [ ] Sección de certificaciones (badges, links a credenciales)
-- [ ] Gráficos de habilidades (barras de progreso)
-- [ ] Botón de descarga de CV en PDF
-- [ ] Mejorar diseño de acordeones
+- [x] Timeline visual de experiencia (`Timeline.jsx`: línea vertical, puntos, período en badge; usado en Experiencia Laboral y Liderazgo y Voluntariado)
+- [x] Sección de certificaciones: no hay credenciales externas; Formación Complementaria (concentración, minor, seminario) se muestra como badges sin links
+- [x] Gráficos de habilidades (`levelToPercent()` en `utils/skillLevel.js` + barra animada en `SkillRow`, con tests)
+- [x] Botón de descarga de CV en PDF (`public/cv-alberto-zuniga.pdf` copiado de `cv/main.pdf`; `site.cvUrl`; README documenta cómo regenerarlo)
+- [x] Mejorar diseño de acordeones (`AnimatePresence` con altura animada, `aria-controls`/`role="region"`, icono por sección)
+- [ ] Verificación manual: timeline y barras en light/dark, acordeones con `prefers-reduced-motion`, descarga del PDF en producción
 
 ---
 
@@ -300,7 +304,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 | Prioridad | Cantidad | Tiempo Total Estimado   |
 | --------- | -------- | ----------------------- |
 | 🔴 ALTA   | 3 tareas | 4 días                  |
-| 🟡 MEDIA  | 3 tareas | 3-4 días + migración TS |
+| 🟡 MEDIA  | 2 tareas | 1-2 días + migración TS |
 | 🟢 BAJA   | 4 tareas | 13-17 días              |
 | 🔵 FUTURO | 5 ideas  | -                       |
 
@@ -326,7 +330,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 
 ### Sprint 3 (3-4 semanas) - Contenido
 
-- Mejoras en About
+- ✅ Mejoras en About (falta verificación manual)
 - Filtros en Proyectos
 - Scroll to Top / Breadcrumbs
 - ✅ Tests unitarios (lógica pura)
@@ -357,6 +361,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - [x] **Animaciones con framer-motion**: variantes reutilizables (`utils/animations.js`), `PageTransition`, animaciones de entrada y scroll en todas las páginas, `prefers-reduced-motion`
 - [x] **Análisis de limpieza de código** y plan de commits atómicos (26 Sep 2026)
 - [x] **Deuda técnica #3**: Vitest, code-splitting por ruta, Tailwind 4, decisión TypeScript (26 Sep 2026)
+- [x] **Mejoras en About #5**: timeline, barras de nivel, badges, descarga de CV, acordeones animados; datos sincronizados con `cv/main.tex` (26 Sep 2026)
 
 ## ❌ Descartadas
 
