@@ -69,8 +69,7 @@ const Projects = () => {
                         </span>
                       )}
                       <span className="inline-flex items-center gap-1 text-sm opacity-80">
-                        {project.external ? "↗" : "→"}{" "}
-                        {project.external ? "Web App" : "SPA"}
+                        → {project.isReact ? "SPA" : "Web App"}
                       </span>
                     </div>
                   </div>
@@ -78,24 +77,14 @@ const Projects = () => {
                 </motion.div>
               );
 
-              return project.isReact ? (
+              return (
                 <Link
                   key={project.title}
-                  to={project.link}
+                  to={project.link ?? `/projects/${project.slug}`}
                   className="h-full block"
                 >
                   {ProjectCard}
                 </Link>
-              ) : (
-                <a
-                  key={project.title}
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="h-full block"
-                >
-                  {ProjectCard}
-                </a>
               );
             })}
           </motion.div>
