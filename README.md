@@ -42,8 +42,11 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 - ✅ **Accesibilidad (a11y)**: ARIA labels, keyboard navigation, screen reader support
 - ✅ **SEO Optimizado**: Meta tags, Open Graph, Twitter Cards
 - ✅ **SPA Routing**: Navegación con React Router DOM v7
+- ✅ **Dark Mode**: `ThemeContext` + `useTheme`, persistencia en localStorage y detección del sistema
+- ✅ **Animaciones**: framer-motion con variantes reutilizables, `PageTransition` y `AnimatePresence`, respeta `prefers-reduced-motion`
+- ✅ **Formulario de contacto**: EmailJS con validación, honeypot y toasts (`react-hot-toast`)
 - ✅ **GitHub Pages Compatible**: Script de routing para SPA en GitHub Pages
-- ✅ **Performance**: Optimizado con Vite y code splitting
+- ✅ **CI**: lint + format check + build en GitHub Actions antes de desplegar
 
 ---
 
@@ -51,16 +54,20 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 
 ### Frontend
 
-- **React** 19.2.0 - Biblioteca UI
-- **React Router DOM** 7.9.5 - Enrutamiento SPA
-- **Tailwind CSS** 3.4.1 - Framework CSS utility-first
-- **Vite** 7.2.2 - Build tool y dev server
+- **React** 19 - Biblioteca UI (metas de `<head>` nativas, sin react-helmet)
+- **React Router DOM** 7 - Enrutamiento SPA
+- **Tailwind CSS** 3.4 - Framework CSS utility-first
+- **framer-motion** 12 - Animaciones
+- **react-hot-toast** 2 - Notificaciones
+- **@emailjs/browser** 4 - Envío del formulario de contacto
+- **prop-types** - Validación de props en componentes
+- **Vite** 7 - Build tool y dev server
 
 ### Desarrollo
 
-- **ESLint** 9.39.1 - Linting y calidad de código
-- **PostCSS** 8.4.35 - Procesamiento CSS
-- **Autoprefixer** 10.4.18 - Prefijos CSS automáticos
+- **ESLint** 9 - Linting (react, react-hooks, react-refresh)
+- **Prettier** 3 - Formateo
+- **PostCSS** + **Autoprefixer** - Procesamiento CSS
 
 ### Deployment
 
@@ -71,34 +78,62 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 ## 📁 Estructura del Proyecto
 
 ```
-mi_pagina/
+.
+├── .github/workflows/
+│   └── static.yml            # CI: lint + format:check + build + deploy a Pages
 ├── public/
-│   ├── 404.html              # Página de error para GitHub Pages
-│   └── favicon.svg           # Ícono del sitio
+│   ├── 404.html              # Redirección SPA para GitHub Pages
+│   ├── favicon.*, android-chrome-*.png, apple-touch-icon.png
+│   ├── og-image.png          # Imagen Open Graph principal
+│   ├── robots.txt
+│   └── sitemap.xml
+├── scripts/
+│   └── generate-favicons.mjs # Genera PNG/ICO desde favicon.svg
 ├── src/
 │   ├── components/
-│   │   ├── Footer.jsx        # Componente de pie de página
-│   │   └── Navbar.jsx        # Barra de navegación
+│   │   ├── AccordionSection.jsx  # Acordeón accesible (About)
+│   │   ├── BackToProjects.jsx    # Link "Volver a proyectos" (variant)
+│   │   ├── BrandMark.jsx         # Logo/isotipo con tamaños responsive
+│   │   ├── Footer.jsx
+│   │   ├── Navbar.jsx            # NavLink desde data/navLinks.js
+│   │   ├── PageTransition.jsx    # Wrapper framer-motion por ruta
+│   │   ├── SEO.jsx               # <title>/<meta> nativos de React 19
+│   │   ├── SkillCard.jsx         # Tarjeta de competencias (Home)
+│   │   ├── SkillRow.jsx          # Fila de tabla de habilidades (About)
+│   │   └── ThemeToggle.jsx       # Botón dark/light
+│   ├── config/
+│   │   └── emailjs.config.js     # Credenciales EmailJS desde import.meta.env
+│   ├── context/
+│   │   └── ThemeContext.jsx      # Provider del tema
+│   ├── data/
+│   │   ├── cv.js                 # Experiencia, educación, etc. (About)
+│   │   ├── navLinks.js           # Rutas del Navbar
+│   │   ├── projects.js           # Galería de proyectos
+│   │   ├── site.js               # Nombre, email, URLs, redes
+│   │   └── skills.js             # Competencias técnicas (Home)
+│   ├── hooks/
+│   │   └── useTheme.js           # Acceso al ThemeContext
 │   ├── pages/
-│   │   ├── Home.jsx          # Página de inicio
-│   │   ├── About.jsx         # CV interactivo
-│   │   ├── Projects.jsx      # Galería de proyectos
-│   │   ├── Contact.jsx       # Página de contacto
+│   │   ├── Home.jsx
+│   │   ├── About.jsx
+│   │   ├── Projects.jsx
+│   │   ├── Contact.jsx
 │   │   ├── CalculatorProject.jsx
 │   │   ├── ClockProject.jsx
 │   │   ├── CameraProject.jsx
 │   │   └── TicTacToeProject.jsx
-│   ├── App.jsx               # Componente raíz con rutas
-│   ├── main.jsx              # Punto de entrada
-│   └── index.css             # Estilos globales + Tailwind
-├── index.html                # HTML principal
-├── package.json              # Dependencias y scripts
-├── vite.config.js            # Configuración de Vite
-├── tailwind.config.js        # Configuración de Tailwind
-├── postcss.config.js         # Configuración de PostCSS
-├── eslint.config.js          # Configuración de ESLint
-├── README.md                 # Este archivo
-└── TODO.md                   # Lista de tareas pendientes
+│   ├── utils/
+│   │   └── animations.js         # Variantes de framer-motion
+│   ├── App.jsx                   # Rutas + AnimatePresence + Toaster
+│   ├── main.jsx
+│   └── index.css                 # Tailwind + clases utilitarias
+├── .env.example                  # Variables de entorno de ejemplo
+├── .prettierrc / .editorconfig
+├── eslint.config.js
+├── index.html                    # HTML base + JSON-LD
+├── tailwind.config.js
+├── vite.config.js
+└── TODO.md
 ```
 
 ---
@@ -154,8 +189,10 @@ npm run build           # Construye para producción en /dist
 # Deployment
 npm run deploy          # Construye y despliega a GitHub Pages
 
-# Linting
-npm run lint            # Ejecuta ESLint
+# Calidad
+npm run lint            # ESLint
+npm run format          # Prettier --write
+npm run format:check    # Prettier --check (CI)
 
 # Preview
 npm run preview         # Previsualiza build de producción
@@ -163,7 +200,29 @@ npm run preview         # Previsualiza build de producción
 
 ### Variables de Entorno
 
-No se requieren variables de entorno. Todo está configurado para funcionar out-of-the-box.
+Solo el formulario de contacto las necesita (EmailJS). Sin ellas la app funciona; el envío falla.
+
+```bash
+cp .env.example .env
+```
+
+| Variable                   | Descripción                      |
+| -------------------------- | -------------------------------- |
+| `VITE_EMAILJS_SERVICE_ID`  | Service ID del dashboard EmailJS |
+| `VITE_EMAILJS_TEMPLATE_ID` | Template ID                      |
+| `VITE_EMAILJS_PUBLIC_KEY`  | Public Key                       |
+
+La plantilla de EmailJS debe usar las variables `{{name}}`, `{{email}}`, `{{subject}}` y `{{message}}` (coinciden con los `name` de los inputs del formulario, ver `src/config/emailjs.config.js`).
+
+En producción se inyectan como **secrets** del repositorio con los mismos nombres (ver `.github/workflows/static.yml`).
+
+### Favicons
+
+`public/favicon.svg` es la fuente. Para regenerar PNG/ICO:
+
+```bash
+npx -p sharp -p to-ico node scripts/generate-favicons.mjs
+```
 
 ---
 
@@ -217,7 +276,7 @@ No se requieren variables de entorno. Todo está configurado para funcionar out-
 **Características**:
 
 - Captura de fotos (JPEG)
-- Grabación de videos (WebM)
+- Grabación de videos (extensión derivada del `mimeType` real del MediaRecorder: WebM o MP4)
 - Modo espejo (mirror) activado por defecto
 - Múltiples resoluciones con fallback automático
 - Galería de capturas con descarga
@@ -288,17 +347,13 @@ No se requieren variables de entorno. Todo está configurado para funcionar out-
 
 ### GitHub Pages
 
-El sitio se despliega automáticamente en GitHub Pages:
+Cada push a `main` dispara `.github/workflows/static.yml`: `npm ci` → `npm run lint` → `npm run format:check` → `npm run build` (con los secrets de EmailJS) → deploy a GitHub Pages.
+
+Deploy manual alternativo (rama `gh-pages`):
 
 ```bash
 npm run deploy
 ```
-
-Este comando:
-
-1. Ejecuta `npm run build` (genera `/dist`)
-2. Despliega `/dist` a la rama `gh-pages`
-3. GitHub Pages sirve desde `gh-pages`
 
 ### Configuración Necesaria
 
@@ -370,10 +425,9 @@ colors: {
 **Clases utilitarias** (`index.css`):
 
 - `.btn-primary` - Botón principal
-- `.btn-secondary` - Botón secundario
 - `.card` - Tarjeta con sombra
 - `.section-title` - Título de sección
-- `.sr-only` - Solo para lectores de pantalla
+- `.section-subtitle` - Subtítulo de sección
 
 ### ESLint
 
@@ -415,15 +469,9 @@ Todos los proyectos interactivos soportan navegación completa por teclado sin n
 - ✅ Twitter Cards
 - ✅ Viewport (responsive)
 
-### Títulos Dinámicos
+### Meta tags por página
 
-Cada página actualiza `document.title` con `useEffect`:
-
-```javascript
-useEffect(() => {
-  document.title = "Página - Alberto Zúñiga";
-}, []);
-```
+Cada página renderiza `<SEO title=... description=... url=... />`. React 19 eleva `<title>`, `<meta>` y `<link>` al `<head>` sin librerías. JSON-LD (Person, WebSite) estático en `index.html`.
 
 ---
 
