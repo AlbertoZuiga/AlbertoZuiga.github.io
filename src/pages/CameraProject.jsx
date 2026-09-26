@@ -1,8 +1,8 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
-import { slideUp, fadeIn } from "../utils/animations";
+import { slideUp } from "../utils/animations";
 
 const CameraProject = () => {
   const [stream, setStream] = useState(null);
@@ -13,93 +13,30 @@ const CameraProject = () => {
   const [isMirrored, setIsMirrored] = useState(true);
 
   const videoRef = useRef(null);
+  const streamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
 
-  useEffect(() => {
-    startCamera();
+  const saveRecordedVideo = () => {
+    const mimeType = mediaRecorderRef.current?.mimeType || "video/webm";
+    const blob = new Blob(chunksRef.current, { type: mimeType });
+    const videoURL = URL.createObjectURL(blob);
 
-    return () => {
-      // Cleanup: stop camera when component unmounts
-      if (stream) {
-        for (const track of stream.getTracks()) {
-          track.stop();
-        }
-      }
-    };
-  }, []); // Empty dependency array - only run once on mount
+    setCaptures((prev) => [
+      ...prev,
+      {
+        type: "video",
+        url: videoURL,
+        mimeType,
+        id: Date.now(),
+      },
+    ]);
 
-  // Keyboard shortcut handler
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (!buttonsEnabled) return;
-
-      if (event.code === "Space") {
-        event.preventDefault();
-        takePicture();
-      } else if (event.code === "KeyR") {
-        event.preventDefault();
-        toggleRecording();
-      } else if (event.code === "KeyM") {
-        event.preventDefault();
-        setIsMirrored((prev) => !prev);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [buttonsEnabled, isRecording]); // Update when buttonsEnabled or isRecording changes
-
-  // Separate effect to update video element when stream changes
-  useEffect(() => {
-    if (stream && videoRef.current) {
-      videoRef.current.srcObject = stream;
-    }
-  }, [stream]);
-
-  const startCamera = async () => {
-    try {
-      // Try to get highest quality video and audio
-      const mediaStream = await navigator.mediaDevices.getUserMedia({
-        video: {
-          width: { ideal: 4096 },
-          height: { ideal: 2160 },
-          facingMode: "user",
-          frameRate: { ideal: 60 },
-        },
-        audio: true,
-      });
-      setupVideoStream(mediaStream);
-    } catch (initialError) {
-      try {
-        // Fallback: try Full HD video only
-        const mediaStream = await navigator.mediaDevices.getUserMedia({
-          video: {
-            width: { ideal: 1920 },
-            height: { ideal: 1080 },
-            facingMode: "user",
-            frameRate: { ideal: 60 },
-          },
-        });
-        setupVideoStream(mediaStream);
-      } catch (secondError) {
-        try {
-          // Final fallback: try basic video only
-          const mediaStream = await navigator.mediaDevices.getUserMedia({
-            video: true,
-          });
-          setupVideoStream(mediaStream);
-        } catch (finalError) {
-          handleCameraError(finalError);
-        }
-      }
-    }
+    chunksRef.current = [];
   };
 
   const setupVideoStream = (mediaStream) => {
+    streamRef.current = mediaStream;
     setStream(mediaStream);
 
     // Setup MediaRecorder
@@ -122,7 +59,68 @@ const CameraProject = () => {
     setButtonsEnabled(false);
   };
 
-  const takePicture = () => {
+  const startCamera = async () => {
+    try {
+      // Try to get highest quality video and audio
+      const mediaStream = await navigator.mediaDevices.getUserMedia({
+        video: {
+          width: { ideal: 4096 },
+          height: { ideal: 2160 },
+          facingMode: "user",
+          frameRate: { ideal: 60 },
+        },
+        audio: true,
+      });
+      setupVideoStream(mediaStream);
+    } catch {
+      try {
+        // Fallback: try Full HD video only
+        const mediaStream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            width: { ideal: 1920 },
+            height: { ideal: 1080 },
+            facingMode: "user",
+            frameRate: { ideal: 60 },
+          },
+        });
+        setupVideoStream(mediaStream);
+      } catch {
+        try {
+          // Final fallback: try basic video only
+          const mediaStream = await navigator.mediaDevices.getUserMedia({
+            video: true,
+          });
+          setupVideoStream(mediaStream);
+        } catch (finalError) {
+          handleCameraError(finalError);
+        }
+      }
+    }
+  };
+
+  useEffect(() => {
+    startCamera();
+
+    return () => {
+      // Cleanup: stop camera when component unmounts
+      if (streamRef.current) {
+        for (const track of streamRef.current.getTracks()) {
+          track.stop();
+        }
+        streamRef.current = null;
+      }
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array - only run once on mount
+
+  // Separate effect to update video element when stream changes
+  useEffect(() => {
+    if (stream && videoRef.current) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+
+  const takePicture = useCallback(() => {
     if (!videoRef.current) return;
 
     const canvas = document.createElement("canvas");
@@ -153,38 +151,44 @@ const CameraProject = () => {
         id: Date.now(),
       },
     ]);
-  };
+  }, []);
 
-  const toggleRecording = () => {
+  const toggleRecording = useCallback(() => {
     if (!mediaRecorderRef.current) return;
 
     if (isRecording) {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
-      console.log("Recording stopped");
     } else {
       chunksRef.current = [];
       mediaRecorderRef.current.start();
       setIsRecording(true);
-      console.log("Recording started");
     }
-  };
+  }, [isRecording]);
 
-  const saveRecordedVideo = () => {
-    const blob = new Blob(chunksRef.current, { type: "video/mp4" });
-    const videoURL = URL.createObjectURL(blob);
+  // Keyboard shortcut handler
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (!buttonsEnabled) return;
 
-    setCaptures((prev) => [
-      ...prev,
-      {
-        type: "video",
-        url: videoURL,
-        id: Date.now(),
-      },
-    ]);
+      if (event.code === "Space") {
+        event.preventDefault();
+        takePicture();
+      } else if (event.code === "KeyR") {
+        event.preventDefault();
+        toggleRecording();
+      } else if (event.code === "KeyM") {
+        event.preventDefault();
+        setIsMirrored((prev) => !prev);
+      }
+    };
 
-    chunksRef.current = [];
-  };
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [buttonsEnabled, takePicture, toggleRecording]);
 
   const downloadImage = (url, index) => {
     const link = document.createElement("a");
@@ -193,10 +197,11 @@ const CameraProject = () => {
     link.click();
   };
 
-  const downloadVideo = (url, index) => {
+  const downloadVideo = (url, index, mimeType) => {
+    const extension = mimeType.includes("mp4") ? "mp4" : "webm";
     const link = document.createElement("a");
     link.href = url;
-    link.download = `video-${index + 1}-${Date.now()}.webm`;
+    link.download = `video-${index + 1}-${Date.now()}.${extension}`;
     link.click();
   };
 
@@ -405,7 +410,11 @@ const CameraProject = () => {
                         onClick={() =>
                           capture.type === "image"
                             ? downloadImage(capture.url, index)
-                            : downloadVideo(capture.url, index)
+                            : downloadVideo(
+                                capture.url,
+                                index,
+                                capture.mimeType
+                              )
                         }
                         className="px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg text-sm font-semibold"
                         title={

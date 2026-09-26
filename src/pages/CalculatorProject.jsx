@@ -68,8 +68,7 @@ const Calculator = () => {
     if (currentValue === null) {
       setCurrentValue(inputValue);
     } else if (pendingOperation) {
-      const currentVal = currentValue || 0;
-      const newValue = calculate(currentVal, inputValue, pendingOperation);
+      const newValue = calculate(currentValue, inputValue, pendingOperation);
 
       updateDisplay(newValue);
       setCurrentValue(newValue);
@@ -88,7 +87,7 @@ const Calculator = () => {
       case "mul":
         return firstValue * secondValue;
       case "div":
-        return firstValue / secondValue;
+        return secondValue === 0 ? "Error" : firstValue / secondValue;
       default:
         return secondValue;
     }

@@ -21,7 +21,7 @@
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐⭐  
-**Rama**: `chore/cleanup` desde `development`
+**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs`)
 
 Estado actual (26 Sep 2026): `npm run lint` = 16 errores + 3 warnings; sin Prettier; CI no corre lint; `react-helmet-async` requiere `--legacy-peer-deps` (peer dep React ≤18).
 
@@ -51,15 +51,15 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 #### Fase 1 — Lint a cero y bugs
 
-- [ ] C5 `fix`: eliminar imports sin usar (`staggerContainer`/`staggerItem` en About, `fadeIn` en Camera, `scaleIn` en TicTacToe, catch vars en Camera)
-- [ ] C6 `refactor`: mover `useTheme` a `src/hooks/useTheme.js` (react-refresh); try/catch en localStorage (B10); unificar `window` vs `globalThis`
-- [ ] C7 `fix(camera)`: `streamRef` + cleanup correcto (B1); `useCallback` en handlers de teclado (B3); quitar `console.log`
-- [ ] C8 `fix(camera)`: usar `mimeType` real del MediaRecorder y extensión derivada (B2)
-- [ ] C9 `fix(tictactoe)`: `WINNING_COMBINATIONS` fuera del componente; `useCallback` en `restartGame`/`resetAll`; scores síncronos; renombrar `isDraw_` (B4)
-- [ ] C10 `fix(clock)`: locale `es-CL` (B5)
-- [ ] C11 `fix`: quitar `xs:inline` en Footer → `hidden sm:inline` (B8)
-- [ ] C12 `fix(calculator)`: quitar `|| 0`; división por cero → `"Error"` (B7)
-- [ ] ✔ Checkpoint: `npm run lint` = 0 errores, 0 warnings
+- [x] C5 `fix`: eliminar imports sin usar (`staggerContainer`/`staggerItem` en About, `fadeIn` en Camera, `scaleIn` en TicTacToe, catch vars en Camera)
+- [x] C6 `refactor`: mover `useTheme` a `src/hooks/useTheme.js` (react-refresh); try/catch en localStorage (B10); unificar `window` vs `globalThis`
+- [x] C7 `fix(camera)`: `streamRef` + cleanup correcto (B1); `useCallback` en handlers de teclado (B3); quitar `console.log`
+- [x] C8 `fix(camera)`: usar `mimeType` real del MediaRecorder y extensión derivada (B2)
+- [x] C9 `fix(tictactoe)`: `WINNING_COMBINATIONS` fuera del componente; `useCallback` en `restartGame`/`resetAll`; scores síncronos; renombrar `isDraw_` (B4)
+- [x] C10 `fix(clock)`: locale `es-CL` (B5)
+- [x] C11 `fix`: quitar `xs:inline` en Footer → `hidden sm:inline` (B8)
+- [x] C12 `fix(calculator)`: quitar `|| 0`; división por cero → `"Error"` (B7)
+- [x] ✔ Checkpoint: `npm run lint` = 0 errores, 0 warnings
 
 #### Fase 2 — Código muerto
 
@@ -368,7 +368,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - **Crear branches** para cada feature nueva
 - **Commits descriptivos** siguiendo conventional commits
 - **Lint + format + build** deben pasar antes de cada commit (desde C4, CI lo exige)
-- **Testing** antes de merge a development
+- **Testing** antes de merge a `main`
 - **Deploy** solo cuando desarrollo esté estable
 
 ---
