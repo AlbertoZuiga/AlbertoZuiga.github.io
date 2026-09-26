@@ -87,6 +87,7 @@ const Clock = () => {
           title="Reloj Digital - Alberto Zúñiga"
           description="Reloj digital interactivo con JavaScript. Formato 12/24 horas, precisión ajustable, navegación por teclado. Proyecto web del portfolio."
           url={`${site.baseUrl}/projects/clock`}
+          image="/og/clock.png"
           keywords="reloj digital, proyecto JavaScript, reloj tiempo real, desarrollo web, programación"
         />
         <div className="max-w-4xl mx-auto px-4">

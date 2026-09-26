@@ -39,6 +39,7 @@ const About = () => {
           title="Sobre Mí - Alberto Zúñiga | CV y Experiencia"
           description="Currículum vitae de Alberto Zúñiga. Experiencia en desarrollo web, formación académica en Ingeniería en Ciencias de la Computación, habilidades técnicas en React, Python, Java y más."
           url={`${site.baseUrl}/about`}
+          image="/og/about.png"
           keywords="Alberto Zúñiga CV, experiencia laboral, ingeniería computación, desarrollador, Universidad de los Andes, habilidades técnicas"
         />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">

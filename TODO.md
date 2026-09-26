@@ -106,11 +106,11 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 **Tareas**:
 
-- [ ] Crear imágenes OG por página (1200×630px) en `/public/og/`:
-  - [ ] About
-  - [ ] Projects
-  - [ ] Cada proyecto individual
-- [ ] Testing con herramientas SEO:
+- [x] Crear imágenes OG por página (1200×630px) en `/public/og/` (`scripts/generate-og.mjs`):
+  - [x] About
+  - [x] Projects
+  - [x] Cada proyecto individual
+- [ ] Testing con herramientas SEO (requiere deploy a `main`; las 3 leen la URL pública):
   - [ ] Facebook Sharing Debugger
   - [ ] Twitter Card Validator
   - [ ] LinkedIn Post Inspector

@@ -218,6 +218,7 @@ const CameraProject = () => {
           title="Cámara Web - Alberto Zúñiga"
           description="Aplicación de cámara web con JavaScript. Captura de fotos, grabación de video, acceso a MediaDevices API. Proyecto web del portfolio."
           url={`${site.baseUrl}/projects/camera`}
+          image="/og/camera.png"
           keywords="cámara web, MediaDevices API, captura video JavaScript, getUserMedia, desarrollo web"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
