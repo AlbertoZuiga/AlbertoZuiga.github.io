@@ -127,14 +127,21 @@ Hallazgo (26 Sep 2026): los scrapers no ejecutan JS, así que las metas de `SEO.
 ### 3. Deuda técnica (detectada en análisis del 26 Sep 2026)
 
 **Prioridad**: 🟡 MEDIA  
-**Estimación**: variable
+**Estimación**: variable  
+**Rama**: `chore/tech-debt` (26 Sep 2026)
 
-- [ ] Tests unitarios con Vitest: extraer `calculate()` (Calculator) y `checkWin()` (TicTacToe) a `src/utils/` como funciones puras y testearlas (ver #10)
-- [ ] Code-splitting de rutas con `React.lazy` + `Suspense` (bundle 466 kB / 140 kB gzip; framer-motion es el mayor peso)
-- [ ] Migrar Tailwind 3.4 → 4
-- [ ] Decidir: quitar `prop-types` y pasar a TypeScript (o JSDoc con `checkJs`)
-- [ ] Documentar `scripts/generate-favicons.mjs` en README
+- [x] Tests unitarios con Vitest: `calculate()` → `src/utils/calculator.js`, `checkWin()`/`isDraw()` → `src/utils/ticTacToe.js`; 6 tests en `src/utils/*.test.js`; `npm test` en CI antes del build
+- [x] Code-splitting de rutas con `React.lazy` + `Suspense`: chunk inicial 432 kB → 256 kB (136 → 83 kB gzip); framer-motion queda en un chunk compartido (118 kB) que carga con la primera página. La `key` va en `<Suspense>` porque `AnimatePresence` solo observa a su hijo directo
+- [x] Migrar Tailwind 3.4 → 4 (`npx @tailwindcss/upgrade`): `@theme` + `@custom-variant dark` en `index.css`, sin `tailwind.config.js` ni PostCSS (plugin `@tailwindcss/vite`); se conserva `cursor: pointer` en botones
+- [x] Decidir: quitar `prop-types` y pasar a TypeScript. React 19 ya no ejecuta `propTypes` en componentes de función, así que hoy la dependencia no valida nada en runtime. TypeScript da chequeo real en build; JSDoc + `checkJs` sería un paso intermedio sin renombrar archivos, pero el proyecto es chico (≈20 archivos) y no lo amerita
+  - [ ] Migrar a TypeScript: `tsconfig.json` con `allowJs`, `typescript-eslint`, renombrar `.jsx` → `.tsx` por archivo, quitar `prop-types` y la regla `react/prop-types`
+- [x] Documentar `scripts/generate-favicons.mjs` en README (sección "Favicons"; ya estaba desde C23)
 - [x] Definir estilo de toast en dark mode una vez movido a `App.jsx` (C19: fondo gray-100 / texto gray-900)
+
+#### Verificación manual
+
+- [ ] Transición de salida sigue funcionando con rutas lazy; sin flash en blanco al entrar por primera vez a cada ruta
+- [ ] Recorrer las 8 rutas en light/dark tras Tailwind 4: gradientes, `backdrop-blur`, bordes (compat `border-color: gray-200` en `index.css`), focus rings, cursor en botones
 
 ---
 
@@ -252,11 +259,13 @@ npm install -D vite-plugin-pwa
 
 **Tareas**:
 
-- [ ] Configurar Vitest + React Testing Library
-- [ ] Tests unitarios: lógica de Calculadora, ganador de TicTacToe, componentes básicos
+- [x] Configurar Vitest (26 Sep 2026, #3); falta React Testing Library
+- [x] Tests unitarios: lógica de Calculadora, ganador de TicTacToe (`src/utils/*.test.js`)
+- [ ] Tests unitarios: componentes básicos
 - [ ] Tests de integración: navegación, formulario de contacto
 - [ ] Playwright para E2E: flujo de navegación, proyectos interactivos, formulario
-- [ ] Ejecutar tests en GitHub Actions; coverage reports
+- [x] Ejecutar tests en GitHub Actions (`npm test` en `static.yml`)
+- [ ] Coverage reports
 
 ```bash
 npm install -D vitest @testing-library/react @testing-library/jest-dom
@@ -304,12 +313,12 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 
 ## 📊 Resumen de Prioridades
 
-| Prioridad | Cantidad | Tiempo Total Estimado    |
-| --------- | -------- | ------------------------ |
-| 🔴 ALTA   | 2 tareas | 3 días                   |
-| 🟡 MEDIA  | 5 tareas | 6-8 días + deuda técnica |
-| 🟢 BAJA   | 4 tareas | 13-17 días               |
-| 🔵 FUTURO | 5 ideas  | -                        |
+| Prioridad | Cantidad | Tiempo Total Estimado   |
+| --------- | -------- | ----------------------- |
+| 🔴 ALTA   | 2 tareas | 3 días                  |
+| 🟡 MEDIA  | 5 tareas | 6-8 días + migración TS |
+| 🟢 BAJA   | 4 tareas | 13-17 días              |
+| 🔵 FUTURO | 5 ideas  | -                       |
 
 ---
 
@@ -337,7 +346,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - Mejoras en About
 - Filtros en Proyectos
 - Scroll to Top / Breadcrumbs
-- Tests unitarios (lógica pura)
+- ✅ Tests unitarios (lógica pura)
 
 ### Sprint 4+ (Opcional) - Avanzado
 
@@ -364,6 +373,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - [x] **Toast notifications** con `react-hot-toast`
 - [x] **Animaciones con framer-motion**: variantes reutilizables (`utils/animations.js`), `PageTransition`, animaciones de entrada y scroll en todas las páginas, `prefers-reduced-motion`
 - [x] **Análisis de limpieza de código** y plan de commits atómicos (26 Sep 2026)
+- [x] **Deuda técnica #3**: Vitest, code-splitting por ruta, Tailwind 4, decisión TypeScript (26 Sep 2026)
 
 ---
 
