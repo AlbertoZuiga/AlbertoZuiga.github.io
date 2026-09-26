@@ -10,7 +10,9 @@ const SEO = ({
   keywords = "Alberto Zúñiga, desarrollador full stack, Python, JavaScript, Ruby on Rails, Flask, portfolio, desarrollo web",
 }) => {
   // URL completa de la imagen para OG
-  const fullImageUrl = image.startsWith("http") ? image : `${url}${image}`;
+  const fullImageUrl = image.startsWith("http")
+    ? image
+    : `${site.baseUrl}${image}`;
 
   // React 19 eleva <title>, <meta> y <link> al <head> automáticamente
   return (

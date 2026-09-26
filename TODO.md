@@ -114,7 +114,7 @@ Hallazgo (26 Sep 2026): los scrapers no ejecutan JS, así que las metas de `SEO.
   - [x] Projects
   - [x] Cada proyecto individual
 - [x] Prerender estático por ruta (`scripts/prerender.mjs` en `npm run build`): `dist/<ruta>/index.html` con `<title>`, `canonical`, `og:*` y `twitter:*` desde `src/data/seo.js` (fuente única, las páginas hacen `<SEO {...seoPages[ruta]} />`); `main.jsx` quita las etiquetas `[data-prerender]` antes de montar React
-- [ ] Verificación manual tras merge: `curl -A facebookexternalhit https://albertozuiga.github.io/projects/camera` devuelve 200 con `og:image` de camera; DevTools `<head>` sin metas duplicadas tras hidratar
+- [x] Verificación manual tras merge: `curl -A facebookexternalhit https://albertozuiga.github.io/projects/camera` devuelve 200 con `og:image` de camera; DevTools `<head>` sin metas duplicadas tras hidratar (26 Sep 2026: `curl -L` → 301 a `/projects/camera/` → 200 con `og/camera.png`; head hidratado sin duplicados en las 8 rutas. Bug hallado y corregido: `SEO.jsx` resolvía `og:image` contra `url` de página en vez de `site.baseUrl` → `/projects/camera/og/camera.png` tras hidratar)
 - [ ] Testing con herramientas SEO (requiere deploy a `production`; las 3 leen la URL pública):
   - [ ] Facebook Sharing Debugger
   - [ ] Twitter Card Validator
