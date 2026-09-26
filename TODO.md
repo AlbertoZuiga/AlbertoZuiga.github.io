@@ -21,7 +21,7 @@
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐⭐  
-**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs`)
+**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs` ✅, Fase 2: `refactor/dead-code`)
 
 Estado actual (26 Sep 2026): `npm run lint` = 16 errores + 3 warnings; sin Prettier; CI no corre lint; `react-helmet-async` requiere `--legacy-peer-deps` (peer dep React ≤18).
 
@@ -63,7 +63,7 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 #### Fase 2 — Código muerto
 
-- [ ] C13 `refactor`: eliminar `slideLeft`, `slideRight`, `hoverScale`, `tapScale`, `floatAnimation` de `animations.js`; `.animate-fade-in`, `.animate-blob`, `.animation-delay-*`, `.btn-secondary`, `.sr-only` custom de `index.css`; `useEffect` de `document.title` en `SEO.jsx`
+- [x] C13 `refactor`: eliminar `slideLeft`, `slideRight`, `hoverScale`, `tapScale`, `floatAnimation` de `animations.js`; `.animate-fade-in`, `.animate-blob`, `.animation-delay-*`, `.btn-secondary`, `.sr-only` custom de `index.css`; `useEffect` de `document.title` en `SEO.jsx`
 
 #### Fase 3 — Modularización
 
