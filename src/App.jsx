@@ -1,3 +1,4 @@
+import { lazy, Suspense } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -10,14 +11,16 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { useTheme } from "./hooks/useTheme";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Projects from "./pages/Projects";
-import Contact from "./pages/Contact";
-import CalculatorProject from "./pages/CalculatorProject";
-import ClockProject from "./pages/ClockProject";
-import TicTacToeProject from "./pages/TicTacToeProject";
-import CameraProject from "./pages/CameraProject";
+
+// Cada ruta es un chunk propio; framer-motion y react-router quedan en el principal
+const Home = lazy(() => import("./pages/Home"));
+const About = lazy(() => import("./pages/About"));
+const Projects = lazy(() => import("./pages/Projects"));
+const Contact = lazy(() => import("./pages/Contact"));
+const CalculatorProject = lazy(() => import("./pages/CalculatorProject"));
+const ClockProject = lazy(() => import("./pages/ClockProject"));
+const TicTacToeProject = lazy(() => import("./pages/TicTacToeProject"));
+const CameraProject = lazy(() => import("./pages/CameraProject"));
 
 const ThemedToaster = () => {
   const { isDark } = useTheme();
@@ -46,16 +49,19 @@ const AppRoutes = () => {
   const location = useLocation();
   return (
     <AnimatePresence mode="wait">
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/projects" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-        <Route path="/projects/calculator" element={<CalculatorProject />} />
-        <Route path="/projects/clock" element={<ClockProject />} />
-        <Route path="/projects/tic-tac-toe" element={<TicTacToeProject />} />
-        <Route path="/projects/camera" element={<CameraProject />} />
-      </Routes>
+      {/* key en Suspense: AnimatePresence solo detecta cambios en su hijo directo */}
+      <Suspense key={location.pathname} fallback={null}>
+        <Routes location={location}>
+          <Route path="/" element={<Home />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/projects" element={<Projects />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/projects/calculator" element={<CalculatorProject />} />
+          <Route path="/projects/clock" element={<ClockProject />} />
+          <Route path="/projects/tic-tac-toe" element={<TicTacToeProject />} />
+          <Route path="/projects/camera" element={<CameraProject />} />
+        </Routes>
+      </Suspense>
     </AnimatePresence>
   );
 };
