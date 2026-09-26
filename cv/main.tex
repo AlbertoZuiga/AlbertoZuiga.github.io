@@ -1,0 +1,111 @@
+\documentclass[a4paper,11pt]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[hmargin=0.65in, vmargin=0.5in]{geometry}
+\usepackage{tabularx}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{enumitem}
+\usepackage{hyperref}
+
+\definecolor{accent}{HTML}{0F4C5C}
+\definecolor{muted}{HTML}{5F6B73}
+\hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
+
+\renewcommand{\familydefault}{\sfdefault}
+\linespread{1.05}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\raggedright
+
+\titleformat{\section}{\Large\bfseries\color{accent}}{}{0em}{}[{\color{accent}\titlerule[0.8pt]}]
+\titlespacing*{\section}{0pt}{11pt}{5pt}
+
+\setlist[itemize]{label={\color{accent}\textbullet}, leftmargin=1.4em, topsep=2pt, itemsep=2pt, parsep=0pt}
+
+% \entry{Organización}{Fecha}{Cargo}
+\newcommand{\entry}[3]{%
+  {\large\textbf{#1}} \hfill {\color{muted}#2} \\
+  {\color{accent}\textit{#3}}\par
+}
+\newcommand{\entrygap}{\vspace{7pt}}
+
+\begin{document}
+
+% Encabezado
+\begin{center}
+  {\huge\bfseries Alberto Zúñiga Marinovic} \\[5pt]
+  {\large\color{accent} Ingeniero Civil en Ciencias de la Computación} \\[2pt]
+  {\color{muted} Universidad de los Andes} \\[5pt]
+  +56 9 6496 2736 \quad$\cdot$\quad
+  \href{mailto:a.zuniga.marinovic@gmail.com}{a.zuniga.marinovic@gmail.com} \quad$\cdot$\quad
+  \href{https://www.linkedin.com/in/alberto-zuniga-marinovic}{LinkedIn} \quad$\cdot$\quad
+  \href{https://github.com/AlbertoZuiga}{GitHub} \quad$\cdot$\quad
+  \href{https://albertozuiga.github.io}{Portafolio}
+\end{center}
+
+\section*{Experiencia}
+
+\entry{Buk}{Mar 2026 -- Presente}{Software Engineer Level 1, equipo de Talento - Evaluaciones}
+\begin{itemize}
+  \item Desarrollo y mantenimiento del módulo de \textbf{Evaluaciones de Desempeño} de la plataforma.
+\end{itemize}
+\entrygap
+
+\entry{Buk}{Ene 2026 -- Feb 2026}{Práctica profesional como Software Engineer, equipo de Talento - Evaluaciones}
+\begin{itemize}
+  \item Migración de la sección \textbf{``Mis evaluaciones''} a \textbf{Fiji}, el framework de desarrollo interno de Buk.
+\end{itemize}
+\entrygap
+
+\entry{Universidad de los Andes}{Ago 2022 -- Jun 2026}{Ayudante}
+\begin{itemize}
+  \item \textbf{14 ayudantías en 9 cursos:} Paradigmas de Programación (×4), Web Technologies (×3), Programación (×2),
+        Bases de Datos, Aplicaciones Móviles, Sistemas Electrónicos, Taller de Computación, Taller de Proyectos de Ingeniería.
+\end{itemize}
+
+\section*{Proyectos}
+
+
+{\large\textbf{Scheduler App}} \quad {\color{accent}\textit{Python, Flask}} \hfill \href{http://scheduler-app-iu34.onrender.com/}{Ver demo}
+\begin{itemize}
+  \item Gestión de horarios y división automática de grupos.
+\end{itemize}
+\entrygap
+
+{\large\textbf{Healthy}} \quad {\color{accent}\textit{Ruby on Rails}} \hfill \href{https://healthy-k6hn.onrender.com}{Ver demo}
+\begin{itemize}
+  \item Sistema de recomendación de planes de comida saludables integrado con compras.
+\end{itemize}
+
+\section*{Educación}
+
+\entry{Universidad de los Andes}{2020 -- 2026}{Ingeniero Civil en Ciencias de la Computación}
+\begin{itemize}
+  \item Concentración tecnológica en Ingeniería Civil Eléctrica. Minor en Psicología.
+\end{itemize}
+
+\section*{Liderazgo y voluntariado}
+
+\entry{Pastoral Universidad de los Andes}{2025 -- 2026}{Catequista (2025 -- 2026) y encargado de logística (2026)}
+\begin{itemize}
+  \item Gestión logística y organización de las actividades del grupo.
+  \item Planificación y dictado de clases semanales de formación.
+\end{itemize}
+\entrygap
+
+\textbf{Consejero político de Ingeniería Civil:} representante ante la Federación de Estudiantes. \hfill {\color{muted}2023} \\[4pt]
+\textbf{Fundación Nueva Mente:} voluntario pro bono; sitio web (Wix) y registro de gastos. \hfill {\color{muted}2022 -- 2024}
+
+\section*{Habilidades}
+
+{\renewcommand{\arraystretch}{1.15}
+\begin{tabularx}{\textwidth}{@{}>{\bfseries\color{accent}}l X@{}}
+  Lenguajes    & Python, JavaScript, Ruby, SQL, C++, HTML/CSS \\
+  Frameworks   & React, React Native, Flask, Django, FastAPI \\
+  Herramientas & Git/GitHub, Docker, LaTeX, Excel \\
+  Idiomas      & Español (nativo), Inglés (intermedio) \\
+\end{tabularx}}
+
+\end{document}
