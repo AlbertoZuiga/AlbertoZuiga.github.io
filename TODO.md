@@ -21,9 +21,9 @@
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐⭐  
-**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs` ✅, Fase 2: `refactor/dead-code` ✅, Fase 3: `refactor/modularization` ✅)
+**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs` ✅, Fase 2: `refactor/dead-code` ✅, Fase 3: `refactor/modularization` ✅, Fase 4: `refactor/dependencies` ✅)
 
-Estado actual (26 Sep 2026): `npm run lint` = 16 errores + 3 warnings; sin Prettier; CI no corre lint; `react-helmet-async` requiere `--legacy-peer-deps` (peer dep React ≤18).
+Estado actual (26 Sep 2026): Fases 0-4 completadas. Lint 0/0, Prettier en CI, sin `react-helmet-async` ni `--legacy-peer-deps`.
 
 Cada commit debe pasar `npm run lint && npm run format:check && npm run build` por sí solo.
 
@@ -77,8 +77,8 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 #### Fase 4 — Dependencias
 
-- [ ] C21 `refactor`: reemplazar `react-helmet-async` por `<title>`/`<meta>` nativos de React 19; JSON-LD estático en `index.html`; quitar metas duplicadas de `index.html`; CI `npm ci` sin `--legacy-peer-deps`
-- [ ] C22 `chore`: `npx update-browserslist-db@latest` + `baseline-browser-mapping@latest`
+- [x] C21 `refactor`: reemplazar `react-helmet-async` por `<title>`/`<meta>` nativos de React 19; JSON-LD estático en `index.html`; quitar metas duplicadas de `index.html`; CI `npm ci` sin `--legacy-peer-deps`
+- [x] C22 `chore`: `npx update-browserslist-db@latest` + `baseline-browser-mapping@latest`
 
 #### Fase 5 — Docs
 
