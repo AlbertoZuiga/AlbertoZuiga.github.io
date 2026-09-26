@@ -18,7 +18,8 @@ const CameraProject = () => {
   const chunksRef = useRef([]);
 
   const saveRecordedVideo = () => {
-    const blob = new Blob(chunksRef.current, { type: "video/mp4" });
+    const mimeType = mediaRecorderRef.current?.mimeType || "video/webm";
+    const blob = new Blob(chunksRef.current, { type: mimeType });
     const videoURL = URL.createObjectURL(blob);
 
     setCaptures((prev) => [
@@ -26,6 +27,7 @@ const CameraProject = () => {
       {
         type: "video",
         url: videoURL,
+        mimeType,
         id: Date.now(),
       },
     ]);
@@ -195,10 +197,11 @@ const CameraProject = () => {
     link.click();
   };
 
-  const downloadVideo = (url, index) => {
+  const downloadVideo = (url, index, mimeType) => {
+    const extension = mimeType.includes("mp4") ? "mp4" : "webm";
     const link = document.createElement("a");
     link.href = url;
-    link.download = `video-${index + 1}-${Date.now()}.webm`;
+    link.download = `video-${index + 1}-${Date.now()}.${extension}`;
     link.click();
   };
 
@@ -407,7 +410,11 @@ const CameraProject = () => {
                         onClick={() =>
                           capture.type === "image"
                             ? downloadImage(capture.url, index)
-                            : downloadVideo(capture.url, index)
+                            : downloadVideo(
+                                capture.url,
+                                index,
+                                capture.mimeType
+                              )
                         }
                         className="px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg text-sm font-semibold"
                         title={
