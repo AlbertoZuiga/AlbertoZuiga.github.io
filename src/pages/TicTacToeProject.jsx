@@ -1,9 +1,20 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
 import { slideUp, fadeIn } from "../utils/animations";
+
+const WINNING_COMBINATIONS = [
+  [0, 1, 2],
+  [3, 4, 5],
+  [6, 7, 8],
+  [0, 3, 6],
+  [1, 4, 7],
+  [2, 5, 8],
+  [0, 4, 8],
+  [2, 4, 6],
+];
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
@@ -13,36 +24,6 @@ const TicTacToe = () => {
   const [firstPlayer, setFirstPlayer] = useState("X"); // Quien inicia el juego
   const [scores, setScores] = useState({ X: 0, O: 0, draws: 0 });
   const [gamesPlayed, setGamesPlayed] = useState(0);
-
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyPress = (e) => {
-      const key = e.key.toLowerCase();
-      if (key === "n") {
-        e.preventDefault();
-        restartGame();
-      } else if (key === "r" && gamesPlayed > 0) {
-        e.preventDefault();
-        resetAll();
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [gamesPlayed]);
-
-  const WINNING_COMBINATIONS = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
 
   const checkWin = (currentBoard, player) => {
     for (const combination of WINNING_COMBINATIONS) {
@@ -73,25 +54,21 @@ const TicTacToe = () => {
       // Calcular puntos: 3 puntos si empezó primero, 5 puntos si empezó segundo
       const points = currentPlayer === firstPlayer ? 3 : 5;
 
-      setTimeout(() => {
-        setScores((prev) => ({
-          ...prev,
-          [currentPlayer]: prev[currentPlayer] + points,
-        }));
-        setGamesPlayed((prev) => prev + 1);
-      }, 100);
+      setScores((prev) => ({
+        ...prev,
+        [currentPlayer]: prev[currentPlayer] + points,
+      }));
+      setGamesPlayed((prev) => prev + 1);
     } else if (isDraw(newBoard)) {
       setGameOn(false);
-      setTimeout(() => {
-        setScores((prev) => ({ ...prev, draws: prev.draws + 1 }));
-        setGamesPlayed((prev) => prev + 1);
-      }, 100);
+      setScores((prev) => ({ ...prev, draws: prev.draws + 1 }));
+      setGamesPlayed((prev) => prev + 1);
     } else {
       setIsXTurn(!isXTurn);
     }
   };
 
-  const restartGame = () => {
+  const restartGame = useCallback(() => {
     setBoard(new Array(9).fill(null));
     // Alternar quien empieza cada juego
     const nextFirst = firstPlayer === "X" ? "O" : "X";
@@ -99,9 +76,9 @@ const TicTacToe = () => {
     setIsXTurn(nextFirst === "X");
     setGameOn(true);
     setWinningCells([]);
-  };
+  }, [firstPlayer]);
 
-  const resetAll = () => {
+  const resetAll = useCallback(() => {
     setBoard(new Array(9).fill(null));
     setIsXTurn(true);
     setGameOn(true);
@@ -109,7 +86,26 @@ const TicTacToe = () => {
     setFirstPlayer("X");
     setScores({ X: 0, O: 0, draws: 0 });
     setGamesPlayed(0);
-  };
+  }, []);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyPress = (e) => {
+      const key = e.key.toLowerCase();
+      if (key === "n") {
+        e.preventDefault();
+        restartGame();
+      } else if (key === "r" && gamesPlayed > 0) {
+        e.preventDefault();
+        resetAll();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [gamesPlayed, restartGame, resetAll]);
 
   const getWinner = () => {
     if (winningCells.length > 0) {
@@ -119,7 +115,7 @@ const TicTacToe = () => {
   };
 
   const winner = getWinner();
-  const isDraw_ = !gameOn && !winner;
+  const isGameDraw = !gameOn && !winner;
   const winPoints = winner && winner === firstPlayer ? 3 : 5;
 
   // Función para calcular el mensaje de estado
@@ -136,7 +132,7 @@ const TicTacToe = () => {
         </div>
       );
     }
-    if (isDraw_) {
+    if (isGameDraw) {
       return <span className="text-yellow-300">¡Empate!</span>;
     }
     return (
