@@ -1,4 +1,4 @@
-import { lazy, Suspense } from "react";
+import { Suspense, use, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -12,15 +12,44 @@ import { useTheme } from "./hooks/useTheme";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 
-// Cada ruta es un chunk propio; framer-motion y react-router quedan en el principal
-const Home = lazy(() => import("./pages/Home"));
-const About = lazy(() => import("./pages/About"));
-const Projects = lazy(() => import("./pages/Projects"));
-const Contact = lazy(() => import("./pages/Contact"));
-const CalculatorProject = lazy(() => import("./pages/CalculatorProject"));
-const ClockProject = lazy(() => import("./pages/ClockProject"));
-const TicTacToeProject = lazy(() => import("./pages/TicTacToeProject"));
-const CameraProject = lazy(() => import("./pages/CameraProject"));
+// Cada ruta es un chunk propio; framer-motion y react-router quedan en el principal.
+// No se usa React.lazy: aunque el chunk esté precargado, lazy suspende igual en
+// el primer render de cada componente. Con use() y un thenable ya resuelto
+// (status: "fulfilled") el render es síncrono y no aparece el fallback.
+const page = (loader) => {
+  let promise;
+  const preload = () =>
+    (promise ??= loader().then((mod) => {
+      promise.status = "fulfilled";
+      promise.value = mod;
+      return mod;
+    }));
+  const Page = (props) => {
+    const { default: Component } = use(preload());
+    return <Component {...props} />;
+  };
+  Page.preload = preload;
+  return Page;
+};
+
+const Home = page(() => import("./pages/Home"));
+const About = page(() => import("./pages/About"));
+const Projects = page(() => import("./pages/Projects"));
+const Contact = page(() => import("./pages/Contact"));
+const CalculatorProject = page(() => import("./pages/CalculatorProject"));
+const ClockProject = page(() => import("./pages/ClockProject"));
+const TicTacToeProject = page(() => import("./pages/TicTacToeProject"));
+const CameraProject = page(() => import("./pages/CameraProject"));
+const pages = [
+  Home,
+  About,
+  Projects,
+  Contact,
+  CalculatorProject,
+  ClockProject,
+  TicTacToeProject,
+  CameraProject,
+];
 
 const ThemedToaster = () => {
   const { isDark } = useTheme();
@@ -47,11 +76,16 @@ const ThemedToaster = () => {
 
 const AppRoutes = () => {
   const location = useLocation();
+  // Precarga el resto de páginas tras el primer render: AnimatePresence monta la
+  // ruta nueva fuera de la transición del router, y si el chunk no está cargado
+  // Suspense muestra el fallback (pantalla en blanco) entre salida y entrada.
+  useEffect(() => {
+    pages.forEach((p) => p.preload());
+  }, []);
   return (
-    <AnimatePresence mode="wait">
-      {/* key en Suspense: AnimatePresence solo detecta cambios en su hijo directo */}
-      <Suspense key={location.pathname} fallback={null}>
-        <Routes location={location}>
+    <Suspense fallback={null}>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/projects" element={<Projects />} />
@@ -61,8 +95,8 @@ const AppRoutes = () => {
           <Route path="/projects/tic-tac-toe" element={<TicTacToeProject />} />
           <Route path="/projects/camera" element={<CameraProject />} />
         </Routes>
-      </Suspense>
-    </AnimatePresence>
+      </AnimatePresence>
+    </Suspense>
   );
 };
 
