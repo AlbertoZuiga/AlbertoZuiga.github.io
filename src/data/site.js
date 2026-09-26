@@ -13,4 +13,5 @@ export const site = {
   githubUser: "AlbertoZuiga",
   github: "https://github.com/AlbertoZuiga",
   linkedin: "https://www.linkedin.com/in/alberto-zuniga-marinovic/",
+  cvUrl: "/cv-alberto-zuniga.pdf",
 };

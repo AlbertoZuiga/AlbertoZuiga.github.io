@@ -223,6 +223,14 @@ La plantilla de EmailJS debe usar las variables `{{name}}`, `{{email}}`, `{{subj
 
 En producción se inyectan como **secrets** del repositorio con los mismos nombres (ver `.github/workflows/static.yml`).
 
+### CV en PDF
+
+`public/cv-alberto-zuniga.pdf` se sirve desde el botón "Descargar CV" en About. La fuente es `cv/main.tex`; tras editarla, regenerar y copiar:
+
+```bash
+cd cv && latexmk -pdf main.tex && cp main.pdf ../public/cv-alberto-zuniga.pdf
+```
+
 ### Favicons
 
 `public/favicon.svg` es la fuente. Para regenerar PNG/ICO:

@@ -45,6 +45,27 @@ const About = () => {
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300">
               {site.name}
             </p>
+            <a
+              href={site.cvUrl}
+              download
+              className="btn-primary inline-flex items-center gap-2 mt-4"
+            >
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"
+                />
+              </svg>
+              Descargar CV (PDF)
+            </a>
           </motion.div>
 
           <AccordionSection
