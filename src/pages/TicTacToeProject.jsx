@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
-import { slideUp, fadeIn, scaleIn } from "../utils/animations";
+import { slideUp, fadeIn } from "../utils/animations";
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));

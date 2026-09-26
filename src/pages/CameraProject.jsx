@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
-import { slideUp, fadeIn } from "../utils/animations";
+import { slideUp } from "../utils/animations";
 
 const CameraProject = () => {
   const [stream, setStream] = useState(null);
@@ -73,7 +73,7 @@ const CameraProject = () => {
         audio: true,
       });
       setupVideoStream(mediaStream);
-    } catch (initialError) {
+    } catch {
       try {
         // Fallback: try Full HD video only
         const mediaStream = await navigator.mediaDevices.getUserMedia({
@@ -85,7 +85,7 @@ const CameraProject = () => {
           },
         });
         setupVideoStream(mediaStream);
-      } catch (secondError) {
+      } catch {
         try {
           // Final fallback: try basic video only
           const mediaStream = await navigator.mediaDevices.getUserMedia({

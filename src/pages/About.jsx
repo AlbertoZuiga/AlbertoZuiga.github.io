@@ -2,13 +2,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
-import {
-  slideUp,
-  fadeIn,
-  staggerContainer,
-  staggerItem,
-  viewportConfig,
-} from "../utils/animations";
+import { slideUp, fadeIn, viewportConfig } from "../utils/animations";
 
 const About = () => {
   const [expandedSections, setExpandedSections] = useState({
