@@ -21,9 +21,9 @@
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐⭐  
-**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs` ✅, Fase 2: `refactor/dead-code` ✅, Fase 3: `refactor/modularization` ✅, Fase 4: `refactor/dependencies` ✅)
+**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs` ✅, Fase 2: `refactor/dead-code` ✅, Fase 3: `refactor/modularization` ✅, Fase 4: `refactor/dependencies` ✅, Fase 5: `docs/readme` ✅)
 
-Estado actual (26 Sep 2026): Fases 0-4 completadas. Lint 0/0, Prettier en CI, sin `react-helmet-async` ni `--legacy-peer-deps`.
+Estado actual (26 Sep 2026): Fases 0-5 completadas. Lint 0/0, Prettier en CI, sin `react-helmet-async` ni `--legacy-peer-deps`.
 
 Cada commit debe pasar `npm run lint && npm run format:check && npm run build` por sí solo.
 
@@ -82,7 +82,7 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 #### Fase 5 — Docs
 
-- [ ] C23 `docs`: crear `.env.example`; quitar referencias a `EMAILJS_SETUP.md` / `LINKEDIN_PREVIEW_SETUP.md` (no existen); alinear comentario de plantilla EmailJS con nombres reales del form (B6); README con `data/`, `hooks/`, componentes nuevos
+- [x] C23 `docs`: crear `.env.example`; quitar referencias a `EMAILJS_SETUP.md` / `LINKEDIN_PREVIEW_SETUP.md` (no existen); alinear comentario de plantilla EmailJS con nombres reales del form (B6); README con `data/`, `hooks/`, componentes nuevos
 - [x] C24 `docs`: actualizar TODO.md (26 Sep 2026)
 
 #### Verificación manual (tras Fase 3 y C21)
