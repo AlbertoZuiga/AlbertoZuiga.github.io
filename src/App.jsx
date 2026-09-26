@@ -40,6 +40,7 @@ const CalculatorProject = page(() => import("./pages/CalculatorProject"));
 const ClockProject = page(() => import("./pages/ClockProject"));
 const TicTacToeProject = page(() => import("./pages/TicTacToeProject"));
 const CameraProject = page(() => import("./pages/CameraProject"));
+const ProjectDetail = page(() => import("./pages/ProjectDetail"));
 const pages = [
   Home,
   About,
@@ -49,6 +50,7 @@ const pages = [
   ClockProject,
   TicTacToeProject,
   CameraProject,
+  ProjectDetail,
 ];
 
 const ThemedToaster = () => {
@@ -94,6 +96,7 @@ const AppRoutes = () => {
           <Route path="/projects/clock" element={<ClockProject />} />
           <Route path="/projects/tic-tac-toe" element={<TicTacToeProject />} />
           <Route path="/projects/camera" element={<CameraProject />} />
+          <Route path="/projects/:slug" element={<ProjectDetail />} />
         </Routes>
       </AnimatePresence>
     </Suspense>

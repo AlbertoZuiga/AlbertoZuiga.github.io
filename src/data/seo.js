@@ -66,6 +66,33 @@ export const seoPages = {
     keywords:
       "cámara web, MediaDevices API, captura video JavaScript, getUserMedia, desarrollo web",
   },
+  "/projects/arbocensus": {
+    title: "Arbocensus - Alberto Zúñiga",
+    description:
+      "Proyecto de título: optimización de rutas para censo de árboles urbanos. mTSP resuelto con OR-Tools y OSRM sobre Django + PostGIS, frontend en React con Leaflet.",
+    url: `${site.baseUrl}/projects/arbocensus`,
+    image: "/og/arbocensus.png",
+    keywords:
+      "Arbocensus, censo de árboles, optimización de rutas, mTSP, OR-Tools, OSRM, Django, PostGIS, proyecto de título",
+  },
+  "/projects/scheduler": {
+    title: "Scheduler App - Alberto Zúñiga",
+    description:
+      "Coordinación de disponibilidad horaria en grupos con Flask: Google OAuth 2.0, roles, categorías con filtros y división automática de subgrupos. Dockerizada con PostgreSQL.",
+    url: `${site.baseUrl}/projects/scheduler`,
+    image: "/og/scheduler.png",
+    keywords:
+      "Scheduler App, Flask, Python, horarios, disponibilidad, Google OAuth, PostgreSQL, Docker",
+  },
+  "/projects/healthy": {
+    title: "Healthy - Alberto Zúñiga",
+    description:
+      "Recomendación de planes saludables de comida integrada con compras y entregas. Ruby on Rails 8, Hotwire, Devise y CanCanCan.",
+    url: `${site.baseUrl}/projects/healthy`,
+    image: "/og/healthy.png",
+    keywords:
+      "Healthy, Ruby on Rails, planes de comida, recomendación, Hotwire, Devise, PostgreSQL",
+  },
   "/contact": {
     title: "Contacto - Alberto Zúñiga | Hablemos de tu Proyecto",
     description:

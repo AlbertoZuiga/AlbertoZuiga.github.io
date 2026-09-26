@@ -150,18 +150,19 @@ Hallazgo (26 Sep 2026): los scrapers no ejecutan JS, así que las metas de `SEO.
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 1 día  
 **Impacto**: ⭐⭐⭐⭐  
-**Depende de**: C14 (`projects.js`)
+**Depende de**: C14 (`projects.js`)  
+**Rama**: `feat/project-detail` (26 Sep 2026)
 
 Problema (26 Sep 2026): las cards de Arbocensus, Scheduler App y Healthy enlazan directo a la demo o al repo. Las demos en Render se duermen o están caídas, así que el visitante llega a un error sin contexto.
 
 **Tareas**:
 
-- [ ] Extender `projects.js`: `slug`, `year`/`period`, `context` (por qué se hizo: ramo, título, personal), `longDescription`, `stack[]`, `repoUrl`, `demoUrl` (opcional). Repos: `AlbertoZuiga/scheduler`, `AlbertoZuiga/healthy`
-- [ ] Ruta `/projects/:slug` con `ProjectDetail.jsx` (lazy): título, icono, período, explicación, stack, y abajo botones "Ver código" y "Ver demo" (solo si `demoUrl` existe). Reusar `BackToProjects`
-- [ ] Cards en `Projects.jsx` llevan al detalle interno; quitar `external`/`isReact` si dejan de usarse
-- [ ] Estado de la demo al abrir el detalle: `fetch` a `demoUrl` con `AbortController` (~5 s). Fase 1: `mode: "no-cors"` (solo detecta host caído; despierta Render de paso). Fase 2: endpoint `/health` con CORS en scheduler y healthy → badge "En línea" / "Despertando (~1 min)" / "Caída" y botón deshabilitado si cae
-- [ ] SEO: entrada por slug en `seo.js`, OG en `generate-og.mjs`, ruta en `prerender.mjs` y `sitemap.xml`
-- [ ] Verificación manual: 3 detalles cargan, botones abren en pestaña nueva, prerender genera `dist/projects/<slug>/index.html`
+- [x] Extender `projects.js`: `slug`, `period`, `context`, `longDescription`, `stack[]`, `repoUrl`, `demoUrl` (opcional). Textos de `longDescription` desde los README de cada repo. `context`: Arbocensus "Proyecto de título", Scheduler "Proyecto personal", Healthy "Práctica pre-profesional". Healthy sin `demoUrl` (instancia suspendida en Render, 503 `x-render-routing: suspend`)
+- [x] Ruta `/projects/:slug` con `ProjectDetail.jsx` (lazy, va después de las rutas fijas): título, icono, período, explicación, stack, botones "Ver código" y "Ver demo" (solo si `demoUrl`). Slug desconocido → `<Navigate to="/projects" />`. Reusa `BackToProjects variant="dark"`
+- [x] Cards en `Projects.jsx` llevan al detalle interno (`<Link>` único; `link ?? /projects/${slug}`); se quitó `external`. `isReact` sigue en uso para el badge ⚛️ / SPA
+- ~~Estado de la demo (`fetch` / `/health`)~~ Descartado (26 Sep 2026): Healthy está suspendida y Scheduler enlaza directo; sin detector
+- [x] SEO: entradas `/projects/{arbocensus,scheduler,healthy}` en `seo.js`, OG en `generate-og.mjs` (+ `public/og/*.png`), `sitemap.xml`. `prerender.mjs` no necesitó cambios (itera `seoPages`)
+- [ ] Verificación manual: 3 detalles cargan, botones abren en pestaña nueva; hero + cuerpo claro en light/dark (build ya genera `dist/projects/<slug>/index.html` con su `og:image`, verificado 26 Sep 2026)
 
 ---
 
@@ -321,7 +322,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - ✅ Animaciones (framer-motion)
 - ✅ Sitemap / robots.txt
 - ✅ Toast notifications
-- [ ] Páginas de detalle para proyectos externos
+- ✅ Páginas de detalle para proyectos externos (falta verificación manual)
 
 ### Sprint 3 (3-4 semanas) - Contenido
 
