@@ -30,8 +30,6 @@ export default defineConfig([
     },
     rules: {
       "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
-      // TODO(C16): reactivar cuando todos los componentes tengan propTypes
-      "react/prop-types": "off",
     },
   },
 ]);

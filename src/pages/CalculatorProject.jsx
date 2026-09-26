@@ -1,9 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
-import { slideUp, fadeIn, scaleIn } from "../utils/animations";
+import BackToProjects from "../components/BackToProjects";
+import { site } from "../data/site";
+import { fadeIn, scaleIn } from "../utils/animations";
 
 const Calculator = () => {
   const [display, setDisplay] = useState("0");
@@ -156,36 +157,11 @@ const Calculator = () => {
         <SEO
           title="Calculadora Interactiva - Alberto Zúñiga"
           description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
-          url="https://albertozuiga.github.io/projects/calculator"
+          url={`${site.baseUrl}/projects/calculator`}
           keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
         />
         <div className="max-w-md mx-auto px-4">
-          <motion.div
-            className="mb-6"
-            variants={slideUp}
-            initial="hidden"
-            animate="visible"
-          >
-            <Link
-              to="/projects"
-              className="inline-flex items-center text-gray-700 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
-            >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              Volver a Proyectos
-            </Link>
-          </motion.div>
+          <BackToProjects />
 
           <motion.div
             className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-2xl p-6"

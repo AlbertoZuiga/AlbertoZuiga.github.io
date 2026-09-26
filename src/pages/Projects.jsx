@@ -8,72 +8,17 @@ import {
   staggerItem,
   viewportConfig,
 } from "../utils/animations";
+import { site } from "../data/site";
+import { projects } from "../data/projects";
 
 const Projects = () => {
-  const projects = [
-    {
-      title: "Scheduler App",
-      link: "http://scheduler-app-iu34.onrender.com/",
-      description:
-        "Gestión de horarios y división automática de grupos con Flask",
-      color: "from-emerald-900 to-teal-900",
-      icon: "📅",
-      isReact: false,
-      external: true,
-      framework: "Flask",
-    },
-    {
-      title: "Healthy",
-      link: "https://healthy-k6hn.onrender.com",
-      description:
-        "Sistema de recomendación de planes saludables de comida integrado con compras",
-      color: "from-green-900 to-lime-900",
-      icon: "🥗",
-      isReact: false,
-      external: true,
-      framework: "Ruby on Rails",
-    },
-    {
-      title: "Calculadora",
-      link: "/projects/calculator",
-      description: "Calculadora funcional con interfaz moderna",
-      color: "from-gray-900 to-gray-700",
-      icon: "🔢",
-      isReact: true,
-    },
-    {
-      title: "Reloj",
-      link: "/projects/clock",
-      description: "Reloj digital y analógico en tiempo real",
-      color: "from-indigo-900 to-purple-900",
-      icon: "⏰",
-      isReact: true,
-    },
-    {
-      title: "Tres en Línea",
-      link: "/projects/tic-tac-toe",
-      description: "Juego clásico para dos jugadores",
-      color: "from-blue-900 to-purple-900",
-      icon: "❌⭕",
-      isReact: true,
-    },
-    {
-      title: "Cámara",
-      link: "/projects/camera",
-      description: "Captura fotos y graba videos desde tu navegador",
-      color: "from-purple-900 to-pink-900",
-      icon: "📸",
-      isReact: true,
-    },
-  ];
-
   return (
     <PageTransition>
       <div className="min-h-screen py-12 dark:bg-gray-900 transition-colors duration-300">
         <SEO
           title="Proyectos - Alberto Zúñiga | Portfolio de Desarrollo Web"
           description="Proyectos de desarrollo web: Scheduler App (Flask/Python), Healthy (Ruby on Rails), aplicaciones interactivas con JavaScript. Backend y frontend."
-          url="https://albertozuiga.github.io/projects"
+          url={`${site.baseUrl}/projects`}
           keywords="proyectos web, Python, Flask, Ruby on Rails, JavaScript, desarrollo full stack, aplicaciones web, portfolio proyectos"
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

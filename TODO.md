@@ -21,7 +21,7 @@
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐⭐  
-**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs` ✅, Fase 2: `refactor/dead-code`)
+**Ramas**: una por fase, desde `main` (Fase 0: `chore/cleanup` ✅, Fase 1: `fix/lint-and-bugs` ✅, Fase 2: `refactor/dead-code` ✅, Fase 3: `refactor/modularization` ✅)
 
 Estado actual (26 Sep 2026): `npm run lint` = 16 errores + 3 warnings; sin Prettier; CI no corre lint; `react-helmet-async` requiere `--legacy-peer-deps` (peer dep React ≤18).
 
@@ -67,13 +67,13 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 #### Fase 3 — Modularización
 
-- [ ] C14 `refactor`: extraer datos a `src/data/` (`skills.js`, `projects.js`, `navLinks.js`, `cv.js`, `site.js`); páginas renderizan con `.map()`
-- [ ] C15 `refactor(about)`: `AccordionSection` (con `<button>` nativo, elimina `handleKeyDown`) + `SkillRow` (corrige `dark:border` faltante)
-- [ ] C16 `refactor(home)`: `SkillCard`; agregar `propTypes` a `BrandMark`, `SkillCard`, `AccordionSection`, `SkillRow`; reactivar `react/prop-types`
-- [ ] C17 `refactor(navbar)`: `ThemeToggle` (elimina duplicado), `NavLink` de react-router desde `navLinks.js`, usar `BrandMark` en vez de `<img>` inline (agregar tamaño responsive `nav` a `sizeMap`)
-- [ ] C18 `refactor`: `BackToProjects` con `variant`; agregarlo a Camera (única página sin el link)
-- [ ] C19 `refactor`: mover `<Toaster>` a `App.jsx` y respetar dark mode
-- [ ] C20 `feat`: `AnimatePresence mode="wait"` en `App.jsx` con `AppRoutes` (B9)
+- [x] C14 `refactor`: extraer datos a `src/data/` (`skills.js`, `projects.js`, `navLinks.js`, `cv.js`, `site.js`); páginas renderizan con `.map()`
+- [x] C15 `refactor(about)`: `AccordionSection` (con `<button>` nativo, elimina `handleKeyDown`) + `SkillRow` (corrige `dark:border` faltante)
+- [x] C16 `refactor(home)`: `SkillCard`; agregar `propTypes` a `BrandMark`, `SkillCard`, `AccordionSection`, `SkillRow`; reactivar `react/prop-types`
+- [x] C17 `refactor(navbar)`: `ThemeToggle` (elimina duplicado), `NavLink` de react-router desde `navLinks.js`, usar `BrandMark` en vez de `<img>` inline (agregar tamaño responsive `nav` a `sizeMap`)
+- [x] C18 `refactor`: `BackToProjects` con `variant`; agregarlo a Camera (única página sin el link)
+- [x] C19 `refactor`: mover `<Toaster>` a `App.jsx` y respetar dark mode
+- [x] C20 `feat`: `AnimatePresence mode="wait"` en `App.jsx` con `AppRoutes` (B9)
 
 #### Fase 4 — Dependencias
 
@@ -129,7 +129,7 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 - [ ] Migrar Tailwind 3.4 → 4
 - [ ] Decidir: quitar `prop-types` y pasar a TypeScript (o JSDoc con `checkJs`)
 - [ ] Documentar `scripts/generate-favicons.mjs` en README
-- [ ] Definir estilo de toast en dark mode una vez movido a `App.jsx`
+- [x] Definir estilo de toast en dark mode una vez movido a `App.jsx` (C19: fondo gray-100 / texto gray-900)
 
 ---
 

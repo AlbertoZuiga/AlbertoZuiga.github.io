@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import BrandMark from "../components/BrandMark";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import SkillCard from "../components/SkillCard";
 import {
   slideDown,
   slideUp,
@@ -12,6 +13,8 @@ import {
   scaleIn,
   viewportConfig,
 } from "../utils/animations";
+import { site } from "../data/site";
+import { homeSkillGroups } from "../data/skills";
 
 const Home = () => {
   return (
@@ -20,7 +23,7 @@ const Home = () => {
         <SEO
           title="Alberto Zúñiga - Desarrollador Full Stack | Portfolio"
           description="Portafolio de Alberto Zúñiga: Desarrollador Full Stack e Ingeniero Civil en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React."
-          url="https://albertozuiga.github.io"
+          url={site.baseUrl}
           keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
         />
         {/* Hero Section */}
@@ -182,211 +185,31 @@ const Home = () => {
               Competencias Técnicas
             </motion.h2>
 
-            {/* Lenguajes de Programación */}
-            <div className="mb-8 sm:mb-10">
-              <motion.h3
-                className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6"
-                variants={slideUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportConfig}
-              >
-                Lenguajes de Programación
-              </motion.h3>
-              <motion.div
-                className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 md:gap-6"
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportConfig}
-              >
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🐍</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    Python
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio - Avanzado
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🟨</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    JavaScript
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio - Avanzado
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">💎</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    Ruby
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚙️</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    C++
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🗄️</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    SQL
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio
-                  </p>
-                </motion.div>
-              </motion.div>
-            </div>
-
-            {/* Frameworks y Librerías */}
-            <div className="mb-8 sm:mb-10">
-              <motion.h3
-                className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6"
-                variants={slideUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportConfig}
-              >
-                Frameworks y Librerías
-              </motion.h3>
-              <motion.div
-                className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 md:gap-6"
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportConfig}
-              >
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚛️</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    React
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🧪</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    Flask
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🎯</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    Django
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Básico - Intermedio
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">⚡</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    FastAPI
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Básico
-                  </p>
-                </motion.div>
-              </motion.div>
-            </div>
-
-            {/* Herramientas */}
-            <div>
-              <motion.h3
-                className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6"
-                variants={slideUp}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportConfig}
-              >
-                Herramientas
-              </motion.h3>
-              <motion.div
-                className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6"
-                variants={staggerContainer}
-                initial="hidden"
-                whileInView="visible"
-                viewport={viewportConfig}
-              >
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🧰</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    Git / GitHub
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio - Avanzado
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">🐳</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    Docker
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Intermedio
-                  </p>
-                </motion.div>
-                <motion.div
-                  className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                  variants={staggerItem}
-                >
-                  <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">📊</div>
-                  <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                    Excel
-                  </h4>
-                  <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                    Avanzado
-                  </p>
-                </motion.div>
-              </motion.div>
+            <div className="space-y-8 sm:space-y-10">
+              {homeSkillGroups.map((group) => (
+                <div key={group.title}>
+                  <motion.h3
+                    className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6"
+                    variants={slideUp}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportConfig}
+                  >
+                    {group.title}
+                  </motion.h3>
+                  <motion.div
+                    className={`grid ${group.grid} gap-3 sm:gap-4 md:gap-6`}
+                    variants={staggerContainer}
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={viewportConfig}
+                  >
+                    {group.skills.map((skill) => (
+                      <SkillCard key={skill.name} {...skill} />
+                    ))}
+                  </motion.div>
+                </div>
+              ))}
             </div>
           </div>
         </section>

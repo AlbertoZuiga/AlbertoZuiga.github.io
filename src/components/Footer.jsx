@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import BrandMark from "./BrandMark";
+import { site } from "../data/site";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,13 +13,13 @@ const Footer = () => {
         </div>
         <div className="text-center mb-6 sm:mb-8">
           <p className="text-base sm:text-lg mb-4 sm:mb-6">
-            &copy; {currentYear} Alberto Zúñiga. Todos los derechos reservados.
+            &copy; {currentYear} {site.name}. Todos los derechos reservados.
           </p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
           <a
-            href="mailto:a.zuniga.marinovic@gmail.com"
+            href={`mailto:${site.email}`}
             className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-white rounded-full text-white text-sm sm:text-base hover:bg-white hover:text-gray-800 dark:hover:text-gray-950 transition-all duration-300 transform hover:scale-105"
           >
             <svg
@@ -33,7 +34,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://github.com/AlbertoZuiga"
+            href={site.github}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-white rounded-full text-white text-sm sm:text-base hover:bg-white hover:text-gray-800 dark:hover:text-gray-950 transition-all duration-300 transform hover:scale-105"
@@ -53,7 +54,7 @@ const Footer = () => {
           </a>
 
           <a
-            href="https://www.linkedin.com/in/alberto-zuniga-marinovic/"
+            href={site.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-4 sm:px-6 py-2.5 sm:py-3 bg-transparent border-2 border-white rounded-full text-white text-sm sm:text-base hover:bg-white hover:text-gray-800 dark:hover:text-gray-950 transition-all duration-300 transform hover:scale-105"
