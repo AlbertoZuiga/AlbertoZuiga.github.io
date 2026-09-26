@@ -5,6 +5,7 @@ import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import AccordionSection from "../components/AccordionSection";
 import SkillRow from "../components/SkillRow";
+import Timeline from "../components/Timeline";
 import { slideUp } from "../utils/animations";
 import { site } from "../data/site";
 import { cvSkillGroups } from "../data/skills";
@@ -80,35 +81,11 @@ const About = () => {
           </AccordionSection>
 
           <AccordionSection
-            title="Antecedentes Laborales"
+            title="Experiencia Laboral"
             isOpen={expandedSections.work}
             onToggle={() => toggleSection("work")}
           >
-            <div className="space-y-4 sm:space-y-3">
-              {work.map((job) => (
-                <div
-                  key={job.period}
-                  className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
-                >
-                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    {job.period}
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    <strong className="text-gray-800 dark:text-gray-200">
-                      {job.org}
-                    </strong>
-                    <br />
-                    {job.title}
-                    {job.lines.map((line) => (
-                      <span key={line}>
-                        <br />
-                        {line}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Timeline items={work} />
           </AccordionSection>
 
           <AccordionSection
@@ -165,31 +142,7 @@ const About = () => {
             isOpen={expandedSections.volunteering}
             onToggle={() => toggleSection("volunteering")}
           >
-            <div className="space-y-4 sm:space-y-3">
-              {volunteering.map((item) => (
-                <div
-                  key={item.period}
-                  className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
-                >
-                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    {item.period}
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    <strong className="text-gray-800 dark:text-gray-200">
-                      {item.org}
-                    </strong>
-                    <br />
-                    {item.title}
-                    {item.lines?.map((line) => (
-                      <span key={line}>
-                        <br />
-                        {line}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              ))}
-            </div>
+            <Timeline items={volunteering} />
           </AccordionSection>
 
           <AccordionSection
