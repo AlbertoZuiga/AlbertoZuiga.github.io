@@ -44,10 +44,10 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 #### Fase 0 — Tooling
 
-- [ ] C1 `chore`: agregar `eslint-plugin-react` (elimina 12 falsos positivos de `motion` sin usar); desactivar `react/prop-types` temporalmente
-- [ ] C2 `chore`: agregar Prettier (`.prettierrc`, `.prettierignore`, `.editorconfig`, scripts `format` / `format:check`) sin formatear aún
-- [ ] C3 `style`: formatear todo con Prettier (solo whitespace/comillas, verificar con `git diff -w`)
-- [ ] C4 `ci`: correr `npm run lint` y `npm run format:check` antes del build en `static.yml`
+- [x] C1 `chore`: agregar `eslint-plugin-react` (elimina 12 falsos positivos de `motion` sin usar); desactivar `react/prop-types` temporalmente
+- [x] C2 `chore`: agregar Prettier (`.prettierrc`, `.prettierignore`, `.editorconfig`, scripts `format` / `format:check`) sin formatear aún
+- [x] C3 `style`: formatear todo con Prettier (solo whitespace/comillas, verificar con `git diff -w`)
+- [x] C4 `ci`: correr `npm run lint` y `npm run format:check` antes del build en `static.yml`
 
 #### Fase 1 — Lint a cero y bugs
 
