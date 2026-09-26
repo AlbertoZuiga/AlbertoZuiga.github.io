@@ -90,23 +90,37 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               className="relative inline-flex items-center gap-2 px-1 py-1 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 group"
-              aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+              aria-label={
+                isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+              }
               title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
             >
               {/* Toggle Track */}
-              <div className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${
-                isDark ? 'bg-blue-600' : 'bg-yellow-500'
-              }`}>
+              <div
+                className={`relative w-14 h-7 rounded-full transition-colors duration-300 ${
+                  isDark ? "bg-blue-600" : "bg-yellow-500"
+                }`}
+              >
                 {/* Toggle Thumb */}
-                <div className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center ${
-                  isDark ? 'translate-x-7' : 'translate-x-0'
-                }`}>
+                <div
+                  className={`absolute top-0.5 left-0.5 w-6 h-6 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center ${
+                    isDark ? "translate-x-7" : "translate-x-0"
+                  }`}
+                >
                   {isDark ? (
-                    <svg className="w-4 h-4 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-4 h-4 text-blue-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
                   ) : (
-                    <svg className="w-4 h-4 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-4 h-4 text-yellow-500"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   )}
@@ -125,23 +139,37 @@ const Navbar = () => {
             <button
               onClick={toggleTheme}
               className="relative inline-flex items-center px-1 py-1 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
-              aria-label={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
+              aria-label={
+                isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"
+              }
               title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
             >
               {/* Toggle Track */}
-              <div className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${
-                isDark ? 'bg-blue-600' : 'bg-yellow-500'
-              }`}>
+              <div
+                className={`relative w-12 h-6 rounded-full transition-colors duration-300 ${
+                  isDark ? "bg-blue-600" : "bg-yellow-500"
+                }`}
+              >
                 {/* Toggle Thumb */}
-                <div className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center ${
-                  isDark ? 'translate-x-6' : 'translate-x-0'
-                }`}>
+                <div
+                  className={`absolute top-0.5 left-0.5 w-5 h-5 bg-white rounded-full shadow-md transform transition-transform duration-300 flex items-center justify-center ${
+                    isDark ? "translate-x-6" : "translate-x-0"
+                  }`}
+                >
                   {isDark ? (
-                    <svg className="w-3 h-3 text-blue-600" fill="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-3 h-3 text-blue-600"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
                     </svg>
                   ) : (
-                    <svg className="w-3 h-3 text-yellow-500" fill="currentColor" viewBox="0 0 24 24">
+                    <svg
+                      className="w-3 h-3 text-yellow-500"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
                       <path d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
                     </svg>
                   )}

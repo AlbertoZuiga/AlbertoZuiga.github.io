@@ -154,171 +154,179 @@ const Calculator = () => {
         role="application"
         aria-label="Calculadora"
       >
-      <SEO 
-        title="Calculadora Interactiva - Alberto Zúñiga"
-        description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
-        url="https://albertozuiga.github.io/projects/calculator"
-        keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
-      />
-      <div className="max-w-md mx-auto px-4">
-        <motion.div 
-          className="mb-6"
-          variants={slideUp}
-          initial="hidden"
-          animate="visible"
-        >
-          <Link
-            to="/projects"
-            className="inline-flex items-center text-gray-700 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
+        <SEO
+          title="Calculadora Interactiva - Alberto Zúñiga"
+          description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
+          url="https://albertozuiga.github.io/projects/calculator"
+          keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
+        />
+        <div className="max-w-md mx-auto px-4">
+          <motion.div
+            className="mb-6"
+            variants={slideUp}
+            initial="hidden"
+            animate="visible"
           >
-            <svg
-              className="w-5 h-5 mr-2"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
+            <Link
+              to="/projects"
+              className="inline-flex items-center text-gray-700 dark:text-white hover:text-primary-500 dark:hover:text-primary-400 transition-colors"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 19l-7-7m0 0l7-7m-7 7h18"
-              />
-            </svg>
-            Volver a Proyectos
-          </Link>
-        </motion.div>
+              <svg
+                className="w-5 h-5 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Volver a Proyectos
+            </Link>
+          </motion.div>
 
-        <motion.div 
-          className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-2xl p-6"
-          variants={scaleIn}
-          initial="hidden"
-          animate="visible"
-        >
-          <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-6 mb-6 min-h-[100px] flex items-center justify-end">
-            <div className="text-gray-900 dark:text-white text-5xl font-light tracking-wider">
-              {display}
+          <motion.div
+            className="bg-gray-50 dark:bg-gray-800 rounded-3xl shadow-2xl p-6"
+            variants={scaleIn}
+            initial="hidden"
+            animate="visible"
+          >
+            <div className="bg-gray-100 dark:bg-gray-900 rounded-2xl p-6 mb-6 min-h-[100px] flex items-center justify-end">
+              <div className="text-gray-900 dark:text-white text-5xl font-light tracking-wider">
+                {display}
+              </div>
             </div>
-          </div>
 
-          <div className="grid grid-cols-4 gap-3">
-            {/* Primera fila */}
-            <button
-              onClick={clearDisplay}
-              className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
-            >
-              C
-            </button>
-            <button
-              onClick={toggleSign}
-              className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
-            >
-              +/-
-            </button>
-            <button
-              onClick={percent}
-              className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
-            >
-              %
-            </button>
-            <button
-              onClick={() => performOperation("div")}
-              className={`${
-                pendingOperation === "div" ? "bg-primary-600" : "bg-primary-500"
-              } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
-            >
-              ÷
-            </button>
-
-            {/* Segunda fila */}
-            {["7", "8", "9"].map((num) => (
+            <div className="grid grid-cols-4 gap-3">
+              {/* Primera fila */}
               <button
-                key={num}
-                onClick={() => inputDigit(num)}
+                onClick={clearDisplay}
+                className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              >
+                C
+              </button>
+              <button
+                onClick={toggleSign}
+                className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              >
+                +/-
+              </button>
+              <button
+                onClick={percent}
+                className="bg-gray-300 hover:bg-gray-400 dark:bg-gray-600 dark:hover:bg-gray-500 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              >
+                %
+              </button>
+              <button
+                onClick={() => performOperation("div")}
+                className={`${
+                  pendingOperation === "div"
+                    ? "bg-primary-600"
+                    : "bg-primary-500"
+                } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
+              >
+                ÷
+              </button>
+
+              {/* Segunda fila */}
+              {["7", "8", "9"].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => inputDigit(num)}
+                  className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                >
+                  {num}
+                </button>
+              ))}
+              <button
+                onClick={() => performOperation("mul")}
+                className={`${
+                  pendingOperation === "mul"
+                    ? "bg-primary-600"
+                    : "bg-primary-500"
+                } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
+              >
+                ×
+              </button>
+
+              {/* Tercera fila */}
+              {["4", "5", "6"].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => inputDigit(num)}
+                  className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                >
+                  {num}
+                </button>
+              ))}
+              <button
+                onClick={() => performOperation("dif")}
+                className={`${
+                  pendingOperation === "dif"
+                    ? "bg-primary-600"
+                    : "bg-primary-500"
+                } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
+              >
+                −
+              </button>
+
+              {/* Cuarta fila */}
+              {["1", "2", "3"].map((num) => (
+                <button
+                  key={num}
+                  onClick={() => inputDigit(num)}
+                  className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                >
+                  {num}
+                </button>
+              ))}
+              <button
+                onClick={() => performOperation("sum")}
+                className={`${
+                  pendingOperation === "sum"
+                    ? "bg-primary-600"
+                    : "bg-primary-500"
+                } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
+              >
+                +
+              </button>
+
+              {/* Quinta fila */}
+              <button
+                onClick={() => inputDigit("0")}
+                className="col-span-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+              >
+                0
+              </button>
+              <button
+                onClick={inputDot}
                 className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
-                {num}
+                ,
               </button>
-            ))}
-            <button
-              onClick={() => performOperation("mul")}
-              className={`${
-                pendingOperation === "mul" ? "bg-primary-600" : "bg-primary-500"
-              } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
-            >
-              ×
-            </button>
-
-            {/* Tercera fila */}
-            {["4", "5", "6"].map((num) => (
               <button
-                key={num}
-                onClick={() => inputDigit(num)}
-                className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
+                onClick={performEquals}
+                className="bg-primary-500 hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
               >
-                {num}
+                =
               </button>
-            ))}
-            <button
-              onClick={() => performOperation("dif")}
-              className={`${
-                pendingOperation === "dif" ? "bg-primary-600" : "bg-primary-500"
-              } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
-            >
-              −
-            </button>
+            </div>
+          </motion.div>
 
-            {/* Cuarta fila */}
-            {["1", "2", "3"].map((num) => (
-              <button
-                key={num}
-                onClick={() => inputDigit(num)}
-                className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
-              >
-                {num}
-              </button>
-            ))}
-            <button
-              onClick={() => performOperation("sum")}
-              className={`${
-                pendingOperation === "sum" ? "bg-primary-600" : "bg-primary-500"
-              } hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95`}
-            >
-              +
-            </button>
-
-            {/* Quinta fila */}
-            <button
-              onClick={() => inputDigit("0")}
-              className="col-span-2 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
-            >
-              0
-            </button>
-            <button
-              onClick={inputDot}
-              className="bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white text-xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
-            >
-              ,
-            </button>
-            <button
-              onClick={performEquals}
-              className="bg-primary-500 hover:bg-primary-600 text-white text-2xl font-semibold py-6 rounded-2xl transition-all duration-200 active:scale-95"
-            >
-              =
-            </button>
-          </div>
-        </motion.div>
-
-        <motion.div 
-          className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm"
-          variants={fadeIn}
-          initial="hidden"
-          animate="visible"
-          transition={{ delay: 0.3 }}
-        >
-          Usa el teclado para una experiencia más rápida
-        </motion.div>
+          <motion.div
+            className="text-center mt-6 text-gray-600 dark:text-gray-400 text-sm"
+            variants={fadeIn}
+            initial="hidden"
+            animate="visible"
+            transition={{ delay: 0.3 }}
+          >
+            Usa el teclado para una experiencia más rápida
+          </motion.div>
+        </div>
       </div>
-    </div>
     </PageTransition>
   );
 };

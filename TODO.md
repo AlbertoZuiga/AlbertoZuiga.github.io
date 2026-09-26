@@ -17,6 +17,7 @@
 ## 🔴 PRIORIDAD ALTA
 
 ### 1. Limpieza de código (commits atómicos)
+
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐⭐  
@@ -28,26 +29,28 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 
 #### Bugs detectados
 
-| # | Archivo | Problema |
-|---|---|---|
-| B1 | `CameraProject.jsx` | Cleanup del `useEffect` cierra sobre `stream = null` → la cámara nunca se apaga al desmontar. StrictMode filtra un segundo stream. |
-| B2 | `CameraProject.jsx` | Blob `video/mp4` descargado como `.webm`. Usar `mediaRecorder.mimeType`. |
-| B3 | `CameraProject.jsx` | Listener de teclado con `toggleRecording`/`takePicture` obsoletos (deps incompletas). |
-| B4 | `TicTacToeProject.jsx` | `restartGame` obsoleto en listener; `setTimeout(100)` innecesario para scores. |
-| B5 | `ClockProject.jsx` | Locale `es-CH` (Suiza) en vez de `es-CL`. |
-| B6 | `Contact.jsx` / `emailjs.config.js` | Form envía `name/email/subject/message`; comentario de plantilla dice `from_name/from_email`. Verificar plantilla real en EmailJS. |
-| B7 | `CalculatorProject.jsx` | `currentValue \|\| 0` redundante; división por cero muestra `Infinity`. |
-| B8 | `Footer.jsx` | Clase `xs:inline` no existe (no hay breakpoint `xs`). |
-| B9 | `PageTransition.jsx` | Define `exit` pero no hay `AnimatePresence` en `App.jsx`. |
-| B10 | `ThemeContext.jsx` | `localStorage` sin try/catch → revienta en Safari privado. |
+| #   | Archivo                             | Problema                                                                                                                           |
+| --- | ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
+| B1  | `CameraProject.jsx`                 | Cleanup del `useEffect` cierra sobre `stream = null` → la cámara nunca se apaga al desmontar. StrictMode filtra un segundo stream. |
+| B2  | `CameraProject.jsx`                 | Blob `video/mp4` descargado como `.webm`. Usar `mediaRecorder.mimeType`.                                                           |
+| B3  | `CameraProject.jsx`                 | Listener de teclado con `toggleRecording`/`takePicture` obsoletos (deps incompletas).                                              |
+| B4  | `TicTacToeProject.jsx`              | `restartGame` obsoleto en listener; `setTimeout(100)` innecesario para scores.                                                     |
+| B5  | `ClockProject.jsx`                  | Locale `es-CH` (Suiza) en vez de `es-CL`.                                                                                          |
+| B6  | `Contact.jsx` / `emailjs.config.js` | Form envía `name/email/subject/message`; comentario de plantilla dice `from_name/from_email`. Verificar plantilla real en EmailJS. |
+| B7  | `CalculatorProject.jsx`             | `currentValue \|\| 0` redundante; división por cero muestra `Infinity`.                                                            |
+| B8  | `Footer.jsx`                        | Clase `xs:inline` no existe (no hay breakpoint `xs`).                                                                              |
+| B9  | `PageTransition.jsx`                | Define `exit` pero no hay `AnimatePresence` en `App.jsx`.                                                                          |
+| B10 | `ThemeContext.jsx`                  | `localStorage` sin try/catch → revienta en Safari privado.                                                                         |
 
 #### Fase 0 — Tooling
-- [ ] C1 `chore`: agregar `eslint-plugin-react` (elimina 12 falsos positivos de `motion` sin usar); desactivar `react/prop-types` temporalmente
-- [ ] C2 `chore`: agregar Prettier (`.prettierrc`, `.prettierignore`, `.editorconfig`, scripts `format` / `format:check`) sin formatear aún
-- [ ] C3 `style`: formatear todo con Prettier (solo whitespace/comillas, verificar con `git diff -w`)
-- [ ] C4 `ci`: correr `npm run lint` y `npm run format:check` antes del build en `static.yml`
+
+- [x] C1 `chore`: agregar `eslint-plugin-react` (elimina 12 falsos positivos de `motion` sin usar); desactivar `react/prop-types` temporalmente
+- [x] C2 `chore`: agregar Prettier (`.prettierrc`, `.prettierignore`, `.editorconfig`, scripts `format` / `format:check`) sin formatear aún
+- [x] C3 `style`: formatear todo con Prettier (solo whitespace/comillas, verificar con `git diff -w`)
+- [x] C4 `ci`: correr `npm run lint` y `npm run format:check` antes del build en `static.yml`
 
 #### Fase 1 — Lint a cero y bugs
+
 - [ ] C5 `fix`: eliminar imports sin usar (`staggerContainer`/`staggerItem` en About, `fadeIn` en Camera, `scaleIn` en TicTacToe, catch vars en Camera)
 - [ ] C6 `refactor`: mover `useTheme` a `src/hooks/useTheme.js` (react-refresh); try/catch en localStorage (B10); unificar `window` vs `globalThis`
 - [ ] C7 `fix(camera)`: `streamRef` + cleanup correcto (B1); `useCallback` en handlers de teclado (B3); quitar `console.log`
@@ -59,9 +62,11 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 - [ ] ✔ Checkpoint: `npm run lint` = 0 errores, 0 warnings
 
 #### Fase 2 — Código muerto
+
 - [ ] C13 `refactor`: eliminar `slideLeft`, `slideRight`, `hoverScale`, `tapScale`, `floatAnimation` de `animations.js`; `.animate-fade-in`, `.animate-blob`, `.animation-delay-*`, `.btn-secondary`, `.sr-only` custom de `index.css`; `useEffect` de `document.title` en `SEO.jsx`
 
 #### Fase 3 — Modularización
+
 - [ ] C14 `refactor`: extraer datos a `src/data/` (`skills.js`, `projects.js`, `navLinks.js`, `cv.js`, `site.js`); páginas renderizan con `.map()`
 - [ ] C15 `refactor(about)`: `AccordionSection` (con `<button>` nativo, elimina `handleKeyDown`) + `SkillRow` (corrige `dark:border` faltante)
 - [ ] C16 `refactor(home)`: `SkillCard`; agregar `propTypes` a `BrandMark`, `SkillCard`, `AccordionSection`, `SkillRow`; reactivar `react/prop-types`
@@ -71,14 +76,17 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 - [ ] C20 `feat`: `AnimatePresence mode="wait"` en `App.jsx` con `AppRoutes` (B9)
 
 #### Fase 4 — Dependencias
+
 - [ ] C21 `refactor`: reemplazar `react-helmet-async` por `<title>`/`<meta>` nativos de React 19; JSON-LD estático en `index.html`; quitar metas duplicadas de `index.html`; CI `npm ci` sin `--legacy-peer-deps`
 - [ ] C22 `chore`: `npx update-browserslist-db@latest` + `baseline-browser-mapping@latest`
 
 #### Fase 5 — Docs
+
 - [ ] C23 `docs`: crear `.env.example`; quitar referencias a `EMAILJS_SETUP.md` / `LINKEDIN_PREVIEW_SETUP.md` (no existen); alinear comentario de plantilla EmailJS con nombres reales del form (B6); README con `data/`, `hooks/`, componentes nuevos
 - [x] C24 `docs`: actualizar TODO.md (26 Sep 2026)
 
 #### Verificación manual (tras Fase 3 y C21)
+
 - [ ] Cada ruta carga; título del tab correcto; toggle dark mode desktop y mobile
 - [ ] Camera: navegar fuera apaga el LED (B1); video descargado reproduce (B2); atajos funcionan tras grabar (B3)
 - [ ] TicTacToe: `N` alterna jugador inicial correctamente; scores sin delay (B4)
@@ -90,12 +98,14 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 ---
 
 ### 2. Meta Tags Dinámicos por Página (SEO) — pendientes
+
 **Prioridad**: 🔴 ALTA  
 **Estimación**: medio día  
 **Impacto**: ⭐⭐⭐  
 **Estado**: ⏳ Parcial (componente `SEO.jsx`, `og-image.png`, JSON-LD, sitemap y robots ya hechos)
 
 **Tareas**:
+
 - [ ] Crear imágenes OG por página (1200×630px) en `/public/og/`:
   - [ ] About
   - [ ] Projects
@@ -110,6 +120,7 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 ## 🟡 PRIORIDAD MEDIA
 
 ### 3. Deuda técnica (detectada en análisis del 26 Sep 2026)
+
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: variable
 
@@ -123,11 +134,13 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 ---
 
 ### 4. Progressive Web App (PWA)
+
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1-2 días  
 **Impacto**: ⭐⭐⭐⭐
 
 **Tareas**:
+
 - [ ] Instalar `vite-plugin-pwa`
 - [ ] Crear `manifest.json` (nombre, íconos 192/512 — ya existen en `/public`, colores, `display: standalone`)
 - [ ] Configurar Service Worker
@@ -143,11 +156,13 @@ npm install -D vite-plugin-pwa
 ---
 
 ### 5. Analytics y Monitoreo
+
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
 **Impacto**: ⭐⭐⭐
 
 **Tareas**:
+
 - [ ] Configurar Google Analytics 4 (cuenta, Measurement ID, gtag en `index.html`) o alternativa privacy-friendly (Plausible)
 - [ ] Eventos personalizados: clic en proyectos, uso de calculadora/reloj/cámara, envío de formulario
 - [ ] Metas y conversiones
@@ -156,12 +171,14 @@ npm install -D vite-plugin-pwa
 ---
 
 ### 6. Mejoras en About.jsx
+
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2 días  
 **Impacto**: ⭐⭐⭐⭐  
 **Depende de**: C14/C15 (datos en `cv.js`, `AccordionSection`)
 
 **Tareas**:
+
 - [ ] Timeline visual de experiencia (línea vertical con puntos, fechas destacadas)
 - [ ] Sección de certificaciones (badges, links a credenciales)
 - [ ] Gráficos de habilidades (barras de progreso)
@@ -171,12 +188,14 @@ npm install -D vite-plugin-pwa
 ---
 
 ### 7. Filtros y Búsqueda en Proyectos
+
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
 **Impacto**: ⭐⭐⭐  
 **Depende de**: C14 (`projects.js`)
 
 **Tareas**:
+
 - [ ] Agregar tags/categoría/dificultad a cada proyecto en `projects.js`
 - [ ] Filtros por categoría (múltiple, reset)
 - [ ] Barra de búsqueda en tiempo real (nombre, descripción)
@@ -188,12 +207,14 @@ npm install -D vite-plugin-pwa
 ## 🟢 PRIORIDAD BAJA
 
 ### 8. Internacionalización (i18n)
+
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 días  
 **Impacto**: ⭐⭐⭐  
 **Depende de**: C14 (textos centralizados en `src/data/`)
 
 **Tareas**:
+
 - [ ] Instalar `react-i18next` + `i18next`
 - [ ] Archivos `es.json` / `en.json`
 - [ ] Traducir todos los textos
@@ -204,11 +225,13 @@ npm install -D vite-plugin-pwa
 ---
 
 ### 9. Blog o Sección de Artículos
+
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 5-7 días  
 **Impacto**: ⭐⭐⭐⭐
 
 **Tareas**:
+
 - [ ] Decidir enfoque: Markdown estático / CMS headless / integración Medium-Dev.to
 - [ ] Si Markdown: parser, `/content/blog`, componente de post, lista con preview, syntax highlighting, metadata
 - [ ] Categorías y tags, búsqueda, RSS feed
@@ -217,11 +240,13 @@ npm install -D vite-plugin-pwa
 ---
 
 ### 10. Tests Unitarios y E2E
+
 **Prioridad**: 🟢 BAJA (subir a MEDIA junto con #3)  
 **Estimación**: 4-5 días  
 **Impacto**: ⭐⭐⭐
 
 **Tareas**:
+
 - [ ] Configurar Vitest + React Testing Library
 - [ ] Tests unitarios: lógica de Calculadora, ganador de TicTacToe, componentes básicos
 - [ ] Tests de integración: navegación, formulario de contacto
@@ -236,11 +261,13 @@ npm install -D @playwright/test
 ---
 
 ### 11. Scroll to Top y Breadcrumbs
+
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 horas  
 **Impacto**: ⭐⭐
 
 **Tareas**:
+
 - [ ] Botón Scroll to Top (aparece tras scroll, animación, smooth scroll, fixed bottom-right)
 - [ ] Breadcrumbs: componente reutilizable generado desde la ruta actual, implementado en proyectos
 
@@ -249,43 +276,51 @@ npm install -D @playwright/test
 ## 🔵 FUTURO / IDEAS
 
 ### 12. Sistema de Autenticación (Admin)
+
 Panel de administración para editar contenido (Firebase Auth / Auth0), CRUD de proyectos desde UI, editar About sin tocar código.
 
 ### 13. Modo de Presentación
+
 Fullscreen para mostrar proyectos, navegación con flechas, sin navbar/footer. Útil en entrevistas.
 
 ### 14. Easter Eggs y Juegos Ocultos
+
 Konami Code, Snake en consola, efectos en fechas especiales, modo Matrix.
 
 ### 15. Integración con GitHub API
+
 Repos reales, estadísticas de commits, lenguajes más usados, contribuciones recientes.
 
 ### 16. Versión de Consola
+
 Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `contact`, ASCII art.
 
 ---
 
 ## 📊 Resumen de Prioridades
 
-| Prioridad | Cantidad | Tiempo Total Estimado |
-|-----------|----------|----------------------|
-| 🔴 ALTA | 2 tareas | 3 días |
-| 🟡 MEDIA | 5 tareas | 6-8 días + deuda técnica |
-| 🟢 BAJA | 4 tareas | 13-17 días |
-| 🔵 FUTURO | 5 ideas | - |
+| Prioridad | Cantidad | Tiempo Total Estimado    |
+| --------- | -------- | ------------------------ |
+| 🔴 ALTA   | 2 tareas | 3 días                   |
+| 🟡 MEDIA  | 5 tareas | 6-8 días + deuda técnica |
+| 🟢 BAJA   | 4 tareas | 13-17 días               |
+| 🔵 FUTURO | 5 ideas  | -                        |
 
 ---
 
 ## 🎯 Roadmap Sugerido
 
 ### Sprint 0 (1 semana) - Limpieza ⏳ Siguiente
+
 1. Limpieza de código (24 commits atómicos)
 2. Imágenes OG por página + validación en debuggers
 
 ### Sprint 1 (1-2 semanas) - Fundamentos ✅ Completado
+
 - Dark Mode, Navbar responsive, Formulario de contacto, Responsividad móvil, SEO base
 
 ### Sprint 2 (2-3 semanas) - Mejoras UX ⏳ Parcial
+
 - ✅ Animaciones (framer-motion)
 - ✅ Sitemap / robots.txt
 - ✅ Toast notifications
@@ -293,12 +328,14 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - [ ] Analytics
 
 ### Sprint 3 (3-4 semanas) - Contenido
+
 - Mejoras en About
 - Filtros en Proyectos
 - Scroll to Top / Breadcrumbs
 - Tests unitarios (lógica pura)
 
 ### Sprint 4+ (Opcional) - Avanzado
+
 - i18n, Blog, E2E, ideas futuras
 
 ---
