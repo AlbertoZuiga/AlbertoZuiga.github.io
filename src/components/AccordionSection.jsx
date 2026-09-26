@@ -13,7 +13,7 @@ const AccordionSection = ({ title, isOpen, onToggle, children }) => {
     >
       <button
         type="button"
-        className="w-full flex justify-between items-center p-4 sm:p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500"
+        className="w-full flex justify-between items-center p-4 sm:p-6 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors focus:outline-hidden focus-visible:ring-2 focus-visible:ring-primary-500"
         onClick={onToggle}
         aria-expanded={isOpen}
       >
@@ -21,7 +21,7 @@ const AccordionSection = ({ title, isOpen, onToggle, children }) => {
           {title}
         </h2>
         <svg
-          className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
+          className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white shrink-0 ml-2 ${
             isOpen ? "rotate-180" : ""
           }`}
           fill="none"

@@ -46,7 +46,8 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 - ✅ **Animaciones**: framer-motion con variantes reutilizables, `PageTransition` y `AnimatePresence`, respeta `prefers-reduced-motion`
 - ✅ **Formulario de contacto**: EmailJS con validación, honeypot y toasts (`react-hot-toast`)
 - ✅ **GitHub Pages Compatible**: Script de routing para SPA en GitHub Pages
-- ✅ **CI**: lint + format check + build en GitHub Actions antes de desplegar
+- ✅ **Code-splitting**: cada ruta es un chunk propio (`React.lazy` + `Suspense`)
+- ✅ **CI**: lint + format check + tests + build en GitHub Actions antes de desplegar
 
 ---
 
@@ -56,7 +57,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 
 - **React** 19 - Biblioteca UI (metas de `<head>` nativas, sin react-helmet)
 - **React Router DOM** 7 - Enrutamiento SPA
-- **Tailwind CSS** 3.4 - Framework CSS utility-first
+- **Tailwind CSS** 4 - Framework CSS utility-first (`@theme` en `index.css`, plugin `@tailwindcss/vite`)
 - **framer-motion** 12 - Animaciones
 - **react-hot-toast** 2 - Notificaciones
 - **@emailjs/browser** 4 - Envío del formulario de contacto
@@ -67,7 +68,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 
 - **ESLint** 9 - Linting (react, react-hooks, react-refresh)
 - **Prettier** 3 - Formateo
-- **PostCSS** + **Autoprefixer** - Procesamiento CSS
+- **Vitest** 4 - Tests unitarios de la lógica pura (`src/utils/`)
 
 ### Deployment
 
@@ -127,16 +128,17 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   │   ├── CameraProject.jsx
 │   │   └── TicTacToeProject.jsx
 │   ├── utils/
-│   │   └── animations.js         # Variantes de framer-motion
+│   │   ├── animations.js         # Variantes de framer-motion
+│   │   ├── calculator.js         # calculate() + calculator.test.js
+│   │   └── ticTacToe.js          # checkWin()/isDraw() + ticTacToe.test.js
 │   ├── App.jsx                   # Rutas + AnimatePresence + Toaster
 │   ├── main.jsx
-│   └── index.css                 # Tailwind + clases utilitarias
+│   └── index.css                 # Tailwind (@theme, dark variant) + clases utilitarias
 ├── .env.example                  # Variables de entorno de ejemplo
 ├── .prettierrc / .editorconfig
 ├── eslint.config.js
 ├── index.html                    # HTML base + JSON-LD
-├── tailwind.config.js
-├── vite.config.js
+├── vite.config.js                # react + @tailwindcss/vite
 └── TODO.md
 ```
 
@@ -195,6 +197,7 @@ npm run deploy          # Construye y despliega a GitHub Pages
 
 # Calidad
 npm run lint            # ESLint
+npm test                # Vitest (src/utils/*.test.js)
 npm run format          # Prettier --write
 npm run format:check    # Prettier --check (CI)
 
@@ -419,22 +422,22 @@ El archivo `public/404.html` y el script en `index.html` permiten que las rutas 
 
 ### Tailwind CSS
 
-**Colores personalizados** (`tailwind.config.js`):
+Tailwind 4 no usa `tailwind.config.js`: el tema vive en `src/index.css` y el dark mode se activa con la clase `.dark` en `<html>` (`@custom-variant`).
 
-```javascript
-colors: {
-  primary: {
-    50: '#e6f3f9',
-    100: '#cce7f3',
-    200: '#99cfe7',
-    300: '#66b7db',
-    400: '#339fcf',
-    500: '#0073ba',
-    600: '#005c95',
-    700: '#004570',
-    800: '#002e4a',
-    900: '#001725',
-  }
+**Colores personalizados** (`src/index.css`):
+
+```css
+@theme {
+  --color-primary-50: #e6f3f9;
+  --color-primary-100: #cce7f3;
+  --color-primary-200: #99cfe7;
+  --color-primary-300: #66b7db;
+  --color-primary-400: #339fcf;
+  --color-primary-500: #0073ba;
+  --color-primary-600: #005c95;
+  --color-primary-700: #004570;
+  --color-primary-800: #002e4a;
+  --color-primary-900: #001725;
 }
 ```
 

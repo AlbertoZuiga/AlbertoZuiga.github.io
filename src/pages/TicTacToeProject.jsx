@@ -5,17 +5,7 @@ import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn } from "../utils/animations";
-
-const WINNING_COMBINATIONS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6],
-];
+import { checkWin, isDraw } from "../utils/ticTacToe";
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
@@ -25,19 +15,6 @@ const TicTacToe = () => {
   const [firstPlayer, setFirstPlayer] = useState("X"); // Quien inicia el juego
   const [scores, setScores] = useState({ X: 0, O: 0, draws: 0 });
   const [gamesPlayed, setGamesPlayed] = useState(0);
-
-  const checkWin = (currentBoard, player) => {
-    for (const combination of WINNING_COMBINATIONS) {
-      if (combination.every((index) => currentBoard[index] === player)) {
-        return combination;
-      }
-    }
-    return null;
-  };
-
-  const isDraw = (currentBoard) => {
-    return currentBoard.every((cell) => cell !== null);
-  };
 
   const handleClick = (index) => {
     if (!gameOn || board[index]) return;
@@ -145,7 +122,7 @@ const TicTacToe = () => {
 
   return (
     <PageTransition>
-      <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
+      <div className="min-h-screen bg-linear-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
         <SEO {...seoPages["/projects/tic-tac-toe"]} />
         <div className="max-w-2xl mx-auto px-4">
           <BackToProjects variant="dark" />
@@ -165,9 +142,13 @@ const TicTacToe = () => {
             {gamesPlayed > 0 && (
               <div className="text-sm text-purple-200">
                 Partidas jugadas: {gamesPlayed} | Atajos:{" "}
-                <kbd className="px-1 py-0.5 bg-white/20 rounded text-xs">N</kbd>{" "}
+                <kbd className="px-1 py-0.5 bg-white/20 rounded-sm text-xs">
+                  N
+                </kbd>{" "}
                 Siguiente |{" "}
-                <kbd className="px-1 py-0.5 bg-white/20 rounded text-xs">R</kbd>{" "}
+                <kbd className="px-1 py-0.5 bg-white/20 rounded-sm text-xs">
+                  R
+                </kbd>{" "}
                 Resetear
               </div>
             )}
@@ -175,7 +156,7 @@ const TicTacToe = () => {
 
           {/* Tablero */}
           <motion.div
-            className="bg-white/10 backdrop-blur-sm rounded-3xl p-8 shadow-2xl mb-8"
+            className="bg-white/10 backdrop-blur-xs rounded-3xl p-8 shadow-2xl mb-8"
             variants={fadeIn}
             initial="hidden"
             animate="visible"
@@ -241,7 +222,7 @@ const TicTacToe = () => {
             animate="visible"
             transition={{ delay: 0.4 }}
           >
-            <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white max-w-md">
+            <div className="inline-block bg-white/10 backdrop-blur-xs rounded-lg p-6 text-white max-w-md">
               <h3 className="text-xl font-semibold mb-3">Cómo Jugar</h3>
               <ul className="text-sm space-y-2 text-left">
                 <li>✓ Los jugadores se turnan para colocar X u O</li>
@@ -274,7 +255,7 @@ const TicTacToe = () => {
             animate="visible"
             transition={{ delay: 0.5 }}
           >
-            <div className="bg-blue-500/20 backdrop-blur-sm rounded-lg p-4 text-center">
+            <div className="bg-blue-500/20 backdrop-blur-xs rounded-lg p-4 text-center">
               <div className="text-4xl font-bold text-blue-400 mb-1">X</div>
               <div className="text-2xl font-bold text-white mb-1">
                 {scores.X}
@@ -284,14 +265,14 @@ const TicTacToe = () => {
                 <div className="text-xs text-yellow-300 mt-1">⭐ Inicia</div>
               )}
             </div>
-            <div className="bg-purple-500/20 backdrop-blur-sm rounded-lg p-4 text-center">
+            <div className="bg-purple-500/20 backdrop-blur-xs rounded-lg p-4 text-center">
               <div className="text-3xl font-bold text-purple-300 mb-1">⚖️</div>
               <div className="text-2xl font-bold text-white mb-1">
                 {scores.draws}
               </div>
               <div className="text-xs text-white/80">empates</div>
             </div>
-            <div className="bg-pink-500/20 backdrop-blur-sm rounded-lg p-4 text-center">
+            <div className="bg-pink-500/20 backdrop-blur-xs rounded-lg p-4 text-center">
               <div className="text-4xl font-bold text-pink-400 mb-1">O</div>
               <div className="text-2xl font-bold text-white mb-1">
                 {scores.O}

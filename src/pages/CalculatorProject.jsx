@@ -5,6 +5,7 @@ import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn, scaleIn } from "../utils/animations";
+import { calculate } from "../utils/calculator";
 
 const Calculator = () => {
   const [display, setDisplay] = useState("0");
@@ -79,21 +80,6 @@ const Calculator = () => {
     setPendingOperation(nextOperation);
   };
 
-  const calculate = (firstValue, secondValue, operation) => {
-    switch (operation) {
-      case "sum":
-        return firstValue + secondValue;
-      case "dif":
-        return firstValue - secondValue;
-      case "mul":
-        return firstValue * secondValue;
-      case "div":
-        return secondValue === 0 ? "Error" : firstValue / secondValue;
-      default:
-        return secondValue;
-    }
-  };
-
   const performEquals = () => {
     const inputValue = Number.parseFloat(display.replace(",", "."));
 
@@ -148,7 +134,7 @@ const Calculator = () => {
     <PageTransition>
       <div
         ref={calculatorRef}
-        className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-8"
+        className="min-h-screen bg-linear-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-8"
         onKeyDown={handleKeyPress}
         tabIndex={0}
         role="application"

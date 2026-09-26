@@ -77,7 +77,7 @@ const Clock = () => {
     <PageTransition>
       <div
         ref={containerRef}
-        className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 py-8"
+        className="min-h-screen bg-linear-to-br from-indigo-900 via-purple-900 to-pink-800 py-8"
         onKeyDown={handleKeyPress}
         tabIndex={0}
         role="application"
@@ -213,7 +213,7 @@ const Clock = () => {
             animate="visible"
             transition={{ delay: 0.4 }}
           >
-            <div className="inline-block bg-white/10 backdrop-blur-sm rounded-lg p-6 text-white">
+            <div className="inline-block bg-white/10 backdrop-blur-xs rounded-lg p-6 text-white">
               <p className="text-sm mb-2">⌨️ Atajos de teclado:</p>
               <p className="text-xs opacity-80">
                 F - Cambiar formato | P - Cambiar precisión

@@ -139,6 +139,19 @@ const About = () => {
                         {entry.degree}
                       </>
                     )}
+                    {entry.thesis && (
+                      <>
+                        <br />
+                        <a
+                          href={entry.thesis.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-primary-600 dark:text-primary-400 hover:underline"
+                        >
+                          {entry.thesis.text}
+                        </a>
+                      </>
+                    )}
                     {entry.courses?.map((course) => (
                       <span key={course}>
                         <br />

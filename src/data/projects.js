@@ -1,5 +1,16 @@
 export const projects = [
   {
+    title: "Arbocensus",
+    link: "https://github.com/AlbertoZuiga/arbocensus-routing",
+    description:
+      "Proyecto de título: optimización de rutas para censo de árboles urbanos. mTSP con OR-Tools, OSRM, Django + PostGIS y React",
+    color: "from-green-950 to-emerald-800",
+    icon: "🌳",
+    isReact: false,
+    external: true,
+    framework: "Django + React",
+  },
+  {
     title: "Scheduler App",
     link: "http://scheduler-app-iu34.onrender.com/",
     description:

@@ -127,55 +127,45 @@ Hallazgo (26 Sep 2026): los scrapers no ejecutan JS, así que las metas de `SEO.
 ### 3. Deuda técnica (detectada en análisis del 26 Sep 2026)
 
 **Prioridad**: 🟡 MEDIA  
-**Estimación**: variable
+**Estimación**: variable  
+**Rama**: `chore/tech-debt` (26 Sep 2026)
 
-- [ ] Tests unitarios con Vitest: extraer `calculate()` (Calculator) y `checkWin()` (TicTacToe) a `src/utils/` como funciones puras y testearlas (ver #10)
-- [ ] Code-splitting de rutas con `React.lazy` + `Suspense` (bundle 466 kB / 140 kB gzip; framer-motion es el mayor peso)
-- [ ] Migrar Tailwind 3.4 → 4
-- [ ] Decidir: quitar `prop-types` y pasar a TypeScript (o JSDoc con `checkJs`)
-- [ ] Documentar `scripts/generate-favicons.mjs` en README
+- [x] Tests unitarios con Vitest: `calculate()` → `src/utils/calculator.js`, `checkWin()`/`isDraw()` → `src/utils/ticTacToe.js`; 6 tests en `src/utils/*.test.js`; `npm test` en CI antes del build
+- [x] Code-splitting de rutas con `React.lazy` + `Suspense`: chunk inicial 432 kB → 256 kB (136 → 83 kB gzip); framer-motion queda en un chunk compartido (118 kB) que carga con la primera página. La `key` va en `<Suspense>` porque `AnimatePresence` solo observa a su hijo directo
+- [x] Migrar Tailwind 3.4 → 4 (`npx @tailwindcss/upgrade`): `@theme` + `@custom-variant dark` en `index.css`, sin `tailwind.config.js` ni PostCSS (plugin `@tailwindcss/vite`); se conserva `cursor: pointer` en botones
+- [x] Decidir: quitar `prop-types` y pasar a TypeScript. React 19 ya no ejecuta `propTypes` en componentes de función, así que hoy la dependencia no valida nada en runtime. TypeScript da chequeo real en build; JSDoc + `checkJs` sería un paso intermedio sin renombrar archivos, pero el proyecto es chico (≈20 archivos) y no lo amerita
+  - [ ] Migrar a TypeScript: `tsconfig.json` con `allowJs`, `typescript-eslint`, renombrar `.jsx` → `.tsx` por archivo, quitar `prop-types` y la regla `react/prop-types`
+- [x] Documentar `scripts/generate-favicons.mjs` en README (sección "Favicons"; ya estaba desde C23)
 - [x] Definir estilo de toast en dark mode una vez movido a `App.jsx` (C19: fondo gray-100 / texto gray-900)
 
----
+#### Verificación manual
 
-### 4. Progressive Web App (PWA)
-
-**Prioridad**: 🟡 MEDIA  
-**Estimación**: 1-2 días  
-**Impacto**: ⭐⭐⭐⭐
-
-**Tareas**:
-
-- [ ] Instalar `vite-plugin-pwa`
-- [ ] Crear `manifest.json` (nombre, íconos 192/512 — ya existen en `/public`, colores, `display: standalone`)
-- [ ] Configurar Service Worker
-- [ ] Estrategia de caché: cache-first para assets, network-first para páginas
-- [ ] Testing de instalación: Android, iOS (limitado), Desktop
-- [ ] Banner de instalación personalizado
-- [ ] Funcionalidad offline básica
-
-```bash
-npm install -D vite-plugin-pwa
-```
+- [ ] Transición de salida sigue funcionando con rutas lazy; sin flash en blanco al entrar por primera vez a cada ruta
+- [ ] Recorrer las 8 rutas en light/dark tras Tailwind 4: gradientes, `backdrop-blur`, bordes (compat `border-color: gray-200` en `index.css`), focus rings, cursor en botones
 
 ---
 
-### 5. Analytics y Monitoreo
+### 4. Páginas de detalle para proyectos externos
 
-**Prioridad**: 🟡 MEDIA  
+**Prioridad**: 🔴 ALTA  
 **Estimación**: 1 día  
-**Impacto**: ⭐⭐⭐
+**Impacto**: ⭐⭐⭐⭐  
+**Depende de**: C14 (`projects.js`)
+
+Problema (26 Sep 2026): las cards de Arbocensus, Scheduler App y Healthy enlazan directo a la demo o al repo. Las demos en Render se duermen o están caídas, así que el visitante llega a un error sin contexto.
 
 **Tareas**:
 
-- [ ] Configurar Google Analytics 4 (cuenta, Measurement ID, gtag en `index.html`) o alternativa privacy-friendly (Plausible)
-- [ ] Eventos personalizados: clic en proyectos, uso de calculadora/reloj/cámara, envío de formulario
-- [ ] Metas y conversiones
-- [ ] Testing de tracking
+- [ ] Extender `projects.js`: `slug`, `year`/`period`, `context` (por qué se hizo: ramo, título, personal), `longDescription`, `stack[]`, `repoUrl`, `demoUrl` (opcional). Repos: `AlbertoZuiga/scheduler`, `AlbertoZuiga/healthy`
+- [ ] Ruta `/projects/:slug` con `ProjectDetail.jsx` (lazy): título, icono, período, explicación, stack, y abajo botones "Ver código" y "Ver demo" (solo si `demoUrl` existe). Reusar `BackToProjects`
+- [ ] Cards en `Projects.jsx` llevan al detalle interno; quitar `external`/`isReact` si dejan de usarse
+- [ ] Estado de la demo al abrir el detalle: `fetch` a `demoUrl` con `AbortController` (~5 s). Fase 1: `mode: "no-cors"` (solo detecta host caído; despierta Render de paso). Fase 2: endpoint `/health` con CORS en scheduler y healthy → badge "En línea" / "Despertando (~1 min)" / "Caída" y botón deshabilitado si cae
+- [ ] SEO: entrada por slug en `seo.js`, OG en `generate-og.mjs`, ruta en `prerender.mjs` y `sitemap.xml`
+- [ ] Verificación manual: 3 detalles cargan, botones abren en pestaña nueva, prerender genera `dist/projects/<slug>/index.html`
 
 ---
 
-### 6. Mejoras en About.jsx
+### 5. Mejoras en About.jsx
 
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2 días  
@@ -192,7 +182,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 7. Filtros y Búsqueda en Proyectos
+### 6. Filtros y Búsqueda en Proyectos
 
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
@@ -211,7 +201,7 @@ npm install -D vite-plugin-pwa
 
 ## 🟢 PRIORIDAD BAJA
 
-### 8. Internacionalización (i18n)
+### 7. Internacionalización (i18n)
 
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 días  
@@ -229,7 +219,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 9. Blog o Sección de Artículos
+### 8. Blog o Sección de Artículos
 
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 5-7 días  
@@ -244,7 +234,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 10. Tests Unitarios y E2E
+### 9. Tests Unitarios y E2E
 
 **Prioridad**: 🟢 BAJA (subir a MEDIA junto con #3)  
 **Estimación**: 4-5 días  
@@ -252,11 +242,13 @@ npm install -D vite-plugin-pwa
 
 **Tareas**:
 
-- [ ] Configurar Vitest + React Testing Library
-- [ ] Tests unitarios: lógica de Calculadora, ganador de TicTacToe, componentes básicos
+- [x] Configurar Vitest (26 Sep 2026, #3); falta React Testing Library
+- [x] Tests unitarios: lógica de Calculadora, ganador de TicTacToe (`src/utils/*.test.js`)
+- [ ] Tests unitarios: componentes básicos
 - [ ] Tests de integración: navegación, formulario de contacto
 - [ ] Playwright para E2E: flujo de navegación, proyectos interactivos, formulario
-- [ ] Ejecutar tests en GitHub Actions; coverage reports
+- [x] Ejecutar tests en GitHub Actions (`npm test` en `static.yml`)
+- [ ] Coverage reports
 
 ```bash
 npm install -D vitest @testing-library/react @testing-library/jest-dom
@@ -265,7 +257,7 @@ npm install -D @playwright/test
 
 ---
 
-### 11. Scroll to Top y Breadcrumbs
+### 10. Scroll to Top y Breadcrumbs
 
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 horas  
@@ -280,23 +272,23 @@ npm install -D @playwright/test
 
 ## 🔵 FUTURO / IDEAS
 
-### 12. Sistema de Autenticación (Admin)
+### 11. Sistema de Autenticación (Admin)
 
 Panel de administración para editar contenido (Firebase Auth / Auth0), CRUD de proyectos desde UI, editar About sin tocar código.
 
-### 13. Modo de Presentación
+### 12. Modo de Presentación
 
 Fullscreen para mostrar proyectos, navegación con flechas, sin navbar/footer. Útil en entrevistas.
 
-### 14. Easter Eggs y Juegos Ocultos
+### 13. Easter Eggs y Juegos Ocultos
 
 Konami Code, Snake en consola, efectos en fechas especiales, modo Matrix.
 
-### 15. Integración con GitHub API
+### 14. Integración con GitHub API
 
 Repos reales, estadísticas de commits, lenguajes más usados, contribuciones recientes.
 
-### 16. Versión de Consola
+### 15. Versión de Consola
 
 Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `contact`, ASCII art.
 
@@ -304,21 +296,21 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 
 ## 📊 Resumen de Prioridades
 
-| Prioridad | Cantidad | Tiempo Total Estimado    |
-| --------- | -------- | ------------------------ |
-| 🔴 ALTA   | 2 tareas | 3 días                   |
-| 🟡 MEDIA  | 5 tareas | 6-8 días + deuda técnica |
-| 🟢 BAJA   | 4 tareas | 13-17 días               |
-| 🔵 FUTURO | 5 ideas  | -                        |
+| Prioridad | Cantidad | Tiempo Total Estimado   |
+| --------- | -------- | ----------------------- |
+| 🔴 ALTA   | 3 tareas | 4 días                  |
+| 🟡 MEDIA  | 3 tareas | 3-4 días + migración TS |
+| 🟢 BAJA   | 4 tareas | 13-17 días              |
+| 🔵 FUTURO | 5 ideas  | -                       |
 
 ---
 
 ## 🎯 Roadmap Sugerido
 
-### Sprint 0 (1 semana) - Limpieza ⏳ Siguiente
+### Sprint 0 (1 semana) - Limpieza ✅ Completado
 
 1. Limpieza de código (24 commits atómicos)
-2. Imágenes OG por página + validación en debuggers
+2. Imágenes OG por página (falta validación en debuggers)
 
 ### Sprint 1 (1-2 semanas) - Fundamentos ✅ Completado
 
@@ -329,15 +321,14 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - ✅ Animaciones (framer-motion)
 - ✅ Sitemap / robots.txt
 - ✅ Toast notifications
-- [ ] PWA
-- [ ] Analytics
+- [ ] Páginas de detalle para proyectos externos
 
 ### Sprint 3 (3-4 semanas) - Contenido
 
 - Mejoras en About
 - Filtros en Proyectos
 - Scroll to Top / Breadcrumbs
-- Tests unitarios (lógica pura)
+- ✅ Tests unitarios (lógica pura)
 
 ### Sprint 4+ (Opcional) - Avanzado
 
@@ -364,6 +355,11 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - [x] **Toast notifications** con `react-hot-toast`
 - [x] **Animaciones con framer-motion**: variantes reutilizables (`utils/animations.js`), `PageTransition`, animaciones de entrada y scroll en todas las páginas, `prefers-reduced-motion`
 - [x] **Análisis de limpieza de código** y plan de commits atómicos (26 Sep 2026)
+- [x] **Deuda técnica #3**: Vitest, code-splitting por ruta, Tailwind 4, decisión TypeScript (26 Sep 2026)
+
+## ❌ Descartadas
+
+- **PWA** y **Analytics/Monitoreo** (26 Sep 2026): sobreingeniería para un portafolio estático; sin caso de uso offline ni volumen que justifique tracking
 
 ---
 
