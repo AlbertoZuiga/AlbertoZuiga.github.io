@@ -70,6 +70,7 @@ const About = () => {
 
           <AccordionSection
             title="Antecedentes Personales"
+            icon="👤"
             isOpen={expandedSections.personal}
             onToggle={() => toggleSection("personal")}
           >
@@ -103,6 +104,7 @@ const About = () => {
 
           <AccordionSection
             title="Experiencia Laboral"
+            icon="💼"
             isOpen={expandedSections.work}
             onToggle={() => toggleSection("work")}
           >
@@ -111,6 +113,7 @@ const About = () => {
 
           <AccordionSection
             title="Antecedentes Académicos"
+            icon="🎓"
             isOpen={expandedSections.academic}
             onToggle={() => toggleSection("academic")}
           >
@@ -160,6 +163,7 @@ const About = () => {
 
           <AccordionSection
             title="Liderazgo y Voluntariado"
+            icon="🤝"
             isOpen={expandedSections.volunteering}
             onToggle={() => toggleSection("volunteering")}
           >
@@ -168,6 +172,7 @@ const About = () => {
 
           <AccordionSection
             title="Formación Complementaria"
+            icon="📜"
             isOpen={expandedSections.additional}
             onToggle={() => toggleSection("additional")}
           >
@@ -188,6 +193,7 @@ const About = () => {
 
           <AccordionSection
             title="Competencias Profesionales"
+            icon="🛠️"
             isOpen={expandedSections.skills}
             onToggle={() => toggleSection("skills")}
           >

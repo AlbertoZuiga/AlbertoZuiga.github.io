@@ -9,7 +9,7 @@ const shouldReduceMotion = () => {
 };
 
 // Duración base de las animaciones (se reduce en móviles)
-const getDuration = (base = 0.5) => {
+export const getDuration = (base = 0.5) => {
   if (shouldReduceMotion()) return 0.1;
   return base;
 };
