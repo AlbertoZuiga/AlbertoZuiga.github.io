@@ -153,9 +153,12 @@ const About = () => {
             <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
               {additional.heading}
             </h3>
-            <ul className="list-disc list-inside space-y-2 text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+            <ul className="flex flex-wrap gap-2">
               {additional.items.map((item) => (
-                <li key={item.em}>
+                <li
+                  key={item.em}
+                  className="rounded-full bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 px-3 py-1 text-sm"
+                >
                   {item.text} <em>{item.em}</em>
                 </li>
               ))}
