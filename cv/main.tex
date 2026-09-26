@@ -2,7 +2,7 @@
 
 \usepackage[spanish]{babel}
 \usepackage[T1]{fontenc}
-\usepackage[hmargin=0.65in, vmargin=0.5in]{geometry}
+\usepackage[hmargin=0.65in, vmargin=0.4in]{geometry}
 \usepackage{tabularx}
 \usepackage{xcolor}
 \usepackage{titlesec}
@@ -14,13 +14,13 @@
 \hypersetup{colorlinks=true, urlcolor=accent, linkcolor=accent}
 
 \renewcommand{\familydefault}{\sfdefault}
-\linespread{1.05}
+\linespread{1.0}
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
 \raggedright
 
 \titleformat{\section}{\Large\bfseries\color{accent}}{}{0em}{}[{\color{accent}\titlerule[0.8pt]}]
-\titlespacing*{\section}{0pt}{11pt}{5pt}
+\titlespacing*{\section}{0pt}{9pt}{4pt}
 
 \setlist[itemize]{label={\color{accent}\textbullet}, leftmargin=1.4em, topsep=2pt, itemsep=2pt, parsep=0pt}
 
@@ -29,7 +29,7 @@
   {\large\textbf{#1}} \hfill {\color{muted}#2} \\
   {\color{accent}\textit{#3}}\par
 }
-\newcommand{\entrygap}{\vspace{7pt}}
+\newcommand{\entrygap}{\vspace{5pt}}
 
 \begin{document}
 
@@ -67,6 +67,14 @@
 
 \section*{Proyectos}
 
+{\large\textbf{Arbocensus}} \quad {\color{accent}\textit{Django/GeoDjango, PostGIS, OR-Tools, Celery, React}} \hfill \href{https://github.com/AlbertoZuiga/arbocensus-routing}{GitHub}
+\begin{itemize}
+  \item \textbf{Proyecto de título:} optimización de rutas para equipos de censo de árboles urbanos, modelado como mTSP
+        con restricciones de tiempo por ruta y balance de carga, resuelto con OR-Tools VRP sobre tiempos peatonales reales de OSRM.
+  \item Backend Django + PostGIS con jobs asíncronos en Celery/Redis; SPA en React con mapa Leaflet.
+        Docker Compose, CI/CD con GitHub Actions y despliegue en DigitalOcean.
+\end{itemize}
+\entrygap
 
 {\large\textbf{Scheduler App}} \quad {\color{accent}\textit{Python, Flask}} \hfill \href{http://scheduler-app-iu34.onrender.com/}{Ver demo}
 \begin{itemize}
@@ -100,11 +108,11 @@
 
 \section*{Habilidades}
 
-{\renewcommand{\arraystretch}{1.15}
+{\renewcommand{\arraystretch}{1.05}
 \begin{tabularx}{\textwidth}{@{}>{\bfseries\color{accent}}l X@{}}
   Lenguajes    & Python, JavaScript, Ruby, SQL, C++, HTML/CSS \\
   Frameworks   & React, React Native, Flask, Django, FastAPI \\
-  Herramientas & Git/GitHub, Docker, LaTeX, Excel \\
+  Herramientas & Git/GitHub, Docker, PostgreSQL/PostGIS, OR-Tools, Celery, LaTeX, Excel \\
   Idiomas      & Español (nativo), Inglés (intermedio) \\
 \end{tabularx}}
 

@@ -42,7 +42,15 @@ export const work = [
 
 // `degree` se muestra tal cual; `courses` se renderiza como "Ayudante de <em>curso</em>"
 export const academic = [
-  { period: "2020 - 2026", org: site.university, degree: site.degree },
+  {
+    period: "2020 - 2026",
+    org: site.university,
+    degree: site.degree,
+    thesis: {
+      text: "Proyecto de título: Arbocensus, optimización de rutas para censo de árboles urbanos",
+      href: "https://github.com/AlbertoZuiga/arbocensus-routing",
+    },
+  },
   {
     period: "Mar 2026 - Jun 2026",
     org: site.university,
