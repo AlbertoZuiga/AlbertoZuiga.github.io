@@ -2,14 +2,20 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
-import { slideUp, staggerContainer, staggerItem, viewportConfig } from "../utils/animations";
+import {
+  slideUp,
+  staggerContainer,
+  staggerItem,
+  viewportConfig,
+} from "../utils/animations";
 
 const Projects = () => {
   const projects = [
     {
       title: "Scheduler App",
       link: "http://scheduler-app-iu34.onrender.com/",
-      description: "Gestión de horarios y división automática de grupos con Flask",
+      description:
+        "Gestión de horarios y división automática de grupos con Flask",
       color: "from-emerald-900 to-teal-900",
       icon: "📅",
       isReact: false,
@@ -19,7 +25,8 @@ const Projects = () => {
     {
       title: "Healthy",
       link: "https://healthy-k6hn.onrender.com",
-      description: "Sistema de recomendación de planes saludables de comida integrado con compras",
+      description:
+        "Sistema de recomendación de planes saludables de comida integrado con compras",
       color: "from-green-900 to-lime-900",
       icon: "🥗",
       isReact: false,
@@ -63,14 +70,14 @@ const Projects = () => {
   return (
     <PageTransition>
       <div className="min-h-screen py-12 dark:bg-gray-900 transition-colors duration-300">
-        <SEO 
+        <SEO
           title="Proyectos - Alberto Zúñiga | Portfolio de Desarrollo Web"
           description="Proyectos de desarrollo web: Scheduler App (Flask/Python), Healthy (Ruby on Rails), aplicaciones interactivas con JavaScript. Backend y frontend."
           url="https://albertozuiga.github.io/projects"
           keywords="proyectos web, Python, Flask, Ruby on Rails, JavaScript, desarrollo full stack, aplicaciones web, portfolio proyectos"
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div 
+          <motion.div
             className="text-center mb-12"
             variants={slideUp}
             initial="hidden"
@@ -102,7 +109,9 @@ const Projects = () => {
                       {project.icon}
                     </div>
                     <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
-                    <p className="text-gray-200 mb-4 flex-grow">{project.description}</p>
+                    <p className="text-gray-200 mb-4 flex-grow">
+                      {project.description}
+                    </p>
                     <div className="flex items-center gap-2 flex-wrap mt-auto">
                       {project.isReact && (
                         <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
@@ -113,7 +122,10 @@ const Projects = () => {
                         <span className="inline-flex items-center gap-1 bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full text-sm">
                           {project.framework === "Flask" && "🐍"}
                           {project.framework === "Ruby on Rails" && "💎"}
-                          {project.framework !== "Flask" && project.framework !== "Ruby on Rails" && "🔧"} {project.framework}
+                          {project.framework !== "Flask" &&
+                            project.framework !== "Ruby on Rails" &&
+                            "🔧"}{" "}
+                          {project.framework}
                         </span>
                       )}
                       <span className="inline-flex items-center gap-1 text-sm opacity-80">
@@ -127,7 +139,11 @@ const Projects = () => {
               );
 
               return project.isReact ? (
-                <Link key={project.title} to={project.link} className="h-full block">
+                <Link
+                  key={project.title}
+                  to={project.link}
+                  className="h-full block"
+                >
                   {ProjectCard}
                 </Link>
               ) : (

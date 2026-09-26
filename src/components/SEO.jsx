@@ -1,23 +1,23 @@
-import { Helmet } from 'react-helmet-async';
-import { useEffect } from 'react';
-import PropTypes from 'prop-types';
+import { Helmet } from "react-helmet-async";
+import { useEffect } from "react";
+import PropTypes from "prop-types";
 
-const SEO = ({ 
-  title = "Alberto Zúñiga - Desarrollador Full Stack", 
+const SEO = ({
+  title = "Alberto Zúñiga - Desarrollador Full Stack",
   description = "Portafolio de Alberto Zúñiga: Desarrollador Full Stack e Ingeniero Civil en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React.",
   image = "/og-image.png",
   url = "https://albertozuiga.github.io",
   type = "website",
-  keywords = "Alberto Zúñiga, desarrollador full stack, Python, JavaScript, Ruby on Rails, Flask, portfolio, desarrollo web"
+  keywords = "Alberto Zúñiga, desarrollador full stack, Python, JavaScript, Ruby on Rails, Flask, portfolio, desarrollo web",
 }) => {
   // URL completa de la imagen para OG
-  const fullImageUrl = image.startsWith('http') ? image : `${url}${image}`;
-  
+  const fullImageUrl = image.startsWith("http") ? image : `${url}${image}`;
+
   // Forzar actualización del título en el DOM
   useEffect(() => {
     document.title = title;
   }, [title]);
-  
+
   return (
     <Helmet prioritizeSeoTags>
       {/* Meta Tags Básicos */}
@@ -46,7 +46,7 @@ const SEO = ({
       <meta name="twitter:description" content={description} />
       <meta name="twitter:image" content={fullImageUrl} />
       <meta name="twitter:image:alt" content={title} />
-      
+
       {/* Additional SEO */}
       <meta name="author" content="Alberto Zúñiga" />
       <meta name="robots" content="index, follow" />
@@ -54,27 +54,27 @@ const SEO = ({
       {/* JSON-LD: Person */}
       <script type="application/ld+json">
         {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'Person',
-          name: 'Alberto Zúñiga',
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Alberto Zúñiga",
           url,
           image: fullImageUrl,
-          jobTitle: 'Desarrollador Full Stack',
+          jobTitle: "Desarrollador Full Stack",
           sameAs: [
-            'https://github.com/AlbertoZuiga',
-            'https://www.linkedin.com/in/alberto-zuniga-marinovic/'
-          ]
+            "https://github.com/AlbertoZuiga",
+            "https://www.linkedin.com/in/alberto-zuniga-marinovic/",
+          ],
         })}
       </script>
 
       {/* JSON-LD: WebSite */}
       <script type="application/ld+json">
         {JSON.stringify({
-          '@context': 'https://schema.org',
-          '@type': 'WebSite',
-          name: 'Alberto Zúñiga Portfolio',
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Alberto Zúñiga Portfolio",
           url,
-          inLanguage: 'es-CL'
+          inLanguage: "es-CL",
         })}
       </script>
     </Helmet>

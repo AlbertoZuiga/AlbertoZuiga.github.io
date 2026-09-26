@@ -15,26 +15,26 @@ export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     // Intentar obtener el tema guardado en localStorage
     const savedTheme = localStorage.getItem("theme");
-    
+
     // Si no hay tema guardado, usar preferencia del sistema
     if (!savedTheme) {
       return globalThis.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
     }
-    
+
     return savedTheme;
   });
 
   useEffect(() => {
     const root = globalThis.document.documentElement;
-    
+
     // Remover la clase anterior
     root.classList.remove("light", "dark");
-    
+
     // Agregar la nueva clase
     root.classList.add(theme);
-    
+
     // Guardar en localStorage
     localStorage.setItem("theme", theme);
   }, [theme]);
