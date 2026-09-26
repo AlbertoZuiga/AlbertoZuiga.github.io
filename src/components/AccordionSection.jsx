@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import PropTypes from "prop-types";
 import { fadeIn, viewportConfig } from "../utils/animations";
 
 const AccordionSection = ({ title, isOpen, onToggle, children }) => {
@@ -44,6 +45,13 @@ const AccordionSection = ({ title, isOpen, onToggle, children }) => {
       )}
     </motion.section>
   );
+};
+
+AccordionSection.propTypes = {
+  title: PropTypes.string.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  onToggle: PropTypes.func.isRequired,
+  children: PropTypes.node.isRequired,
 };
 
 export default AccordionSection;

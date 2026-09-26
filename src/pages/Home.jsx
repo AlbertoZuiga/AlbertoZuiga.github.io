@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import BrandMark from "../components/BrandMark";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import SkillCard from "../components/SkillCard";
 import {
   slideDown,
   slideUp,
@@ -204,21 +205,7 @@ const Home = () => {
                     viewport={viewportConfig}
                   >
                     {group.skills.map((skill) => (
-                      <motion.div
-                        key={skill.name}
-                        className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
-                        variants={staggerItem}
-                      >
-                        <div className="text-3xl sm:text-4xl mb-2 sm:mb-3">
-                          {skill.icon}
-                        </div>
-                        <h4 className="font-semibold text-gray-800 dark:text-gray-200 text-sm sm:text-base">
-                          {skill.name}
-                        </h4>
-                        <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-                          {skill.level}
-                        </p>
-                      </motion.div>
+                      <SkillCard key={skill.name} {...skill} />
                     ))}
                   </motion.div>
                 </div>

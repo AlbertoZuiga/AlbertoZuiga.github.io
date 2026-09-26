@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const sizeMap = {
   xs: "h-6 w-6",
@@ -42,6 +43,15 @@ const BrandMark = ({
       {Img}
     </Link>
   );
+};
+
+BrandMark.propTypes = {
+  to: PropTypes.string,
+  withLink: PropTypes.bool,
+  size: PropTypes.oneOf(Object.keys(sizeMap)),
+  className: PropTypes.string,
+  title: PropTypes.string,
+  ariaLabel: PropTypes.string,
 };
 
 export default BrandMark;

@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const SkillRow = ({ name, level }) => {
   return (
     <div className="flex justify-between items-center border-b border-gray-200 dark:border-gray-700 pb-2 text-sm sm:text-base">
@@ -15,6 +17,11 @@ const SkillRow = ({ name, level }) => {
       </span>
     </div>
   );
+};
+
+SkillRow.propTypes = {
+  name: PropTypes.string.isRequired,
+  level: PropTypes.string.isRequired,
 };
 
 export default SkillRow;
