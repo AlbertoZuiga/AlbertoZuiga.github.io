@@ -5,7 +5,6 @@ import {
   useLocation,
 } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
-import { HelmetProvider } from "react-helmet-async";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./context/ThemeContext";
 import { useTheme } from "./hooks/useTheme";
@@ -63,20 +62,18 @@ const AppRoutes = () => {
 
 function App() {
   return (
-    <HelmetProvider>
-      <ThemeProvider>
-        <Router>
-          <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-            <Navbar />
-            <main className="flex-grow">
-              <AppRoutes />
-            </main>
-            <Footer />
-          </div>
-          <ThemedToaster />
-        </Router>
-      </ThemeProvider>
-    </HelmetProvider>
+    <ThemeProvider>
+      <Router>
+        <div className="flex flex-col min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+          <Navbar />
+          <main className="flex-grow">
+            <AppRoutes />
+          </main>
+          <Footer />
+        </div>
+        <ThemedToaster />
+      </Router>
+    </ThemeProvider>
   );
 }
 
