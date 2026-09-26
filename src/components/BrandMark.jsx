@@ -40,7 +40,7 @@ const BrandMark = ({
       onClick={onClick}
       aria-label={ariaLabel}
       title={title}
-      className="inline-flex items-center justify-center rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-transform hover:scale-105 p-0.5"
+      className="inline-flex items-center justify-center rounded-lg focus:outline-hidden focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 focus:ring-offset-gray-800 transition-transform hover:scale-105 p-0.5"
     >
       <span className="sr-only">{title}</span>
       {Img}

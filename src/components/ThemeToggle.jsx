@@ -8,7 +8,7 @@ const ThemeToggle = ({ compact = false }) => {
   return (
     <button
       onClick={toggleTheme}
-      className="relative inline-flex items-center gap-2 px-1 py-1 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500"
+      className="relative inline-flex items-center gap-2 px-1 py-1 rounded-full transition-all duration-300 focus:outline-hidden focus:ring-2 focus:ring-primary-500"
       aria-label={label}
       title={label}
     >
