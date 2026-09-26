@@ -8,13 +8,7 @@ import SkillRow from "../components/SkillRow";
 import { slideUp } from "../utils/animations";
 import { site } from "../data/site";
 import { cvSkillGroups } from "../data/skills";
-import {
-  personal,
-  work,
-  academic,
-  extracurricular,
-  additional,
-} from "../data/cv";
+import { personal, work, academic, volunteering, additional } from "../data/cv";
 
 const About = () => {
   const [expandedSections, setExpandedSections] = useState({
@@ -22,7 +16,7 @@ const About = () => {
     academic: true,
     work: true,
     additional: true,
-    extracurricular: true,
+    volunteering: true,
     skills: true,
   });
 
@@ -103,6 +97,8 @@ const About = () => {
                     <strong className="text-gray-800 dark:text-gray-200">
                       {job.org}
                     </strong>
+                    <br />
+                    {job.title}
                     {job.lines.map((line) => (
                       <span key={line}>
                         <br />
@@ -165,18 +161,31 @@ const About = () => {
           </AccordionSection>
 
           <AccordionSection
-            title="Actividades Extracurriculares"
-            isOpen={expandedSections.extracurricular}
-            onToggle={() => toggleSection("extracurricular")}
+            title="Liderazgo y Voluntariado"
+            isOpen={expandedSections.volunteering}
+            onToggle={() => toggleSection("volunteering")}
           >
-            <div className="space-y-3">
-              {extracurricular.map((item) => (
-                <div key={item.period} className="pb-3">
+            <div className="space-y-4 sm:space-y-3">
+              {volunteering.map((item) => (
+                <div
+                  key={item.period}
+                  className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0"
+                >
                   <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
                     {item.period}
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    {item.text}
+                    <strong className="text-gray-800 dark:text-gray-200">
+                      {item.org}
+                    </strong>
+                    <br />
+                    {item.title}
+                    {item.lines?.map((line) => (
+                      <span key={line}>
+                        <br />
+                        {line}
+                      </span>
+                    ))}
                   </div>
                 </div>
               ))}
