@@ -1,24 +1,20 @@
-import { createContext, useContext, useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import PropTypes from "prop-types";
-
-const ThemeContext = createContext();
-
-export const useTheme = () => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error("useTheme debe ser usado dentro de ThemeProvider");
-  }
-  return context;
-};
+import { ThemeContext } from "../hooks/useTheme";
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState(() => {
     // Intentar obtener el tema guardado en localStorage
-    const savedTheme = localStorage.getItem("theme");
+    let savedTheme = null;
+    try {
+      savedTheme = localStorage.getItem("theme");
+    } catch {
+      // localStorage no disponible (Safari privado, etc.)
+    }
 
     // Si no hay tema guardado, usar preferencia del sistema
     if (!savedTheme) {
-      return globalThis.matchMedia("(prefers-color-scheme: dark)").matches
+      return window.matchMedia("(prefers-color-scheme: dark)").matches
         ? "dark"
         : "light";
     }
@@ -27,7 +23,7 @@ export const ThemeProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const root = globalThis.document.documentElement;
+    const root = document.documentElement;
 
     // Remover la clase anterior
     root.classList.remove("light", "dark");
@@ -36,7 +32,11 @@ export const ThemeProvider = ({ children }) => {
     root.classList.add(theme);
 
     // Guardar en localStorage
-    localStorage.setItem("theme", theme);
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // localStorage no disponible (Safari privado, etc.)
+    }
   }, [theme]);
 
   const toggleTheme = () => {
