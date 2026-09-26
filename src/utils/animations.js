@@ -49,32 +49,6 @@ export const slideDown = {
   },
 };
 
-// Slide Left - Elemento entra desde la derecha
-export const slideLeft = {
-  hidden: { opacity: 0, x: 30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: getDuration(0.6),
-      ease: "easeOut",
-    },
-  },
-};
-
-// Slide Right - Elemento entra desde la izquierda
-export const slideRight = {
-  hidden: { opacity: 0, x: -30 },
-  visible: {
-    opacity: 1,
-    x: 0,
-    transition: {
-      duration: getDuration(0.6),
-      ease: "easeOut",
-    },
-  },
-};
-
 // Scale In - Elemento crece desde el centro
 export const scaleIn = {
   hidden: { opacity: 0, scale: 0.8 },
@@ -128,27 +102,6 @@ export const pageTransition = {
     transition: {
       duration: getDuration(0.3),
     },
-  },
-};
-
-// Hover Scale - Para botones y elementos interactivos
-export const hoverScale = {
-  scale: shouldReduceMotion() ? 1 : 1.05,
-  transition: { duration: 0.2 },
-};
-
-// Tap Scale - Para feedback al hacer clic
-export const tapScale = {
-  scale: shouldReduceMotion() ? 1 : 0.95,
-};
-
-// Float Animation - Movimiento flotante sutil
-export const floatAnimation = {
-  y: shouldReduceMotion() ? 0 : [0, -10, 0],
-  transition: {
-    duration: 3,
-    repeat: Infinity,
-    ease: "easeInOut",
   },
 };
 
