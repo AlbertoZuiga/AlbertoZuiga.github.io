@@ -85,10 +85,12 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   ├── 404.html              # Redirección SPA para GitHub Pages
 │   ├── favicon.*, android-chrome-*.png, apple-touch-icon.png
 │   ├── og-image.png          # Imagen Open Graph principal
+│   ├── og/                   # Imágenes OG por página (about, projects, proyectos)
 │   ├── robots.txt
 │   └── sitemap.xml
 ├── scripts/
-│   └── generate-favicons.mjs # Genera PNG/ICO desde favicon.svg
+│   ├── generate-favicons.mjs # Genera PNG/ICO desde favicon.svg
+│   └── generate-og.mjs       # Genera imágenes OG 1200×630 en public/og
 ├── src/
 │   ├── components/
 │   │   ├── AccordionSection.jsx  # Acordeón accesible (About)
@@ -222,6 +224,14 @@ En producción se inyectan como **secrets** del repositorio con los mismos nombr
 
 ```bash
 npx -p sharp -p to-ico node scripts/generate-favicons.mjs
+```
+
+### Imágenes Open Graph por página
+
+`scripts/generate-og.mjs` define título, subtítulo y tags de cada página y renderiza SVG → PNG con `sharp`:
+
+```bash
+npm i --no-save sharp && node scripts/generate-og.mjs
 ```
 
 ---

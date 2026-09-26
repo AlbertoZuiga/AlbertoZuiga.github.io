@@ -150,6 +150,7 @@ const TicTacToe = () => {
           title="Tic-Tac-Toe - Alberto Zúñiga"
           description="Juego de Tres en Línea (Tic-Tac-Toe) con JavaScript. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo."
           url={`${site.baseUrl}/projects/tic-tac-toe`}
+          image="/og/tic-tac-toe.png"
           keywords="tic-tac-toe, tres en línea JavaScript, juego interactivo, desarrollo web, programación"
         />
         <div className="max-w-2xl mx-auto px-4">

@@ -19,6 +19,7 @@ const Projects = () => {
           title="Proyectos - Alberto Zúñiga | Portfolio de Desarrollo Web"
           description="Proyectos de desarrollo web: Scheduler App (Flask/Python), Healthy (Ruby on Rails), aplicaciones interactivas con JavaScript. Backend y frontend."
           url={`${site.baseUrl}/projects`}
+          image="/og/projects.png"
           keywords="proyectos web, Python, Flask, Ruby on Rails, JavaScript, desarrollo full stack, aplicaciones web, portfolio proyectos"
         />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
