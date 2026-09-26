@@ -1,6 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
+import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "./context/ThemeContext";
+import { useTheme } from "./hooks/useTheme";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
@@ -11,6 +13,29 @@ import CalculatorProject from "./pages/CalculatorProject";
 import ClockProject from "./pages/ClockProject";
 import TicTacToeProject from "./pages/TicTacToeProject";
 import CameraProject from "./pages/CameraProject";
+
+const ThemedToaster = () => {
+  const { isDark } = useTheme();
+  return (
+    <Toaster
+      position="top-center"
+      toastOptions={{
+        duration: 4000,
+        style: isDark
+          ? { background: "#f3f4f6", color: "#111827" }
+          : { background: "#363636", color: "#fff" },
+        success: {
+          duration: 5000,
+          iconTheme: { primary: "#10b981", secondary: "#fff" },
+        },
+        error: {
+          duration: 6000,
+          iconTheme: { primary: "#ef4444", secondary: "#fff" },
+        },
+      }}
+    />
+  );
+};
 
 function App() {
   return (
@@ -39,6 +64,7 @@ function App() {
             </main>
             <Footer />
           </div>
+          <ThemedToaster />
         </Router>
       </ThemeProvider>
     </HelmetProvider>

@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { emailConfig } from "../config/emailjs.config";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
@@ -468,32 +468,6 @@ const Contact = () => {
               </a>
             </div>
           </motion.div>
-
-          {/* Toast Container */}
-          <Toaster
-            position="top-center"
-            toastOptions={{
-              duration: 4000,
-              style: {
-                background: "#363636",
-                color: "#fff",
-              },
-              success: {
-                duration: 5000,
-                iconTheme: {
-                  primary: "#10b981",
-                  secondary: "#fff",
-                },
-              },
-              error: {
-                duration: 6000,
-                iconTheme: {
-                  primary: "#ef4444",
-                  secondary: "#fff",
-                },
-              },
-            }}
-          />
         </div>
       </div>
     </PageTransition>
