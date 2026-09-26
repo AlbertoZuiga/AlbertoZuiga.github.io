@@ -17,27 +17,25 @@ export const personal = [
   },
 ];
 
+// Entradas de timeline: { period, org, title, lines? }
 export const work = [
   {
     period: "Mar 2026 - Presente",
     org: "Buk",
-    lines: ["Software Engineer Level 1"],
+    title: "Software Engineer Level 1, equipo de Talento - Evaluaciones",
+    lines: [
+      "Desarrollo y mantenimiento del módulo de Evaluaciones de Desempeño de la plataforma",
+    ],
   },
   {
     period: "Ene 2026 - Feb 2026",
     org: "Buk",
-    lines: ["Práctica profesional como Software Engineer"],
-  },
-  {
-    period: "2022 - 2024",
-    org: "Fundación Nueva Mente",
+    title:
+      "Práctica profesional como Software Engineer, equipo de Talento - Evaluaciones",
     lines: [
-      "Colaboración pro bono a tiempo parcial",
-      "Manejo de la página web utilizando Wix",
-      "Registro y seguimiento de gastos",
+      "Migración de la sección “Mis evaluaciones” a Fiji, el framework de desarrollo interno de Buk",
     ],
   },
-  { period: "2019", org: "Cornershop", lines: ["Repartidor"] },
 ];
 
 // `degree` se muestra tal cual; `courses` se renderiza como "Ayudante de <em>curso</em>"
@@ -93,8 +91,30 @@ export const academic = [
   },
 ];
 
-export const extracurricular = [
-  { period: "2023", text: "Consejero político de Ingeniería Civil" },
+export const volunteering = [
+  {
+    period: "2025 - 2026",
+    org: "Pastoral Universidad de los Andes",
+    title: "Catequista (2025 - 2026) y encargado de logística (2026)",
+    lines: [
+      "Gestión logística y organización de las actividades del grupo",
+      "Planificación y dictado de clases semanales de formación",
+    ],
+  },
+  {
+    period: "2023",
+    org: "Consejero político de Ingeniería Civil",
+    title: "Representante ante la Federación de Estudiantes",
+  },
+  {
+    period: "2022 - 2024",
+    org: "Fundación Nueva Mente",
+    title: "Voluntario pro bono a tiempo parcial",
+    lines: [
+      "Manejo de la página web utilizando Wix",
+      "Registro y seguimiento de gastos",
+    ],
+  },
 ];
 
 // Se renderiza como "{text} <em>{em}</em>"

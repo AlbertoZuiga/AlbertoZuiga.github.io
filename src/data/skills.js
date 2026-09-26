@@ -64,6 +64,9 @@ export const cvSkillGroups = [
       { name: "Git/GitHub", level: "Intermedio-Avanzado" },
       { name: "Excel", level: "Avanzado" },
       { name: "Docker", level: "Intermedio" },
+      { name: "PostgreSQL/PostGIS", level: "Intermedio" },
+      { name: "OR-Tools", level: "Básico-Intermedio" },
+      { name: "Celery", level: "Básico-Intermedio" },
       { name: "LaTeX", level: "Intermedio" },
     ],
   },
@@ -71,7 +74,7 @@ export const cvSkillGroups = [
     title: "Idiomas",
     skills: [
       { name: "Español", level: "Nativo" },
-      { name: "Inglés", level: "Básico-Intermedio" },
+      { name: "Inglés", level: "Intermedio" },
     ],
   },
 ];

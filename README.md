@@ -25,7 +25,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 ### Páginas Principales
 
 - **🏠 Home**: Página de inicio con presentación y competencias técnicas organizadas por categorías
-- **👤 About**: CV interactivo con acordeones expandibles y tablas accesibles
+- **👤 About**: CV interactivo con acordeones animados, timeline de experiencia, barras de nivel y descarga en PDF
 - **💼 Projects**: Galería de proyectos interactivos
 - **📧 Contact**: Información de contacto y redes sociales
 
@@ -103,7 +103,8 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   │   ├── PageTransition.jsx    # Wrapper framer-motion por ruta
 │   │   ├── SEO.jsx               # <title>/<meta> nativos de React 19
 │   │   ├── SkillCard.jsx         # Tarjeta de competencias (Home)
-│   │   ├── SkillRow.jsx          # Fila de tabla de habilidades (About)
+│   │   ├── SkillRow.jsx          # Nombre, nivel y barra de progreso (About)
+│   │   ├── Timeline.jsx          # Línea de tiempo (About)
 │   │   └── ThemeToggle.jsx       # Botón dark/light
 │   ├── config/
 │   │   └── emailjs.config.js     # Credenciales EmailJS desde import.meta.env
@@ -115,7 +116,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   │   ├── projects.js           # Galería de proyectos
 │   │   ├── seo.js                # title/description/OG por ruta (SEO.jsx + prerender)
 │   │   ├── site.js               # Nombre, email, URLs, redes
-│   │   └── skills.js             # Competencias técnicas (Home)
+│   │   └── skills.js             # Competencias técnicas (Home y About)
 │   ├── hooks/
 │   │   └── useTheme.js           # Acceso al ThemeContext
 │   ├── pages/
@@ -130,6 +131,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   ├── utils/
 │   │   ├── animations.js         # Variantes de framer-motion
 │   │   ├── calculator.js         # calculate() + calculator.test.js
+│   │   ├── skillLevel.js         # levelToPercent() + skillLevel.test.js
 │   │   └── ticTacToe.js          # checkWin()/isDraw() + ticTacToe.test.js
 │   ├── App.jsx                   # Rutas + AnimatePresence + Toaster
 │   ├── main.jsx
@@ -222,6 +224,14 @@ cp .env.example .env
 La plantilla de EmailJS debe usar las variables `{{name}}`, `{{email}}`, `{{subject}}` y `{{message}}` (coinciden con los `name` de los inputs del formulario, ver `src/config/emailjs.config.js`).
 
 En producción se inyectan como **secrets** del repositorio con los mismos nombres (ver `.github/workflows/static.yml`).
+
+### CV en PDF
+
+`public/cv-alberto-zuniga.pdf` se sirve desde el botón "Descargar CV" en About. La fuente es `cv/main.tex`; tras editarla, regenerar y copiar:
+
+```bash
+cd cv && latexmk -pdf main.tex && cp main.pdf ../public/cv-alberto-zuniga.pdf
+```
 
 ### Favicons
 
