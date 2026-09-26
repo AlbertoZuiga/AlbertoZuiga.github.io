@@ -1,7 +1,7 @@
 # 📋 TODO - Lista de Tareas y Mejoras
 
 **Proyecto**: Portafolio Personal - Alberto Zúñiga  
-**Última actualización**: 12 de Noviembre, 2025
+**Última actualización**: 26 de Septiembre, 2026
 
 ---
 
@@ -16,611 +16,252 @@
 
 ## 🔴 PRIORIDAD ALTA
 
-### 1. Dark Mode / Tema Oscuro ✅
+### 1. Limpieza de código (commits atómicos)
 **Prioridad**: 🔴 ALTA  
 **Estimación**: 2-3 días  
 **Impacto**: ⭐⭐⭐⭐⭐  
-**Estado**: ✅ **COMPLETADO** (13 Nov 2025)
+**Rama**: `chore/cleanup` desde `development`
 
-**Tareas**:
-- [x] Crear `ThemeContext.jsx` para gestión de tema
-- [x] Agregar toggle de tema en `Navbar.jsx`
-- [x] Implementar persistencia en `localStorage`
-- [x] Actualizar `tailwind.config.js` con modo oscuro
-- [x] Agregar clases `dark:` a todos los componentes:
-  - [x] `Home.jsx`
-  - [x] `About.jsx`
-  - [x] `Projects.jsx`
-  - [x] `Contact.jsx`
-  - [x] `CalculatorProject.jsx`
-  - [x] `ClockProject.jsx`
-  - [x] `CameraProject.jsx`
-  - [x] `TicTacToeProject.jsx`
-  - [x] `Navbar.jsx`
-  - [x] `Footer.jsx`
-- [x] Iconos sol/luna para el toggle
-- [x] Transición suave entre temas
-- [x] Testing en todas las páginas
+Estado actual (26 Sep 2026): `npm run lint` = 16 errores + 3 warnings; sin Prettier; CI no corre lint; `react-helmet-async` requiere `--legacy-peer-deps` (peer dep React ≤18).
 
-**Archivos creados/modificados**:
-- `src/context/ThemeContext.jsx` - Context para gestión de tema
-- `tailwind.config.js` - Configuración de dark mode
-- `src/App.jsx` - ThemeProvider wrapper
-- `src/components/Navbar.jsx` - Toggle de tema desktop y mobile
-- `src/components/Footer.jsx` - Clases dark mode
-- `src/pages/*.jsx` - Todas las páginas con soporte dark mode
+Cada commit debe pasar `npm run lint && npm run format:check && npm run build` por sí solo.
 
-**Beneficios**:
-- ✅ Experiencia de usuario moderna
-- ✅ Reduce fatiga visual
-- ✅ Muy popular entre desarrolladores
-- ✅ Demuestra habilidades con React Context
-- ✅ Detecta preferencia del sistema automáticamente
-- ✅ Persistencia en localStorage
-- ✅ Transiciones suaves entre temas
+#### Bugs detectados
 
----
+| # | Archivo | Problema |
+|---|---|---|
+| B1 | `CameraProject.jsx` | Cleanup del `useEffect` cierra sobre `stream = null` → la cámara nunca se apaga al desmontar. StrictMode filtra un segundo stream. |
+| B2 | `CameraProject.jsx` | Blob `video/mp4` descargado como `.webm`. Usar `mediaRecorder.mimeType`. |
+| B3 | `CameraProject.jsx` | Listener de teclado con `toggleRecording`/`takePicture` obsoletos (deps incompletas). |
+| B4 | `TicTacToeProject.jsx` | `restartGame` obsoleto en listener; `setTimeout(100)` innecesario para scores. |
+| B5 | `ClockProject.jsx` | Locale `es-CH` (Suiza) en vez de `es-CL`. |
+| B6 | `Contact.jsx` / `emailjs.config.js` | Form envía `name/email/subject/message`; comentario de plantilla dice `from_name/from_email`. Verificar plantilla real en EmailJS. |
+| B7 | `CalculatorProject.jsx` | `currentValue \|\| 0` redundante; división por cero muestra `Infinity`. |
+| B8 | `Footer.jsx` | Clase `xs:inline` no existe (no hay breakpoint `xs`). |
+| B9 | `PageTransition.jsx` | Define `exit` pero no hay `AnimatePresence` en `App.jsx`. |
+| B10 | `ThemeContext.jsx` | `localStorage` sin try/catch → revienta en Safari privado. |
 
-### 2. Navbar Responsive con Menú Hamburguesa ✅
-**Prioridad**: 🔴 ALTA  
-**Estimación**: 1 día  
-**Impacto**: ⭐⭐⭐⭐⭐  
-**Estado**: ✅ **COMPLETADO** (12 Nov 2025)
+#### Fase 0 — Tooling
+- [ ] C1 `chore`: agregar `eslint-plugin-react` (elimina 12 falsos positivos de `motion` sin usar); desactivar `react/prop-types` temporalmente
+- [ ] C2 `chore`: agregar Prettier (`.prettierrc`, `.prettierignore`, `.editorconfig`, scripts `format` / `format:check`) sin formatear aún
+- [ ] C3 `style`: formatear todo con Prettier (solo whitespace/comillas, verificar con `git diff -w`)
+- [ ] C4 `ci`: correr `npm run lint` y `npm run format:check` antes del build en `static.yml`
 
-**Tareas**:
-- [x] Crear estado para menú móvil abierto/cerrado
-- [x] Diseñar ícono hamburguesa (☰)
-- [x] Implementar menú desplegable en móviles
-- [x] Animación de apertura/cierre
-- [x] Cerrar menú al hacer clic en un link
-- [x] Breakpoint en `md:` para mostrar/ocultar
-- [x] Testing en diferentes tamaños de pantalla
-- [x] Iconos SVG para hamburguesa y X
-- [x] Transiciones suaves con Tailwind
-- [x] ARIA labels para accesibilidad
+#### Fase 1 — Lint a cero y bugs
+- [ ] C5 `fix`: eliminar imports sin usar (`staggerContainer`/`staggerItem` en About, `fadeIn` en Camera, `scaleIn` en TicTacToe, catch vars en Camera)
+- [ ] C6 `refactor`: mover `useTheme` a `src/hooks/useTheme.js` (react-refresh); try/catch en localStorage (B10); unificar `window` vs `globalThis`
+- [ ] C7 `fix(camera)`: `streamRef` + cleanup correcto (B1); `useCallback` en handlers de teclado (B3); quitar `console.log`
+- [ ] C8 `fix(camera)`: usar `mimeType` real del MediaRecorder y extensión derivada (B2)
+- [ ] C9 `fix(tictactoe)`: `WINNING_COMBINATIONS` fuera del componente; `useCallback` en `restartGame`/`resetAll`; scores síncronos; renombrar `isDraw_` (B4)
+- [ ] C10 `fix(clock)`: locale `es-CL` (B5)
+- [ ] C11 `fix`: quitar `xs:inline` en Footer → `hidden sm:inline` (B8)
+- [ ] C12 `fix(calculator)`: quitar `|| 0`; división por cero → `"Error"` (B7)
+- [ ] ✔ Checkpoint: `npm run lint` = 0 errores, 0 warnings
 
-**Beneficios**:
-- **Crítico** para experiencia móvil
-- Navbar ahora totalmente funcional en móviles
-- Mejora significativa de UX
+#### Fase 2 — Código muerto
+- [ ] C13 `refactor`: eliminar `slideLeft`, `slideRight`, `hoverScale`, `tapScale`, `floatAnimation` de `animations.js`; `.animate-fade-in`, `.animate-blob`, `.animation-delay-*`, `.btn-secondary`, `.sr-only` custom de `index.css`; `useEffect` de `document.title` en `SEO.jsx`
 
----
+#### Fase 3 — Modularización
+- [ ] C14 `refactor`: extraer datos a `src/data/` (`skills.js`, `projects.js`, `navLinks.js`, `cv.js`, `site.js`); páginas renderizan con `.map()`
+- [ ] C15 `refactor(about)`: `AccordionSection` (con `<button>` nativo, elimina `handleKeyDown`) + `SkillRow` (corrige `dark:border` faltante)
+- [ ] C16 `refactor(home)`: `SkillCard`; agregar `propTypes` a `BrandMark`, `SkillCard`, `AccordionSection`, `SkillRow`; reactivar `react/prop-types`
+- [ ] C17 `refactor(navbar)`: `ThemeToggle` (elimina duplicado), `NavLink` de react-router desde `navLinks.js`, usar `BrandMark` en vez de `<img>` inline (agregar tamaño responsive `nav` a `sizeMap`)
+- [ ] C18 `refactor`: `BackToProjects` con `variant`; agregarlo a Camera (única página sin el link)
+- [ ] C19 `refactor`: mover `<Toaster>` a `App.jsx` y respetar dark mode
+- [ ] C20 `feat`: `AnimatePresence mode="wait"` en `App.jsx` con `AppRoutes` (B9)
 
-### 3. Formulario de Contacto Funcional ✅
-**Prioridad**: 🔴 ALTA  
-**Estimación**: 2 días  
-**Impacto**: ⭐⭐⭐⭐  
-**Estado**: ✅ **COMPLETADO** (12 Nov 2025)
+#### Fase 4 — Dependencias
+- [ ] C21 `refactor`: reemplazar `react-helmet-async` por `<title>`/`<meta>` nativos de React 19; JSON-LD estático en `index.html`; quitar metas duplicadas de `index.html`; CI `npm ci` sin `--legacy-peer-deps`
+- [ ] C22 `chore`: `npx update-browserslist-db@latest` + `baseline-browser-mapping@latest`
 
-**Tareas**:
-- [x] Instalar y configurar EmailJS
-- [x] Crear componente de formulario en `Contact.jsx`
-- [x] Campos: nombre, email, asunto, mensaje
-- [x] Validación de formulario:
-  - [x] Email válido
-  - [x] Campos requeridos
-  - [x] Longitud máxima (1000 chars para mensaje)
-  - [x] Longitud mínima para cada campo
-- [x] Estados de carga (loading spinner)
-- [x] Mensajes de éxito/error con toast
-- [x] Limpiar formulario después de enviar
-- [x] Captcha básico (honeypot implementado)
-- [x] Diseño responsive del formulario
-- [x] Contador de caracteres para mensaje
-- [x] Archivo de configuración separado
-- [x] Documentación de setup completa
+#### Fase 5 — Docs
+- [ ] C23 `docs`: crear `.env.example`; quitar referencias a `EMAILJS_SETUP.md` / `LINKEDIN_PREVIEW_SETUP.md` (no existen); alinear comentario de plantilla EmailJS con nombres reales del form (B6); README con `data/`, `hooks/`, componentes nuevos
+- [x] C24 `docs`: actualizar TODO.md (26 Sep 2026)
 
-**Archivos creados/modificados**:
-- `src/pages/Contact.jsx` - Formulario completo con validación
-- `src/config/emailjs.config.js` - Configuración de EmailJS
-- `EMAILJS_SETUP.md` - Documentación de configuración
-
-**Beneficios**:
-- Contacto directo sin abrir cliente de email
-- Más profesional que solo links
-- Validación robusta del lado del cliente
-- Feedback inmediato al usuario
-- Prevención de spam con honeypot
+#### Verificación manual (tras Fase 3 y C21)
+- [ ] Cada ruta carga; título del tab correcto; toggle dark mode desktop y mobile
+- [ ] Camera: navegar fuera apaga el LED (B1); video descargado reproduce (B2); atajos funcionan tras grabar (B3)
+- [ ] TicTacToe: `N` alterna jugador inicial correctamente; scores sin delay (B4)
+- [ ] Clock: fecha `dd-mm-yyyy` (B5)
+- [ ] Contact: mensaje real llega con todos los campos (B6); toast visible en dark mode
+- [ ] Transición de salida entre rutas (C20)
+- [ ] DevTools `<head>`: sin `<title>`/`og:*` duplicados (C21)
 
 ---
 
-### 4. Meta Tags Dinámicos por Página (SEO) ✅
+### 2. Meta Tags Dinámicos por Página (SEO) — pendientes
 **Prioridad**: 🔴 ALTA  
-**Estimación**: 1 día  
-**Impacto**: ⭐⭐⭐⭐  
-**Estado**: ✅ **COMPLETADO** (14 Nov 2025)
+**Estimación**: medio día  
+**Impacto**: ⭐⭐⭐  
+**Estado**: ⏳ Parcial (componente `SEO.jsx`, `og-image.png`, JSON-LD, sitemap y robots ya hechos)
 
 **Tareas**:
-- [x] Instalar `react-helmet-async`
-- [x] Crear componente `SEO.jsx` reutilizable
-- [x] Implementar en cada página:
-  - [x] Título único
-  - [x] Descripción específica
-  - [x] Keywords relevantes
-  - [x] OG image (pendiente crear imágenes)
-  - [x] OG url canónica
-- [ ] Crear imágenes OG (1200×630px):
-  - [ ] Home
+- [ ] Crear imágenes OG por página (1200×630px) en `/public/og/`:
   - [ ] About
   - [ ] Projects
   - [ ] Cada proyecto individual
-- [ ] Agregar imágenes a `/public/og/`
-- [x] Testing con herramientas SEO:
-  - [x] Documentación completa creada
+- [ ] Testing con herramientas SEO:
   - [ ] Facebook Sharing Debugger
   - [ ] Twitter Card Validator
   - [ ] LinkedIn Post Inspector
-
-**Archivos creados/modificados**:
-- `src/components/SEO.jsx` - Componente reutilizable
-- `src/App.jsx` - HelmetProvider configurado
-- `src/pages/Home.jsx` - Meta tags dinámicos
-- `src/pages/About.jsx` - Meta tags dinámicos
-- `src/pages/Projects.jsx` - Meta tags dinámicos
-- `src/pages/Contact.jsx` - Meta tags dinámicos
-- `src/pages/CalculatorProject.jsx` - Meta tags dinámicos
-- `src/pages/ClockProject.jsx` - Meta tags dinámicos
-- `src/pages/TicTacToeProject.jsx` - Meta tags dinámicos
-- `src/pages/CameraProject.jsx` - Meta tags dinámicos
-- `index.html` - Meta tags mejorados con OG completo
-- `LINKEDIN_PREVIEW_SETUP.md` - Guía completa de implementación
-
-**Dependencias instaladas**:
-```bash
-npm install react-helmet-async --legacy-peer-deps
-```
-
-**Beneficios**:
-- ✅ Mejor posicionamiento en buscadores
-- ✅ Previews atractivos al compartir en LinkedIn
-- ✅ Compatible con Facebook, Twitter, LinkedIn
-- ✅ Meta tags dinámicos por página
-- ✅ Profesionalismo
-- ⏳ Pendiente: Crear imagen OG (1200×630px)
-
-**Próximos pasos**:
-1. Crear imagen OG principal (`/public/og-image.png`)
-2. Testear en LinkedIn Post Inspector
-3. Opcional: Crear imágenes específicas por página
 
 ---
 
 ## 🟡 PRIORIDAD MEDIA
 
-### 5. Mejoras de Responsividad para iPhone y Móviles ✅
+### 3. Deuda técnica (detectada en análisis del 26 Sep 2026)
 **Prioridad**: 🟡 MEDIA  
-**Estimación**: 2 días  
-**Impacto**: ⭐⭐⭐⭐⭐  
-**Estado**: ✅ **COMPLETADO** (12 Nov 2025)
+**Estimación**: variable
 
-**Tareas**:
-- [x] Optimizar página Contact.jsx para móviles
-- [x] Mejorar Footer con tamaños responsivos
-- [x] Optimizar Home.jsx para pantallas pequeñas
-- [x] Ajustar padding y margins para móviles
-- [x] Implementar grid responsive (1 col móvil, 2+ desktop)
-- [x] Tamaños de texto escalables (text-sm → text-base → text-lg)
-- [x] Iconos y botones con tamaños apropiados para touch
-- [x] Espaciado optimizado (gaps reducidos en móvil)
-- [x] Mostrar información de contacto (email, teléfono)
-- [x] Testing en simuladores de iPhone
-
-**Archivos modificados**:
-- `src/pages/Contact.jsx` - Grids, padding, texto responsive
-- `src/components/Footer.jsx` - Botones y espaciado móvil
-- `src/pages/Home.jsx` - Hero, cards, skills responsive
-
-**Beneficios**:
-- Experiencia perfecta en iPhone y dispositivos móviles
-- Mejor uso del espacio en pantallas pequeñas
-- Touch targets apropiados
-- Texto legible sin zoom
+- [ ] Tests unitarios con Vitest: extraer `calculate()` (Calculator) y `checkWin()` (TicTacToe) a `src/utils/` como funciones puras y testearlas (ver #10)
+- [ ] Code-splitting de rutas con `React.lazy` + `Suspense` (bundle 466 kB / 140 kB gzip; framer-motion es el mayor peso)
+- [ ] Migrar Tailwind 3.4 → 4
+- [ ] Decidir: quitar `prop-types` y pasar a TypeScript (o JSDoc con `checkJs`)
+- [ ] Documentar `scripts/generate-favicons.mjs` en README
+- [ ] Definir estilo de toast en dark mode una vez movido a `App.jsx`
 
 ---
 
-### 6. Animaciones y Transiciones Suaves
-**Prioridad**: 🟡 MEDIA  
-**Estimación**: 2-3 días  
-**Impacto**: ⭐⭐⭐⭐
-
-**Tareas**:
-- [ ] Instalar Framer Motion o AOS
-- [ ] Animaciones de entrada en páginas:
-  - [ ] Fade in general
-  - [ ] Slide up para secciones
-  - [ ] Stagger para listas de proyectos
-- [ ] Transiciones entre rutas
-- [ ] Scroll animations:
-  - [ ] Fade in cuando elemento entra en viewport
-  - [ ] Parallax en Home
-- [ ] Animaciones en hover mejoradas
-- [ ] Loading skeletons para About.jsx
-- [ ] Micro-interacciones en botones
-- [ ] Performance: reducir animaciones en móviles
-
-**Dependencias**:
-```bash
-npm install framer-motion
-# o
-npm install aos
-```
-
-**Beneficios**:
-- Experiencia de usuario premium
-- Sitio más dinámico y moderno
-- Retención de visitantes
-
----
-
-### 7. Progressive Web App (PWA)
+### 4. Progressive Web App (PWA)
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1-2 días  
 **Impacto**: ⭐⭐⭐⭐
 
 **Tareas**:
 - [ ] Instalar `vite-plugin-pwa`
-- [ ] Crear `manifest.json`:
-  - [ ] Nombre de la app
-  - [ ] Íconos (192×192, 512×512)
-  - [ ] Colores de tema
-  - [ ] Display: standalone
+- [ ] Crear `manifest.json` (nombre, íconos 192/512 — ya existen en `/public`, colores, `display: standalone`)
 - [ ] Configurar Service Worker
-- [ ] Estrategia de caché:
-  - [ ] Cache-first para assets estáticos
-  - [ ] Network-first para páginas
-- [ ] Crear íconos en diferentes tamaños
-- [ ] Testing de instalación:
-  - [ ] Android
-  - [ ] iOS (limitado)
-  - [ ] Desktop
+- [ ] Estrategia de caché: cache-first para assets, network-first para páginas
+- [ ] Testing de instalación: Android, iOS (limitado), Desktop
 - [ ] Banner de instalación personalizado
 - [ ] Funcionalidad offline básica
 
-**Dependencias**:
 ```bash
 npm install -D vite-plugin-pwa
 ```
 
-**Beneficios**:
-- Instalable como app nativa
-- Funciona offline
-- Carga más rápida en visitas repetidas
-- Destaca entre portafolios
-
 ---
 
-### 8. Analytics y Monitoreo
+### 5. Analytics y Monitoreo
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
 **Impacto**: ⭐⭐⭐
 
 **Tareas**:
-- [ ] Configurar Google Analytics 4:
-  - [ ] Crear cuenta GA4
-  - [ ] Obtener Measurement ID
-  - [ ] Instalar gtag en `index.html`
-- [ ] Tracking de eventos personalizados:
-  - [ ] Clic en proyectos
-  - [ ] Descargas de CV (si se agrega)
-  - [ ] Uso de calculadora/reloj/cámara
-  - [ ] Envío de formulario de contacto
-- [ ] Alternativa privacy-friendly: Plausible
-- [ ] Dashboard para ver métricas
+- [ ] Configurar Google Analytics 4 (cuenta, Measurement ID, gtag en `index.html`) o alternativa privacy-friendly (Plausible)
+- [ ] Eventos personalizados: clic en proyectos, uso de calculadora/reloj/cámara, envío de formulario
 - [ ] Metas y conversiones
 - [ ] Testing de tracking
 
-**Beneficios**:
-- Saber cuántas personas visitan tu sitio
-- Entender qué proyectos son más populares
-- Datos para mejorar contenido
-- Profesional para mostrar en entrevistas
-
 ---
 
-### 9. Sitemap y robots.txt
-**Prioridad**: 🟡 MEDIA  
-**Estimación**: 2-3 horas  
-**Impacto**: ⭐⭐⭐
-
-**Tareas**:
-- [ ] Generar `sitemap.xml`:
-  - [ ] Todas las rutas principales
-  - [ ] Rutas de proyectos
-  - [ ] Prioridades y frecuencia de cambio
-- [ ] Crear `robots.txt`:
-  - [ ] Allow all
-  - [ ] Referencia a sitemap
-- [ ] Colocar en `/public`
-- [ ] Verificar en Google Search Console
-- [ ] Enviar sitemap a Google
-- [ ] Testing con validadores
-
-**Beneficios**:
-- Mejor indexación en buscadores
-- Control sobre qué se indexa
-- Acelera descubrimiento de páginas
-
----
-
-### 10. Mejoras en About.jsx
+### 6. Mejoras en About.jsx
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2 días  
-**Impacto**: ⭐⭐⭐⭐
+**Impacto**: ⭐⭐⭐⭐  
+**Depende de**: C14/C15 (datos en `cv.js`, `AccordionSection`)
 
 **Tareas**:
-- [ ] Timeline visual de experiencia:
-  - [ ] Línea vertical con puntos
-  - [ ] Fechas destacadas
-  - [ ] Descripciones expandibles
-- [ ] Sección de certificaciones:
-  - [ ] Badges visuales
-  - [ ] Links a credenciales
-  - [ ] Logos de instituciones
-- [ ] Galería de logros/reconocimientos
+- [ ] Timeline visual de experiencia (línea vertical con puntos, fechas destacadas)
+- [ ] Sección de certificaciones (badges, links a credenciales)
 - [ ] Gráficos de habilidades (barras de progreso)
 - [ ] Botón de descarga de CV en PDF
-- [ ] Optimizar tablas para móviles
 - [ ] Mejorar diseño de acordeones
-
-**Beneficios**:
-- CV más visual y atractivo
-- Mejor presentación profesional
-- Facilita lectura de experiencia
 
 ---
 
-### 11. Filtros y Búsqueda en Proyectos
+### 7. Filtros y Búsqueda en Proyectos
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
-**Impacto**: ⭐⭐⭐
+**Impacto**: ⭐⭐⭐  
+**Depende de**: C14 (`projects.js`)
 
 **Tareas**:
-- [ ] Agregar categorías a proyectos:
-  - [ ] Tags (React, Python, Web APIs, etc.)
-  - [ ] Tipo (Frontend, Fullstack, etc.)
-  - [ ] Dificultad
-- [ ] Implementar filtros:
-  - [ ] Botones de categoría
-  - [ ] Filtro múltiple
-  - [ ] Reset filtros
-- [ ] Barra de búsqueda:
-  - [ ] Buscar por nombre
-  - [ ] Buscar por descripción
-  - [ ] Búsqueda en tiempo real
-- [ ] Ordenamiento:
-  - [ ] Por fecha
-  - [ ] Por nombre
-  - [ ] Por popularidad (si hay analytics)
-- [ ] Contador de resultados
-- [ ] Animación al filtrar
-
-**Beneficios**:
-- Mejor navegación cuando hay muchos proyectos
-- Usuarios encuentran lo que buscan rápido
-- Profesional
+- [ ] Agregar tags/categoría/dificultad a cada proyecto en `projects.js`
+- [ ] Filtros por categoría (múltiple, reset)
+- [ ] Barra de búsqueda en tiempo real (nombre, descripción)
+- [ ] Ordenamiento (fecha, nombre)
+- [ ] Contador de resultados y animación al filtrar
 
 ---
 
 ## 🟢 PRIORIDAD BAJA
 
-### 12. Internacionalización (i18n)
+### 8. Internacionalización (i18n)
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 días  
-**Impacto**: ⭐⭐⭐
+**Impacto**: ⭐⭐⭐  
+**Depende de**: C14 (textos centralizados en `src/data/`)
 
 **Tareas**:
-- [ ] Instalar `react-i18next`
-- [ ] Crear archivos de traducción:
-  - [ ] `es.json` (Español)
-  - [ ] `en.json` (Inglés)
-- [ ] Configurar i18next
+- [ ] Instalar `react-i18next` + `i18next`
+- [ ] Archivos `es.json` / `en.json`
 - [ ] Traducir todos los textos
-- [ ] Selector de idioma en Navbar
-- [ ] Persistencia de idioma en localStorage
+- [ ] Selector de idioma en Navbar con persistencia en localStorage
 - [ ] Fechas localizadas
 - [ ] Testing en ambos idiomas
 
-**Dependencias**:
-```bash
-npm install react-i18next i18next
-```
-
-**Beneficios**:
-- Audiencia internacional
-- Mejor para aplicar a empresas extranjeras
-- Demuestra habilidades de i18n
-
 ---
 
-### 13. Blog o Sección de Artículos
+### 9. Blog o Sección de Artículos
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 5-7 días  
 **Impacto**: ⭐⭐⭐⭐
 
 **Tareas**:
-- [ ] Decidir enfoque:
-  - Opción A: Blog estático con Markdown
-  - Opción B: CMS headless (Contentful, Strapi)
-  - Opción C: Integración con Medium/Dev.to
-- [ ] Si Markdown:
-  - [ ] Configurar markdown parser
-  - [ ] Crear carpeta `/content/blog`
-  - [ ] Componente de post individual
-  - [ ] Lista de posts con preview
-  - [ ] Syntax highlighting para código
-  - [ ] Metadata (fecha, autor, tags)
-- [ ] Sistema de categorías y tags
-- [ ] Búsqueda de artículos
-- [ ] RSS feed
-- [ ] Comentarios (Disqus o utterances)
-- [ ] Compartir en redes sociales
-
-**Beneficios**:
-- Muestra conocimientos técnicos
-- Mejora SEO significativamente
-- Contenido fresco y dinámico
-- Personal branding
+- [ ] Decidir enfoque: Markdown estático / CMS headless / integración Medium-Dev.to
+- [ ] Si Markdown: parser, `/content/blog`, componente de post, lista con preview, syntax highlighting, metadata
+- [ ] Categorías y tags, búsqueda, RSS feed
+- [ ] Comentarios (utterances) y compartir en redes
 
 ---
 
-### 14. Tests Unitarios y E2E
-**Prioridad**: 🟢 BAJA  
+### 10. Tests Unitarios y E2E
+**Prioridad**: 🟢 BAJA (subir a MEDIA junto con #3)  
 **Estimación**: 4-5 días  
 **Impacto**: ⭐⭐⭐
 
 **Tareas**:
-- [ ] Configurar Vitest
-- [ ] Configurar React Testing Library
-- [ ] Tests unitarios:
-  - [ ] Calculadora (lógica de operaciones)
-  - [ ] TicTacToe (lógica de ganador)
-  - [ ] Componentes básicos
-- [ ] Tests de integración:
-  - [ ] Navegación entre páginas
-  - [ ] Formulario de contacto
-- [ ] Configurar Playwright para E2E
-- [ ] Tests E2E críticos:
-  - [ ] Flujo completo de navegación
-  - [ ] Uso de proyectos interactivos
-  - [ ] Formulario de contacto
-- [ ] CI/CD: ejecutar tests en GitHub Actions
-- [ ] Coverage reports
+- [ ] Configurar Vitest + React Testing Library
+- [ ] Tests unitarios: lógica de Calculadora, ganador de TicTacToe, componentes básicos
+- [ ] Tests de integración: navegación, formulario de contacto
+- [ ] Playwright para E2E: flujo de navegación, proyectos interactivos, formulario
+- [ ] Ejecutar tests en GitHub Actions; coverage reports
 
-**Dependencias**:
 ```bash
 npm install -D vitest @testing-library/react @testing-library/jest-dom
 npm install -D @playwright/test
 ```
 
-**Beneficios**:
-- Calidad de código profesional
-- Confianza al hacer cambios
-- Prevención de bugs
-- Muy valorado en empresas
-
 ---
 
-### 15. Scroll to Top y Breadcrumbs
+### 11. Scroll to Top y Breadcrumbs
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 horas  
 **Impacto**: ⭐⭐
 
 **Tareas**:
-- [ ] Botón Scroll to Top:
-  - [ ] Aparecer después de scroll
-  - [ ] Animación de entrada/salida
-  - [ ] Smooth scroll al hacer clic
-  - [ ] Ícono de flecha arriba
-  - [ ] Fixed position (bottom right)
-- [ ] Breadcrumbs:
-  - [ ] Componente reutilizable
-  - [ ] Generar desde ruta actual
-  - [ ] Links navegables
-  - [ ] Estilo con separadores (>)
-  - [ ] Implementar en proyectos
-
-**Beneficios**:
-- Mejor UX en páginas largas
-- Navegación más clara
-- Pequeños detalles que importan
-
----
-
-### 16. Toast Notifications System
-**Prioridad**: 🟢 BAJA  
-**Estimación**: 2-3 horas  
-**Impacto**: ⭐⭐⭐
-
-**Tareas**:
-- [ ] Instalar `react-hot-toast` o `react-toastify`
-- [ ] Configurar provider
-- [ ] Estilos personalizados
-- [ ] Tipos de toast:
-  - [ ] Success (verde)
-  - [ ] Error (rojo)
-  - [ ] Info (azul)
-  - [ ] Warning (amarillo)
-- [ ] Usar en:
-  - [ ] Formulario de contacto
-  - [ ] Copiar al portapapeles
-  - [ ] Descarga de capturas de cámara
-  - [ ] Resetear juegos
-- [ ] Personalización con tema (dark mode)
-
-**Dependencias**:
-```bash
-npm install react-hot-toast
-```
-
-**Beneficios**:
-- Feedback visual elegante
-- Mejor UX
-- Consistencia en notificaciones
+- [ ] Botón Scroll to Top (aparece tras scroll, animación, smooth scroll, fixed bottom-right)
+- [ ] Breadcrumbs: componente reutilizable generado desde la ruta actual, implementado en proyectos
 
 ---
 
 ## 🔵 FUTURO / IDEAS
 
-### 17. Sistema de Autenticación (Admin)
-**Prioridad**: 🔵 FUTURO  
-**Estimación**: 1 semana  
+### 12. Sistema de Autenticación (Admin)
+Panel de administración para editar contenido (Firebase Auth / Auth0), CRUD de proyectos desde UI, editar About sin tocar código.
 
-**Ideas**:
-- Panel de administración para editar contenido
-- Login con Firebase Auth o Auth0
-- CRUD de proyectos desde UI
-- Editar About sin tocar código
-- Estadísticas privadas
+### 13. Modo de Presentación
+Fullscreen para mostrar proyectos, navegación con flechas, sin navbar/footer. Útil en entrevistas.
 
----
+### 14. Easter Eggs y Juegos Ocultos
+Konami Code, Snake en consola, efectos en fechas especiales, modo Matrix.
 
-### 18. Modo de Presentación
-**Prioridad**: 🔵 FUTURO  
-**Estimación**: 2 días  
+### 15. Integración con GitHub API
+Repos reales, estadísticas de commits, lenguajes más usados, contribuciones recientes.
 
-**Ideas**:
-- Modo fullscreen para mostrar proyectos
-- Navegación con flechas del teclado
-- Sin navbar/footer en modo presentación
-- Perfecto para entrevistas
-
----
-
-### 19. Easter Eggs y Juegos Ocultos
-**Prioridad**: 🔵 FUTURO  
-**Estimación**: Variable  
-
-**Ideas**:
-- Konami Code para easter egg
-- Mini juego de Snake en consola
-- Efectos especiales en fechas especiales
-- Modo Matrix con lluvia de código
-
----
-
-### 20. Integración con GitHub API
-**Prioridad**: 🔵 FUTURO  
-**Estimación**: 2 días  
-
-**Ideas**:
-- Mostrar repos reales de GitHub
-- Estadísticas de commits
-- Lenguajes más usados
-- Contribuciones recientes
-- Link directo a código fuente
-
----
-
-### 21. Versión de Consola
-**Prioridad**: 🔵 FUTURO  
-**Estimación**: 3 días  
-
-**Ideas**:
-- Terminal interactiva en el sitio
-- Comandos estilo bash
-- `help`, `about`, `projects`, `contact`
-- Navegación alternativa para developers
-- ASCII art
+### 16. Versión de Consola
+Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `contact`, ASCII art.
 
 ---
 
@@ -628,75 +269,59 @@ npm install react-hot-toast
 
 | Prioridad | Cantidad | Tiempo Total Estimado |
 |-----------|----------|----------------------|
-| 🔴 ALTA | 1 tarea | 1-2 días |
-| 🟡 MEDIA | 7 tareas | 14-18 días |
-| 🟢 BAJA | 6 tareas | 17-22 días |
+| 🔴 ALTA | 2 tareas | 3 días |
+| 🟡 MEDIA | 5 tareas | 6-8 días + deuda técnica |
+| 🟢 BAJA | 4 tareas | 13-17 días |
 | 🔵 FUTURO | 5 ideas | - |
 
 ---
 
 ## 🎯 Roadmap Sugerido
 
-### Sprint 1 (1-2 semanas) - Fundamentos ⏳ En Progreso
-1. ✅ Dark Mode (Completado - 13 Nov 2025)
-2. ✅ Navbar Responsive (Completado)
-3. ✅ Formulario de Contacto (Completado)
-4. Meta Tags Dinámicos
-5. ✅ Mejoras Responsividad iPhone (Completado)
+### Sprint 0 (1 semana) - Limpieza ⏳ Siguiente
+1. Limpieza de código (24 commits atómicos)
+2. Imágenes OG por página + validación en debuggers
 
-### Sprint 2 (2-3 semanas) - Mejoras UX
-6. Animaciones
-7. PWA
-8. Analytics
-9. Sitemap/robots.txt
+### Sprint 1 (1-2 semanas) - Fundamentos ✅ Completado
+- Dark Mode, Navbar responsive, Formulario de contacto, Responsividad móvil, SEO base
+
+### Sprint 2 (2-3 semanas) - Mejoras UX ⏳ Parcial
+- ✅ Animaciones (framer-motion)
+- ✅ Sitemap / robots.txt
+- ✅ Toast notifications
+- [ ] PWA
+- [ ] Analytics
 
 ### Sprint 3 (3-4 semanas) - Contenido
-10. Mejoras en About
-11. Filtros en Proyectos
-12. Toast Notifications
-13. Scroll to Top
+- Mejoras en About
+- Filtros en Proyectos
+- Scroll to Top / Breadcrumbs
+- Tests unitarios (lógica pura)
 
 ### Sprint 4+ (Opcional) - Avanzado
-14. i18n
-15. Blog
-16. Tests
-17. Ideas futuras
+- i18n, Blog, E2E, ideas futuras
 
 ---
 
 ## ✅ Completadas
 
-- [x] Estructura básica del proyecto
-- [x] Routing con React Router
-- [x] Diseño responsive básico
-- [x] 4 proyectos interactivos funcionales
-- [x] Navegación por teclado en proyectos
+- [x] Estructura básica del proyecto, routing, diseño responsive básico
+- [x] 4 proyectos interactivos funcionales con navegación por teclado
 - [x] Accesibilidad básica (ARIA, roles)
-- [x] SEO básico (meta tags generales)
-- [x] Deployment a GitHub Pages
+- [x] Deployment a GitHub Pages con GitHub Actions
 - [x] README.md completo
-- [x] TODO.md organizado
 - [x] **Navbar responsive con menú hamburguesa** (12 Nov 2025)
 - [x] **Mejoras de responsividad para iPhone y móviles** (12 Nov 2025)
-  - [x] Contact.jsx optimizado
-  - [x] Footer.jsx responsive
-  - [x] Home.jsx mobile-friendly
-  - [x] Grids y spacing adaptativos
-- [x] **Formulario de Contacto Funcional** (12 Nov 2025)
-  - [x] Integración con EmailJS
-  - [x] Validación completa de campos
-  - [x] Toast notifications con react-hot-toast
-  - [x] Honeypot anti-spam
-  - [x] Estados de carga y error handling
-  - [x] Diseño responsive
-- [x] **Dark Mode / Tema Oscuro** (13 Nov 2025)
-  - [x] ThemeContext con React Context API
-  - [x] Toggle sol/luna en Navbar (desktop y mobile)
-  - [x] Persistencia en localStorage
-  - [x] Detección de preferencia del sistema
-  - [x] Clases dark: en todos los componentes y páginas
-  - [x] Transiciones suaves (duration-300)
-  - [x] Soporte completo en todas las páginas
+- [x] **Formulario de Contacto Funcional** con EmailJS, validación, honeypot y toast (12 Nov 2025)
+- [x] **Dark Mode / Tema Oscuro** con ThemeContext, persistencia y detección del sistema (13 Nov 2025)
+- [x] **Meta tags dinámicos por página** con `SEO.jsx` + `react-helmet-async` (14 Nov 2025)
+- [x] **JSON-LD** (Person, WebSite)
+- [x] **Sitemap.xml y robots.txt**
+- [x] **Imagen OG principal** (`public/og-image.png`)
+- [x] **Favicons** (SVG, PNG, ICO, apple-touch) generados con `scripts/generate-favicons.mjs` + componente `BrandMark`
+- [x] **Toast notifications** con `react-hot-toast`
+- [x] **Animaciones con framer-motion**: variantes reutilizables (`utils/animations.js`), `PageTransition`, animaciones de entrada y scroll en todas las páginas, `prefers-reduced-motion`
+- [x] **Análisis de limpieza de código** y plan de commits atómicos (26 Sep 2026)
 
 ---
 
@@ -705,10 +330,11 @@ npm install react-hot-toast
 - **Actualizar este archivo** al completar tareas
 - **Crear branches** para cada feature nueva
 - **Commits descriptivos** siguiendo conventional commits
+- **Lint + format + build** deben pasar antes de cada commit (desde C4, CI lo exige)
 - **Testing** antes de merge a development
 - **Deploy** solo cuando desarrollo esté estable
 
 ---
 
-**Última revisión**: 13 de Noviembre, 2025  
+**Última revisión**: 26 de Septiembre, 2026  
 **Mantenido por**: Alberto Zúñiga
