@@ -42,7 +42,7 @@ const Projects = () => {
               const ProjectCard = (
                 <motion.div
                   variants={staggerItem}
-                  className={`card group relative overflow-hidden transform hover:scale-105 transition-all duration-300 bg-linear-to-br ${project.color} h-full flex flex-col`}
+                  className={`card group relative overflow-hidden transform hover:scale-105 transition-[color,background-color,border-color,box-shadow] duration-300 bg-linear-to-br ${project.color} h-full flex flex-col`}
                 >
                   <div className="p-8 text-white flex flex-col h-full">
                     <div className="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">

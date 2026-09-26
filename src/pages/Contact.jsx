@@ -349,7 +349,7 @@ const Contact = () => {
           >
             <motion.a
               href={`mailto:${site.email}`}
-              className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
+              className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-[color,background-color,border-color,box-shadow] duration-300 hover:shadow-xl dark:bg-gray-800"
               variants={staggerItem}
             >
               <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-primary-100 dark:bg-primary-900 rounded-full mb-3 sm:mb-4">
@@ -375,7 +375,7 @@ const Contact = () => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label="Contactar por WhatsApp"
-              className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
+              className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-[color,background-color,border-color,box-shadow] duration-300 hover:shadow-xl dark:bg-gray-800"
               variants={staggerItem}
             >
               <div className="inline-flex items-center justify-center w-14 h-14 sm:w-16 sm:h-16 bg-green-50 dark:bg-green-900 rounded-full mb-3 sm:mb-4">
