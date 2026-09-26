@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
-import { site } from "../data/site";
 import { slideUp } from "../utils/animations";
 
 const CameraProject = () => {
@@ -214,13 +214,7 @@ const CameraProject = () => {
   return (
     <PageTransition>
       <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
-        <SEO
-          title="Cámara Web - Alberto Zúñiga"
-          description="Aplicación de cámara web con JavaScript. Captura de fotos, grabación de video, acceso a MediaDevices API. Proyecto web del portfolio."
-          url={`${site.baseUrl}/projects/camera`}
-          image="/og/camera.png"
-          keywords="cámara web, MediaDevices API, captura video JavaScript, getUserMedia, desarrollo web"
-        />
+        <SEO {...seoPages["/projects/camera"]} />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <BackToProjects />
 

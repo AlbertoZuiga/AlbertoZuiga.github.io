@@ -102,7 +102,10 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
 **Prioridad**: 🔴 ALTA  
 **Estimación**: medio día  
 **Impacto**: ⭐⭐⭐  
-**Estado**: ⏳ Parcial (componente `SEO.jsx`, `og-image.png`, JSON-LD, sitemap y robots ya hechos)
+**Estado**: ⏳ Parcial (componente `SEO.jsx`, `og-image.png`, JSON-LD, sitemap y robots ya hechos)  
+**Rama**: `feat/prerender-seo`
+
+Hallazgo (26 Sep 2026): los scrapers no ejecutan JS, así que las metas de `SEO.jsx` nunca llegaban a Facebook/LinkedIn/Twitter. `curl` a la URL pública: `/` devolvía 0 metas `og:*`; `/projects/camera` devolvía `404.html`.
 
 **Tareas**:
 
@@ -110,7 +113,9 @@ Cada commit debe pasar `npm run lint && npm run format:check && npm run build` p
   - [x] About
   - [x] Projects
   - [x] Cada proyecto individual
-- [ ] Testing con herramientas SEO (requiere deploy a `main`; las 3 leen la URL pública):
+- [x] Prerender estático por ruta (`scripts/prerender.mjs` en `npm run build`): `dist/<ruta>/index.html` con `<title>`, `canonical`, `og:*` y `twitter:*` desde `src/data/seo.js` (fuente única, las páginas hacen `<SEO {...seoPages[ruta]} />`); `main.jsx` quita las etiquetas `[data-prerender]` antes de montar React
+- [ ] Verificación manual tras merge: `curl -A facebookexternalhit https://albertozuiga.github.io/projects/camera` devuelve 200 con `og:image` de camera; DevTools `<head>` sin metas duplicadas tras hidratar
+- [ ] Testing con herramientas SEO (requiere deploy a `production`; las 3 leen la URL pública):
   - [ ] Facebook Sharing Debugger
   - [ ] Twitter Card Validator
   - [ ] LinkedIn Post Inspector

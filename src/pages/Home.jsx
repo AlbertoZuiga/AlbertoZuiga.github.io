@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BrandMark from "../components/BrandMark";
 import SEO from "../components/SEO";
+import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import SkillCard from "../components/SkillCard";
 import {
@@ -13,19 +14,13 @@ import {
   scaleIn,
   viewportConfig,
 } from "../utils/animations";
-import { site } from "../data/site";
 import { homeSkillGroups } from "../data/skills";
 
 const Home = () => {
   return (
     <PageTransition>
       <div className="min-h-screen">
-        <SEO
-          title="Alberto Zúñiga - Desarrollador Full Stack | Portfolio"
-          description="Portafolio de Alberto Zúñiga: Desarrollador Full Stack e Ingeniero Civil en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React."
-          url={site.baseUrl}
-          keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
-        />
+        <SEO {...seoPages["/"]} />
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-primary-900 to-gray-800 text-white py-12 sm:py-16 md:py-20 transition-colors duration-500">
           {/* Glow visual sutil - Igual en ambos modos */}
