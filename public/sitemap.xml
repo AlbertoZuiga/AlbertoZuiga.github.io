@@ -16,6 +16,21 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://albertozuiga.github.io/projects/arbocensus</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://albertozuiga.github.io/projects/scheduler</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://albertozuiga.github.io/projects/healthy</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://albertozuiga.github.io/projects/calculator</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

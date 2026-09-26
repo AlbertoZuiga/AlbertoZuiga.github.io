@@ -20,6 +20,24 @@ const pages = [
     tags: ["Flask", "Ruby on Rails", "JavaScript", "React"],
   },
   {
+    slug: "arbocensus",
+    title: "Arbocensus",
+    subtitle: "Rutas óptimas para censo de árboles urbanos",
+    tags: ["Django", "PostGIS", "OR-Tools", "OSRM", "React"],
+  },
+  {
+    slug: "scheduler",
+    title: "Scheduler App",
+    subtitle: "Disponibilidad horaria en grupos",
+    tags: ["Flask", "PostgreSQL", "Google OAuth", "Docker"],
+  },
+  {
+    slug: "healthy",
+    title: "Healthy",
+    subtitle: "Planes de comida saludable con compras",
+    tags: ["Ruby on Rails", "Hotwire", "Devise", "PostgreSQL"],
+  },
+  {
     slug: "calculator",
     title: "Calculadora",
     subtitle: "Operaciones básicas con soporte de teclado",
