@@ -145,44 +145,27 @@ Hallazgo (26 Sep 2026): los scrapers no ejecutan JS, así que las metas de `SEO.
 
 ---
 
-### 4. Progressive Web App (PWA)
+### 4. Páginas de detalle para proyectos externos
 
-**Prioridad**: 🟡 MEDIA  
-**Estimación**: 1-2 días  
-**Impacto**: ⭐⭐⭐⭐
-
-**Tareas**:
-
-- [ ] Instalar `vite-plugin-pwa`
-- [ ] Crear `manifest.json` (nombre, íconos 192/512 — ya existen en `/public`, colores, `display: standalone`)
-- [ ] Configurar Service Worker
-- [ ] Estrategia de caché: cache-first para assets, network-first para páginas
-- [ ] Testing de instalación: Android, iOS (limitado), Desktop
-- [ ] Banner de instalación personalizado
-- [ ] Funcionalidad offline básica
-
-```bash
-npm install -D vite-plugin-pwa
-```
-
----
-
-### 5. Analytics y Monitoreo
-
-**Prioridad**: 🟡 MEDIA  
+**Prioridad**: 🔴 ALTA  
 **Estimación**: 1 día  
-**Impacto**: ⭐⭐⭐
+**Impacto**: ⭐⭐⭐⭐  
+**Depende de**: C14 (`projects.js`)
+
+Problema (26 Sep 2026): las cards de Arbocensus, Scheduler App y Healthy enlazan directo a la demo o al repo. Las demos en Render se duermen o están caídas, así que el visitante llega a un error sin contexto.
 
 **Tareas**:
 
-- [ ] Configurar Google Analytics 4 (cuenta, Measurement ID, gtag en `index.html`) o alternativa privacy-friendly (Plausible)
-- [ ] Eventos personalizados: clic en proyectos, uso de calculadora/reloj/cámara, envío de formulario
-- [ ] Metas y conversiones
-- [ ] Testing de tracking
+- [ ] Extender `projects.js`: `slug`, `year`/`period`, `context` (por qué se hizo: ramo, título, personal), `longDescription`, `stack[]`, `repoUrl`, `demoUrl` (opcional). Repos: `AlbertoZuiga/scheduler`, `AlbertoZuiga/healthy`
+- [ ] Ruta `/projects/:slug` con `ProjectDetail.jsx` (lazy): título, icono, período, explicación, stack, y abajo botones "Ver código" y "Ver demo" (solo si `demoUrl` existe). Reusar `BackToProjects`
+- [ ] Cards en `Projects.jsx` llevan al detalle interno; quitar `external`/`isReact` si dejan de usarse
+- [ ] Estado de la demo al abrir el detalle: `fetch` a `demoUrl` con `AbortController` (~5 s). Fase 1: `mode: "no-cors"` (solo detecta host caído; despierta Render de paso). Fase 2: endpoint `/health` con CORS en scheduler y healthy → badge "En línea" / "Despertando (~1 min)" / "Caída" y botón deshabilitado si cae
+- [ ] SEO: entrada por slug en `seo.js`, OG en `generate-og.mjs`, ruta en `prerender.mjs` y `sitemap.xml`
+- [ ] Verificación manual: 3 detalles cargan, botones abren en pestaña nueva, prerender genera `dist/projects/<slug>/index.html`
 
 ---
 
-### 6. Mejoras en About.jsx
+### 5. Mejoras en About.jsx
 
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 2 días  
@@ -199,7 +182,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 7. Filtros y Búsqueda en Proyectos
+### 6. Filtros y Búsqueda en Proyectos
 
 **Prioridad**: 🟡 MEDIA  
 **Estimación**: 1 día  
@@ -218,7 +201,7 @@ npm install -D vite-plugin-pwa
 
 ## 🟢 PRIORIDAD BAJA
 
-### 8. Internacionalización (i18n)
+### 7. Internacionalización (i18n)
 
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 días  
@@ -236,7 +219,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 9. Blog o Sección de Artículos
+### 8. Blog o Sección de Artículos
 
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 5-7 días  
@@ -251,7 +234,7 @@ npm install -D vite-plugin-pwa
 
 ---
 
-### 10. Tests Unitarios y E2E
+### 9. Tests Unitarios y E2E
 
 **Prioridad**: 🟢 BAJA (subir a MEDIA junto con #3)  
 **Estimación**: 4-5 días  
@@ -274,7 +257,7 @@ npm install -D @playwright/test
 
 ---
 
-### 11. Scroll to Top y Breadcrumbs
+### 10. Scroll to Top y Breadcrumbs
 
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 horas  
@@ -289,23 +272,23 @@ npm install -D @playwright/test
 
 ## 🔵 FUTURO / IDEAS
 
-### 12. Sistema de Autenticación (Admin)
+### 11. Sistema de Autenticación (Admin)
 
 Panel de administración para editar contenido (Firebase Auth / Auth0), CRUD de proyectos desde UI, editar About sin tocar código.
 
-### 13. Modo de Presentación
+### 12. Modo de Presentación
 
 Fullscreen para mostrar proyectos, navegación con flechas, sin navbar/footer. Útil en entrevistas.
 
-### 14. Easter Eggs y Juegos Ocultos
+### 13. Easter Eggs y Juegos Ocultos
 
 Konami Code, Snake en consola, efectos en fechas especiales, modo Matrix.
 
-### 15. Integración con GitHub API
+### 14. Integración con GitHub API
 
 Repos reales, estadísticas de commits, lenguajes más usados, contribuciones recientes.
 
-### 16. Versión de Consola
+### 15. Versión de Consola
 
 Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `contact`, ASCII art.
 
@@ -315,8 +298,8 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 
 | Prioridad | Cantidad | Tiempo Total Estimado   |
 | --------- | -------- | ----------------------- |
-| 🔴 ALTA   | 2 tareas | 3 días                  |
-| 🟡 MEDIA  | 5 tareas | 6-8 días + migración TS |
+| 🔴 ALTA   | 3 tareas | 4 días                  |
+| 🟡 MEDIA  | 3 tareas | 3-4 días + migración TS |
 | 🟢 BAJA   | 4 tareas | 13-17 días              |
 | 🔵 FUTURO | 5 ideas  | -                       |
 
@@ -324,10 +307,10 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 
 ## 🎯 Roadmap Sugerido
 
-### Sprint 0 (1 semana) - Limpieza ⏳ Siguiente
+### Sprint 0 (1 semana) - Limpieza ✅ Completado
 
 1. Limpieza de código (24 commits atómicos)
-2. Imágenes OG por página + validación en debuggers
+2. Imágenes OG por página (falta validación en debuggers)
 
 ### Sprint 1 (1-2 semanas) - Fundamentos ✅ Completado
 
@@ -338,8 +321,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - ✅ Animaciones (framer-motion)
 - ✅ Sitemap / robots.txt
 - ✅ Toast notifications
-- [ ] PWA
-- [ ] Analytics
+- [ ] Páginas de detalle para proyectos externos
 
 ### Sprint 3 (3-4 semanas) - Contenido
 
@@ -374,6 +356,10 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - [x] **Animaciones con framer-motion**: variantes reutilizables (`utils/animations.js`), `PageTransition`, animaciones de entrada y scroll en todas las páginas, `prefers-reduced-motion`
 - [x] **Análisis de limpieza de código** y plan de commits atómicos (26 Sep 2026)
 - [x] **Deuda técnica #3**: Vitest, code-splitting por ruta, Tailwind 4, decisión TypeScript (26 Sep 2026)
+
+## ❌ Descartadas
+
+- **PWA** y **Analytics/Monitoreo** (26 Sep 2026): sobreingeniería para un portafolio estático; sin caso de uso offline ni volumen que justifique tracking
 
 ---
 
