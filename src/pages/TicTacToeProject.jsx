@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import { site } from "../data/site";
 import { slideUp, fadeIn } from "../utils/animations";
 
 const WINNING_COMBINATIONS = [
@@ -148,7 +149,7 @@ const TicTacToe = () => {
         <SEO
           title="Tic-Tac-Toe - Alberto Zúñiga"
           description="Juego de Tres en Línea (Tic-Tac-Toe) con JavaScript. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo."
-          url="https://albertozuiga.github.io/projects/tic-tac-toe"
+          url={`${site.baseUrl}/projects/tic-tac-toe`}
           keywords="tic-tac-toe, tres en línea JavaScript, juego interactivo, desarrollo web, programación"
         />
         <div className="max-w-2xl mx-auto px-4">

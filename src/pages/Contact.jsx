@@ -5,6 +5,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { emailConfig } from "../config/emailjs.config";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import { site } from "../data/site";
 import {
   slideUp,
   fadeIn,
@@ -125,7 +126,7 @@ const Contact = () => {
         <SEO
           title="Contacto - Alberto Zúñiga | Hablemos de tu Proyecto"
           description="Contacta a Alberto Zúñiga. Ingeniero Civil en Ciencias de la Computación disponible para proyectos de desarrollo web. Email: a.zuniga.marinovic@gmail.com"
-          url="https://albertozuiga.github.io/contact"
+          url={`${site.baseUrl}/contact`}
           keywords="contacto Alberto Zúñiga, colaboración desarrollo web, freelance developer, contratar desarrollador"
         />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -351,7 +352,7 @@ const Contact = () => {
             viewport={viewportConfig}
           >
             <motion.a
-              href="mailto:a.zuniga.marinovic@gmail.com"
+              href={`mailto:${site.email}`}
               className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-all duration-300 hover:shadow-xl dark:bg-gray-800"
               variants={staggerItem}
             >
@@ -369,7 +370,7 @@ const Contact = () => {
                 Email
               </h3>
               <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400 break-all px-2">
-                a.zuniga.marinovic@gmail.com
+                {site.email}
               </p>
             </motion.a>
 
@@ -413,7 +414,7 @@ const Contact = () => {
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <a
-                href="https://github.com/AlbertoZuiga"
+                href={site.github}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
@@ -442,7 +443,7 @@ const Contact = () => {
               </a>
 
               <a
-                href="https://www.linkedin.com/in/alberto-zuniga-marinovic/"
+                href={site.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"

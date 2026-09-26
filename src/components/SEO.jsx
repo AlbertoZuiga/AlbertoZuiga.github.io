@@ -1,11 +1,12 @@
 import { Helmet } from "react-helmet-async";
 import PropTypes from "prop-types";
+import { site } from "../data/site";
 
 const SEO = ({
   title = "Alberto Zúñiga - Desarrollador Full Stack",
   description = "Portafolio de Alberto Zúñiga: Desarrollador Full Stack e Ingeniero Civil en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React.",
   image = "/og-image.png",
-  url = "https://albertozuiga.github.io",
+  url = site.baseUrl,
   type = "website",
   keywords = "Alberto Zúñiga, desarrollador full stack, Python, JavaScript, Ruby on Rails, Flask, portfolio, desarrollo web",
 }) => {
@@ -30,7 +31,7 @@ const SEO = ({
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
       <meta property="og:image:alt" content={title} />
-      <meta property="og:site_name" content="Alberto Zúñiga Portfolio" />
+      <meta property="og:site_name" content={site.siteName} />
       <meta property="og:locale" content="es_ES" />
 
       {/* Twitter Card */}
@@ -42,7 +43,7 @@ const SEO = ({
       <meta name="twitter:image:alt" content={title} />
 
       {/* Additional SEO */}
-      <meta name="author" content="Alberto Zúñiga" />
+      <meta name="author" content={site.name} />
       <meta name="robots" content="index, follow" />
 
       {/* JSON-LD: Person */}
@@ -50,14 +51,11 @@ const SEO = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
-          name: "Alberto Zúñiga",
+          name: site.name,
           url,
           image: fullImageUrl,
-          jobTitle: "Desarrollador Full Stack",
-          sameAs: [
-            "https://github.com/AlbertoZuiga",
-            "https://www.linkedin.com/in/alberto-zuniga-marinovic/",
-          ],
+          jobTitle: site.jobTitle,
+          sameAs: [site.github, site.linkedin],
         })}
       </script>
 
@@ -66,7 +64,7 @@ const SEO = ({
         {JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "Alberto Zúñiga Portfolio",
+          name: site.siteName,
           url,
           inLanguage: "es-CL",
         })}

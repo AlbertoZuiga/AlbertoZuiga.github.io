@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import { site } from "../data/site";
 import { slideUp, fadeIn, scaleIn } from "../utils/animations";
 
 const Calculator = () => {
@@ -156,7 +157,7 @@ const Calculator = () => {
         <SEO
           title="Calculadora Interactiva - Alberto Zúñiga"
           description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
-          url="https://albertozuiga.github.io/projects/calculator"
+          url={`${site.baseUrl}/projects/calculator`}
           keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
         />
         <div className="max-w-md mx-auto px-4">

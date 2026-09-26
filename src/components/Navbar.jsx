@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { useTheme } from "../hooks/useTheme";
+import { navLinks } from "../data/navLinks";
 
 const Navbar = () => {
   const location = useLocation();
@@ -45,46 +46,19 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive("/")
-                  ? "bg-primary-500 text-white"
-                  : "text-gray-300 hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-white"
-              }`}
-            >
-              Inicio
-            </Link>
-            <Link
-              to="/about"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive("/about")
-                  ? "bg-primary-500 text-white"
-                  : "text-gray-300 hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-white"
-              }`}
-            >
-              Sobre Mí
-            </Link>
-            <Link
-              to="/projects"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive("/projects")
-                  ? "bg-primary-500 text-white"
-                  : "text-gray-300 hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-white"
-              }`}
-            >
-              Proyectos
-            </Link>
-            <Link
-              to="/contact"
-              className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
-                isActive("/contact")
-                  ? "bg-primary-500 text-white"
-                  : "text-gray-300 hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-white"
-              }`}
-            >
-              Contacto
-            </Link>
+            {navLinks.map((link) => (
+              <Link
+                key={link.to}
+                to={link.to}
+                className={`px-3 py-2 rounded-md text-sm font-medium transition-colors ${
+                  isActive(link.to)
+                    ? "bg-primary-500 text-white"
+                    : "text-gray-300 hover:bg-gray-700 dark:hover:bg-gray-800 hover:text-white"
+                }`}
+              >
+                {link.label}
+              </Link>
+            ))}
 
             {/* Theme Toggle Switch */}
             <button
@@ -230,50 +204,20 @@ const Navbar = () => {
         }`}
       >
         <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-700 dark:bg-gray-900 transition-colors duration-300">
-          <Link
-            to="/"
-            onClick={closeMenu}
-            className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-              isActive("/")
-                ? "bg-primary-500 text-white"
-                : "text-gray-300 hover:bg-gray-600 dark:hover:bg-gray-800 hover:text-white"
-            }`}
-          >
-            Inicio
-          </Link>
-          <Link
-            to="/about"
-            onClick={closeMenu}
-            className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-              isActive("/about")
-                ? "bg-primary-500 text-white"
-                : "text-gray-300 hover:bg-gray-600 dark:hover:bg-gray-800 hover:text-white"
-            }`}
-          >
-            Sobre Mí
-          </Link>
-          <Link
-            to="/projects"
-            onClick={closeMenu}
-            className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-              isActive("/projects")
-                ? "bg-primary-500 text-white"
-                : "text-gray-300 hover:bg-gray-600 dark:hover:bg-gray-800 hover:text-white"
-            }`}
-          >
-            Proyectos
-          </Link>
-          <Link
-            to="/contact"
-            onClick={closeMenu}
-            className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
-              isActive("/contact")
-                ? "bg-primary-500 text-white"
-                : "text-gray-300 hover:bg-gray-600 dark:hover:bg-gray-800 hover:text-white"
-            }`}
-          >
-            Contacto
-          </Link>
+          {navLinks.map((link) => (
+            <Link
+              key={link.to}
+              to={link.to}
+              onClick={closeMenu}
+              className={`block px-3 py-2 rounded-md text-base font-medium transition-colors ${
+                isActive(link.to)
+                  ? "bg-primary-500 text-white"
+                  : "text-gray-300 hover:bg-gray-600 dark:hover:bg-gray-800 hover:text-white"
+              }`}
+            >
+              {link.label}
+            </Link>
+          ))}
         </div>
       </div>
     </nav>

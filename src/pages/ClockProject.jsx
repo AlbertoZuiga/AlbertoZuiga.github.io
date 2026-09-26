@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import { site } from "../data/site";
 import { slideUp, fadeIn, scaleIn } from "../utils/animations";
 
 const Clock = () => {
@@ -85,7 +86,7 @@ const Clock = () => {
         <SEO
           title="Reloj Digital - Alberto Zúñiga"
           description="Reloj digital interactivo con JavaScript. Formato 12/24 horas, precisión ajustable, navegación por teclado. Proyecto web del portfolio."
-          url="https://albertozuiga.github.io/projects/clock"
+          url={`${site.baseUrl}/projects/clock`}
           keywords="reloj digital, proyecto JavaScript, reloj tiempo real, desarrollo web, programación"
         />
         <div className="max-w-4xl mx-auto px-4">

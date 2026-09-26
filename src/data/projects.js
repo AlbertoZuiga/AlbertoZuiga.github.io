@@ -1,0 +1,56 @@
+export const projects = [
+  {
+    title: "Scheduler App",
+    link: "http://scheduler-app-iu34.onrender.com/",
+    description:
+      "Gestión de horarios y división automática de grupos con Flask",
+    color: "from-emerald-900 to-teal-900",
+    icon: "📅",
+    isReact: false,
+    external: true,
+    framework: "Flask",
+  },
+  {
+    title: "Healthy",
+    link: "https://healthy-k6hn.onrender.com",
+    description:
+      "Sistema de recomendación de planes saludables de comida integrado con compras",
+    color: "from-green-900 to-lime-900",
+    icon: "🥗",
+    isReact: false,
+    external: true,
+    framework: "Ruby on Rails",
+  },
+  {
+    title: "Calculadora",
+    link: "/projects/calculator",
+    description: "Calculadora funcional con interfaz moderna",
+    color: "from-gray-900 to-gray-700",
+    icon: "🔢",
+    isReact: true,
+  },
+  {
+    title: "Reloj",
+    link: "/projects/clock",
+    description: "Reloj digital y analógico en tiempo real",
+    color: "from-indigo-900 to-purple-900",
+    icon: "⏰",
+    isReact: true,
+  },
+  {
+    title: "Tres en Línea",
+    link: "/projects/tic-tac-toe",
+    description: "Juego clásico para dos jugadores",
+    color: "from-blue-900 to-purple-900",
+    icon: "❌⭕",
+    isReact: true,
+  },
+  {
+    title: "Cámara",
+    link: "/projects/camera",
+    description: "Captura fotos y graba videos desde tu navegador",
+    color: "from-purple-900 to-pink-900",
+    icon: "📸",
+    isReact: true,
+  },
+];
