@@ -19,7 +19,7 @@ const Home = () => {
       <div className="min-h-screen">
         <SEO 
           title="Alberto Zúñiga - Desarrollador Full Stack | Portfolio"
-          description="Portafolio de Alberto Zúñiga: Desarrollador Full Stack y estudiante de Ingeniería en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React."
+          description="Portafolio de Alberto Zúñiga: Desarrollador Full Stack e Ingeniero Civil en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React."
           url="https://albertozuiga.github.io"
           keywords="Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
         />
@@ -67,7 +67,7 @@ const Home = () => {
                 animate="visible"
                 transition={{ delay: 0.1 }}
               >
-                Estudiante de Ingeniería Civil en Ciencias de la Computación
+                Ingeniero Civil en Ciencias de la Computación
               </motion.p>
               <motion.p 
                 className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-300 px-4"
@@ -130,8 +130,8 @@ const Home = () => {
               >
                 <h3 className="section-subtitle mb-3 sm:mb-4 text-lg sm:text-xl dark:text-white">Formación Académica</h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
-                  Estudiante de Ingeniería Civil en Ciencias de la Computación en
-                  la Universidad de los Andes, con concentración tecnológica en
+                  Ingeniero Civil en Ciencias de la Computación de la
+                  Universidad de los Andes (2026), con concentración tecnológica en
                   Ingeniería Civil Eléctrica y Minor en Psicología.
                 </p>
               </motion.div>

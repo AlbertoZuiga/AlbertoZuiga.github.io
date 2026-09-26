@@ -100,6 +100,14 @@ const About = () => {
                 </div>
                 <div className="py-2 sm:py-3 border-b border-gray-200 dark:border-gray-700 sm:border-b-0">
                   <div className="font-semibold text-gray-700 dark:text-gray-300 text-sm sm:text-base mb-1 sm:mb-0 sm:inline-block sm:w-1/3">
+                    Título
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base sm:inline-block sm:w-2/3">
+                    Ingeniero Civil en Ciencias de la Computación
+                  </div>
+                </div>
+                <div className="py-2 sm:py-3 border-b border-gray-200 dark:border-gray-700 sm:border-b-0">
+                  <div className="font-semibold text-gray-700 dark:text-gray-300 text-sm sm:text-base mb-1 sm:mb-0 sm:inline-block sm:w-1/3">
                     Teléfono
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base sm:inline-block sm:w-2/3">
@@ -140,6 +148,95 @@ const About = () => {
                     >
                       AlbertoZuiga
                     </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </motion.section>
+
+        {/* Antecedentes Laborales */}
+        <motion.section 
+          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
+          variants={fadeIn}
+          initial="hidden"
+          whileInView="visible"
+          viewport={viewportConfig}
+        >
+          <div
+            className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+            onClick={() => toggleSection("work")}
+            onKeyDown={(e) => handleKeyDown(e, "work")}
+            role="button"
+            tabIndex={0}
+            aria-expanded={expandedSections.work}
+            aria-label="Expandir o contraer Antecedentes Laborales"
+          >
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
+              Antecedentes Laborales
+            </h2>
+            <svg
+              className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
+                expandedSections.work ? "rotate-180" : ""
+              }`}
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </div>
+          {expandedSections.work && (
+            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
+              <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
+              <div className="space-y-4 sm:space-y-3">
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Mar 2026 - Presente
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Buk</strong>
+                    <br />
+                    Software Engineer Level 1
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    Ene 2026 - Feb 2026
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Buk</strong>
+                    <br />
+                    Práctica profesional como Software Engineer
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    2022 - 2024
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Fundación Nueva Mente</strong>
+                    <br />
+                    Colaboración pro bono a tiempo parcial
+                    <br />
+                    Manejo de la página web utilizando Wix
+                    <br />
+                    Registro y seguimiento de gastos
+                  </div>
+                </div>
+                <div className="pb-3 sm:pb-4">
+                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
+                    2019
+                  </div>
+                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
+                    <strong className="text-gray-800 dark:text-gray-200">Cornershop</strong>
+                    <br />
+                    Repartidor
                   </div>
                 </div>
               </div>
@@ -189,17 +286,17 @@ const About = () => {
               <div className="space-y-4 sm:space-y-3">
                 <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
                   <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    2020 - Presente
+                    2020 - 2026
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                     <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
                     <br />
-                    Estudiante de Ingeniería Civil en Ciencias de la Computación
+                    Ingeniero Civil en Ciencias de la Computación
                   </div>
                 </div>
                 <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
                   <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    Mar 2026 - Presente
+                    Mar 2026 - Jun 2026
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                     <strong className="text-gray-800 dark:text-gray-200">Universidad de los Andes</strong>
@@ -332,95 +429,6 @@ const About = () => {
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                     Consejero político de Ingeniería Civil
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-        </motion.section>
-
-        {/* Antecedentes Laborales */}
-        <motion.section 
-          className="card mb-4 sm:mb-6 dark:bg-gray-800 transition-colors duration-300"
-          variants={fadeIn}
-          initial="hidden"
-          whileInView="visible"
-          viewport={viewportConfig}
-        >
-          <div
-            className="flex justify-between items-center p-4 sm:p-6 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
-            onClick={() => toggleSection("work")}
-            onKeyDown={(e) => handleKeyDown(e, "work")}
-            role="button"
-            tabIndex={0}
-            aria-expanded={expandedSections.work}
-            aria-label="Expandir o contraer Antecedentes Laborales"
-          >
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white">
-              Antecedentes Laborales
-            </h2>
-            <svg
-              className={`w-5 h-5 sm:w-6 sm:h-6 transform transition-transform dark:text-white flex-shrink-0 ml-2 ${
-                expandedSections.work ? "rotate-180" : ""
-              }`}
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M19 9l-7 7-7-7"
-              />
-            </svg>
-          </div>
-          {expandedSections.work && (
-            <div className="px-4 sm:px-6 pb-4 sm:pb-6">
-              <hr className="mb-4 sm:mb-6 dark:border-gray-700" />
-              <div className="space-y-4 sm:space-y-3">
-                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
-                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    Mar 2026 - Presente
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    <strong className="text-gray-800 dark:text-gray-200">Buk</strong>
-                    <br />
-                    Software Engineer Level 1
-                  </div>
-                </div>
-                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
-                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    Ene 2026 - Feb 2026
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    <strong className="text-gray-800 dark:text-gray-200">Buk</strong>
-                    <br />
-                    Práctica profesional como Software Engineer
-                  </div>
-                </div>
-                <div className="pb-3 sm:pb-4 border-b border-gray-200 dark:border-gray-700 last:border-b-0">
-                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    2022 - 2024
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    <strong className="text-gray-800 dark:text-gray-200">Fundación Nueva Mente</strong>
-                    <br />
-                    Colaboración pro bono a tiempo parcial
-                    <br />
-                    Manejo de la página web utilizando Wix
-                    <br />
-                    Registro y seguimiento de gastos
-                  </div>
-                </div>
-                <div className="pb-3 sm:pb-4">
-                  <div className="font-semibold text-primary-600 dark:text-primary-400 text-xs sm:text-sm mb-1 sm:mb-2">
-                    2019
-                  </div>
-                  <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
-                    <strong className="text-gray-800 dark:text-gray-200">Cornershop</strong>
-                    <br />
-                    Repartidor
                   </div>
                 </div>
               </div>

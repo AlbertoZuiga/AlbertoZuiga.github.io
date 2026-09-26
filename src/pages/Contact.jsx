@@ -116,7 +116,7 @@ const Contact = () => {
       <div className="min-h-screen py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
         <SEO 
         title="Contacto - Alberto Zúñiga | Hablemos de tu Proyecto"
-        description="Contacta a Alberto Zúñiga. Estudiante de Ingeniería en Ciencias de la Computación disponible para proyectos de desarrollo web. Email: alberto.zuniga@mi.unc.edu.ar"
+        description="Contacta a Alberto Zúñiga. Ingeniero Civil en Ciencias de la Computación disponible para proyectos de desarrollo web. Email: a.zuniga.marinovic@gmail.com"
         url="https://albertozuiga.github.io/contact"
         keywords="contacto Alberto Zúñiga, colaboración desarrollo web, freelance developer, contratar desarrollador"
       />
