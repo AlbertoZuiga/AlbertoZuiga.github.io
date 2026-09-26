@@ -1,4 +1,3 @@
-import { Helmet } from "react-helmet-async";
 import PropTypes from "prop-types";
 import { site } from "../data/site";
 
@@ -13,8 +12,9 @@ const SEO = ({
   // URL completa de la imagen para OG
   const fullImageUrl = image.startsWith("http") ? image : `${url}${image}`;
 
+  // React 19 eleva <title>, <meta> y <link> al <head> automáticamente
   return (
-    <Helmet prioritizeSeoTags>
+    <>
       {/* Meta Tags Básicos */}
       <title>{title}</title>
       <meta name="description" content={description} />
@@ -45,31 +45,7 @@ const SEO = ({
       {/* Additional SEO */}
       <meta name="author" content={site.name} />
       <meta name="robots" content="index, follow" />
-
-      {/* JSON-LD: Person */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Person",
-          name: site.name,
-          url,
-          image: fullImageUrl,
-          jobTitle: site.jobTitle,
-          sameAs: [site.github, site.linkedin],
-        })}
-      </script>
-
-      {/* JSON-LD: WebSite */}
-      <script type="application/ld+json">
-        {JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "WebSite",
-          name: site.siteName,
-          url,
-          inLanguage: "es-CL",
-        })}
-      </script>
-    </Helmet>
+    </>
   );
 };
 
