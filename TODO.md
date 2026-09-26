@@ -157,13 +157,12 @@ Problema (26 Sep 2026): las cards de Arbocensus, Scheduler App y Healthy enlazan
 
 **Tareas**:
 
-- [x] Extender `projects.js`: `slug`, `period`, `context`, `longDescription`, `stack[]`, `repoUrl`, `demoUrl` (opcional). Textos de `context`/`longDescription` escritos desde los README de cada repo; revisar `context` de Scheduler ("Proyecto personal") y Healthy ("Proyecto universitario")
+- [x] Extender `projects.js`: `slug`, `period`, `context`, `longDescription`, `stack[]`, `repoUrl`, `demoUrl` (opcional). Textos de `longDescription` desde los README de cada repo. `context`: Arbocensus "Proyecto de título", Scheduler "Proyecto personal", Healthy "Práctica pre-profesional". Healthy sin `demoUrl` (instancia suspendida en Render, 503 `x-render-routing: suspend`)
 - [x] Ruta `/projects/:slug` con `ProjectDetail.jsx` (lazy, va después de las rutas fijas): título, icono, período, explicación, stack, botones "Ver código" y "Ver demo" (solo si `demoUrl`). Slug desconocido → `<Navigate to="/projects" />`. Reusa `BackToProjects variant="dark"`
 - [x] Cards en `Projects.jsx` llevan al detalle interno (`<Link>` único; `link ?? /projects/${slug}`); se quitó `external`. `isReact` sigue en uso para el badge ⚛️ / SPA
-- [x] Estado de la demo (Fase 1): `fetch` `no-cors` con `AbortController` 5 s → badge "En línea" / "Caída", botón demo deshabilitado (`aria-disabled` + `preventDefault`) si cae. Despierta Render de paso
-  - [ ] Fase 2: endpoint `/health` con CORS en scheduler y healthy → distinguir "Despertando (~1 min)" (requiere cambios en esos repos)
+- ~~Estado de la demo (`fetch` / `/health`)~~ Descartado (26 Sep 2026): Healthy está suspendida y Scheduler enlaza directo; sin detector
 - [x] SEO: entradas `/projects/{arbocensus,scheduler,healthy}` en `seo.js`, OG en `generate-og.mjs` (+ `public/og/*.png`), `sitemap.xml`. `prerender.mjs` no necesitó cambios (itera `seoPages`)
-- [ ] Verificación manual: 3 detalles cargan, botones abren en pestaña nueva, badge cambia con demo dormida/caída (build ya genera `dist/projects/<slug>/index.html` con su `og:image`, verificado 26 Sep 2026)
+- [ ] Verificación manual: 3 detalles cargan, botones abren en pestaña nueva; hero + cuerpo claro en light/dark (build ya genera `dist/projects/<slug>/index.html` con su `og:image`, verificado 26 Sep 2026)
 
 ---
 

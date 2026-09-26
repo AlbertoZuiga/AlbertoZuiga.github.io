@@ -50,7 +50,7 @@ export const projects = [
     slug: "healthy",
     title: "Healthy",
     period: "2024 - 2025",
-    context: "Proyecto universitario",
+    context: "Práctica pre-profesional",
     description:
       "Sistema de recomendación de planes saludables de comida integrado con compras",
     longDescription:
@@ -64,7 +64,6 @@ export const projects = [
       "Docker",
     ],
     repoUrl: "https://github.com/AlbertoZuiga/healthy",
-    demoUrl: "https://healthy-k6hn.onrender.com",
     color: "from-green-900 to-lime-900",
     icon: "🥗",
     framework: "Ruby on Rails",

@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
@@ -8,145 +7,93 @@ import BackToProjects from "../components/BackToProjects";
 import { fadeIn, slideUp } from "../utils/animations";
 import { projects } from "../data/projects";
 
-const DEMO_TIMEOUT_MS = 5000;
-
-const demoStatus = {
-  checking: { label: "Verificando demo…", dot: "bg-gray-400 animate-pulse" },
-  online: { label: "En línea", dot: "bg-green-400" },
-  offline: { label: "Caída", dot: "bg-red-400" },
-};
-
-// Fase 1: mode "no-cors" solo distingue host inalcanzable de host que responde
-// (la respuesta es opaca). De paso despierta la instancia dormida en Render.
-const useDemoStatus = (demoUrl) => {
-  const [status, setStatus] = useState(demoUrl ? "checking" : null);
-
-  useEffect(() => {
-    if (!demoUrl) return;
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), DEMO_TIMEOUT_MS);
-    setStatus("checking");
-    fetch(demoUrl, { mode: "no-cors", signal: controller.signal })
-      .then(() => setStatus("online"))
-      .catch(() => setStatus("offline"))
-      .finally(() => clearTimeout(timer));
-    return () => {
-      clearTimeout(timer);
-      controller.abort();
-    };
-  }, [demoUrl]);
-
-  return status;
-};
-
 const ProjectDetail = () => {
   const { slug } = useParams();
   const project = projects.find((p) => p.slug === slug);
-  const status = useDemoStatus(project?.demoUrl);
 
   if (!project) return <Navigate to="/projects" replace />;
 
-  const demoDisabled = status === "offline";
-
   return (
     <PageTransition>
-      <div
-        className={`min-h-screen bg-linear-to-br ${project.color} py-8 text-white`}
-      >
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <SEO {...seoPages[`/projects/${project.slug}`]} />
-        <div className="max-w-4xl mx-auto px-4">
-          <BackToProjects variant="dark" />
 
-          <motion.header
-            className="mb-10"
-            variants={fadeIn}
-            initial="hidden"
-            animate="visible"
-          >
-            <div className="text-7xl mb-4">{project.icon}</div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-3">
-              {project.title}
-            </h1>
-            <p className="text-gray-200">
-              {project.context} · {project.period}
-            </p>
-          </motion.header>
+        <div className={`bg-linear-to-br ${project.color} text-white py-10`}>
+          <div className="max-w-5xl mx-auto px-4">
+            <BackToProjects variant="dark" />
+            <motion.div
+              className="flex items-center gap-5"
+              variants={fadeIn}
+              initial="hidden"
+              animate="visible"
+            >
+              <div className="text-6xl" aria-hidden="true">
+                {project.icon}
+              </div>
+              <div>
+                <h1 className="text-4xl md:text-5xl font-bold mb-2">
+                  {project.title}
+                </h1>
+                <p className="text-gray-200">
+                  {project.context} · {project.period}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
-          <motion.section
-            className="mb-10"
-            variants={slideUp}
-            initial="hidden"
-            animate="visible"
-          >
-            <h2 className="text-2xl font-semibold mb-3">Sobre el proyecto</h2>
-            <p className="text-lg text-gray-100 leading-relaxed">
+        <motion.div
+          className="max-w-5xl mx-auto px-4 py-10 grid md:grid-cols-[2fr_1fr] gap-8 items-start"
+          variants={slideUp}
+          initial="hidden"
+          animate="visible"
+        >
+          <section className="card dark:bg-gray-800 p-8">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              Sobre el proyecto
+            </h2>
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
               {project.longDescription}
             </p>
-          </motion.section>
+          </section>
 
-          <motion.section
-            className="mb-12"
-            variants={slideUp}
-            initial="hidden"
-            animate="visible"
-          >
-            <h2 className="text-2xl font-semibold mb-3">Stack</h2>
-            <ul className="flex flex-wrap gap-2">
+          <aside className="card dark:bg-gray-800 p-8">
+            <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
+              Stack
+            </h2>
+            <ul className="flex flex-wrap gap-2 mb-6">
               {project.stack.map((tech) => (
                 <li
                   key={tech}
-                  className="bg-white/20 backdrop-blur-xs px-3 py-1 rounded-full text-sm"
+                  className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-full px-3 py-1 text-sm"
                 >
                   {tech}
                 </li>
               ))}
             </ul>
-          </motion.section>
-
-          <motion.div
-            className="flex flex-wrap items-center gap-4"
-            variants={slideUp}
-            initial="hidden"
-            animate="visible"
-          >
-            <a
-              href={project.repoUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white text-gray-900 font-semibold px-6 py-3 rounded-lg hover:bg-gray-100 transition-colors"
-            >
-              Ver código ↗
-            </a>
-            {project.demoUrl && (
-              <>
+            <hr className="border-gray-200 dark:border-gray-700 mb-6" />
+            <div className="flex flex-col gap-3">
+              <a
+                href={project.repoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary text-center"
+              >
+                Ver código ↗
+              </a>
+              {project.demoUrl && (
                 <a
                   href={project.demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-disabled={demoDisabled}
-                  onClick={(e) => demoDisabled && e.preventDefault()}
-                  className={`inline-flex items-center gap-2 border-2 border-white font-semibold px-6 py-3 rounded-lg transition-colors ${
-                    demoDisabled
-                      ? "opacity-50 cursor-not-allowed"
-                      : "hover:bg-white/10"
-                  }`}
+                  className="text-center border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold py-2 px-6 rounded-lg hover:bg-primary-500/10 transition-colors"
                 >
                   Ver demo ↗
                 </a>
-                <span
-                  className="inline-flex items-center gap-2 text-sm text-gray-200"
-                  role="status"
-                >
-                  <span
-                    className={`w-2.5 h-2.5 rounded-full ${demoStatus[status].dot}`}
-                    aria-hidden="true"
-                  />
-                  {demoStatus[status].label}
-                </span>
-              </>
-            )}
-          </motion.div>
-        </div>
+              )}
+            </div>
+          </aside>
+        </motion.div>
       </div>
     </PageTransition>
   );
