@@ -143,7 +143,7 @@ const Contact = () => {
 
           {/* Call to Action - Improved mobile spacing */}
           <motion.div
-            className="card p-6 sm:p-8 bg-gradient-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 dark:bg-gray-800"
+            className="card p-6 sm:p-8 bg-linear-to-br from-primary-50 to-primary-100 dark:from-primary-900/20 dark:to-primary-800/20 dark:bg-gray-800"
             variants={fadeIn}
             initial="hidden"
             whileInView="visible"
@@ -415,7 +415,7 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
               >
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <svg
                     className="w-8 h-8 sm:w-10 sm:h-10 text-gray-800 dark:text-white"
                     fill="currentColor"
@@ -444,7 +444,7 @@ const Contact = () => {
                 rel="noopener noreferrer"
                 className="flex items-center gap-3 sm:gap-4 p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
               >
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <svg
                     className="w-8 h-8 sm:w-10 sm:h-10 text-blue-600 dark:text-blue-400"
                     fill="currentColor"

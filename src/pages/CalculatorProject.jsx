@@ -134,7 +134,7 @@ const Calculator = () => {
     <PageTransition>
       <div
         ref={calculatorRef}
-        className="min-h-screen bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-8"
+        className="min-h-screen bg-linear-to-br from-gray-100 to-gray-200 dark:from-gray-900 dark:to-gray-800 py-8"
         onKeyDown={handleKeyPress}
         tabIndex={0}
         role="application"

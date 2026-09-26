@@ -22,7 +22,7 @@ const Home = () => {
       <div className="min-h-screen">
         <SEO {...seoPages["/"]} />
         {/* Hero Section */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-gray-900 via-primary-900 to-gray-800 text-white py-12 sm:py-16 md:py-20 transition-colors duration-500">
+        <section className="relative overflow-hidden bg-linear-to-br from-gray-900 via-primary-900 to-gray-800 text-white py-12 sm:py-16 md:py-20 transition-colors duration-500">
           {/* Glow visual sutil - Igual en ambos modos */}
           <div className="absolute inset-0 opacity-20 pointer-events-none">
             <div className="absolute top-1/3 left-1/3 w-[500px] h-[500px] bg-primary-500 rounded-full blur-3xl"></div>
@@ -53,7 +53,7 @@ const Home = () => {
                 animate="visible"
               >
                 <span className="relative inline-block">
-                  <span className="absolute inset-0 blur-2xl opacity-30 bg-gradient-to-r from-primary-300 to-blue-300"></span>
+                  <span className="absolute inset-0 blur-2xl opacity-30 bg-linear-to-r from-primary-300 to-blue-300"></span>
                   <span className="relative text-gray-100">Alberto Zúñiga</span>
                 </span>
               </motion.h1>
@@ -93,7 +93,7 @@ const Home = () => {
                 </Link>
                 <Link
                   to="/contact"
-                  className="relative inline-flex items-center border-2 border-gray-300/60 text-gray-100 bg-transparent hover:bg-white/5 hover:border-gray-200 text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 backdrop-blur-sm"
+                  className="relative inline-flex items-center border-2 border-gray-300/60 text-gray-100 bg-transparent hover:bg-white/5 hover:border-gray-200 text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 backdrop-blur-xs"
                 >
                   Contactar
                 </Link>

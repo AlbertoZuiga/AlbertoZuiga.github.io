@@ -233,15 +233,15 @@ const CameraProject = () => {
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
               Atajos:{" "}
-              <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded">
+              <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded-sm">
                 Espacio
               </kbd>{" "}
               Foto |{" "}
-              <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded ml-1">
+              <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded-sm ml-1">
                 R
               </kbd>{" "}
               Grabar |{" "}
-              <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded ml-1">
+              <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded-sm ml-1">
                 M
               </kbd>{" "}
               Reflejar
