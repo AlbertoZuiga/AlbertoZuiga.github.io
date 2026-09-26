@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
@@ -13,52 +13,49 @@ const CameraProject = () => {
   const [isMirrored, setIsMirrored] = useState(true);
 
   const videoRef = useRef(null);
+  const streamRef = useRef(null);
   const mediaRecorderRef = useRef(null);
   const chunksRef = useRef([]);
 
-  useEffect(() => {
-    startCamera();
+  const saveRecordedVideo = () => {
+    const blob = new Blob(chunksRef.current, { type: "video/mp4" });
+    const videoURL = URL.createObjectURL(blob);
 
-    return () => {
-      // Cleanup: stop camera when component unmounts
-      if (stream) {
-        for (const track of stream.getTracks()) {
-          track.stop();
-        }
-      }
+    setCaptures((prev) => [
+      ...prev,
+      {
+        type: "video",
+        url: videoURL,
+        id: Date.now(),
+      },
+    ]);
+
+    chunksRef.current = [];
+  };
+
+  const setupVideoStream = (mediaStream) => {
+    streamRef.current = mediaStream;
+    setStream(mediaStream);
+
+    // Setup MediaRecorder
+    const recorder = new MediaRecorder(mediaStream);
+    recorder.ondataavailable = (event) => {
+      chunksRef.current.push(event.data);
     };
-  }, []); // Empty dependency array - only run once on mount
+    recorder.onstop = saveRecordedVideo;
+    mediaRecorderRef.current = recorder;
 
-  // Keyboard shortcut handler
-  useEffect(() => {
-    const handleKeyPress = (event) => {
-      if (!buttonsEnabled) return;
+    setButtonsEnabled(true);
+    setError(null);
+  };
 
-      if (event.code === "Space") {
-        event.preventDefault();
-        takePicture();
-      } else if (event.code === "KeyR") {
-        event.preventDefault();
-        toggleRecording();
-      } else if (event.code === "KeyM") {
-        event.preventDefault();
-        setIsMirrored((prev) => !prev);
-      }
-    };
-
-    document.addEventListener("keydown", handleKeyPress);
-
-    return () => {
-      document.removeEventListener("keydown", handleKeyPress);
-    };
-  }, [buttonsEnabled, isRecording]); // Update when buttonsEnabled or isRecording changes
-
-  // Separate effect to update video element when stream changes
-  useEffect(() => {
-    if (stream && videoRef.current) {
-      videoRef.current.srcObject = stream;
-    }
-  }, [stream]);
+  const handleCameraError = (err) => {
+    console.error("Error al acceder a la cámara:", err);
+    setError(
+      "Se requiere permiso para usar la cámara. Por favor, permite el acceso y recarga la página."
+    );
+    setButtonsEnabled(false);
+  };
 
   const startCamera = async () => {
     try {
@@ -99,30 +96,29 @@ const CameraProject = () => {
     }
   };
 
-  const setupVideoStream = (mediaStream) => {
-    setStream(mediaStream);
+  useEffect(() => {
+    startCamera();
 
-    // Setup MediaRecorder
-    const recorder = new MediaRecorder(mediaStream);
-    recorder.ondataavailable = (event) => {
-      chunksRef.current.push(event.data);
+    return () => {
+      // Cleanup: stop camera when component unmounts
+      if (streamRef.current) {
+        for (const track of streamRef.current.getTracks()) {
+          track.stop();
+        }
+        streamRef.current = null;
+      }
     };
-    recorder.onstop = saveRecordedVideo;
-    mediaRecorderRef.current = recorder;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Empty dependency array - only run once on mount
 
-    setButtonsEnabled(true);
-    setError(null);
-  };
+  // Separate effect to update video element when stream changes
+  useEffect(() => {
+    if (stream && videoRef.current) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
 
-  const handleCameraError = (err) => {
-    console.error("Error al acceder a la cámara:", err);
-    setError(
-      "Se requiere permiso para usar la cámara. Por favor, permite el acceso y recarga la página."
-    );
-    setButtonsEnabled(false);
-  };
-
-  const takePicture = () => {
+  const takePicture = useCallback(() => {
     if (!videoRef.current) return;
 
     const canvas = document.createElement("canvas");
@@ -153,38 +149,44 @@ const CameraProject = () => {
         id: Date.now(),
       },
     ]);
-  };
+  }, []);
 
-  const toggleRecording = () => {
+  const toggleRecording = useCallback(() => {
     if (!mediaRecorderRef.current) return;
 
     if (isRecording) {
       mediaRecorderRef.current.stop();
       setIsRecording(false);
-      console.log("Recording stopped");
     } else {
       chunksRef.current = [];
       mediaRecorderRef.current.start();
       setIsRecording(true);
-      console.log("Recording started");
     }
-  };
+  }, [isRecording]);
 
-  const saveRecordedVideo = () => {
-    const blob = new Blob(chunksRef.current, { type: "video/mp4" });
-    const videoURL = URL.createObjectURL(blob);
+  // Keyboard shortcut handler
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (!buttonsEnabled) return;
 
-    setCaptures((prev) => [
-      ...prev,
-      {
-        type: "video",
-        url: videoURL,
-        id: Date.now(),
-      },
-    ]);
+      if (event.code === "Space") {
+        event.preventDefault();
+        takePicture();
+      } else if (event.code === "KeyR") {
+        event.preventDefault();
+        toggleRecording();
+      } else if (event.code === "KeyM") {
+        event.preventDefault();
+        setIsMirrored((prev) => !prev);
+      }
+    };
 
-    chunksRef.current = [];
-  };
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [buttonsEnabled, takePicture, toggleRecording]);
 
   const downloadImage = (url, index) => {
     const link = document.createElement("a");
