@@ -4,6 +4,7 @@ import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
 import { emailConfig } from "../config/emailjs.config";
 import SEO from "../components/SEO";
+import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import { site } from "../data/site";
 import {
@@ -123,12 +124,7 @@ const Contact = () => {
   return (
     <PageTransition>
       <div className="min-h-screen py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
-        <SEO
-          title="Contacto - Alberto Zúñiga | Hablemos de tu Proyecto"
-          description="Contacta a Alberto Zúñiga. Ingeniero Civil en Ciencias de la Computación disponible para proyectos de desarrollo web. Email: a.zuniga.marinovic@gmail.com"
-          url={`${site.baseUrl}/contact`}
-          keywords="contacto Alberto Zúñiga, colaboración desarrollo web, freelance developer, contratar desarrollador"
-        />
+        <SEO {...seoPages["/contact"]} />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section - Improved mobile spacing */}
           <motion.div

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import {
   slideUp,
@@ -8,20 +9,13 @@ import {
   staggerItem,
   viewportConfig,
 } from "../utils/animations";
-import { site } from "../data/site";
 import { projects } from "../data/projects";
 
 const Projects = () => {
   return (
     <PageTransition>
       <div className="min-h-screen py-12 dark:bg-gray-900 transition-colors duration-300">
-        <SEO
-          title="Proyectos - Alberto Zúñiga | Portfolio de Desarrollo Web"
-          description="Proyectos de desarrollo web: Scheduler App (Flask/Python), Healthy (Ruby on Rails), aplicaciones interactivas con JavaScript. Backend y frontend."
-          url={`${site.baseUrl}/projects`}
-          image="/og/projects.png"
-          keywords="proyectos web, Python, Flask, Ruby on Rails, JavaScript, desarrollo full stack, aplicaciones web, portfolio proyectos"
-        />
+        <SEO {...seoPages["/projects"]} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"

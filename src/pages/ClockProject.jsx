@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
-import { site } from "../data/site";
 import { fadeIn, scaleIn } from "../utils/animations";
 
 const Clock = () => {
@@ -83,13 +83,7 @@ const Clock = () => {
         role="application"
         aria-label="Reloj"
       >
-        <SEO
-          title="Reloj Digital - Alberto Zúñiga"
-          description="Reloj digital interactivo con JavaScript. Formato 12/24 horas, precisión ajustable, navegación por teclado. Proyecto web del portfolio."
-          url={`${site.baseUrl}/projects/clock`}
-          image="/og/clock.png"
-          keywords="reloj digital, proyecto JavaScript, reloj tiempo real, desarrollo web, programación"
-        />
+        <SEO {...seoPages["/projects/clock"]} />
         <div className="max-w-4xl mx-auto px-4">
           <BackToProjects variant="dark" />
 

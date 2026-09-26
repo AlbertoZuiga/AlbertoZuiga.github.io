@@ -1,9 +1,9 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
-import { site } from "../data/site";
 import { fadeIn } from "../utils/animations";
 
 const WINNING_COMBINATIONS = [
@@ -146,13 +146,7 @@ const TicTacToe = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
-        <SEO
-          title="Tic-Tac-Toe - Alberto Zúñiga"
-          description="Juego de Tres en Línea (Tic-Tac-Toe) con JavaScript. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo."
-          url={`${site.baseUrl}/projects/tic-tac-toe`}
-          image="/og/tic-tac-toe.png"
-          keywords="tic-tac-toe, tres en línea JavaScript, juego interactivo, desarrollo web, programación"
-        />
+        <SEO {...seoPages["/projects/tic-tac-toe"]} />
         <div className="max-w-2xl mx-auto px-4">
           <BackToProjects variant="dark" />
 

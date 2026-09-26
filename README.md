@@ -90,7 +90,8 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   └── sitemap.xml
 ├── scripts/
 │   ├── generate-favicons.mjs # Genera PNG/ICO desde favicon.svg
-│   └── generate-og.mjs       # Genera imágenes OG 1200×630 en public/og
+│   ├── generate-og.mjs       # Genera imágenes OG 1200×630 en public/og
+│   └── prerender.mjs         # Post-build: dist/<ruta>/index.html con metas OG estáticas
 ├── src/
 │   ├── components/
 │   │   ├── AccordionSection.jsx  # Acordeón accesible (About)
@@ -111,6 +112,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   │   ├── cv.js                 # Experiencia, educación, etc. (About)
 │   │   ├── navLinks.js           # Rutas del Navbar
 │   │   ├── projects.js           # Galería de proyectos
+│   │   ├── seo.js                # title/description/OG por ruta (SEO.jsx + prerender)
 │   │   ├── site.js               # Nombre, email, URLs, redes
 │   │   └── skills.js             # Competencias técnicas (Home)
 │   ├── hooks/
@@ -233,6 +235,10 @@ npx -p sharp -p to-ico node scripts/generate-favicons.mjs
 ```bash
 npm i --no-save sharp && node scripts/generate-og.mjs
 ```
+
+### Prerender de metas por ruta
+
+Los scrapers de Facebook/LinkedIn/Twitter no ejecutan JS y GitHub Pages responde `404.html` en rutas profundas. `npm run build` ejecuta `scripts/prerender.mjs`, que copia `dist/index.html` a `dist/<ruta>/index.html` inyectando `<title>`, `canonical` y metas `og:*`/`twitter:*` desde `src/data/seo.js`. En el navegador, `main.jsx` elimina esas etiquetas (`data-prerender`) antes de montar React para que `SEO.jsx` no las duplique.
 
 ---
 

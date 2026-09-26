@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
+import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
-import { site } from "../data/site";
 import { fadeIn, scaleIn } from "../utils/animations";
 
 const Calculator = () => {
@@ -154,13 +154,7 @@ const Calculator = () => {
         role="application"
         aria-label="Calculadora"
       >
-        <SEO
-          title="Calculadora Interactiva - Alberto Zúñiga"
-          description="Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio."
-          url={`${site.baseUrl}/projects/calculator`}
-          image="/og/calculator.png"
-          keywords="calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
-        />
+        <SEO {...seoPages["/projects/calculator"]} />
         <div className="max-w-md mx-auto px-4">
           <BackToProjects />
 
