@@ -40,12 +40,12 @@ const Clock = () => {
       options.fractionalSecondDigits = precision;
     }
 
-    return time.toLocaleTimeString("es-CH", options);
+    return time.toLocaleTimeString("es-CL", options);
   };
 
   const formatDate = () => {
     const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-    return time.toLocaleDateString("es-CH", options);
+    return time.toLocaleDateString("es-CL", options);
   };
 
   const getHandRotation = (unit, max) => {
