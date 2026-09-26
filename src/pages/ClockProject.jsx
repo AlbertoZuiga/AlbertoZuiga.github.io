@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import BackToProjects from "../components/BackToProjects";
 import { site } from "../data/site";
-import { slideUp, fadeIn, scaleIn } from "../utils/animations";
+import { fadeIn, scaleIn } from "../utils/animations";
 
 const Clock = () => {
   const [time, setTime] = useState(new Date());
@@ -90,32 +90,7 @@ const Clock = () => {
           keywords="reloj digital, proyecto JavaScript, reloj tiempo real, desarrollo web, programación"
         />
         <div className="max-w-4xl mx-auto px-4">
-          <motion.div
-            className="mb-6"
-            variants={slideUp}
-            initial="hidden"
-            animate="visible"
-          >
-            <Link
-              to="/projects"
-              className="inline-flex items-center text-white hover:text-yellow-300 transition-colors"
-            >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              Volver a Proyectos
-            </Link>
-          </motion.div>
+          <BackToProjects variant="dark" />
 
           <motion.div
             className="text-center mb-8"

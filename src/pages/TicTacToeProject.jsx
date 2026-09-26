@@ -1,10 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
-import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import BackToProjects from "../components/BackToProjects";
 import { site } from "../data/site";
-import { slideUp, fadeIn } from "../utils/animations";
+import { fadeIn } from "../utils/animations";
 
 const WINNING_COMBINATIONS = [
   [0, 1, 2],
@@ -153,32 +153,7 @@ const TicTacToe = () => {
           keywords="tic-tac-toe, tres en línea JavaScript, juego interactivo, desarrollo web, programación"
         />
         <div className="max-w-2xl mx-auto px-4">
-          <motion.div
-            className="mb-6"
-            variants={slideUp}
-            initial="hidden"
-            animate="visible"
-          >
-            <Link
-              to="/projects"
-              className="inline-flex items-center text-white hover:text-yellow-300 transition-colors"
-            >
-              <svg
-                className="w-5 h-5 mr-2"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              Volver a Proyectos
-            </Link>
-          </motion.div>
+          <BackToProjects variant="dark" />
 
           <motion.div
             className="text-center mb-8"

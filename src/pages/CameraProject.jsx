@@ -2,6 +2,7 @@ import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
 import SEO from "../components/SEO";
 import PageTransition from "../components/PageTransition";
+import BackToProjects from "../components/BackToProjects";
 import { site } from "../data/site";
 import { slideUp } from "../utils/animations";
 
@@ -220,6 +221,8 @@ const CameraProject = () => {
           keywords="cámara web, MediaDevices API, captura video JavaScript, getUserMedia, desarrollo web"
         />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <BackToProjects />
+
           {/* Header */}
           <motion.div
             className="text-center mb-8"
