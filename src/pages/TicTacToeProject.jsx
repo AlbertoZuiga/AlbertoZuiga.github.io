@@ -5,17 +5,7 @@ import { seoPages } from "../data/seo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn } from "../utils/animations";
-
-const WINNING_COMBINATIONS = [
-  [0, 1, 2],
-  [3, 4, 5],
-  [6, 7, 8],
-  [0, 3, 6],
-  [1, 4, 7],
-  [2, 5, 8],
-  [0, 4, 8],
-  [2, 4, 6],
-];
+import { checkWin, isDraw } from "../utils/ticTacToe";
 
 const TicTacToe = () => {
   const [board, setBoard] = useState(new Array(9).fill(null));
@@ -25,19 +15,6 @@ const TicTacToe = () => {
   const [firstPlayer, setFirstPlayer] = useState("X"); // Quien inicia el juego
   const [scores, setScores] = useState({ X: 0, O: 0, draws: 0 });
   const [gamesPlayed, setGamesPlayed] = useState(0);
-
-  const checkWin = (currentBoard, player) => {
-    for (const combination of WINNING_COMBINATIONS) {
-      if (combination.every((index) => currentBoard[index] === player)) {
-        return combination;
-      }
-    }
-    return null;
-  };
-
-  const isDraw = (currentBoard) => {
-    return currentBoard.every((cell) => cell !== null);
-  };
 
   const handleClick = (index) => {
     if (!gameOn || board[index]) return;

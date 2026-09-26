@@ -44,6 +44,9 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
+      - name: Test
+        run: npm test
+
       - name: Build with environment variables
         env:
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.VITE_EMAILJS_SERVICE_ID }}
