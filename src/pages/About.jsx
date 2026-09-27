@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
 import PageTransition from "../components/PageTransition";
 import AccordionSection from "../components/AccordionSection";
 import SkillRow from "../components/SkillRow";
@@ -9,9 +10,19 @@ import Timeline from "../components/Timeline";
 import { slideUp } from "../utils/animations";
 import { site } from "../data/site";
 import { cvSkillGroups } from "../data/skills";
-import { personal, work, academic, volunteering, additional } from "../data/cv";
+
+const SECTIONS = [
+  { id: "personal", icon: "👤" },
+  { id: "work", icon: "💼" },
+  { id: "academic", icon: "🎓" },
+  { id: "volunteering", icon: "🤝" },
+  { id: "additional", icon: "📜" },
+  { id: "skills", icon: "🛠️" },
+];
 
 const About = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/about");
   const [expandedSections, setExpandedSections] = useState({
     personal: true,
     academic: true,
@@ -28,10 +39,44 @@ const About = () => {
     }));
   };
 
+  const sectionProps = (id) => {
+    const { icon } = SECTIONS.find((s) => s.id === id);
+    return {
+      title: t(`about.sections.${id}`),
+      icon,
+      isOpen: expandedSections[id],
+      onToggle: () => toggleSection(id),
+    };
+  };
+
+  const personal = [
+    { label: t("cv.personal.name"), value: site.fullName },
+    { label: t("cv.personal.degree"), value: t("site.degree") },
+    {
+      label: t("cv.personal.phone"),
+      links: [{ href: site.phoneHref, text: site.phone }],
+    },
+    {
+      label: t("cv.personal.email"),
+      links: [
+        { href: `mailto:${site.universityEmail}`, text: site.universityEmail },
+        { href: `mailto:${site.email}`, text: site.email },
+      ],
+    },
+    {
+      label: t("cv.personal.github"),
+      links: [{ href: site.github, text: site.githubUser, external: true }],
+    },
+  ];
+  const work = t("cv.work", { returnObjects: true });
+  const academic = t("cv.academic", { returnObjects: true });
+  const volunteering = t("cv.volunteering", { returnObjects: true });
+  const additional = t("cv.additional.items", { returnObjects: true });
+
   return (
     <PageTransition>
       <div className="py-8 sm:py-12 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-        <SEO {...seoPages["/about"]} />
+        <SEO {...seo} />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-8 sm:mb-12"
@@ -40,13 +85,13 @@ const About = () => {
             animate="visible"
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4">
-              Currículum Vitae
+              {t("about.title")}
             </h1>
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300">
               {site.name}
             </p>
             <a
-              href={site.cvUrl}
+              href={t("site.cvUrl")}
               download
               className="btn-primary inline-flex items-center gap-2 mt-4"
             >
@@ -64,16 +109,11 @@ const About = () => {
                   d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"
                 />
               </svg>
-              Descargar CV (PDF)
+              {t("about.downloadCv")}
             </a>
           </motion.div>
 
-          <AccordionSection
-            title="Antecedentes Personales"
-            icon="👤"
-            isOpen={expandedSections.personal}
-            onToggle={() => toggleSection("personal")}
-          >
+          <AccordionSection {...sectionProps("personal")}>
             <div className="space-y-3 sm:space-y-0">
               {personal.map((row) => (
                 <div
@@ -102,21 +142,11 @@ const About = () => {
             </div>
           </AccordionSection>
 
-          <AccordionSection
-            title="Experiencia Laboral"
-            icon="💼"
-            isOpen={expandedSections.work}
-            onToggle={() => toggleSection("work")}
-          >
+          <AccordionSection {...sectionProps("work")}>
             <Timeline items={work} />
           </AccordionSection>
 
-          <AccordionSection
-            title="Antecedentes Académicos"
-            icon="🎓"
-            isOpen={expandedSections.academic}
-            onToggle={() => toggleSection("academic")}
-          >
+          <AccordionSection {...sectionProps("academic")}>
             <div className="space-y-4 sm:space-y-3">
               {academic.map((entry) => (
                 <div
@@ -128,7 +158,7 @@ const About = () => {
                   </div>
                   <div className="text-gray-600 dark:text-gray-400 text-sm sm:text-base">
                     <strong className="text-gray-800 dark:text-gray-200">
-                      {entry.org}
+                      {site.university}
                     </strong>
                     {entry.degree && (
                       <>
@@ -152,7 +182,7 @@ const About = () => {
                     {entry.courses?.map((course) => (
                       <span key={course}>
                         <br />
-                        Ayudante de <em>{course}</em>
+                        {t("about.assistantOf")} <em>{course}</em>
                       </span>
                     ))}
                   </div>
@@ -161,26 +191,16 @@ const About = () => {
             </div>
           </AccordionSection>
 
-          <AccordionSection
-            title="Liderazgo y Voluntariado"
-            icon="🤝"
-            isOpen={expandedSections.volunteering}
-            onToggle={() => toggleSection("volunteering")}
-          >
+          <AccordionSection {...sectionProps("volunteering")}>
             <Timeline items={volunteering} />
           </AccordionSection>
 
-          <AccordionSection
-            title="Formación Complementaria"
-            icon="📜"
-            isOpen={expandedSections.additional}
-            onToggle={() => toggleSection("additional")}
-          >
+          <AccordionSection {...sectionProps("additional")}>
             <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
-              {additional.heading}
+              {site.university}:
             </h3>
             <ul className="flex flex-wrap gap-2">
-              {additional.items.map((item) => (
+              {additional.map((item) => (
                 <li
                   key={item.em}
                   className="rounded-full bg-primary-50 dark:bg-primary-900/40 text-primary-700 dark:text-primary-300 px-3 py-1 text-sm"
@@ -191,17 +211,12 @@ const About = () => {
             </ul>
           </AccordionSection>
 
-          <AccordionSection
-            title="Competencias Profesionales"
-            icon="🛠️"
-            isOpen={expandedSections.skills}
-            onToggle={() => toggleSection("skills")}
-          >
+          <AccordionSection {...sectionProps("skills")}>
             <div className="space-y-6 sm:space-y-8">
               {cvSkillGroups.map((group) => (
-                <div key={group.title}>
+                <div key={group.id}>
                   <h3 className="text-lg sm:text-xl font-semibold text-gray-700 dark:text-gray-300 mb-3 sm:mb-4">
-                    {group.title}
+                    {t(`skills.groups.${group.id}`)}
                   </h3>
                   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-2 sm:gap-y-3">
                     {group.skills.map((skill) => (

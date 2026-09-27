@@ -1,22 +1,26 @@
 import { Navigate, useParams } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn, slideUp } from "../utils/animations";
 import { projects } from "../data/projects";
 
 const ProjectDetail = () => {
+  const { t } = useTranslation();
   const { slug } = useParams();
+  const seo = useSeo(`/projects/${slug}`);
   const project = projects.find((p) => p.slug === slug);
 
   if (!project) return <Navigate to="/projects" replace />;
+  const text = t(`projects.${project.slug}`, { returnObjects: true });
 
   return (
     <PageTransition>
       <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-        <SEO {...seoPages[`/projects/${project.slug}`]} />
+        <SEO {...seo} />
 
         <div className={`bg-linear-to-br ${project.color} text-white py-10`}>
           <div className="max-w-5xl mx-auto px-4">
@@ -32,10 +36,10 @@ const ProjectDetail = () => {
               </div>
               <div>
                 <h1 className="text-4xl md:text-5xl font-bold mb-2">
-                  {project.title}
+                  {text.title}
                 </h1>
                 <p className="text-gray-200">
-                  {project.context} · {project.period}
+                  {text.context} · {project.period}
                 </p>
               </div>
             </motion.div>
@@ -50,16 +54,16 @@ const ProjectDetail = () => {
         >
           <section className="card dark:bg-gray-800 p-8">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-              Sobre el proyecto
+              {t("projectDetail.about")}
             </h2>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
-              {project.longDescription}
+              {text.longDescription}
             </p>
           </section>
 
           <aside className="card dark:bg-gray-800 p-8">
             <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-4">
-              Stack
+              {t("projectDetail.stack")}
             </h2>
             <ul className="flex flex-wrap gap-2 mb-6">
               {project.stack.map((tech) => (
@@ -79,7 +83,7 @@ const ProjectDetail = () => {
                 rel="noopener noreferrer"
                 className="btn-primary text-center"
               >
-                Ver código ↗
+                {t("projectDetail.code")}
               </a>
               {project.demoUrl && (
                 <a
@@ -88,7 +92,7 @@ const ProjectDetail = () => {
                   rel="noopener noreferrer"
                   className="text-center border-2 border-primary-500 text-primary-500 dark:text-primary-400 font-semibold py-2 px-6 rounded-lg hover:bg-primary-500/10 transition-colors"
                 >
-                  Ver demo ↗
+                  {t("projectDetail.demo")}
                 </a>
               )}
             </div>

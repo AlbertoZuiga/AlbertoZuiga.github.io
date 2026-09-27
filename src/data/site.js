@@ -1,8 +1,6 @@
 export const site = {
   name: "Alberto Zúñiga",
   fullName: "Alberto Zúñiga Marinovic",
-  degree: "Ingeniero Civil en Ciencias de la Computación",
-  jobTitle: "Desarrollador Full Stack",
   university: "Universidad de los Andes",
   siteName: "Alberto Zúñiga Portfolio",
   baseUrl: "https://albertozuiga.github.io",
@@ -13,5 +11,4 @@ export const site = {
   githubUser: "AlbertoZuiga",
   github: "https://github.com/AlbertoZuiga",
   linkedin: "https://www.linkedin.com/in/alberto-zuniga-marinovic/",
-  cvUrl: "/cv-alberto-zuniga.pdf",
 };

@@ -1,12 +1,15 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { slideUp } from "../utils/animations";
 
 const CameraProject = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/projects/camera");
   const [stream, setStream] = useState(null);
   const [isRecording, setIsRecording] = useState(false);
   const [error, setError] = useState(null);
@@ -55,9 +58,7 @@ const CameraProject = () => {
 
   const handleCameraError = (err) => {
     console.error("Error al acceder a la cámara:", err);
-    setError(
-      "Se requiere permiso para usar la cámara. Por favor, permite el acceso y recarga la página."
-    );
+    setError(t("camera.error"));
     setButtonsEnabled(false);
   };
 
@@ -214,7 +215,7 @@ const CameraProject = () => {
   return (
     <PageTransition>
       <div className="min-h-screen py-12 bg-gray-50 dark:bg-gray-900">
-        <SEO {...seoPages["/projects/camera"]} />
+        <SEO {...seo} />
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <BackToProjects />
 
@@ -226,25 +227,25 @@ const CameraProject = () => {
             animate="visible"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
-              📸 Cámara Web
+              {t("camera.title")}
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              Toma fotos y graba videos usando tu cámara
+              {t("camera.subtitle")}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400 mt-2">
-              Atajos:{" "}
+              {t("camera.shortcuts")}{" "}
               <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded-sm">
-                Espacio
+                {t("camera.space")}
               </kbd>{" "}
-              Foto |{" "}
+              {t("camera.photo")} |{" "}
               <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded-sm ml-1">
                 R
               </kbd>{" "}
-              Grabar |{" "}
+              {t("camera.record")} |{" "}
               <kbd className="px-2 py-1 bg-gray-200 dark:bg-gray-700 dark:text-gray-200 rounded-sm ml-1">
                 M
               </kbd>{" "}
-              Reflejar
+              {t("camera.mirror")}
             </p>
           </motion.div>
 
@@ -307,7 +308,7 @@ const CameraProject = () => {
                       d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"
                     />
                   </svg>
-                  Sacar Foto
+                  {t("camera.takePhoto")}
                 </button>
 
                 <button
@@ -328,7 +329,7 @@ const CameraProject = () => {
                       >
                         <rect x="6" y="6" width="12" height="12" />
                       </svg>
-                      Detener Grabación
+                      {t("camera.stopRecording")}
                     </>
                   ) : (
                     <>
@@ -339,7 +340,7 @@ const CameraProject = () => {
                       >
                         <circle cx="12" cy="12" r="8" />
                       </svg>
-                      Comenzar Grabación
+                      {t("camera.startRecording")}
                     </>
                   )}
                 </button>
@@ -366,7 +367,7 @@ const CameraProject = () => {
                       d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"
                     />
                   </svg>
-                  Reflejar
+                  {t("camera.mirror")}
                 </button>
               </div>
             </div>
@@ -376,7 +377,7 @@ const CameraProject = () => {
           {captures.length > 0 && (
             <div className="bg-gray-50 dark:bg-gray-800 rounded-lg shadow-lg p-6">
               <h2 className="text-2xl font-bold text-gray-800 dark:text-white mb-6">
-                Capturas ({captures.length})
+                {t("camera.captures", { count: captures.length })}
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {captures.map((capture, index) => (
@@ -387,7 +388,7 @@ const CameraProject = () => {
                     {capture.type === "image" ? (
                       <img
                         src={capture.url}
-                        alt={`Snapshot ${index + 1}`}
+                        alt={t("camera.snapshot", { n: index + 1 })}
                         className="w-full h-auto"
                       />
                     ) : (
@@ -396,10 +397,7 @@ const CameraProject = () => {
                         controls
                         className="w-full h-auto"
                       >
-                        <track
-                          kind="captions"
-                          label="Sin subtítulos disponibles"
-                        />
+                        <track kind="captions" label={t("camera.noCaptions")} />
                       </video>
                     )}
 
@@ -418,8 +416,8 @@ const CameraProject = () => {
                         className="px-3 py-2 bg-primary-500 hover:bg-primary-600 text-white rounded-lg text-sm font-semibold"
                         title={
                           capture.type === "image"
-                            ? "Descargar imagen"
-                            : "Descargar video"
+                            ? t("camera.downloadImage")
+                            : t("camera.downloadVideo")
                         }
                       >
                         <svg
@@ -439,7 +437,7 @@ const CameraProject = () => {
                       <button
                         onClick={() => deleteCapture(capture.id)}
                         className="px-3 py-2 bg-red-600 hover:bg-red-700 text-white rounded-lg text-sm font-semibold"
-                        title="Eliminar"
+                        title={t("camera.delete")}
                       >
                         <svg
                           className="w-5 h-5"

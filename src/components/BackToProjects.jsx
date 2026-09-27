@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { slideUp } from "../utils/animations";
 
 const variantClass = {
@@ -10,6 +11,7 @@ const variantClass = {
 };
 
 const BackToProjects = ({ variant = "light" }) => {
+  const { t } = useTranslation();
   return (
     <motion.div
       className="mb-6"
@@ -35,7 +37,7 @@ const BackToProjects = ({ variant = "light" }) => {
             d="M10 19l-7-7m0 0l7-7m-7 7h18"
           />
         </svg>
-        Volver a Proyectos
+        {t("back")}
       </Link>
     </motion.div>
   );

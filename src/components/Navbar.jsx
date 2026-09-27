@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import BrandMark from "./BrandMark";
 import ThemeToggle from "./ThemeToggle";
 import { navLinks } from "../data/navLinks";
@@ -14,6 +15,7 @@ const linkClass =
     }`;
 
 const Navbar = () => {
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -40,7 +42,7 @@ const Navbar = () => {
                 to={link.to}
                 className={linkClass("px-3 py-2 text-sm", "hover:bg-gray-700")}
               >
-                {link.label}
+                {t(`nav.${link.key}`)}
               </NavLink>
             ))}
 
@@ -55,9 +57,9 @@ const Navbar = () => {
               onClick={toggleMenu}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 dark:hover:bg-gray-800 focus:outline-hidden focus:ring-2 focus:ring-inset focus:ring-white transition-colors"
               aria-expanded={isMenuOpen}
-              aria-label="Menú principal"
+              aria-label={t("nav.menu")}
             >
-              <span className="sr-only">Abrir menú principal</span>
+              <span className="sr-only">{t("nav.openMenu")}</span>
               {/* Icon when menu is closed */}
               <svg
                 className={`${isMenuOpen ? "hidden" : "block"} h-6 w-6`}
@@ -114,7 +116,7 @@ const Navbar = () => {
                 "hover:bg-gray-600"
               )}
             >
-              {link.label}
+              {t(`nav.${link.key}`)}
             </NavLink>
           ))}
         </div>

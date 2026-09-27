@@ -1,6 +1,7 @@
+// `key` indexa nav.* en src/i18n/*.json
 export const navLinks = [
-  { to: "/", label: "Inicio" },
-  { to: "/about", label: "Sobre Mí" },
-  { to: "/projects", label: "Proyectos" },
-  { to: "/contact", label: "Contacto" },
+  { to: "/", key: "home" },
+  { to: "/about", key: "about" },
+  { to: "/projects", key: "projects" },
+  { to: "/contact", key: "contact" },
 ];

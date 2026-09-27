@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import BrandMark from "./BrandMark";
 import { site } from "../data/site";
 
 const Footer = () => {
+  const { t } = useTranslation();
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,7 +14,7 @@ const Footer = () => {
         </div>
         <div className="text-center mb-6 sm:mb-8">
           <p className="text-base sm:text-lg mb-4 sm:mb-6">
-            &copy; {currentYear} {site.name}. Todos los derechos reservados.
+            &copy; {currentYear} {site.name}. {t("footer.rights")}
           </p>
         </div>
 

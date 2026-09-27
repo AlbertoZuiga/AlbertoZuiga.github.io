@@ -1,8 +1,10 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { staggerItem } from "../utils/animations";
 
 const SkillCard = ({ icon, name, level }) => {
+  const { t } = useTranslation();
   return (
     <motion.div
       className="card p-4 sm:p-6 text-center transform hover:scale-105 transition-transform dark:bg-gray-800"
@@ -13,7 +15,7 @@ const SkillCard = ({ icon, name, level }) => {
         {name}
       </h4>
       <p className="text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-        {level}
+        {t(`skills.levels.${level}`)}
       </p>
     </motion.div>
   );
