@@ -1,0 +1,381 @@
+{
+  "site": {
+    "degree": "Computer Science Engineer",
+    "jobTitle": "Full Stack Developer",
+    "cvUrl": "/cv-alberto-zuniga-en.pdf"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About Me",
+    "projects": "Projects",
+    "contact": "Contact",
+    "menu": "Main menu",
+    "openMenu": "Open main menu",
+    "lang": "Language"
+  },
+  "brand": {
+    "title": "Home",
+    "ariaLabel": "Go to home",
+    "alt": "Alberto Zúñiga's personal brand"
+  },
+  "theme": {
+    "toLight": "Switch to light mode",
+    "toDark": "Switch to dark mode",
+    "dark": "Dark",
+    "light": "Light"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "back": "Back to Projects",
+  "home": {
+    "viewProjects": "View Projects",
+    "contact": "Contact",
+    "aboutTitle": "About Me",
+    "educationTitle": "Education",
+    "educationText": "Computer Science Engineer from Universidad de los Andes (2026), with a technological concentration in Electrical Engineering and a Minor in Psychology.",
+    "experienceTitle": "Experience",
+    "experienceText": "Teaching assistant in several courses (Web Technologies, Programming, Programming Paradigms, Electronic Systems, Databases, Computing Workshop). Pro bono collaborator at Fundación Nueva Mente, managing its web presence and administrative records.",
+    "more": "Learn more",
+    "skillsTitle": "Technical Skills"
+  },
+  "about": {
+    "title": "Curriculum Vitae",
+    "downloadCv": "Download CV (PDF)",
+    "sections": {
+      "personal": "Personal Information",
+      "work": "Work Experience",
+      "academic": "Education",
+      "volunteering": "Leadership & Volunteering",
+      "additional": "Additional Training",
+      "skills": "Professional Skills"
+    },
+    "assistantOf": "Teaching assistant,"
+  },
+  "cv": {
+    "personal": {
+      "name": "Name",
+      "degree": "Degree",
+      "phone": "Phone",
+      "email": "Email",
+      "github": "GitHub"
+    },
+    "work": [
+      {
+        "period": "Mar 2026 - Present",
+        "org": "Buk",
+        "title": "Software Engineer Level 1, Talent - Evaluations team",
+        "lines": [
+          "Development and maintenance of the platform's Performance Evaluations module"
+        ]
+      },
+      {
+        "period": "Jan 2026 - Feb 2026",
+        "org": "Buk",
+        "title": "Software Engineer intern, Talent - Evaluations team",
+        "lines": [
+          "Migration of the “My evaluations” section to Fiji, Buk's internal development framework"
+        ]
+      }
+    ],
+    "academic": [
+      {
+        "period": "2020 - 2026",
+        "degree": "Computer Science Engineer (Ingeniero Civil en Ciencias de la Computación)",
+        "thesis": {
+          "text": "Thesis project: Arbocensus, route optimization for urban tree censuses",
+          "href": "https://github.com/AlbertoZuiga/arbocensus-routing"
+        }
+      },
+      {
+        "period": "Mar 2026 - Jun 2026",
+        "courses": ["Programming Paradigms"]
+      },
+      {
+        "period": "Aug 2025 - Nov 2025",
+        "courses": [
+          "Electronic Systems",
+          "Databases",
+          "Programming Paradigms",
+          "Computing Workshop"
+        ]
+      },
+      {
+        "period": "Mar 2025 - Jun 2025",
+        "courses": ["Web Technologies", "Engineering Projects Workshop"]
+      },
+      {
+        "period": "Aug 2024 - Nov 2024",
+        "courses": ["Web Technologies", "Mobile Applications"]
+      },
+      {
+        "period": "Mar 2024 - Jun 2024",
+        "courses": ["Web Technologies", "Programming"]
+      },
+      {
+        "period": "Mar 2023 - Jun 2023",
+        "courses": ["Programming Paradigms", "Programming"]
+      },
+      {
+        "period": "Aug 2022 - Nov 2022",
+        "courses": ["Programming Paradigms"]
+      }
+    ],
+    "volunteering": [
+      {
+        "period": "2025 - 2026",
+        "org": "Pastoral Universidad de los Andes",
+        "title": "Catechist (2025 - 2026) and logistics lead (2026)",
+        "lines": [
+          "Logistics management and organization of the group's activities",
+          "Planning and teaching weekly formation classes"
+        ]
+      },
+      {
+        "period": "2023",
+        "org": "Engineering Student Council Member",
+        "title": "Representative to the Student Federation"
+      },
+      {
+        "period": "2022 - 2024",
+        "org": "Fundación Nueva Mente",
+        "title": "Part-time pro bono volunteer",
+        "lines": [
+          "Management of the website using Wix",
+          "Expense tracking and record keeping"
+        ]
+      }
+    ],
+    "additional": {
+      "items": [
+        {
+          "text": "Technological concentration in",
+          "em": "Electrical Engineering"
+        },
+        { "text": "Minor in", "em": "Psychology" },
+        { "text": "Seminar", "em": "ChatGPT" }
+      ]
+    }
+  },
+  "skills": {
+    "groups": {
+      "languages": "Programming Languages",
+      "frameworks": "Frameworks & Libraries",
+      "tools": "Tools",
+      "software": "Software Tools",
+      "spoken": "Languages"
+    },
+    "levels": {
+      "basic": "Basic",
+      "basic-intermediate": "Basic-Intermediate",
+      "intermediate": "Intermediate",
+      "intermediate-advanced": "Intermediate-Advanced",
+      "advanced": "Advanced",
+      "native": "Native"
+    }
+  },
+  "projects": {
+    "arbocensus": {
+      "title": "Arbocensus",
+      "context": "Thesis project, Universidad de los Andes",
+      "description": "Thesis project: route optimization for urban tree censuses. mTSP with OR-Tools, OSRM, Django + PostGIS and React",
+      "longDescription": "Urban tree censuses require a team of surveyors to walk to thousands of trees spread across a municipality. Arbocensus models that route as an mTSP (multiple Traveling Salesman Problem): from the geometries stored in PostGIS, it computes the pedestrian cost matrix with OSRM and solves it with the OR-Tools VRP solver, running the optimization jobs in Celery. The React frontend displays the resulting routes on a Leaflet map."
+    },
+    "scheduler": {
+      "title": "Scheduler App",
+      "context": "Personal project",
+      "description": "Schedule management and automatic group splitting with Flask",
+      "longDescription": "An app to coordinate availability within groups. Each member marks their free time blocks and the app finds the best moments to meet; it also splits the group automatically into compatible subgroups. Includes Google OAuth 2.0 authentication, Owner / Admin / Member roles, custom categories with AND / OR filters, and a dockerized deployment with PostgreSQL."
+    },
+    "healthy": {
+      "title": "Healthy",
+      "context": "Pre-professional internship",
+      "description": "Healthy meal plan recommendation system integrated with purchases",
+      "longDescription": "A platform where companies publish meal plans with their nutritional information and users receive recommendations based on their preferences, customize the plan by answering questions, purchase it and track their deliveries. Includes per-plan reviews, roles with CanCanCan and authentication with Devise."
+    },
+    "calculator": {
+      "title": "Calculator",
+      "description": "Functional calculator with a modern interface"
+    },
+    "clock": {
+      "title": "Clock",
+      "description": "Real-time digital and analog clock"
+    },
+    "tic-tac-toe": {
+      "title": "Tic-Tac-Toe",
+      "description": "Classic two-player game"
+    },
+    "camera": {
+      "title": "Camera",
+      "description": "Take photos and record videos from your browser"
+    }
+  },
+  "projectsPage": {
+    "title": "My Projects",
+    "subtitle": "A collection of personal projects and web applications"
+  },
+  "projectDetail": {
+    "about": "About the project",
+    "stack": "Stack",
+    "code": "View code ↗",
+    "demo": "View demo ↗"
+  },
+  "contact": {
+    "title": "Contact",
+    "subtitle": "Have a question or a proposal? I'd love to hear from you",
+    "formTitle": "Send me a message",
+    "formSubtitle": "Fill in the form and I'll get back to you shortly",
+    "name": "Name",
+    "email": "Email",
+    "subject": "Subject",
+    "message": "Message",
+    "placeholders": {
+      "name": "Your full name",
+      "email": "you@email.com",
+      "subject": "What would you like to talk about?",
+      "message": "Write your message here..."
+    },
+    "errors": {
+      "nameRequired": "Name is required",
+      "nameShort": "Name must be at least 2 characters",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email",
+      "subjectRequired": "Subject is required",
+      "subjectShort": "Subject must be at least 3 characters",
+      "messageRequired": "Message is required",
+      "messageShort": "Message must be at least 10 characters",
+      "messageLong": "Message cannot exceed 1000 characters"
+    },
+    "sending": "Sending...",
+    "send": "Send Message",
+    "toastFix": "Please fix the errors in the form",
+    "toastSuccess": "Message sent successfully! I'll reply soon.",
+    "toastError": "There was an error sending the message. Please try again or contact me directly by email.",
+    "whatsappAria": "Contact via WhatsApp",
+    "whatsappUrl": "https://wa.me/56964962736?text=Hi%20Alberto%2C%20I%27m%20contacting%20you%20from%20your%20website.",
+    "social": "Social Networks"
+  },
+  "calculator": {
+    "aria": "Calculator",
+    "hint": "Use the keyboard for a faster experience"
+  },
+  "clock": {
+    "aria": "Clock",
+    "locale": "en-US",
+    "format12": "12h format",
+    "format24": "24h format",
+    "precision": "Precision:",
+    "seconds": "Seconds",
+    "decimals_one": "{{count}} decimal",
+    "decimals_other": "{{count}} decimals",
+    "shortcuts": "⌨️ Keyboard shortcuts:",
+    "shortcutsHint": "F - Change format | P - Change precision"
+  },
+  "ticTacToe": {
+    "title": "Tic-Tac-Toe",
+    "won": "{{winner}} wins!",
+    "wonPoints": "+{{points}} points {{started}}",
+    "startedFirst": "(started first)",
+    "startedSecond": "(started second)",
+    "draw": "Draw!",
+    "turn": "Turn:",
+    "gamesPlayed": "Games played: {{count}} | Shortcuts:",
+    "next": "Next",
+    "reset": "Reset",
+    "restart": "🔄 Restart",
+    "nextGame": "▶️ Next Game",
+    "resetAll": "🗑️ Reset All",
+    "howTo": "How to Play",
+    "rules": [
+      "✓ Players take turns placing X or O",
+      "✓ The first to get three in a row wins",
+      "✓ Lines can be horizontal, vertical or diagonal",
+      "✓ If the board fills up with no winner, it's a draw"
+    ],
+    "pointsSystem": "Scoring:",
+    "winFirst": "🥇 Win having started first:",
+    "winSecond": "🏆 Win having started second:",
+    "points_one": "{{count}} point",
+    "points_other": "{{count}} points",
+    "alternate": "🔄 Turns alternate every game",
+    "pointsLabel": "points",
+    "drawsLabel": "draws",
+    "starts": "⭐ Starts"
+  },
+  "camera": {
+    "title": "📸 Web Camera",
+    "subtitle": "Take photos and record videos using your camera",
+    "shortcuts": "Shortcuts:",
+    "space": "Space",
+    "photo": "Photo",
+    "record": "Record",
+    "mirror": "Mirror",
+    "error": "Camera permission is required. Please allow access and reload the page.",
+    "takePhoto": "Take Photo",
+    "stopRecording": "Stop Recording",
+    "startRecording": "Start Recording",
+    "captures": "Captures ({{count}})",
+    "snapshot": "Snapshot {{n}}",
+    "noCaptions": "No captions available",
+    "downloadImage": "Download image",
+    "downloadVideo": "Download video",
+    "delete": "Delete"
+  },
+  "seo": {
+    "/": {
+      "title": "Alberto Zúñiga - Full Stack Developer | Portfolio",
+      "description": "Alberto Zúñiga's portfolio: Full Stack Developer and Computer Science Engineer. I build web applications with Python, JavaScript and React.",
+      "keywords": "Alberto Zúñiga, full stack developer, computer science engineer, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
+    },
+    "/about": {
+      "title": "About Me - Alberto Zúñiga | CV and Experience",
+      "description": "Alberto Zúñiga's curriculum vitae. Web development experience, Computer Science Engineering degree, technical skills in React, Python, Java and more.",
+      "keywords": "Alberto Zúñiga CV, work experience, computer science engineering, developer, Universidad de los Andes, technical skills"
+    },
+    "/projects": {
+      "title": "Projects - Alberto Zúñiga | Web Development Portfolio",
+      "description": "Web development projects: Scheduler App (Flask/Python), Healthy (Ruby on Rails), interactive JavaScript applications. Backend and frontend.",
+      "keywords": "web projects, Python, Flask, Ruby on Rails, JavaScript, full stack development, web applications, project portfolio"
+    },
+    "/projects/calculator": {
+      "title": "Interactive Calculator - Alberto Zúñiga",
+      "description": "Functional calculator built with JavaScript. Basic operations, keyboard support, responsive interface. Interactive portfolio project.",
+      "keywords": "JavaScript calculator, web project, interactive calculator, frontend development, programming"
+    },
+    "/projects/clock": {
+      "title": "Digital Clock - Alberto Zúñiga",
+      "description": "Interactive digital clock built with JavaScript. 12/24 hour format, adjustable precision, keyboard navigation. Portfolio web project.",
+      "keywords": "digital clock, JavaScript project, real-time clock, web development, programming"
+    },
+    "/projects/tic-tac-toe": {
+      "title": "Tic-Tac-Toe - Alberto Zúñiga",
+      "description": "Tic-Tac-Toe game built with JavaScript. Scoring system, winner detection, keyboard navigation. Interactive project.",
+      "keywords": "tic-tac-toe, JavaScript game, interactive game, web development, programming"
+    },
+    "/projects/camera": {
+      "title": "Web Camera - Alberto Zúñiga",
+      "description": "Web camera application built with JavaScript. Photo capture, video recording, MediaDevices API access. Portfolio web project.",
+      "keywords": "web camera, MediaDevices API, JavaScript video capture, getUserMedia, web development"
+    },
+    "/projects/arbocensus": {
+      "title": "Arbocensus - Alberto Zúñiga",
+      "description": "Thesis project: route optimization for urban tree censuses. mTSP solved with OR-Tools and OSRM on Django + PostGIS, React frontend with Leaflet.",
+      "keywords": "Arbocensus, tree census, route optimization, mTSP, OR-Tools, OSRM, Django, PostGIS, thesis project"
+    },
+    "/projects/scheduler": {
+      "title": "Scheduler App - Alberto Zúñiga",
+      "description": "Group availability coordination with Flask: Google OAuth 2.0, roles, categories with filters and automatic subgroup splitting. Dockerized with PostgreSQL.",
+      "keywords": "Scheduler App, Flask, Python, schedules, availability, Google OAuth, PostgreSQL, Docker"
+    },
+    "/projects/healthy": {
+      "title": "Healthy - Alberto Zúñiga",
+      "description": "Healthy meal plan recommendations integrated with purchases and deliveries. Ruby on Rails 8, Hotwire, Devise and CanCanCan.",
+      "keywords": "Healthy, Ruby on Rails, meal plans, recommendation, Hotwire, Devise, PostgreSQL"
+    },
+    "/contact": {
+      "title": "Contact - Alberto Zúñiga | Let's Talk About Your Project",
+      "description": "Contact Alberto Zúñiga. Computer Science Engineer available for web development projects. Email: a.zuniga.marinovic@gmail.com",
+      "keywords": "contact Alberto Zúñiga, web development collaboration, freelance developer, hire developer"
+    }
+  }
+}

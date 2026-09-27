@@ -1,0 +1,381 @@
+{
+  "site": {
+    "degree": "Ingeniero Civil en Ciencias de la Computación",
+    "jobTitle": "Desarrollador Full Stack",
+    "cvUrl": "/cv-alberto-zuniga.pdf"
+  },
+  "nav": {
+    "home": "Inicio",
+    "about": "Sobre Mí",
+    "projects": "Proyectos",
+    "contact": "Contacto",
+    "menu": "Menú principal",
+    "openMenu": "Abrir menú principal",
+    "lang": "Idioma"
+  },
+  "brand": {
+    "title": "Inicio",
+    "ariaLabel": "Ir al inicio",
+    "alt": "Marca personal de Alberto Zúñiga"
+  },
+  "theme": {
+    "toLight": "Cambiar a modo claro",
+    "toDark": "Cambiar a modo oscuro",
+    "dark": "Oscuro",
+    "light": "Claro"
+  },
+  "footer": {
+    "rights": "Todos los derechos reservados."
+  },
+  "back": "Volver a Proyectos",
+  "home": {
+    "viewProjects": "Ver Proyectos",
+    "contact": "Contactar",
+    "aboutTitle": "Sobre Mí",
+    "educationTitle": "Formación Académica",
+    "educationText": "Ingeniero Civil en Ciencias de la Computación de la Universidad de los Andes (2026), con concentración tecnológica en Ingeniería Civil Eléctrica y Minor en Psicología.",
+    "experienceTitle": "Experiencia",
+    "experienceText": "Ayudante universitario en diversos cursos (Web Technologies, Programación, Paradigmas de Programación, Sistemas Electrónicos, Bases de Datos, Taller de Computación). Colaborador pro bono en Fundación Nueva Mente, gestionando su presencia web y registros administrativos.",
+    "more": "Conocer más",
+    "skillsTitle": "Competencias Técnicas"
+  },
+  "about": {
+    "title": "Currículum Vitae",
+    "downloadCv": "Descargar CV (PDF)",
+    "sections": {
+      "personal": "Antecedentes Personales",
+      "work": "Experiencia Laboral",
+      "academic": "Antecedentes Académicos",
+      "volunteering": "Liderazgo y Voluntariado",
+      "additional": "Formación Complementaria",
+      "skills": "Competencias Profesionales"
+    },
+    "assistantOf": "Ayudante de"
+  },
+  "cv": {
+    "personal": {
+      "name": "Nombre",
+      "degree": "Título",
+      "phone": "Teléfono",
+      "email": "Correo electrónico",
+      "github": "GitHub"
+    },
+    "work": [
+      {
+        "period": "Mar 2026 - Presente",
+        "org": "Buk",
+        "title": "Software Engineer Level 1, equipo de Talento - Evaluaciones",
+        "lines": [
+          "Desarrollo y mantenimiento del módulo de Evaluaciones de Desempeño de la plataforma"
+        ]
+      },
+      {
+        "period": "Ene 2026 - Feb 2026",
+        "org": "Buk",
+        "title": "Práctica profesional como Software Engineer, equipo de Talento - Evaluaciones",
+        "lines": [
+          "Migración de la sección “Mis evaluaciones” a Fiji, el framework de desarrollo interno de Buk"
+        ]
+      }
+    ],
+    "academic": [
+      {
+        "period": "2020 - 2026",
+        "degree": "Ingeniero Civil en Ciencias de la Computación",
+        "thesis": {
+          "text": "Proyecto de título: Arbocensus, optimización de rutas para censo de árboles urbanos",
+          "href": "https://github.com/AlbertoZuiga/arbocensus-routing"
+        }
+      },
+      {
+        "period": "Mar 2026 - Jun 2026",
+        "courses": ["Paradigmas de Programación"]
+      },
+      {
+        "period": "Ago 2025 - Nov 2025",
+        "courses": [
+          "Sistemas Electrónicos",
+          "Bases de Datos",
+          "Paradigmas de Programación",
+          "Taller de Computación"
+        ]
+      },
+      {
+        "period": "Mar 2025 - Jun 2025",
+        "courses": ["Web Technologies", "Taller de Proyectos de Ingeniería"]
+      },
+      {
+        "period": "Ago 2024 - Nov 2024",
+        "courses": ["Web Technologies", "Aplicaciones Móviles"]
+      },
+      {
+        "period": "Mar 2024 - Jun 2024",
+        "courses": ["Web Technologies", "Programación"]
+      },
+      {
+        "period": "Mar 2023 - Jun 2023",
+        "courses": ["Paradigmas de Programación", "Programación"]
+      },
+      {
+        "period": "Ago 2022 - Nov 2022",
+        "courses": ["Paradigmas de Programación"]
+      }
+    ],
+    "volunteering": [
+      {
+        "period": "2025 - 2026",
+        "org": "Pastoral Universidad de los Andes",
+        "title": "Catequista (2025 - 2026) y encargado de logística (2026)",
+        "lines": [
+          "Gestión logística y organización de las actividades del grupo",
+          "Planificación y dictado de clases semanales de formación"
+        ]
+      },
+      {
+        "period": "2023",
+        "org": "Consejero político de Ingeniería Civil",
+        "title": "Representante ante la Federación de Estudiantes"
+      },
+      {
+        "period": "2022 - 2024",
+        "org": "Fundación Nueva Mente",
+        "title": "Voluntario pro bono a tiempo parcial",
+        "lines": [
+          "Manejo de la página web utilizando Wix",
+          "Registro y seguimiento de gastos"
+        ]
+      }
+    ],
+    "additional": {
+      "items": [
+        {
+          "text": "Concentración tecnológica en",
+          "em": "Ingeniería Civil Eléctrica"
+        },
+        { "text": "Minor en", "em": "Psicología" },
+        { "text": "Seminario", "em": "ChatGPT" }
+      ]
+    }
+  },
+  "skills": {
+    "groups": {
+      "languages": "Lenguajes de Programación",
+      "frameworks": "Frameworks y Librerías",
+      "tools": "Herramientas",
+      "software": "Herramientas de Software",
+      "spoken": "Idiomas"
+    },
+    "levels": {
+      "basic": "Básico",
+      "basic-intermediate": "Básico-Intermedio",
+      "intermediate": "Intermedio",
+      "intermediate-advanced": "Intermedio-Avanzado",
+      "advanced": "Avanzado",
+      "native": "Nativo"
+    }
+  },
+  "projects": {
+    "arbocensus": {
+      "title": "Arbocensus",
+      "context": "Proyecto de título, Universidad de los Andes",
+      "description": "Proyecto de título: optimización de rutas para censo de árboles urbanos. mTSP con OR-Tools, OSRM, Django + PostGIS y React",
+      "longDescription": "Los censos de arbolado urbano exigen que un equipo de censistas recorra a pie miles de árboles distribuidos por una comuna. Arbocensus modela ese recorrido como un mTSP (multiple Traveling Salesman Problem): a partir de las geometrías almacenadas en PostGIS, calcula la matriz de costos peatonales con OSRM y la resuelve con el solver VRP de OR-Tools, ejecutando los jobs de optimización en Celery. El frontend en React muestra las rutas resultantes sobre un mapa Leaflet."
+    },
+    "scheduler": {
+      "title": "Scheduler App",
+      "context": "Proyecto personal",
+      "description": "Gestión de horarios y división automática de grupos con Flask",
+      "longDescription": "Aplicación para coordinar disponibilidad horaria en grupos. Cada miembro marca sus bloques libres y la app encuentra los mejores momentos para reunirse; además divide automáticamente el grupo en subgrupos compatibles. Incluye autenticación con Google OAuth 2.0, roles Owner / Admin / Member, categorías personalizables con filtros AND / OR, y despliegue dockerizado con PostgreSQL."
+    },
+    "healthy": {
+      "title": "Healthy",
+      "context": "Práctica pre-profesional",
+      "description": "Sistema de recomendación de planes saludables de comida integrado con compras",
+      "longDescription": "Plataforma donde empresas publican planes de alimentación con su información nutricional y los usuarios reciben recomendaciones según sus preferencias, personalizan el plan respondiendo preguntas, lo compran y siguen el estado de sus entregas. Cuenta con reseñas por plan, roles con CanCanCan y autenticación con Devise."
+    },
+    "calculator": {
+      "title": "Calculadora",
+      "description": "Calculadora funcional con interfaz moderna"
+    },
+    "clock": {
+      "title": "Reloj",
+      "description": "Reloj digital y analógico en tiempo real"
+    },
+    "tic-tac-toe": {
+      "title": "Tres en Línea",
+      "description": "Juego clásico para dos jugadores"
+    },
+    "camera": {
+      "title": "Cámara",
+      "description": "Captura fotos y graba videos desde tu navegador"
+    }
+  },
+  "projectsPage": {
+    "title": "Mis Proyectos",
+    "subtitle": "Una colección de proyectos personales y aplicaciones web"
+  },
+  "projectDetail": {
+    "about": "Sobre el proyecto",
+    "stack": "Stack",
+    "code": "Ver código ↗",
+    "demo": "Ver demo ↗"
+  },
+  "contact": {
+    "title": "Contacto",
+    "subtitle": "¿Tienes alguna pregunta o propuesta? Me encantaría escucharte",
+    "formTitle": "Envíame un mensaje",
+    "formSubtitle": "Completa el formulario y te responderé a la brevedad",
+    "name": "Nombre",
+    "email": "Email",
+    "subject": "Asunto",
+    "message": "Mensaje",
+    "placeholders": {
+      "name": "Tu nombre completo",
+      "email": "tu@email.com",
+      "subject": "¿De qué quieres hablar?",
+      "message": "Escribe tu mensaje aquí..."
+    },
+    "errors": {
+      "nameRequired": "El nombre es requerido",
+      "nameShort": "El nombre debe tener al menos 2 caracteres",
+      "emailRequired": "El email es requerido",
+      "emailInvalid": "Email inválido",
+      "subjectRequired": "El asunto es requerido",
+      "subjectShort": "El asunto debe tener al menos 3 caracteres",
+      "messageRequired": "El mensaje es requerido",
+      "messageShort": "El mensaje debe tener al menos 10 caracteres",
+      "messageLong": "El mensaje no puede exceder 1000 caracteres"
+    },
+    "sending": "Enviando...",
+    "send": "Enviar Mensaje",
+    "toastFix": "Por favor, corrige los errores del formulario",
+    "toastSuccess": "¡Mensaje enviado exitosamente! Te responderé pronto.",
+    "toastError": "Hubo un error al enviar el mensaje. Por favor, intenta nuevamente o contáctame directamente por email.",
+    "whatsappAria": "Contactar por WhatsApp",
+    "whatsappUrl": "https://wa.me/56964962736?text=Hola%20Alberto%2C%20te%20contacto%20desde%20tu%20sitio%20web.",
+    "social": "Redes Sociales"
+  },
+  "calculator": {
+    "aria": "Calculadora",
+    "hint": "Usa el teclado para una experiencia más rápida"
+  },
+  "clock": {
+    "aria": "Reloj",
+    "locale": "es-CL",
+    "format12": "Formato 12h",
+    "format24": "Formato 24h",
+    "precision": "Precisión:",
+    "seconds": "Segundos",
+    "decimals_one": "{{count}} decimal",
+    "decimals_other": "{{count}} decimales",
+    "shortcuts": "⌨️ Atajos de teclado:",
+    "shortcutsHint": "F - Cambiar formato | P - Cambiar precisión"
+  },
+  "ticTacToe": {
+    "title": "Tres en Línea",
+    "won": "¡Ganó {{winner}}!",
+    "wonPoints": "+{{points}} puntos {{started}}",
+    "startedFirst": "(inició primero)",
+    "startedSecond": "(inició segundo)",
+    "draw": "¡Empate!",
+    "turn": "Turno de:",
+    "gamesPlayed": "Partidas jugadas: {{count}} | Atajos:",
+    "next": "Siguiente",
+    "reset": "Resetear",
+    "restart": "🔄 Reiniciar",
+    "nextGame": "▶️ Siguiente Juego",
+    "resetAll": "🗑️ Resetear Todo",
+    "howTo": "Cómo Jugar",
+    "rules": [
+      "✓ Los jugadores se turnan para colocar X u O",
+      "✓ Gana el primero que logre tres en línea",
+      "✓ Las líneas pueden ser horizontales, verticales o diagonales",
+      "✓ Si se llena el tablero sin ganador, es empate"
+    ],
+    "pointsSystem": "Sistema de Puntos:",
+    "winFirst": "🥇 Ganar iniciando primero:",
+    "winSecond": "🏆 Ganar iniciando segundo:",
+    "points_one": "{{count}} punto",
+    "points_other": "{{count}} puntos",
+    "alternate": "🔄 Los turnos se alternan cada juego",
+    "pointsLabel": "puntos",
+    "drawsLabel": "empates",
+    "starts": "⭐ Inicia"
+  },
+  "camera": {
+    "title": "📸 Cámara Web",
+    "subtitle": "Toma fotos y graba videos usando tu cámara",
+    "shortcuts": "Atajos:",
+    "space": "Espacio",
+    "photo": "Foto",
+    "record": "Grabar",
+    "mirror": "Reflejar",
+    "error": "Se requiere permiso para usar la cámara. Por favor, permite el acceso y recarga la página.",
+    "takePhoto": "Sacar Foto",
+    "stopRecording": "Detener Grabación",
+    "startRecording": "Comenzar Grabación",
+    "captures": "Capturas ({{count}})",
+    "snapshot": "Captura {{n}}",
+    "noCaptions": "Sin subtítulos disponibles",
+    "downloadImage": "Descargar imagen",
+    "downloadVideo": "Descargar video",
+    "delete": "Eliminar"
+  },
+  "seo": {
+    "/": {
+      "title": "Alberto Zúñiga - Desarrollador Full Stack | Portfolio",
+      "description": "Portafolio de Alberto Zúñiga: Desarrollador Full Stack e Ingeniero Civil en Ciencias de la Computación. Construyo aplicaciones web con Python, JavaScript y React.",
+      "keywords": "Alberto Zúñiga, desarrollador full stack, ingeniería computación, Python, JavaScript, Ruby on Rails, Flask, portfolio, Universidad de los Andes"
+    },
+    "/about": {
+      "title": "Sobre Mí - Alberto Zúñiga | CV y Experiencia",
+      "description": "Currículum vitae de Alberto Zúñiga. Experiencia en desarrollo web, formación académica en Ingeniería en Ciencias de la Computación, habilidades técnicas en React, Python, Java y más.",
+      "keywords": "Alberto Zúñiga CV, experiencia laboral, ingeniería computación, desarrollador, Universidad de los Andes, habilidades técnicas"
+    },
+    "/projects": {
+      "title": "Proyectos - Alberto Zúñiga | Portfolio de Desarrollo Web",
+      "description": "Proyectos de desarrollo web: Scheduler App (Flask/Python), Healthy (Ruby on Rails), aplicaciones interactivas con JavaScript. Backend y frontend.",
+      "keywords": "proyectos web, Python, Flask, Ruby on Rails, JavaScript, desarrollo full stack, aplicaciones web, portfolio proyectos"
+    },
+    "/projects/calculator": {
+      "title": "Calculadora Interactiva - Alberto Zúñiga",
+      "description": "Calculadora funcional con JavaScript. Operaciones básicas, soporte para teclado, interfaz responsive. Proyecto interactivo del portfolio.",
+      "keywords": "calculadora JavaScript, proyecto web, calculadora interactiva, desarrollo frontend, programación"
+    },
+    "/projects/clock": {
+      "title": "Reloj Digital - Alberto Zúñiga",
+      "description": "Reloj digital interactivo con JavaScript. Formato 12/24 horas, precisión ajustable, navegación por teclado. Proyecto web del portfolio.",
+      "keywords": "reloj digital, proyecto JavaScript, reloj tiempo real, desarrollo web, programación"
+    },
+    "/projects/tic-tac-toe": {
+      "title": "Tic-Tac-Toe - Alberto Zúñiga",
+      "description": "Juego de Tres en Línea (Tic-Tac-Toe) con JavaScript. Sistema de puntuación, detección de ganador, navegación por teclado. Proyecto interactivo.",
+      "keywords": "tic-tac-toe, tres en línea JavaScript, juego interactivo, desarrollo web, programación"
+    },
+    "/projects/camera": {
+      "title": "Cámara Web - Alberto Zúñiga",
+      "description": "Aplicación de cámara web con JavaScript. Captura de fotos, grabación de video, acceso a MediaDevices API. Proyecto web del portfolio.",
+      "keywords": "cámara web, MediaDevices API, captura video JavaScript, getUserMedia, desarrollo web"
+    },
+    "/projects/arbocensus": {
+      "title": "Arbocensus - Alberto Zúñiga",
+      "description": "Proyecto de título: optimización de rutas para censo de árboles urbanos. mTSP resuelto con OR-Tools y OSRM sobre Django + PostGIS, frontend en React con Leaflet.",
+      "keywords": "Arbocensus, censo de árboles, optimización de rutas, mTSP, OR-Tools, OSRM, Django, PostGIS, proyecto de título"
+    },
+    "/projects/scheduler": {
+      "title": "Scheduler App - Alberto Zúñiga",
+      "description": "Coordinación de disponibilidad horaria en grupos con Flask: Google OAuth 2.0, roles, categorías con filtros y división automática de subgrupos. Dockerizada con PostgreSQL.",
+      "keywords": "Scheduler App, Flask, Python, horarios, disponibilidad, Google OAuth, PostgreSQL, Docker"
+    },
+    "/projects/healthy": {
+      "title": "Healthy - Alberto Zúñiga",
+      "description": "Recomendación de planes saludables de comida integrada con compras y entregas. Ruby on Rails 8, Hotwire, Devise y CanCanCan.",
+      "keywords": "Healthy, Ruby on Rails, planes de comida, recomendación, Hotwire, Devise, PostgreSQL"
+    },
+    "/contact": {
+      "title": "Contacto - Alberto Zúñiga | Hablemos de tu Proyecto",
+      "description": "Contacta a Alberto Zúñiga. Ingeniero Civil en Ciencias de la Computación disponible para proyectos de desarrollo web. Email: a.zuniga.marinovic@gmail.com",
+      "keywords": "contacto Alberto Zúñiga, colaboración desarrollo web, freelance developer, contratar desarrollador"
+    }
+  }
+}
