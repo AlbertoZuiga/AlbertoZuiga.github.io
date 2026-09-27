@@ -1,7 +1,7 @@
 # 📋 TODO - Lista de Tareas y Mejoras
 
 **Proyecto**: Portafolio Personal - Alberto Zúñiga  
-**Última actualización**: 26 de Septiembre, 2026
+**Última actualización**: 27 de Septiembre, 2026
 
 ---
 
@@ -211,16 +211,23 @@ Previo: `cv.js` / `skills.js` sincronizados con `cv/main.tex` (Buk con equipo y 
 **Prioridad**: 🟢 BAJA  
 **Estimación**: 3-4 días  
 **Impacto**: ⭐⭐⭐  
-**Depende de**: C14 (textos centralizados en `src/data/`)
+**Depende de**: C14 (textos centralizados en `src/data/`)  
+**Rama**: `feat/i18n` (27 Sep 2026) ✅
+
+Decisiones: español canónico sin prefijo, inglés bajo `/en` (ambos prerenderizados con `hreflang`); `react-i18next` con recursos bundleados; todo el texto (UI + CV + proyectos + SEO) en `src/i18n/{es,en}.json`. Las OG images se reutilizan en inglés (títulos mayormente nombres propios).
 
 **Tareas**:
 
-- [ ] Instalar `react-i18next` + `i18next`
-- [ ] Archivos `es.json` / `en.json`
-- [ ] Traducir todos los textos
-- [ ] Selector de idioma en Navbar con persistencia en localStorage
-- [ ] Fechas localizadas
-- [ ] Testing en ambos idiomas
+- [x] Instalar `react-i18next` + `i18next`
+- [x] Archivos `es.json` / `en.json` (+ test: mismas claves en ambos)
+- [x] Traducir todos los textos (UI, `cv.*`, `projects.*`, `seo.*`; `cv.js` eliminado; niveles de skill como claves)
+- [x] Sin toggle: `LangBanner` en la primera visita si `navigator.language` difiere del idioma de la ruta (sin redirect automático); `LocaleLayout` guarda el idioma visitado y redirige a `/en/...` si la preferencia guardada es `en`
+- [x] Fechas localizadas (reloj `en-US`; periodos del CV traducidos en el JSON)
+- [x] Testing en ambos idiomas (Playwright ad hoc sobre `vite preview`: rutas, switch sin rebote, redirect por preferencia, formulario, reloj, sin errores de consola)
+- [x] SEO: `hreflang`, `og:locale`, `dist/en/<ruta>/index.html` en `prerender.mjs`, `sitemap.xml` con URLs `/en`
+- [x] CV en inglés: `cv/main-en.tex` → `public/cv-alberto-zuniga-en.pdf`
+- [ ] Verificación manual en producción: `curl -A facebookexternalhit https://albertozuiga.github.io/en/about/` → título en inglés + `hreflang`; Search Console detecta ambas versiones
+- [ ] Opcional: OG images en inglés (`generate-og.mjs` variante `en`)
 
 ---
 
@@ -337,7 +344,8 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 
 ### Sprint 4+ (Opcional) - Avanzado
 
-- i18n, Blog, E2E, ideas futuras
+- ✅ i18n
+- Blog, E2E, ideas futuras
 
 ---
 
@@ -362,6 +370,7 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 - [x] **Análisis de limpieza de código** y plan de commits atómicos (26 Sep 2026)
 - [x] **Deuda técnica #3**: Vitest, code-splitting por ruta, Tailwind 4, decisión TypeScript (26 Sep 2026)
 - [x] **Mejoras en About #5**: timeline, barras de nivel, badges, descarga de CV, acordeones animados; datos sincronizados con `cv/main.tex` (26 Sep 2026)
+- [x] **Internacionalización #7**: es/en con `react-i18next`, rutas `/en`, `LangBanner` (primera visita), `hreflang` + prerender por idioma, CV en PDF en inglés (27 Sep 2026)
 
 ## ❌ Descartadas
 
@@ -380,5 +389,5 @@ Terminal interactiva en el sitio con comandos `help`, `about`, `projects`, `cont
 
 ---
 
-**Última revisión**: 26 de Septiembre, 2026  
+**Última revisión**: 27 de Septiembre, 2026  
 **Mantenido por**: Alberto Zúñiga

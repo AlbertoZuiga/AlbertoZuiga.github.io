@@ -48,6 +48,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 - ✅ **GitHub Pages Compatible**: Script de routing para SPA en GitHub Pages
 - ✅ **Code-splitting**: cada ruta es un chunk propio (`React.lazy` + `Suspense`)
 - ✅ **CI**: lint + format check + tests + build en GitHub Actions antes de desplegar
+- ✅ **i18n**: español (`/`) e inglés (`/en/...`) con `react-i18next`; banner de idioma en la primera visita (según `navigator.language`), `hreflang` y prerender por idioma; CV en PDF en ambos idiomas
 
 ---
 
@@ -61,6 +62,7 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 - **framer-motion** 12 - Animaciones
 - **react-hot-toast** 2 - Notificaciones
 - **@emailjs/browser** 4 - Envío del formulario de contacto
+- **i18next** + **react-i18next** - Internacionalización (recursos bundleados, sin backend)
 - **prop-types** - Validación de props en componentes
 - **Vite** 7 - Build tool y dev server
 
@@ -99,6 +101,8 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   │   ├── BackToProjects.jsx    # Link "Volver a proyectos" (variant)
 │   │   ├── BrandMark.jsx         # Logo/isotipo con tamaños responsive
 │   │   ├── Footer.jsx
+│   │   ├── LangBanner.jsx        # Primera visita: ofrece cambiar al idioma del navegador
+│   │   ├── LocaleLayout.jsx      # Sincroniza i18next, <html lang> y localStorage con la ruta
 │   │   ├── Navbar.jsx            # NavLink desde data/navLinks.js
 │   │   ├── PageTransition.jsx    # Wrapper framer-motion por ruta
 │   │   ├── SEO.jsx               # <title>/<meta> nativos de React 19
@@ -111,14 +115,20 @@ Sitio web personal y portafolio profesional desarrollado con React, Vite y Tailw
 │   ├── context/
 │   │   └── ThemeContext.jsx      # Provider del tema
 │   ├── data/
-│   │   ├── cv.js                 # Experiencia, educación, etc. (About)
-│   │   ├── navLinks.js           # Rutas del Navbar
-│   │   ├── projects.js           # Galería de proyectos
-│   │   ├── seo.js                # title/description/OG por ruta (SEO.jsx + prerender)
+│   │   ├── navLinks.js           # Rutas del Navbar (clave nav.* del diccionario)
+│   │   ├── projects.js           # Galería de proyectos (campos no traducibles)
+│   │   ├── seo.js                # Imagen OG por ruta + seoFor(ruta, idioma, dict)
 │   │   ├── site.js               # Nombre, email, URLs, redes
-│   │   └── skills.js             # Competencias técnicas (Home y About)
+│   │   └── skills.js             # Competencias técnicas (ids y niveles como claves)
 │   ├── hooks/
+│   │   ├── useLocalePath.js      # Prefija rutas internas con el idioma actual
+│   │   ├── useSeo.js             # seoFor() con el idioma y diccionario actuales
 │   │   └── useTheme.js           # Acceso al ThemeContext
+│   ├── i18n/
+│   │   ├── index.js              # init de i18next (idioma inicial desde la URL)
+│   │   ├── locale.js             # langFromPath / localePath / switchPath (sin React)
+│   │   ├── es.json, en.json      # Todo el texto del sitio: UI, CV, proyectos, SEO
+│   │   └── i18n.test.js          # Mismas claves en ambos idiomas + helpers
 │   ├── pages/
 │   │   ├── Home.jsx
 │   │   ├── About.jsx
@@ -227,11 +237,21 @@ En producción se inyectan como **secrets** del repositorio con los mismos nombr
 
 ### CV en PDF
 
-`public/cv-alberto-zuniga.pdf` se sirve desde el botón "Descargar CV" en About. La fuente es `cv/main.tex`; tras editarla, regenerar y copiar:
+`public/cv-alberto-zuniga.pdf` (es) y `public/cv-alberto-zuniga-en.pdf` (en) se sirven desde el botón "Descargar CV" en About según el idioma (`site.cvUrl` en `src/i18n/*.json`). Las fuentes son `cv/main.tex` y `cv/main-en.tex`; tras editarlas, regenerar y copiar:
 
 ```bash
 cd cv && latexmk -pdf main.tex && cp main.pdf ../public/cv-alberto-zuniga.pdf
+cd cv && latexmk -pdf main-en.tex && cp main-en.pdf ../public/cv-alberto-zuniga-en.pdf
 ```
+
+Los datos del CV en la web (`cv.*` de `es.json` / `en.json`) se mantienen a mano en sincronía con los `.tex`.
+
+### Internacionalización
+
+- Español sin prefijo (`/about`, canónica) e inglés bajo `/en` (`/en/about`). `App.jsx` monta las mismas rutas bajo ambos prefijos con `LocaleLayout`.
+- Todo el texto vive en `src/i18n/es.json` y `src/i18n/en.json`, incluidos los datos estructurados (CV, proyectos, SEO); se leen con `t("clave")` o `t("clave", { returnObjects: true })`. `npm test` falla si un idioma tiene claves que el otro no.
+- Links internos pasan por `useLocalePath()` para conservar el prefijo. No hay toggle: la URL es la fuente de verdad y `LocaleLayout` guarda el idioma visitado en `localStorage`. En la primera visita, si `navigator.language` difiere del de la ruta, `LangBanner` ofrece cambiar (sin redirect automático, para no romper `hreflang`). Un visitante con `en` guardado que entra sin prefijo es redirigido a `/en/...`.
+- Agregar un texto: clave en ambos JSON → `t()` en el componente. Agregar una ruta: `routes` en `App.jsx`, `seoRoutes` en `seo.js`, `seo.<ruta>` en ambos JSON y `sitemap.xml` (es y en).
 
 ### Favicons
 
@@ -251,7 +271,7 @@ npm i --no-save sharp && node scripts/generate-og.mjs
 
 ### Prerender de metas por ruta
 
-Los scrapers de Facebook/LinkedIn/Twitter no ejecutan JS y GitHub Pages responde `404.html` en rutas profundas. `npm run build` ejecuta `scripts/prerender.mjs`, que copia `dist/index.html` a `dist/<ruta>/index.html` inyectando `<title>`, `canonical` y metas `og:*`/`twitter:*` desde `src/data/seo.js`. En el navegador, `main.jsx` elimina esas etiquetas (`data-prerender`) antes de montar React para que `SEO.jsx` no las duplique.
+Los scrapers de Facebook/LinkedIn/Twitter no ejecutan JS y GitHub Pages responde `404.html` en rutas profundas. `npm run build` ejecuta `scripts/prerender.mjs`, que copia `dist/index.html` a `dist/<ruta>/index.html` (es) y `dist/en/<ruta>/index.html` (en, con `<html lang="en">`) inyectando `<title>`, `canonical`, `hreflang`, `og:locale` y metas `og:*`/`twitter:*` desde `src/data/seo.js` + `src/i18n/*.json`. En el navegador, `main.jsx` elimina esas etiquetas (`data-prerender`) antes de montar React para que `SEO.jsx` no las duplique.
 
 ---
 
