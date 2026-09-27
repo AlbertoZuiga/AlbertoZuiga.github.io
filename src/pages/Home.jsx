@@ -4,6 +4,7 @@ import BrandMark from "../components/BrandMark";
 import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
 import { useSeo } from "../hooks/useSeo";
+import { useLocalePath } from "../hooks/useLocalePath";
 import { site } from "../data/site";
 import PageTransition from "../components/PageTransition";
 import SkillCard from "../components/SkillCard";
@@ -21,6 +22,7 @@ import { homeSkillGroups } from "../data/skills";
 const Home = () => {
   const { t } = useTranslation();
   const seo = useSeo("/");
+  const toPath = useLocalePath();
   return (
     <PageTransition>
       <div className="min-h-screen">
@@ -87,7 +89,7 @@ const Home = () => {
                 transition={{ delay: 0.3 }}
               >
                 <Link
-                  to="/projects"
+                  to={toPath("/projects")}
                   className="group relative inline-flex items-center gap-2 bg-gray-100 text-primary-700 hover:bg-white text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-400/20"
                 >
                   <span>{t("home.viewProjects")}</span>
@@ -96,7 +98,7 @@ const Home = () => {
                   </span>
                 </Link>
                 <Link
-                  to="/contact"
+                  to={toPath("/contact")}
                   className="relative inline-flex items-center border-2 border-gray-300/60 text-gray-100 bg-transparent hover:bg-white/5 hover:border-gray-200 text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 backdrop-blur-xs"
                 >
                   {t("home.contact")}
@@ -156,7 +158,7 @@ const Home = () => {
               viewport={viewportConfig}
             >
               <Link
-                to="/about"
+                to={toPath("/about")}
                 className="btn-primary text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
               >
                 {t("home.more")}

@@ -10,8 +10,7 @@
     "projects": "Proyectos",
     "contact": "Contacto",
     "menu": "Menú principal",
-    "openMenu": "Abrir menú principal",
-    "lang": "Idioma"
+    "openMenu": "Abrir menú principal"
   },
   "brand": {
     "title": "Inicio",
@@ -26,6 +25,11 @@
   },
   "footer": {
     "rights": "Todos los derechos reservados."
+  },
+  "langBanner": {
+    "text": "Este sitio está disponible en español.",
+    "accept": "Cambiar a español",
+    "dismiss": "Cerrar"
   },
   "back": "Volver a Proyectos",
   "home": {
@@ -152,8 +156,14 @@
           "text": "Concentración tecnológica en",
           "em": "Ingeniería Civil Eléctrica"
         },
-        { "text": "Minor en", "em": "Psicología" },
-        { "text": "Seminario", "em": "ChatGPT" }
+        {
+          "text": "Minor en",
+          "em": "Psicología"
+        },
+        {
+          "text": "Seminario",
+          "em": "ChatGPT"
+        }
       ]
     }
   },

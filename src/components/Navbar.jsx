@@ -3,6 +3,7 @@ import { NavLink } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import BrandMark from "./BrandMark";
 import ThemeToggle from "./ThemeToggle";
+import { useLocalePath } from "../hooks/useLocalePath";
 import { navLinks } from "../data/navLinks";
 
 const linkClass =
@@ -16,6 +17,7 @@ const linkClass =
 
 const Navbar = () => {
   const { t } = useTranslation();
+  const toPath = useLocalePath();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -39,7 +41,7 @@ const Navbar = () => {
             {navLinks.map((link) => (
               <NavLink
                 key={link.to}
-                to={link.to}
+                to={toPath(link.to)}
                 className={linkClass("px-3 py-2 text-sm", "hover:bg-gray-700")}
               >
                 {t(`nav.${link.key}`)}
@@ -109,7 +111,7 @@ const Navbar = () => {
           {navLinks.map((link) => (
             <NavLink
               key={link.to}
-              to={link.to}
+              to={toPath(link.to)}
               onClick={closeMenu}
               className={linkClass(
                 "block px-3 py-2 text-base",

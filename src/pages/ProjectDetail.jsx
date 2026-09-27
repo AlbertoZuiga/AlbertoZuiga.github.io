@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
 import { useSeo } from "../hooks/useSeo";
+import { useLocalePath } from "../hooks/useLocalePath";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn, slideUp } from "../utils/animations";
@@ -10,11 +11,12 @@ import { projects } from "../data/projects";
 
 const ProjectDetail = () => {
   const { t } = useTranslation();
+  const toPath = useLocalePath();
   const { slug } = useParams();
   const seo = useSeo(`/projects/${slug}`);
   const project = projects.find((p) => p.slug === slug);
 
-  if (!project) return <Navigate to="/projects" replace />;
+  if (!project) return <Navigate to={toPath("/projects")} replace />;
   const text = t(`projects.${project.slug}`, { returnObjects: true });
 
   return (

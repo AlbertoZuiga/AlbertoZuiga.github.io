@@ -10,8 +10,7 @@
     "projects": "Projects",
     "contact": "Contact",
     "menu": "Main menu",
-    "openMenu": "Open main menu",
-    "lang": "Language"
+    "openMenu": "Open main menu"
   },
   "brand": {
     "title": "Home",
@@ -26,6 +25,11 @@
   },
   "footer": {
     "rights": "All rights reserved."
+  },
+  "langBanner": {
+    "text": "This site is available in English.",
+    "accept": "Switch to English",
+    "dismiss": "Dismiss"
   },
   "back": "Back to Projects",
   "home": {
@@ -152,8 +156,14 @@
           "text": "Technological concentration in",
           "em": "Electrical Engineering"
         },
-        { "text": "Minor in", "em": "Psychology" },
-        { "text": "Seminar", "em": "ChatGPT" }
+        {
+          "text": "Minor in",
+          "em": "Psychology"
+        },
+        {
+          "text": "Seminar",
+          "em": "ChatGPT"
+        }
       ]
     }
   },

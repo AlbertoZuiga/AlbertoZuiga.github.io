@@ -11,6 +11,8 @@ import { ThemeProvider } from "./context/ThemeContext";
 import { useTheme } from "./hooks/useTheme";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import LocaleLayout from "./components/LocaleLayout";
+import { LANGS, localePath } from "./i18n/locale";
 
 // Cada ruta es un chunk propio; framer-motion y react-router quedan en el principal.
 // No se usa React.lazy: aunque el chunk esté precargado, lazy suspende igual en
@@ -41,16 +43,18 @@ const ClockProject = page(() => import("./pages/ClockProject"));
 const TicTacToeProject = page(() => import("./pages/TicTacToeProject"));
 const CameraProject = page(() => import("./pages/CameraProject"));
 const ProjectDetail = page(() => import("./pages/ProjectDetail"));
-const pages = [
-  Home,
-  About,
-  Projects,
-  Contact,
-  CalculatorProject,
-  ClockProject,
-  TicTacToeProject,
-  CameraProject,
-  ProjectDetail,
+// Rutas hijas relativas; se montan bajo "/" (es) y "/en" (en). La comodín
+// projects/:slug va después de las fijas.
+const routes = [
+  ["", Home],
+  ["about", About],
+  ["projects", Projects],
+  ["contact", Contact],
+  ["projects/calculator", CalculatorProject],
+  ["projects/clock", ClockProject],
+  ["projects/tic-tac-toe", TicTacToeProject],
+  ["projects/camera", CameraProject],
+  ["projects/:slug", ProjectDetail],
 ];
 
 const ThemedToaster = () => {
@@ -82,21 +86,28 @@ const AppRoutes = () => {
   // ruta nueva fuera de la transición del router, y si el chunk no está cargado
   // Suspense muestra el fallback (pantalla en blanco) entre salida y entrada.
   useEffect(() => {
-    pages.forEach((p) => p.preload());
+    routes.forEach(([, p]) => p.preload());
   }, []);
   return (
     <Suspense fallback={null}>
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/projects/calculator" element={<CalculatorProject />} />
-          <Route path="/projects/clock" element={<ClockProject />} />
-          <Route path="/projects/tic-tac-toe" element={<TicTacToeProject />} />
-          <Route path="/projects/camera" element={<CameraProject />} />
-          <Route path="/projects/:slug" element={<ProjectDetail />} />
+          {LANGS.map((lang) => (
+            <Route
+              key={lang}
+              path={localePath(lang, "/")}
+              element={<LocaleLayout lang={lang} />}
+            >
+              {routes.map(([path, Page]) => (
+                <Route
+                  key={path}
+                  index={path === ""}
+                  path={path || undefined}
+                  element={<Page />}
+                />
+              ))}
+            </Route>
+          ))}
         </Routes>
       </AnimatePresence>
     </Suspense>

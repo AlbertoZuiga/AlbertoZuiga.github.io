@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useLocalePath } from "../hooks/useLocalePath";
 import { useTranslation } from "react-i18next";
 
 const sizeMap = {
@@ -21,6 +22,7 @@ const BrandMark = ({
   onClick,
 }) => {
   const { t } = useTranslation();
+  const toPath = useLocalePath();
   const title = titleProp ?? t("brand.title");
   const ariaLabel = ariaLabelProp ?? t("brand.ariaLabel");
   const sizeClass = sizeMap[size] || sizeMap.md;
@@ -40,7 +42,7 @@ const BrandMark = ({
 
   return (
     <Link
-      to={to}
+      to={toPath(to)}
       onClick={onClick}
       aria-label={ariaLabel}
       title={title}

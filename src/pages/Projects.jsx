@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
 import { useSeo } from "../hooks/useSeo";
+import { useLocalePath } from "../hooks/useLocalePath";
 import PageTransition from "../components/PageTransition";
 import {
   slideUp,
@@ -15,6 +16,7 @@ import { projects } from "../data/projects";
 const Projects = () => {
   const { t } = useTranslation();
   const seo = useSeo("/projects");
+  const toPath = useLocalePath();
   return (
     <PageTransition>
       <div className="min-h-screen py-12 dark:bg-gray-900 transition-colors duration-300">
@@ -86,7 +88,7 @@ const Projects = () => {
               return (
                 <Link
                   key={project.slug}
-                  to={project.link ?? `/projects/${project.slug}`}
+                  to={toPath(project.link ?? `/projects/${project.slug}`)}
                   className="h-full block"
                 >
                   {ProjectCard}

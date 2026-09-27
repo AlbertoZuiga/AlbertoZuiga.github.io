@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import PropTypes from "prop-types";
+import { useLocalePath } from "../hooks/useLocalePath";
 import { useTranslation } from "react-i18next";
 import { slideUp } from "../utils/animations";
 
@@ -12,6 +13,7 @@ const variantClass = {
 
 const BackToProjects = ({ variant = "light" }) => {
   const { t } = useTranslation();
+  const toPath = useLocalePath();
   return (
     <motion.div
       className="mb-6"
@@ -20,7 +22,7 @@ const BackToProjects = ({ variant = "light" }) => {
       animate="visible"
     >
       <Link
-        to="/projects"
+        to={toPath("/projects")}
         className={`inline-flex items-center transition-colors ${variantClass[variant]}`}
       >
         <svg
