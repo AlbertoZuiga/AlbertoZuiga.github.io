@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "../hooks/useTheme";
 
 const ThemeToggle = ({ compact = false }) => {
   const { isDark, toggleTheme } = useTheme();
-  const label = isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro";
+  const { t } = useTranslation();
+  const label = isDark ? t("theme.toLight") : t("theme.toDark");
 
   return (
     <button
@@ -51,7 +53,7 @@ const ThemeToggle = ({ compact = false }) => {
       </div>
       {!compact && (
         <span className="text-gray-200 text-sm font-medium hidden xl:inline-block w-14 text-left">
-          {isDark ? "Oscuro" : "Claro"}
+          {isDark ? t("theme.dark") : t("theme.light")}
         </span>
       )}
     </button>

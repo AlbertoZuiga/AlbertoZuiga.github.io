@@ -1,13 +1,16 @@
 import { useState, useEffect, useCallback } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn } from "../utils/animations";
 import { checkWin, isDraw } from "../utils/ticTacToe";
 
 const TicTacToe = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/projects/tic-tac-toe");
   const [board, setBoard] = useState(new Array(9).fill(null));
   const [isXTurn, setIsXTurn] = useState(true);
   const [gameOn, setGameOn] = useState(true);
@@ -99,23 +102,28 @@ const TicTacToe = () => {
   // Función para calcular el mensaje de estado
   const getStatusMessage = () => {
     if (winner) {
-      const pointsText =
-        winner === firstPlayer ? "(inició primero)" : "(inició segundo)";
+      const started =
+        winner === firstPlayer
+          ? t("ticTacToe.startedFirst")
+          : t("ticTacToe.startedSecond");
       return (
         <div>
-          <span className="text-yellow-300">¡Ganó {winner}!</span>
+          <span className="text-yellow-300">
+            {t("ticTacToe.won", { winner })}
+          </span>
           <div className="text-lg mt-1">
-            +{winPoints} puntos {pointsText}
+            {t("ticTacToe.wonPoints", { points: winPoints, started })}
           </div>
         </div>
       );
     }
     if (isGameDraw) {
-      return <span className="text-yellow-300">¡Empate!</span>;
+      return <span className="text-yellow-300">{t("ticTacToe.draw")}</span>;
     }
     return (
       <span>
-        Turno de: <span className="text-yellow-300">{isXTurn ? "X" : "O"}</span>
+        {t("ticTacToe.turn")}{" "}
+        <span className="text-yellow-300">{isXTurn ? "X" : "O"}</span>
       </span>
     );
   };
@@ -123,7 +131,7 @@ const TicTacToe = () => {
   return (
     <PageTransition>
       <div className="min-h-screen bg-linear-to-br from-blue-900 via-purple-900 to-pink-900 py-8">
-        <SEO {...seoPages["/projects/tic-tac-toe"]} />
+        <SEO {...seo} />
         <div className="max-w-2xl mx-auto px-4">
           <BackToProjects variant="dark" />
 
@@ -134,22 +142,22 @@ const TicTacToe = () => {
             animate="visible"
           >
             <h1 className="text-5xl font-bold text-white mb-4">
-              Tres en Línea
+              {t("ticTacToe.title")}
             </h1>
             <div className="text-2xl md:text-3xl font-bold">
               {getStatusMessage()}
             </div>
             {gamesPlayed > 0 && (
               <div className="text-sm text-purple-200">
-                Partidas jugadas: {gamesPlayed} | Atajos:{" "}
+                {t("ticTacToe.gamesPlayed", { count: gamesPlayed })}{" "}
                 <kbd className="px-1 py-0.5 bg-white/20 rounded-sm text-xs">
                   N
                 </kbd>{" "}
-                Siguiente |{" "}
+                {t("ticTacToe.next")} |{" "}
                 <kbd className="px-1 py-0.5 bg-white/20 rounded-sm text-xs">
                   R
                 </kbd>{" "}
-                Resetear
+                {t("ticTacToe.reset")}
               </div>
             )}
           </motion.div>
@@ -202,14 +210,14 @@ const TicTacToe = () => {
               onClick={restartGame}
               className="bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 text-lg"
             >
-              {gameOn ? "🔄 Reiniciar" : "▶️ Siguiente Juego"}
+              {gameOn ? t("ticTacToe.restart") : t("ticTacToe.nextGame")}
             </button>
             {gamesPlayed > 0 && (
               <button
                 onClick={resetAll}
                 className="bg-red-500 hover:bg-red-400 text-white font-bold py-4 px-8 rounded-full shadow-lg transition-all duration-300 transform hover:scale-110 text-lg"
               >
-                🗑️ Resetear Todo
+                {t("ticTacToe.resetAll")}
               </button>
             )}
           </motion.div>
@@ -223,25 +231,28 @@ const TicTacToe = () => {
             transition={{ delay: 0.4 }}
           >
             <div className="inline-block bg-white/10 backdrop-blur-xs rounded-lg p-6 text-white max-w-md">
-              <h3 className="text-xl font-semibold mb-3">Cómo Jugar</h3>
+              <h3 className="text-xl font-semibold mb-3">
+                {t("ticTacToe.howTo")}
+              </h3>
               <ul className="text-sm space-y-2 text-left">
-                <li>✓ Los jugadores se turnan para colocar X u O</li>
-                <li>✓ Gana el primero que logre tres en línea</li>
-                <li>
-                  ✓ Las líneas pueden ser horizontales, verticales o diagonales
-                </li>
-                <li>✓ Si se llena el tablero sin ganador, es empate</li>
+                {t("ticTacToe.rules", { returnObjects: true }).map((rule) => (
+                  <li key={rule}>{rule}</li>
+                ))}
               </ul>
               <div className="mt-4 pt-4 border-t border-white/20">
-                <h4 className="font-semibold mb-2">Sistema de Puntos:</h4>
+                <h4 className="font-semibold mb-2">
+                  {t("ticTacToe.pointsSystem")}
+                </h4>
                 <ul className="text-sm space-y-1 text-left">
                   <li>
-                    🥇 Ganar iniciando primero: <strong>3 puntos</strong>
+                    {t("ticTacToe.winFirst")}{" "}
+                    <strong>{t("ticTacToe.points", { count: 3 })}</strong>
                   </li>
                   <li>
-                    🏆 Ganar iniciando segundo: <strong>5 puntos</strong>
+                    {t("ticTacToe.winSecond")}{" "}
+                    <strong>{t("ticTacToe.points", { count: 5 })}</strong>
                   </li>
-                  <li>🔄 Los turnos se alternan cada juego</li>
+                  <li>{t("ticTacToe.alternate")}</li>
                 </ul>
               </div>
             </div>
@@ -260,9 +271,13 @@ const TicTacToe = () => {
               <div className="text-2xl font-bold text-white mb-1">
                 {scores.X}
               </div>
-              <div className="text-xs text-white/80">puntos</div>
+              <div className="text-xs text-white/80">
+                {t("ticTacToe.pointsLabel")}
+              </div>
               {firstPlayer === "X" && gameOn && (
-                <div className="text-xs text-yellow-300 mt-1">⭐ Inicia</div>
+                <div className="text-xs text-yellow-300 mt-1">
+                  {t("ticTacToe.starts")}
+                </div>
               )}
             </div>
             <div className="bg-purple-500/20 backdrop-blur-xs rounded-lg p-4 text-center">
@@ -270,16 +285,22 @@ const TicTacToe = () => {
               <div className="text-2xl font-bold text-white mb-1">
                 {scores.draws}
               </div>
-              <div className="text-xs text-white/80">empates</div>
+              <div className="text-xs text-white/80">
+                {t("ticTacToe.drawsLabel")}
+              </div>
             </div>
             <div className="bg-pink-500/20 backdrop-blur-xs rounded-lg p-4 text-center">
               <div className="text-4xl font-bold text-pink-400 mb-1">O</div>
               <div className="text-2xl font-bold text-white mb-1">
                 {scores.O}
               </div>
-              <div className="text-xs text-white/80">puntos</div>
+              <div className="text-xs text-white/80">
+                {t("ticTacToe.pointsLabel")}
+              </div>
               {firstPlayer === "O" && gameOn && (
-                <div className="text-xs text-yellow-300 mt-1">⭐ Inicia</div>
+                <div className="text-xs text-yellow-300 mt-1">
+                  {t("ticTacToe.starts")}
+                </div>
               )}
             </div>
           </motion.div>

@@ -1,8 +1,13 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import BrandMark from "./BrandMark";
 import { site } from "../data/site";
+import { LANGS, switchPath } from "../i18n/locale";
 
 const Footer = () => {
+  const { t, i18n } = useTranslation();
+  const { pathname } = useLocation();
+  const otherLang = LANGS.find((l) => l !== i18n.language);
   const currentYear = new Date().getFullYear();
 
   return (
@@ -13,8 +18,24 @@ const Footer = () => {
         </div>
         <div className="text-center mb-6 sm:mb-8">
           <p className="text-base sm:text-lg mb-4 sm:mb-6">
-            &copy; {currentYear} {site.name}. Todos los derechos reservados.
+            &copy; {currentYear} {site.name}. {t("footer.rights")}
           </p>
+          {/* Cambio de idioma posterior al banner; guarda antes de navegar para que LocaleLayout no rebote */}
+          <Link
+            to={switchPath(pathname, otherLang)}
+            hrefLang={otherLang}
+            lang={otherLang}
+            onClick={() => {
+              try {
+                localStorage.setItem("lang", otherLang);
+              } catch {
+                // localStorage no disponible
+              }
+            }}
+            className="text-sm text-gray-400 underline underline-offset-2 hover:text-white transition-colors"
+          >
+            {t("langBanner.accept", { lng: otherLang })}
+          </Link>
         </div>
 
         <div className="flex flex-wrap justify-center gap-3 sm:gap-4">

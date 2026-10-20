@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
+import { useLocalePath } from "../hooks/useLocalePath";
 import PageTransition from "../components/PageTransition";
 import {
   slideUp,
@@ -12,10 +14,13 @@ import {
 import { projects } from "../data/projects";
 
 const Projects = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/projects");
+  const toPath = useLocalePath();
   return (
     <PageTransition>
       <div className="min-h-screen py-12 dark:bg-gray-900 transition-colors duration-300">
-        <SEO {...seoPages["/projects"]} />
+        <SEO {...seo} />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             className="text-center mb-12"
@@ -24,10 +29,10 @@ const Projects = () => {
             animate="visible"
           >
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-4">
-              Mis Proyectos
+              {t("projectsPage.title")}
             </h1>
             <p className="text-lg text-gray-600 dark:text-gray-300">
-              Una colección de proyectos personales y aplicaciones web
+              {t("projectsPage.subtitle")}
             </p>
           </motion.div>
 
@@ -39,6 +44,9 @@ const Projects = () => {
             viewport={viewportConfig}
           >
             {projects.map((project) => {
+              const text = t(`projects.${project.slug}`, {
+                returnObjects: true,
+              });
               const ProjectCard = (
                 <motion.div
                   variants={staggerItem}
@@ -48,9 +56,9 @@ const Projects = () => {
                     <div className="text-6xl mb-4 transform group-hover:scale-110 transition-transform duration-300">
                       {project.icon}
                     </div>
-                    <h3 className="text-2xl font-bold mb-3">{project.title}</h3>
+                    <h3 className="text-2xl font-bold mb-3">{text.title}</h3>
                     <p className="text-gray-200 mb-4 grow">
-                      {project.description}
+                      {text.description}
                     </p>
                     <div className="flex items-center gap-2 flex-wrap mt-auto">
                       {project.isReact && (
@@ -79,8 +87,8 @@ const Projects = () => {
 
               return (
                 <Link
-                  key={project.title}
-                  to={project.link ?? `/projects/${project.slug}`}
+                  key={project.slug}
+                  to={toPath(project.link ?? `/projects/${project.slug}`)}
                   className="h-full block"
                 >
                   {ProjectCard}

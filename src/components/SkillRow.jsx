@@ -1,10 +1,13 @@
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 import { viewportConfig } from "../utils/animations";
 import { levelToPercent } from "../utils/skillLevel";
 
 const SkillRow = ({ name, level }) => {
+  const { t } = useTranslation();
   const percent = levelToPercent(level);
+  const label = t(`skills.levels.${level}`);
   return (
     <div className="pb-2 text-sm sm:text-base">
       <div className="flex justify-between items-center mb-1">
@@ -13,18 +16,18 @@ const SkillRow = ({ name, level }) => {
         </span>
         <span
           className={`text-sm font-semibold ${
-            level === "Básico"
+            level === "basic"
               ? "text-gray-500 dark:text-gray-500"
               : "text-primary-600 dark:text-primary-400"
           }`}
         >
-          {level}
+          {label}
         </span>
       </div>
       <div
         className="h-2 rounded-full bg-gray-200 dark:bg-gray-700 overflow-hidden"
         role="progressbar"
-        aria-label={`${name}: ${level}`}
+        aria-label={`${name}: ${label}`}
         aria-valuenow={percent}
         aria-valuemin={0}
         aria-valuemax={100}

@@ -1,12 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn, scaleIn } from "../utils/animations";
 
 const Clock = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/projects/clock");
+  const locale = t("clock.locale");
   const [time, setTime] = useState(new Date());
   const [format24h, setFormat24h] = useState(true);
   const [precision, setPrecision] = useState(0);
@@ -41,12 +45,12 @@ const Clock = () => {
       options.fractionalSecondDigits = precision;
     }
 
-    return time.toLocaleTimeString("es-CL", options);
+    return time.toLocaleTimeString(locale, options);
   };
 
   const formatDate = () => {
     const options = { day: "2-digit", month: "2-digit", year: "numeric" };
-    return time.toLocaleDateString("es-CL", options);
+    return time.toLocaleDateString(locale, options);
   };
 
   const getHandRotation = (unit, max) => {
@@ -81,9 +85,9 @@ const Clock = () => {
         onKeyDown={handleKeyPress}
         tabIndex={0}
         role="application"
-        aria-label="Reloj"
+        aria-label={t("clock.aria")}
       >
-        <SEO {...seoPages["/projects/clock"]} />
+        <SEO {...seo} />
         <div className="max-w-4xl mx-auto px-4">
           <BackToProjects variant="dark" />
 
@@ -193,16 +197,16 @@ const Clock = () => {
               onClick={toggleFormat}
               className="bg-white hover:bg-gray-100 text-purple-900 font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
             >
-              {format24h ? "Formato 12h" : "Formato 24h"}
+              {format24h ? t("clock.format12") : t("clock.format24")}
             </button>
             <button
               onClick={cyclePrecision}
               className="bg-yellow-400 hover:bg-yellow-300 text-purple-900 font-semibold py-3 px-6 rounded-lg shadow-lg transition-all duration-300 transform hover:scale-105"
             >
-              Precisión:{" "}
+              {t("clock.precision")}{" "}
               {precision === 0
-                ? "Segundos"
-                : `${precision} decimal${precision > 1 ? "es" : ""}`}
+                ? t("clock.seconds")
+                : t("clock.decimals", { count: precision })}
             </button>
           </motion.div>
 
@@ -214,10 +218,8 @@ const Clock = () => {
             transition={{ delay: 0.4 }}
           >
             <div className="inline-block bg-white/10 backdrop-blur-xs rounded-lg p-6 text-white">
-              <p className="text-sm mb-2">⌨️ Atajos de teclado:</p>
-              <p className="text-xs opacity-80">
-                F - Cambiar formato | P - Cambiar precisión
-              </p>
+              <p className="text-sm mb-2">{t("clock.shortcuts")}</p>
+              <p className="text-xs opacity-80">{t("clock.shortcutsHint")}</p>
             </div>
           </motion.div>
         </div>

@@ -1,13 +1,16 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
 import PageTransition from "../components/PageTransition";
 import BackToProjects from "../components/BackToProjects";
 import { fadeIn, scaleIn } from "../utils/animations";
 import { calculate } from "../utils/calculator";
 
 const Calculator = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/projects/calculator");
   const [display, setDisplay] = useState("0");
   const [currentValue, setCurrentValue] = useState(null);
   const [pendingOperation, setPendingOperation] = useState(null);
@@ -138,9 +141,9 @@ const Calculator = () => {
         onKeyDown={handleKeyPress}
         tabIndex={0}
         role="application"
-        aria-label="Calculadora"
+        aria-label={t("calculator.aria")}
       >
-        <SEO {...seoPages["/projects/calculator"]} />
+        <SEO {...seo} />
         <div className="max-w-md mx-auto px-4">
           <BackToProjects />
 
@@ -279,7 +282,7 @@ const Calculator = () => {
             animate="visible"
             transition={{ delay: 0.3 }}
           >
-            Usa el teclado para una experiencia más rápida
+            {t("calculator.hint")}
           </motion.div>
         </div>
       </div>

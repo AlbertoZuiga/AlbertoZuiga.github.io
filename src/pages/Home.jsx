@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import BrandMark from "../components/BrandMark";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
+import { useLocalePath } from "../hooks/useLocalePath";
+import { site } from "../data/site";
 import PageTransition from "../components/PageTransition";
 import SkillCard from "../components/SkillCard";
 import {
@@ -17,10 +20,13 @@ import {
 import { homeSkillGroups } from "../data/skills";
 
 const Home = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/");
+  const toPath = useLocalePath();
   return (
     <PageTransition>
       <div className="min-h-screen">
-        <SEO {...seoPages["/"]} />
+        <SEO {...seo} />
         {/* Hero Section */}
         <section className="relative overflow-hidden bg-linear-to-br from-gray-900 via-primary-900 to-gray-800 text-white py-12 sm:py-16 md:py-20 transition-colors duration-500">
           {/* Glow visual sutil - Igual en ambos modos */}
@@ -64,7 +70,7 @@ const Home = () => {
                 animate="visible"
                 transition={{ delay: 0.1 }}
               >
-                Ingeniero Civil en Ciencias de la Computación
+                {t("site.degree")}
               </motion.p>
               <motion.p
                 className="text-base sm:text-lg md:text-xl mb-6 sm:mb-8 text-gray-300 px-4"
@@ -73,7 +79,7 @@ const Home = () => {
                 animate="visible"
                 transition={{ delay: 0.2 }}
               >
-                Universidad de los Andes
+                {site.university}
               </motion.p>
               <motion.div
                 className="flex flex-wrap justify-center gap-3 sm:gap-4 mt-6 sm:mt-8 px-4"
@@ -83,19 +89,19 @@ const Home = () => {
                 transition={{ delay: 0.3 }}
               >
                 <Link
-                  to="/projects"
+                  to={toPath("/projects")}
                   className="group relative inline-flex items-center gap-2 bg-gray-100 text-primary-700 hover:bg-white text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-primary-400/20"
                 >
-                  <span>Ver Proyectos</span>
+                  <span>{t("home.viewProjects")}</span>
                   <span className="group-hover:translate-x-1 transition-all duration-300">
                     →
                   </span>
                 </Link>
                 <Link
-                  to="/contact"
+                  to={toPath("/contact")}
                   className="relative inline-flex items-center border-2 border-gray-300/60 text-gray-100 bg-transparent hover:bg-white/5 hover:border-gray-200 text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold transition-all duration-300 hover:scale-105 backdrop-blur-xs"
                 >
-                  Contactar
+                  {t("home.contact")}
                 </Link>
               </motion.div>
             </div>
@@ -112,7 +118,7 @@ const Home = () => {
               whileInView="visible"
               viewport={viewportConfig}
             >
-              Sobre Mí
+              {t("home.aboutTitle")}
             </motion.h2>
             <motion.div
               className="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8"
@@ -126,12 +132,10 @@ const Home = () => {
                 variants={staggerItem}
               >
                 <h3 className="section-subtitle mb-3 sm:mb-4 text-lg sm:text-xl dark:text-white">
-                  Formación Académica
+                  {t("home.educationTitle")}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
-                  Ingeniero Civil en Ciencias de la Computación de la
-                  Universidad de los Andes (2026), con concentración tecnológica
-                  en Ingeniería Civil Eléctrica y Minor en Psicología.
+                  {t("home.educationText")}
                 </p>
               </motion.div>
               <motion.div
@@ -139,14 +143,10 @@ const Home = () => {
                 variants={staggerItem}
               >
                 <h3 className="section-subtitle mb-3 sm:mb-4 text-lg sm:text-xl dark:text-white">
-                  Experiencia
+                  {t("home.experienceTitle")}
                 </h3>
                 <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-sm sm:text-base">
-                  Ayudante universitario en diversos cursos (Web Technologies,
-                  Programación, Paradigmas de Programación, Sistemas
-                  Electrónicos, Bases de Datos, Taller de Computación).
-                  Colaborador pro bono en Fundación Nueva Mente, gestionando su
-                  presencia web y registros administrativos.
+                  {t("home.experienceText")}
                 </p>
               </motion.div>
             </motion.div>
@@ -158,10 +158,10 @@ const Home = () => {
               viewport={viewportConfig}
             >
               <Link
-                to="/about"
+                to={toPath("/about")}
                 className="btn-primary text-sm sm:text-base px-5 sm:px-6 py-2.5 sm:py-3"
               >
-                Conocer más
+                {t("home.more")}
               </Link>
             </motion.div>
           </div>
@@ -177,12 +177,12 @@ const Home = () => {
               whileInView="visible"
               viewport={viewportConfig}
             >
-              Competencias Técnicas
+              {t("home.skillsTitle")}
             </motion.h2>
 
             <div className="space-y-8 sm:space-y-10">
               {homeSkillGroups.map((group) => (
-                <div key={group.title}>
+                <div key={group.id}>
                   <motion.h3
                     className="text-xl sm:text-2xl font-semibold text-gray-800 dark:text-gray-200 text-center mb-4 sm:mb-6"
                     variants={slideUp}
@@ -190,7 +190,7 @@ const Home = () => {
                     whileInView="visible"
                     viewport={viewportConfig}
                   >
-                    {group.title}
+                    {t(`skills.groups.${group.id}`)}
                   </motion.h3>
                   <motion.div
                     className={`grid ${group.grid} gap-3 sm:gap-4 md:gap-6`}

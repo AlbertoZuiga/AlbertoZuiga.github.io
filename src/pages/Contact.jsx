@@ -3,8 +3,9 @@ import { motion } from "framer-motion";
 import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
 import { emailConfig } from "../config/emailjs.config";
+import { useTranslation } from "react-i18next";
 import SEO from "../components/SEO";
-import { seoPages } from "../data/seo";
+import { useSeo } from "../hooks/useSeo";
 import PageTransition from "../components/PageTransition";
 import { site } from "../data/site";
 import {
@@ -16,6 +17,8 @@ import {
 } from "../utils/animations";
 
 const Contact = () => {
+  const { t } = useTranslation();
+  const seo = useSeo("/contact");
   const formRef = useRef();
   const [formData, setFormData] = useState({
     name: "",
@@ -32,33 +35,33 @@ const Contact = () => {
 
     // Validar nombre
     if (!formData.name.trim()) {
-      newErrors.name = "El nombre es requerido";
+      newErrors.name = t("contact.errors.nameRequired");
     } else if (formData.name.trim().length < 2) {
-      newErrors.name = "El nombre debe tener al menos 2 caracteres";
+      newErrors.name = t("contact.errors.nameShort");
     }
 
     // Validar email
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!formData.email.trim()) {
-      newErrors.email = "El email es requerido";
+      newErrors.email = t("contact.errors.emailRequired");
     } else if (!emailRegex.test(formData.email)) {
-      newErrors.email = "Email inválido";
+      newErrors.email = t("contact.errors.emailInvalid");
     }
 
     // Validar asunto
     if (!formData.subject.trim()) {
-      newErrors.subject = "El asunto es requerido";
+      newErrors.subject = t("contact.errors.subjectRequired");
     } else if (formData.subject.trim().length < 3) {
-      newErrors.subject = "El asunto debe tener al menos 3 caracteres";
+      newErrors.subject = t("contact.errors.subjectShort");
     }
 
     // Validar mensaje
     if (!formData.message.trim()) {
-      newErrors.message = "El mensaje es requerido";
+      newErrors.message = t("contact.errors.messageRequired");
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = "El mensaje debe tener al menos 10 caracteres";
+      newErrors.message = t("contact.errors.messageShort");
     } else if (formData.message.trim().length > 1000) {
-      newErrors.message = "El mensaje no puede exceder 1000 caracteres";
+      newErrors.message = t("contact.errors.messageLong");
     }
 
     setErrors(newErrors);
@@ -86,7 +89,7 @@ const Contact = () => {
     e.preventDefault();
 
     if (!validateForm()) {
-      toast.error("Por favor, corrige los errores del formulario");
+      toast.error(t("contact.toastFix"));
       return;
     }
 
@@ -101,7 +104,7 @@ const Contact = () => {
         emailConfig.publicKey
       );
 
-      toast.success("¡Mensaje enviado exitosamente! Te responderé pronto.");
+      toast.success(t("contact.toastSuccess"));
 
       // Limpiar formulario
       setFormData({
@@ -113,9 +116,7 @@ const Contact = () => {
       setErrors({});
     } catch (error) {
       console.error("Error al enviar el mensaje:", error);
-      toast.error(
-        "Hubo un error al enviar el mensaje. Por favor, intenta nuevamente o contáctame directamente por email."
-      );
+      toast.error(t("contact.toastError"));
     } finally {
       setIsSubmitting(false);
     }
@@ -124,7 +125,7 @@ const Contact = () => {
   return (
     <PageTransition>
       <div className="min-h-screen py-8 sm:py-12 dark:bg-gray-900 transition-colors duration-300">
-        <SEO {...seoPages["/contact"]} />
+        <SEO {...seo} />
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header Section - Improved mobile spacing */}
           <motion.div
@@ -134,10 +135,10 @@ const Contact = () => {
             animate="visible"
           >
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 px-2">
-              Contacto
+              {t("contact.title")}
             </h1>
             <p className="text-base sm:text-lg text-gray-600 dark:text-gray-300 px-4">
-              ¿Tienes alguna pregunta o propuesta? Me encantaría escucharte
+              {t("contact.subtitle")}
             </p>
           </motion.div>
 
@@ -151,10 +152,10 @@ const Contact = () => {
           >
             <div className="text-center mb-6">
               <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-3 sm:mb-4 px-2">
-                Envíame un mensaje
+                {t("contact.formTitle")}
               </h2>
               <p className="text-sm sm:text-base text-gray-700 dark:text-gray-300 px-4">
-                Completa el formulario y te responderé a la brevedad
+                {t("contact.formSubtitle")}
               </p>
             </div>
 
@@ -170,7 +171,7 @@ const Contact = () => {
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2"
                 >
-                  Nombre <span className="text-red-500">*</span>
+                  {t("contact.name")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -183,7 +184,7 @@ const Contact = () => {
                       ? "border-red-500 bg-red-50 dark:bg-red-900/20"
                       : "border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                   }`}
-                  placeholder="Tu nombre completo"
+                  placeholder={t("contact.placeholders.name")}
                   disabled={isSubmitting}
                 />
                 {errors.name && (
@@ -199,7 +200,7 @@ const Contact = () => {
                   htmlFor="email"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2"
                 >
-                  Email <span className="text-red-500">*</span>
+                  {t("contact.email")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -212,7 +213,7 @@ const Contact = () => {
                       ? "border-red-500 bg-red-50 dark:bg-red-900/20"
                       : "border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                   }`}
-                  placeholder="tu@email.com"
+                  placeholder={t("contact.placeholders.email")}
                   disabled={isSubmitting}
                 />
                 {errors.email && (
@@ -228,7 +229,7 @@ const Contact = () => {
                   htmlFor="subject"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2"
                 >
-                  Asunto <span className="text-red-500">*</span>
+                  {t("contact.subject")} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -241,7 +242,7 @@ const Contact = () => {
                       ? "border-red-500 bg-red-50 dark:bg-red-900/20"
                       : "border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                   }`}
-                  placeholder="¿De qué quieres hablar?"
+                  placeholder={t("contact.placeholders.subject")}
                   disabled={isSubmitting}
                 />
                 {errors.subject && (
@@ -257,7 +258,7 @@ const Contact = () => {
                   htmlFor="message"
                   className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1 sm:mb-2"
                 >
-                  Mensaje <span className="text-red-500">*</span>
+                  {t("contact.message")} <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -270,7 +271,7 @@ const Contact = () => {
                       ? "border-red-500 bg-red-50 dark:bg-red-900/20"
                       : "border-gray-300 bg-white dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                   }`}
-                  placeholder="Escribe tu mensaje aquí..."
+                  placeholder={t("contact.placeholders.message")}
                   disabled={isSubmitting}
                 />
                 <div className="flex justify-between items-center mt-1">
@@ -320,10 +321,10 @@ const Contact = () => {
                           d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                         />
                       </svg>
-                      Enviando...
+                      {t("contact.sending")}
                     </span>
                   ) : (
-                    "Enviar Mensaje"
+                    t("contact.send")
                   )}
                 </button>
               </div>
@@ -371,10 +372,10 @@ const Contact = () => {
             </motion.a>
 
             <motion.a
-              href="https://wa.me/56964962736?text=Hola%20Alberto%2C%20te%20contacto%20desde%20tu%20sitio%20web."
+              href={t("contact.whatsappUrl")}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Contactar por WhatsApp"
+              aria-label={t("contact.whatsappAria")}
               className="card p-6 sm:p-8 text-center transform hover:scale-105 transition-[color,background-color,border-color,box-shadow] duration-300 hover:shadow-xl dark:bg-gray-800"
               variants={staggerItem}
             >
@@ -406,7 +407,7 @@ const Contact = () => {
             viewport={viewportConfig}
           >
             <h2 className="text-xl sm:text-2xl font-bold text-gray-800 dark:text-white mb-4 sm:mb-6 text-center">
-              Redes Sociales
+              {t("contact.social")}
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
               <a

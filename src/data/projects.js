@@ -1,13 +1,9 @@
+// Solo campos no traducibles. title/context/description/longDescription
+// viven en projects.<slug> de src/i18n/*.json.
 export const projects = [
   {
     slug: "arbocensus",
-    title: "Arbocensus",
     period: "2025 - 2026",
-    context: "Proyecto de título, Universidad de los Andes",
-    description:
-      "Proyecto de título: optimización de rutas para censo de árboles urbanos. mTSP con OR-Tools, OSRM, Django + PostGIS y React",
-    longDescription:
-      "Los censos de arbolado urbano exigen que un equipo de censistas recorra a pie miles de árboles distribuidos por una comuna. Arbocensus modela ese recorrido como un mTSP (multiple Traveling Salesman Problem): a partir de las geometrías almacenadas en PostGIS, calcula la matriz de costos peatonales con OSRM y la resuelve con el solver VRP de OR-Tools, ejecutando los jobs de optimización en Celery. El frontend en React muestra las rutas resultantes sobre un mapa Leaflet.",
     stack: [
       "Django + GeoDjango",
       "PostGIS",
@@ -25,13 +21,7 @@ export const projects = [
   },
   {
     slug: "scheduler",
-    title: "Scheduler App",
     period: "2025 - 2026",
-    context: "Proyecto personal",
-    description:
-      "Gestión de horarios y división automática de grupos con Flask",
-    longDescription:
-      "Aplicación para coordinar disponibilidad horaria en grupos. Cada miembro marca sus bloques libres y la app encuentra los mejores momentos para reunirse; además divide automáticamente el grupo en subgrupos compatibles. Incluye autenticación con Google OAuth 2.0, roles Owner / Admin / Member, categorías personalizables con filtros AND / OR, y despliegue dockerizado con PostgreSQL.",
     stack: [
       "Flask",
       "SQLAlchemy + Alembic",
@@ -48,13 +38,7 @@ export const projects = [
   },
   {
     slug: "healthy",
-    title: "Healthy",
     period: "2024 - 2025",
-    context: "Práctica pre-profesional",
-    description:
-      "Sistema de recomendación de planes saludables de comida integrado con compras",
-    longDescription:
-      "Plataforma donde empresas publican planes de alimentación con su información nutricional y los usuarios reciben recomendaciones según sus preferencias, personalizan el plan respondiendo preguntas, lo compran y siguen el estado de sus entregas. Cuenta con reseñas por plan, roles con CanCanCan y autenticación con Devise.",
     stack: [
       "Ruby on Rails 8",
       "PostgreSQL",
@@ -69,33 +53,29 @@ export const projects = [
     framework: "Ruby on Rails",
   },
   {
-    title: "Calculadora",
+    slug: "calculator",
     link: "/projects/calculator",
-    description: "Calculadora funcional con interfaz moderna",
     color: "from-gray-900 to-gray-700",
     icon: "🔢",
     isReact: true,
   },
   {
-    title: "Reloj",
+    slug: "clock",
     link: "/projects/clock",
-    description: "Reloj digital y analógico en tiempo real",
     color: "from-indigo-900 to-purple-900",
     icon: "⏰",
     isReact: true,
   },
   {
-    title: "Tres en Línea",
+    slug: "tic-tac-toe",
     link: "/projects/tic-tac-toe",
-    description: "Juego clásico para dos jugadores",
     color: "from-blue-900 to-purple-900",
     icon: "❌⭕",
     isReact: true,
   },
   {
-    title: "Cámara",
+    slug: "camera",
     link: "/projects/camera",
-    description: "Captura fotos y graba videos desde tu navegador",
     color: "from-purple-900 to-pink-900",
     icon: "📸",
     isReact: true,

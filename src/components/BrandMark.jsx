@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
+import { useLocalePath } from "../hooks/useLocalePath";
+import { useTranslation } from "react-i18next";
 
 const sizeMap = {
   xs: "h-6 w-6",
@@ -15,16 +17,20 @@ const BrandMark = ({
   withLink = true,
   size = "md",
   className = "",
-  title = "Inicio",
-  ariaLabel = "Ir al inicio",
+  title: titleProp,
+  ariaLabel: ariaLabelProp,
   onClick,
 }) => {
+  const { t } = useTranslation();
+  const toPath = useLocalePath();
+  const title = titleProp ?? t("brand.title");
+  const ariaLabel = ariaLabelProp ?? t("brand.ariaLabel");
   const sizeClass = sizeMap[size] || sizeMap.md;
 
   const Img = (
     <img
       src="/favicon.svg"
-      alt="Marca personal de Alberto Zúñiga"
+      alt={t("brand.alt")}
       className={`${sizeClass} rounded-2xl shadow-md ring-1 ring-white/10 dark:ring-white/10 ${className}`}
       loading="eager"
       decoding="async"
@@ -36,7 +42,7 @@ const BrandMark = ({
 
   return (
     <Link
-      to={to}
+      to={toPath(to)}
       onClick={onClick}
       aria-label={ariaLabel}
       title={title}
