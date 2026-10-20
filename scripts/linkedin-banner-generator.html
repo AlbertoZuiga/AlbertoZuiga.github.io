@@ -1,0 +1,487 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Generador Banner LinkedIn - Alberto Zúñiga</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="alternate icon" href="/favicon.svg" />
+  <link rel="shortcut icon" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* Paleta del portafolio (tema oscuro): gray-950/900/800 + primary */
+    :root {
+      --bg: #030712;
+      --surface: #101828;
+      --surface-2: #1e2939;
+      --border: #1e2939;
+      --border-strong: #364153;
+      --text: #f3f4f6;
+      --muted: #99a1af;
+      --primary: #0073ba;
+      --primary-hover: #005c95;
+      --primary-soft: #339fcf;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      color-scheme: dark;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      padding: 2rem clamp(1rem, 4vw, 3rem) 3rem;
+      background: radial-gradient(1200px 500px at 85% -10%, rgba(0,115,186,.18), transparent 60%), var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    .wrap { max-width: 1584px; margin: 0 auto; display: flex; flex-direction: column; gap: 1.5rem; }
+    header { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem; }
+    .eyebrow { margin: 0 0 .35rem; font-size: .7rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--primary-soft); }
+    h1 { margin: 0; font-size: clamp(1.4rem, 2.4vw, 1.9rem); font-weight: 800; letter-spacing: -.02em; }
+    header p { margin: .4rem 0 0; color: var(--muted); font-size: .9rem; line-height: 1.5; max-width: 640px; }
+
+    .preview { position: relative; border-radius: 14px; overflow: hidden; box-shadow: 0 0 0 1px var(--border), 0 24px 60px -20px rgba(0,0,0,.8); }
+    canvas { display: block; width: 100%; height: auto; }
+    .reserved-hint { position: absolute; bottom: 0; aspect-ratio: 1; border: 2px dashed rgba(255,255,255,.28); border-bottom: none; border-radius: 50% 50% 0 0 / 50% 50% 0 0; pointer-events: none; }
+    .preview-note { margin: .6rem 0 0; font-size: .75rem; color: var(--muted); }
+    .preview-note span { display: inline-block; width: .7rem; height: .7rem; margin-right: .35rem; vertical-align: -1px; border: 1.5px dashed rgba(255,255,255,.45); border-radius: 50%; }
+
+    .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem; }
+    fieldset { margin: 0; border: 1px solid var(--border); border-radius: 12px; padding: 1rem 1.1rem 1.15rem; background: rgba(16,24,40,.7); display: flex; flex-direction: column; gap: .85rem; min-width: 0; }
+    legend { padding: 0 .4rem; font-size: .8rem; font-weight: 700; color: var(--text); }
+    label { display: flex; flex-direction: column; gap: .35rem; font-size: .7rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+    input[type="text"], select {
+      padding: .55rem .7rem; border-radius: 8px; border: 1px solid var(--border-strong);
+      width: 100%; min-width: 0;
+      background: var(--bg); color: var(--text); font: 500 .85rem/1.2 inherit; font-family: inherit;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input[type="text"]:focus, select:focus { outline: none; border-color: var(--primary-soft); box-shadow: 0 0 0 3px rgba(51,159,207,.2); }
+    input[type="range"] { accent-color: var(--primary-soft); }
+    .swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: .75rem; }
+    input[type="color"] { width: 100%; height: 2.1rem; padding: 2px; border: 1px solid var(--border-strong); border-radius: 8px; background: var(--bg); cursor: pointer; }
+    input[type="color"]::-webkit-color-swatch-wrapper { padding: 0; }
+    input[type="color"]::-webkit-color-swatch { border: none; border-radius: 6px; }
+    .checks { display: flex; flex-wrap: wrap; gap: .5rem; }
+    .check { flex-direction: row; align-items: center; gap: .45rem; padding: .45rem .7rem; border: 1px solid var(--border-strong); border-radius: 999px; font-size: .78rem; text-transform: none; letter-spacing: 0; color: var(--text); cursor: pointer; }
+    .check input { accent-color: var(--primary-soft); margin: 0; }
+    .hint { font-size: .7rem; color: var(--muted); line-height: 1.4; }
+
+    .actions { display: flex; align-items: center; gap: .75rem; }
+    button {
+      cursor: pointer; background: var(--primary); color: #fff; border: none; padding: .75rem 1.25rem;
+      font: 600 .85rem/1 inherit; font-family: inherit; border-radius: 10px;
+      box-shadow: 0 8px 24px -10px rgba(0,115,186,.9); transition: background .15s, transform .15s;
+    }
+    button:hover { background: var(--primary-hover); transform: translateY(-1px); }
+    button:focus-visible { outline: 2px solid var(--primary-soft); outline-offset: 2px; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div>
+        <p class="eyebrow">Herramienta interna</p>
+        <h1>Generador de banner para LinkedIn</h1>
+        <p>1584×396 px. El contenido se alinea a la derecha para que la foto de perfil (abajo a la izquierda) no lo tape. Todo escala de forma proporcional al tamaño elegido.</p>
+      </div>
+      <div class="actions">
+        <button id="downloadBtn" type="button">Descargar PNG</button>
+      </div>
+    </header>
+
+    <div>
+      <div class="preview">
+        <canvas id="banner" width="1584" height="396" aria-label="Vista previa del banner">Tu navegador no soporta canvas.</canvas>
+        <div class="reserved-hint" aria-hidden="true"></div>
+      </div>
+      <p class="preview-note"><span></span>Zona aproximada que cubre la foto de perfil en escritorio.</p>
+    </div>
+
+    <section class="controls">
+      <fieldset>
+        <legend>Texto</legend>
+        <label>Nombre
+          <input id="titleInput" type="text" value="Alberto Zúñiga" maxlength="40" />
+        </label>
+        <label>Rol
+          <input id="subtitleInput" type="text" value="Ingeniero Civil en Ciencias de la Computación" maxlength="80" />
+        </label>
+        <label>Tagline
+          <input id="taglineInput" type="text" value="Construyendo soluciones eficientes" maxlength="80" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Stack</legend>
+        <div class="checks">
+          <label class="check"><input type="checkbox" data-stack="python" checked />Python</label>
+          <label class="check"><input type="checkbox" data-stack="javascript" checked />JavaScript</label>
+          <label class="check"><input type="checkbox" data-stack="ruby" checked />Ruby</label>
+        </div>
+        <label>Tamaño logo AZ (px base)
+          <input id="logoSizeInput" type="range" min="64" max="140" value="104" />
+        </label>
+        <span class="hint">Logos monocromos en el color de texto. Medidas en px sobre la base 1584×396; se escalan con el tamaño final.</span>
+      </fieldset>
+
+      <fieldset>
+        <legend>Colores</legend>
+        <div class="swatches">
+          <label>Fondo A <input id="colorStart" type="color" value="#030712" /></label>
+          <label>Fondo B <input id="colorMid" type="color" value="#101828" /></label>
+          <label>Fondo C <input id="colorEnd" type="color" value="#004570" /></label>
+          <label>Acento <input id="accentColor" type="color" value="#339fcf" /></label>
+          <label>Logo <input id="profileBlockColor" type="color" value="#0f172a" /></label>
+          <label>Texto <input id="textColor" type="color" value="#f3f4f6" /></label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Decoración</legend>
+        <label>Trama de puntos
+          <input id="patternOpacity" type="range" min="0" max="0.5" step="0.01" value="0.28" />
+        </label>
+        <label>Halo de acento
+          <input id="shineIntensity" type="range" min="0" max="1" step="0.01" value="0.6" />
+        </label>
+      </fieldset>
+
+      <fieldset>
+        <legend>Exportación</legend>
+        <label>Preset
+          <select id="sizePreset">
+            <option value="standard">Estándar 1584×396</option>
+            <option value="retina">Retina 3168×792</option>
+            <option value="custom">Personalizado</option>
+          </select>
+        </label>
+        <div class="swatches" style="grid-template-columns:1fr 1fr;">
+          <label>Ancho <input id="widthInput" type="text" value="1584" /></label>
+          <label>Alto <input id="heightInput" type="text" value="396" /></label>
+        </div>
+        <label>Escala exportación (1–3)
+          <input id="exportScale" type="text" value="1" />
+        </label>
+        <span class="hint">Mantén relación 4:1. La exportación vuelve a dibujar en alta resolución (no reescala el bitmap).</span>
+      </fieldset>
+    </section>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('banner');
+    const ctx = canvas.getContext('2d');
+    const reservedHint = document.querySelector('.reserved-hint');
+
+    // Todo se diseña sobre una altura base de 396 y se escala; así las proporciones
+    // se mantienen en cualquier tamaño de salida.
+    const BASE_H = 396;
+    // Zona de la foto de perfil, relativa a la altura del banner
+    const RESERVED = { offset: 0.08, size: 0.66 };
+    const FONT = 'Inter, system-ui, -apple-system, "Segoe UI", sans-serif';
+
+    // Logos monocromos (Simple Icons, viewBox 24×24) teñidos con el color de texto
+    const STACK = {
+      python: { label: 'Python', path: new Path2D('M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z') },
+      javascript: { label: 'JavaScript', path: new Path2D('M0 0h24v24H0V0zm22.034 18.276c-.175-1.095-.888-2.015-3.003-2.873-.736-.345-1.554-.585-1.797-1.14-.091-.33-.105-.51-.046-.705.15-.646.915-.84 1.515-.66.39.12.75.42.976.9 1.034-.676 1.034-.676 1.755-1.125-.27-.42-.404-.601-.586-.78-.63-.705-1.469-1.065-2.834-1.034l-.705.089c-.676.165-1.32.525-1.71 1.005-1.14 1.291-.811 3.541.569 4.471 1.365 1.02 3.361 1.244 3.616 2.205.24 1.17-.87 1.545-1.966 1.41-.811-.18-1.26-.586-1.755-1.336l-1.83 1.051c.21.48.45.689.81 1.109 1.74 1.756 6.09 1.666 6.871-1.004.029-.09.24-.705.074-1.65l.046.067zm-8.983-7.245h-2.248c0 1.938-.009 3.864-.009 5.805 0 1.232.063 2.363-.138 2.711-.33.689-1.18.601-1.566.48-.396-.196-.597-.466-.83-.855-.063-.105-.11-.196-.127-.196l-1.825 1.125c.305.63.75 1.172 1.324 1.517.855.51 2.004.675 3.207.405.783-.226 1.458-.691 1.811-1.411.51-.93.402-2.07.397-3.346.012-2.054 0-4.109 0-6.179l.004-.056z') },
+      ruby: { label: 'Ruby', path: new Path2D('M20.156.083c3.033.525 3.893 2.598 3.829 4.77L24 4.822 22.635 22.71 4.89 23.926h.016C3.433 23.864.15 23.729 0 19.139l1.645-3 2.819 6.586.503 1.172 2.805-9.144-.03.007.016-.03 9.255 2.956-1.396-5.431-.99-3.9 8.82-.569-.615-.51L16.5 2.114 20.159.073l-.003.01zM0 19.089zM5.13 5.073c3.561-3.533 8.157-5.621 9.922-3.84 1.762 1.777-.105 6.105-3.673 9.636-3.563 3.532-8.103 5.734-9.864 3.957-1.766-1.777.045-6.217 3.612-9.75l.003-.003z') },
+    };
+
+    const val = id => document.getElementById(id).value;
+
+    function readOptions(){
+      return {
+        title: val('titleInput').trim(),
+        subtitle: val('subtitleInput').trim(),
+        tagline: val('taglineInput').trim(),
+        cStart: val('colorStart'),
+        cMid: val('colorMid'),
+        cEnd: val('colorEnd'),
+        accent: val('accentColor'),
+        logoBg: val('profileBlockColor'),
+        text: val('textColor'),
+        pattern: clamp(parseFloat(val('patternOpacity')), 0, 0.5),
+        glow: clamp(parseFloat(val('shineIntensity')), 0, 1),
+        logoSize: clamp(parseInt(val('logoSizeInput'), 10), 64, 140),
+        stack: [...document.querySelectorAll('[data-stack]')].filter(c => c.checked).map(c => STACK[c.dataset.stack]),
+      };
+    }
+
+    function render(context, w, h, o){
+      const s = h / BASE_H;
+      const W = w / s, H = BASE_H;
+      context.setTransform(s, 0, 0, s, 0, 0);
+      context.clearRect(0, 0, W, H);
+
+      drawBackground(context, W, H, o);
+
+      // ---- Layout (unidades base) ----
+      const R = W - 72;                                            // borde derecho del bloque
+      const leftBound = (RESERVED.offset + RESERVED.size) * H + 56; // no invadir la foto
+      const maxW = R - leftBound;
+      const logoGap = 28;
+
+      // Nombre: una sola línea; se reduce la fuente si no cabe
+      let nameSize = 64;
+      context.font = `800 ${nameSize}px ${FONT}`;
+      context.letterSpacing = '-1.5px';
+      const nameMax = maxW - o.logoSize - logoGap;
+      while(nameSize > 32 && context.measureText(o.title).width > nameMax){
+        nameSize -= 2;
+        context.font = `800 ${nameSize}px ${FONT}`;
+      }
+      context.letterSpacing = '0px';
+
+      context.font = `500 26px ${FONT}`;
+      const subLines = o.subtitle ? wrapLines(context, o.subtitle, maxW) : [];
+      const subLH = 34;
+
+      const chipH = 44;
+      const tagH = 22;
+      const gapA = 22, gapB = 22, gapC = 18;
+      const total = o.logoSize
+        + (subLines.length ? gapA + subLines.length * subLH : 0)
+        + (o.stack.length ? gapB + chipH : 0)
+        + (o.tagline ? gapC + tagH : 0);
+      let y = Math.round((H - total) / 2);
+
+      // Fila 1: nombre | logo
+      const logoX = R - o.logoSize;
+      drawLogo(context, logoX, y, o.logoSize, o.accent, o.logoBg);
+      context.fillStyle = o.text;
+      context.textAlign = 'right';
+      context.textBaseline = 'middle';
+      context.font = `800 ${nameSize}px ${FONT}`;
+      context.letterSpacing = '-1.5px';
+      context.fillText(o.title, logoX - logoGap, y + o.logoSize / 2 + 2);
+      context.letterSpacing = '0px';
+      y += o.logoSize;
+
+      // Fila 2: rol, stack y tagline bajo nombre + logo
+      if(subLines.length){
+        y += gapA;
+        context.font = `500 26px ${FONT}`;
+        context.textBaseline = 'top';
+        context.fillStyle = withAlpha(o.text, .82);
+        subLines.forEach((line, i) => context.fillText(line, R, y + i * subLH));
+        y += subLines.length * subLH;
+      }
+
+      if(o.stack.length){
+        y += gapB;
+        drawChips(context, o.stack, R, y, chipH, o.text);
+        y += chipH;
+      }
+
+      if(o.tagline){
+        y += gapC;
+        context.font = `500 18px ${FONT}`;
+        context.textBaseline = 'top';
+        context.textAlign = 'right';
+        context.fillStyle = o.accent;
+        context.fillText(o.tagline, R, y);
+        const tw = context.measureText(o.tagline).width;
+        context.fillRect(R - tw - 14 - 28, y + tagH / 2 - 1, 28, 2);
+      }
+
+      context.setTransform(1, 0, 0, 1, 0, 0);
+    }
+
+    function drawBackground(context, W, H, o){
+      const bg = context.createLinearGradient(0, 0, W, H);
+      bg.addColorStop(0, o.cStart);
+      bg.addColorStop(.55, o.cMid);
+      bg.addColorStop(1, o.cEnd);
+      context.fillStyle = bg;
+      context.fillRect(0, 0, W, H);
+
+      // Halo de acento detrás del contenido (la zona de la foto queda oscura para que resalte)
+      if(o.glow > 0){
+        const gx = W * .8, gy = H * .3;
+        const glow = context.createRadialGradient(gx, gy, 0, gx, gy, W * .5);
+        glow.addColorStop(0, withAlpha(o.accent, .32 * o.glow));
+        glow.addColorStop(.5, withAlpha(o.accent, .08 * o.glow));
+        glow.addColorStop(1, withAlpha(o.accent, 0));
+        context.fillStyle = glow;
+        context.fillRect(0, 0, W, H);
+      }
+
+      // Trama de puntos que se desvanece hacia la izquierda
+      if(o.pattern > 0){
+        context.fillStyle = '#ffffff';
+        const step = 22;
+        for(let x = step / 2; x < W; x += step){
+          const t = x / W;
+          const a = o.pattern * t * t;
+          if(a < .01) continue;
+          context.globalAlpha = a;
+          for(let y = step / 2; y < H; y += step){
+            context.beginPath();
+            context.arc(x, y, 1.1, 0, Math.PI * 2);
+            context.fill();
+          }
+        }
+        context.globalAlpha = 1;
+      }
+
+      // Línea fina de acento en el borde superior
+      const line = context.createLinearGradient(W * .3, 0, W, 0);
+      line.addColorStop(0, withAlpha(o.accent, 0));
+      line.addColorStop(.6, withAlpha(o.accent, .9));
+      line.addColorStop(1, withAlpha(o.accent, 0));
+      context.fillStyle = line;
+      context.fillRect(W * .3, 0, W * .7, 3);
+    }
+
+    // Isotipo AZ (mismo trazado que /favicon.svg, viewBox 0 0 100 100)
+    function drawLogo(context, x, y, size, accent, bg){
+      const r = size * .22;
+      context.save();
+      context.shadowColor = withAlpha(accent, .45);
+      context.shadowBlur = 36;
+      context.fillStyle = bg;
+      context.beginPath();
+      context.roundRect(x, y, size, size, r);
+      context.fill();
+      context.restore();
+
+      context.save();
+      context.lineWidth = 2;
+      context.strokeStyle = withAlpha(accent, .85);
+      context.beginPath();
+      context.roundRect(x + 1, y + 1, size - 2, size - 2, r);
+      context.stroke();
+
+      context.translate(x, y);
+      context.scale(size / 100, size / 100);
+      context.fillStyle = '#ffffff';
+      context.beginPath();
+      context.moveTo(24, 76);
+      context.lineTo(50, 24);
+      context.lineTo(76, 76);
+      context.lineTo(64, 76);
+      context.lineTo(50, 48);
+      context.lineTo(36, 76);
+      context.closePath();
+      context.fill();
+      context.transform(1, 0, Math.tan(-15 * Math.PI / 180), 1, 0, 0); // skewX(-15)
+      context.fillStyle = bg;
+      context.fillRect(44, 56, 24, 8);
+      context.restore();
+    }
+
+    function drawChips(context, items, right, y, h, textColor){
+      const padX = 16, icon = 20, iconGap = 10, gap = 12;
+      context.font = `600 18px ${FONT}`;
+      const widths = items.map(it => padX * 2 + icon + iconGap + context.measureText(it.label).width);
+      let x = right - widths.reduce((a, b) => a + b, 0) - gap * (items.length - 1);
+      items.forEach((it, i) => {
+        const w = widths[i];
+        context.beginPath();
+        context.roundRect(x, y, w, h, h / 2);
+        context.fillStyle = 'rgba(255,255,255,.06)';
+        context.fill();
+        context.lineWidth = 1;
+        context.strokeStyle = 'rgba(255,255,255,.16)';
+        context.stroke();
+        context.fillStyle = withAlpha(textColor, .92);
+        context.save();
+        context.translate(x + padX, y + (h - icon) / 2);
+        context.scale(icon / 24, icon / 24);
+        context.fill(it.path);
+        context.restore();
+        context.textAlign = 'left';
+        context.textBaseline = 'middle';
+        context.fillText(it.label, x + padX + icon + iconGap, y + h / 2 + 1);
+        x += w + gap;
+      });
+    }
+
+    function wrapLines(context, text, maxWidth){
+      const words = text.split(/\s+/);
+      const lines = [];
+      let line = '';
+      for(const word of words){
+        const test = line ? line + ' ' + word : word;
+        if(line && context.measureText(test).width > maxWidth){
+          lines.push(line);
+          line = word;
+        } else {
+          line = test;
+        }
+      }
+      lines.push(line);
+      return lines;
+    }
+
+    function withAlpha(hex, a){
+      const n = parseInt(hex.slice(1), 16);
+      return `rgba(${n >> 16 & 255},${n >> 8 & 255},${n & 255},${a})`;
+    }
+
+    function clamp(v, min, max){ return isNaN(v) ? min : Math.min(max, Math.max(min, v)); }
+
+    function draw(){
+      render(ctx, canvas.width, canvas.height, readOptions());
+      // Hint de la foto en % para que siga al canvas escalado por CSS
+      const ratio = canvas.height / canvas.width;
+      reservedHint.style.left = (RESERVED.offset * ratio * 100) + '%';
+      reservedHint.style.width = (RESERVED.size * ratio * 100) + '%';
+    }
+
+    function updateDimensions(){
+      const preset = val('sizePreset');
+      let w = parseInt(val('widthInput'), 10);
+      let h = parseInt(val('heightInput'), 10);
+      if(preset === 'standard'){ w = 1584; h = 396; }
+      if(preset === 'retina'){ w = 3168; h = 792; }
+      if(preset !== 'custom'){
+        document.getElementById('widthInput').value = w;
+        document.getElementById('heightInput').value = h;
+      }
+      if(!Number.isFinite(w) || w < 600) w = 1584;
+      if(!Number.isFinite(h) || h < 150) h = 396;
+      canvas.width = w;
+      canvas.height = h;
+      draw();
+    }
+
+    document.querySelectorAll('.controls input').forEach(i => i.addEventListener('input', draw));
+    document.getElementById('sizePreset').addEventListener('change', updateDimensions);
+    document.getElementById('widthInput').addEventListener('input', updateDimensions);
+    document.getElementById('heightInput').addEventListener('input', updateDimensions);
+
+    document.getElementById('downloadBtn').addEventListener('click', () => {
+      const scale = clamp(parseFloat(val('exportScale')), 1, 3);
+      try {
+        const out = document.createElement('canvas');
+        out.width = Math.round(canvas.width * scale);
+        out.height = Math.round(canvas.height * scale);
+        render(out.getContext('2d'), out.width, out.height, readOptions());
+        triggerDownload(out.toDataURL('image/png'));
+      } catch(err){
+        console.error('Error al generar imagen:', err);
+        alert('No se pudo generar la imagen. Prueba abrirlo con un servidor local (p.e. npm run dev).');
+      }
+    });
+
+    function triggerDownload(dataUrl){
+      const link = document.createElement('a');
+      link.download = 'linkedin-banner-alberto-zuniga.png';
+      link.href = dataUrl;
+      link.style.display = 'none';
+      document.body.appendChild(link);
+      link.click();
+      setTimeout(() => link.remove(), 50);
+    }
+
+    draw();
+    // Redibujar cuando Inter y los logos estén listos
+    Promise.all([
+      document.fonts.load(`800 64px Inter`),
+      document.fonts.load(`600 18px Inter`),
+      document.fonts.load(`500 26px Inter`),
+    ]).finally(draw);
+  </script>
+</body>
+</html>
